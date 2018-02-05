@@ -90,14 +90,59 @@ In Etter, 6.4</strong><br />
 <table class="twoColumnCode">
 <tr>
 <td><pre>
-<?php requireQuoted("code/example1.c"); ?>
+// example1.c from H23, CS16, S10
+#include <stdio.h>
+
+int squared(int x)
+{
+  return x * x;
+}
+
+int main()
+{
+  int a,b;
+  a=5;
+  b=squared(a);
+  printf("a=%i b=%i\n",a,b);
+  return 0;
+}
+
 </pre></td>
 <td><pre>
-<?php requireQuoted("code/example2.c"); ?>
+// example2.c from H23, CS16, S10
+#include <stdio.h>
+
+int twiceTheValue(int x)
+{
+  return 2 * x;
+}
+
+void doStuff(int a)
+{
+  int b;
+  b=twiceTheValue(a);
+  printf("a=%i b=%i\n",a,b);
+}
+
+int main(int argc, char *argv[])
+{
+  if (argc!=2)
+    {
+      printf("Usage: %s integer\n",argv[0]);
+      return 1;
+    }
+  doStuff(atoi(argv[1]));
+  return 0;
+}
+
+
 </pre></td>
 </tr>
 </table>
-<?php require("../../10S/homework/pleaseTurnOver.php"); ?>
+<!-- start content from pleaseTurnOver.php -->
+<p class="pleaseTurnOver">Please turn over for more...</p>
+<p class="continuedFromPrevPage">...continued from other side</p>
+<!-- end content from pleaseTurnOver.php -->
 <div id="sideTwo">
 <h2 align="center"><br />
 Two (well, maybe three) ways to pass parameters in C</h2>
@@ -159,10 +204,38 @@ Two (well, maybe three) ways to pass parameters in C</h2>
 <table class="twoColumnCode">
 <tr>
 <td><pre>
-<?php requireQuoted("code/squareIt.c"); ?>
+// squareIt.c
+#include <stdio.h>
+
+void squareIt(int *p)
+{
+  (*p) = (*p) * (*p);
+}
+
+int main()
+{
+  int a=5;
+  squareIt(&a);
+  printf("a=%i\n",a);
+  return 0;
+}
 </pre></td>
 <td><pre>
-<?php requireQuoted("code/squareIt.cpp"); ?>
+// squareIt.cpp (using C style I/O)
+#include <stdio.h>
+
+void squareIt(int &x)
+{
+  x = x * x;
+}
+
+int main()
+{
+  int a=5;
+  squareIt(a);
+  printf("a=%i\n",a);
+  return 0;
+}
 </pre></td>
 </tr>
 </table>
