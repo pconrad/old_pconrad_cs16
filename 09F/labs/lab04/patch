@@ -1,0 +1,21 @@
+76c76
+<  <p>You should see a listing of several C programs. We are going to copy those into your ~/cs16/lab04 directory all at once with the following command:</p>
+---
+>  <p>You should see a listing with one C programs. We are going to copy that into your ~/cs16/lab04 directory  with the following command:</p>
+85,86c85
+<  <p>The * symbol in this command is a &quot;wildcard&quot;&mdash;it means that we want all of the files from the source directory copy be copied into the destination directory namely ~/cs16/lab04. </p>
+<  <p>After doing this command, if you cd into ~/cs16/lab04 and use the ls command, you should see four files in your ~/cs16/lab04 directory:  </p>
+---
+>  <p>After doing this command, if you cd into ~/cs16/lab04 and use the ls command, you should see one file in your ~/cs16/lab04 directory:  </p>
+88c87
+< @@@ NOTE TO CONRAD --- FILL THESE IN @@@<br>-bash-3.2$ </pre>
+---
+> countOddWithTests.c<br>-bash-3.2$ </pre>
+91c90
+<  <p>We won't be working with the C files we copied until Step 4. </p>
+---
+>  <p>We won't be working with the C file we copied until Step 4. </p>
+190c189
+---
+>  <p>This part is pretty easy. You need to replace the stub of the isOdd function with some code that correctly returns 0 when x is odd, and 1 when x is even.</p>
+-bash-3.2$ ls

@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<title>CS16, 10S, 03.29 Monday: Overview of Ch, declaration of variables, types int, double, char, emacs, make. (Code)</title>
+<style type="text/css">
+pre {white-space:pre;}
+
+</style>
+</head>
+
+<body>
+<div id="container">
+<h1>CS16, 10S,Conrad,  Wed 03.31, Lecture Outline</h1>
+<p>Todays <a href="code">code</a>      Back to <a href="../../../">CS16</a></p>
+<h2>Announcements</h2>
+<h3>New Announcements for Crashers</h3>
+<p>If you are a crasher and you turned in an orange sheet on Monday, then:</p>
+<ul><li> You've been added into the course on Gauchospace</li>
+  <li>This does not necessarily mean you will get a slot in the course—it just allows us to record your first week homework grades.</li>
+  <li>Check Gauchospace to see which discussion section to attend on Friday
+    <ul>
+      <li>We've given everyone their first or second choice</li>
+      <li>We've tried to balance the crashers—either 6 or 7 crashers per discussion section</li>
+      <li>So PLEASE attend the one you were assigned to.</li>
+      <li>The lab will be very full no matter what.</li>
+    </ul>
+  </li>
+  <li>Doing the lab early is another option, and will help your chances of getting a slot—see below.</li>
+  </ul>
+<h3>New Announcements for Everyone</h3>
+<p>We have more than 25 crashers trying to get somewhere between 5 and 15 slots.</p>
+<p>So, the labs will be very full this week.</p>
+<p>Starting next week: </p>
+<ul>
+  <li>We'll be doing pair programming</li>
+  <li>So you must come to lab in person and do the lab there.</li>
+  </ul>
+<p>But, for this week, if you want to do the lab in advance, that's ok.<br />
+FOR THIS WEEK ONLY:</p>
+<ul>
+  <li>If you complete BOTH <a href="../labs/lab00">lab00</a> and <a href=",">lab01</a>  by midnight Thursday night, and submit it with the turnin program</li>
+  <li>Then, you can skip lab on Friday—in that case, and in that case ONLY—you may turn in the lab &quot;homework&quot; along with your lecture homework on Friday.</li>
+  </ul>
+<p>If you do NOT complete BOTH lab00 and lab01 by midnight Thursday and submit with turnin, then you need to come to your assigned discussion section on Friday morning, and stay until the 50 minutes are complete, or until you've submitted both lab00 and lab01 via turnin (whichever comes first.)</p>
+<p><strong>Starting next week, though, lab (discussion section) is always mandatory—and its mandatory this week too, except as listed above.</strong></p>
+<p>If you need to miss for a very good reason you need to speak to the instructor, preferably in advance, or if not, then very soon after the fact. Come during office hours, or make an appointment.</p>
+<h3><strong>Reminder Announcements </strong></h3>
+<ul>
+  <li><strong>Seating:</strong> We expect the hall to be very full, so please be mindful of leaving space for others to sit</li>
+  <li><strong>Homework: </strong>There is homework almost every class period—including some due today
+    <ul>
+      <li>If you don't have it with you, the only way to make it up is to come to office hours:
+        <ul>
+          <li>Today, Wed 03.31 2pm-3:20pm, HFH1113</li>
+          <li>Tomorrow, Thu, 04.01, 2pm-3pm, CCS Rm 139</li>
+          <li>Next Monday, 04.05, 2pm-3pm, HFH1113</li>
+          </ul>
+      </li>
+      <li>You MUST come in person, with the homework already filled out, and have Prof. Conrad grade it in person and record your grade while you watch.</li>
+      <li>You only get to do this once per quarter—one &quot;personal/sick day&quot;.</li>
+      <li>After that, it is entirely at the instructor's discretion/prerogitive</li>
+      <li>Missed homeworks can also be made up through extra credit.</li>
+    </ul>
+  </li>
+  <li><strong>Turning in Homework
+    </strong>
+    <ul>
+      <li>Turn it in as you leave—make a pile on a desk or chair near the door.</li>
+      <li>Take the new homework paper as you leave also.</li>
+      </ul>
+  </li>
+  <li><strong>The textbook for the course </strong>is on reserve at the library—please get your own copy  ASAP
+    <ul>
+      <li>The link to the course reserve info is on the main course web page: <a href="http://www.cs.ucsb.edu/~pconrad/cs16">http://www.cs.ucsb.edu/~pconrad/cs16</a></li>
+    </ul>
+  </li>
+  <li>You need a CoE/CSIL account:
+    <ul>
+      <li>You can activiate your CoE/CSIL account at: <a href="https://accounts.engr.ucsb.edu/">https://accounts.engr.ucsb.edu/</a></li>
+      <li>It doesn't matter if you aren't a College of Engineering student—you are eligble
+        <ul>
+          <li>Just by being registered for the course, you can get a CoE account</li>
+          <li>It doesn't matter if you are undeclared, from L&amp;S or CCS, etc.</li>
+          <li>If you are crashing though, you'll have to let me know so I can request an account for you</li>
+          </ul>
+      </li>
+      </ul>
+  </li>
+  </ul>
+<p>&nbsp;</p>
+<h2>This should not be your first programming course!<br />
+</h2>
+<p>You should already have had a course where you learned the following, perhaps in Python, Java, Visual Basic, C, C++, C# or some other programming language.<br />
+  <br />
+  <strong>If</strong> you took CS8 and got a C-, D+, D, D- or F:</p>
+<ul>
+  <li><strong>then</strong>: CS16 may not be a good choice for you—please repeat CS8 first.</li>
+  </ul>
+<p>You should be comfortable with at least the following.</p>
+<ul><li>variables, expressions. assignment statements (e.g. <code>x = x + 1</code> makes x one more than it used to be)</li>
+  <li>order of operations (operator precedence), e.g.<code> 2 + 4 * 5 </code>gives  22, not 40</li>
+  <li>if/else, such as: 
+    <pre>if (x&lt;0)<br />  printf(&quot;Negative);<br />else<br />  printf(&quot;Positive);
+</pre>
+  </li>
+  <li>loops (while loops, for loops)—for example, if <code>x</code> starts at 16, what value will <code>count</code> be when this loop is finished—when we reach the line <code>return count; </code>?
+    <pre>count = 0;<br />while (x&gt;1)
+{<br />  x = x / 2;<br />  count = count + 1;<br />}<br />return count;</pre>
+  </li>
+  <li>functions (function definition, function call, arguments, parameters)    </li>
+  <ul>
+    <li>Why do we use functions in a program—what is the problem that they solve?</li>
+    <li>(<strong>If you studied  Java</strong>: you may be familiar with the word <em>method</em> rather than <em>function</em>. For purposes of this discussion—if you know what a method is, then you know what a function is. The difference between method and function comes up in later courses (CS24, CS32), but isn't important for CS16.)</li>
+    </ul>
+  <li>arrays
+    <ul>
+      <li>If you studied Python, you may know these as lists</li>
+      <li>a[0], a[1]. a[2], etc...</li>
+    </ul>
+  </li>
+  </ul>
+<h3>Since this is not a first programming course, we'll move quickly</h3>
+<ul>
+  <li>We <strong>don't </strong>expect you to already know <strong>C</strong></li>
+  <li>But we <strong>do</strong> expect you to already know <strong>how to program</strong></li>
+  <li>So, we'll be:
+    <ul>
+      <li>moving through chapters in the book quickly</li>
+      <li>sometimes introducing a few details of C earlier than they appear in the book</li>
+      </ul>
+  </li>
+  <li>The purpose is to give you a chance to <strong>solve interesting problems</strong> earlier.</li>
+  </ul>
+<h3>Three topics we want to introduce early:</h3>
+<ul>
+  <li>arrays</li>
+  <li>structs</li>
+  <li>functions</li>
+  </ul>
+<p>In C, there are a lot of <em>details</em> associated with arrays, structs, and functions—so many details that many authors delay their introduction.</p>
+<p>We want to try a different approach: </p>
+<ul>
+  <li>a very basic way to deal with arrays, structs and functions early</li>
+  <li>a more detailed way to deal with arrays, structs and functions later on.</li>
+  </ul>
+<p>&nbsp;</p>
+<h2>Three pieces of software—all on CSIL</h2>
+<p>All of our work with C programming will be done on the CSIL computers.</p>
+<ul>
+  <li>CSIL: Computer Science Instructional Lab—a collection of computers running Linux</li>
+  <li>The three pieces of software we'll use:
+    <ul>
+      <li><code>ch</code>: for typing in short fragments of C code to see what they do</li>
+      <li><code>emacs</code>: for typing in complete C programs </li>
+      <li><code>make</code>: for compiling complete C programs (so we can run them)</li>
+      </ul>
+  </li>
+  <li>We reviewed each of those last time.</li>
+</ul>
+<div class="sideNoteDiv">
+  <h3>Frequently asked questions—look over these later...</h3>
+  <p>	Q: Can I work from my own computer (running Windows, Mac OS, or Linux?)<br />
+</p>
+<ul>
+  <li> Yes—as long as it is connected to the internet
+    <ul>
+      <li>You'll use an internet connection to set up a &quot;terminal session on CSIL&quot; from your own computer</li>
+      </ul>
+  </li>
+  <li>On PCs, you need to download one piece of software: PuTTY
+    <ul>
+      <li>There is also an optional piece of software called XMing that can be helpful too, but it isn't necessary</li>
+      <li>Details are available at this link: <a href="http://www.cs.ucsb.edu/~pconrad/topics/CSILviaPutty/">http://www.cs.ucsb.edu/~pconrad/topics/CSILviaPutty/</a></li>
+    </ul>
+  </li>
+  <li>On Mac and Linux, you can use the ssh command, which is likely already installed.
+    <ul>
+      <li>Details available here: <a href="http://www.cs.ucsb.edu/~pconrad/topics/CSILFromMacOrLinux/">http://www.cs.ucsb.edu/~pconrad/topics/CSILFromMacOrLinux/</a></li>
+    </ul>
+  </li>
+  </ul>
+<p>Q: Do I need to download _____ on to my machine? (where ___ is <code>emacs</code>, <code>make</code>, <code>ch</code>, etc.)</p>
+<ul>
+  <li>No—you do <strong>not</strong> need to download emacs, make or ch, for your machine.
+    <ul class="spaciousList">
+      <li><strong>if you are on Windows, you only need to download <a href="http://www.cs.ucsb.edu/~pconrad/topics/CSILviaPutty/">PuTTY</a> </strong>(and optionally, XMing)</li>
+      <li><strong>If you are on Mac/Linux, you probably <a href="http://www.cs.ucsb.edu/~pconrad/topics/CSILFromMacOrLinux/">don't need to download anything</a></strong></li>
+    </ul>
+  </li>
+  </ul>
+<p>	Q: What if I want to work offline—i.e. while disconnected from the Internet?</p>
+<ul>
+  <li>While it is <em>possible</em> to download versions of emacs, make, ch, for  various systems so that you can work offline,  <em>we don't recommend it—</em>and as a result, we suggest that if you want to go this route, you are &quot;on your own&quot;.<br />
+    <br />
+    There are various reasons including the fact that (a)&nbsp;many of the assignments involve working in pairs, or specific other resources that are available on CSIL, e.g. scripts that check your work, creating files on the web, etc. (b)&nbsp;individual computers and versions of the operating systems on them vary so widely that we've found that trying to help students with installation of software on their individual machines is a major &quot;time-sink&quot; for instructors and TAs---consuming time that could be better spent on helping you learn the problem solving and C language topics that are the focus of the course.<br />
+  </li>
+</ul>
+</div> <!-- side note div -->
+
+<h2>Basics of using Ch</h2>
+<p>There is a very useful program on CSIL called Ch that you can use to learn about some of the basic properties of the C programming language.</p>
+<p>Ch is an 'interpreter' for C&mdash;it allows you to type in C statements one at a time, and have those statements be immediately turned into something that can be executed by the computer, one at a time. This is really helpful for trying out small bits of code to see what they will do. </p>
+<p>Ch has many other uses, as we may see later in the course&mdash;but for today we'll primarily be using it for little experiments to learn about:</p>
+<ul>
+  <li>declaring variables</li>
+  <li>assignments statements</li>
+  <li>the printf command.</li>
+</ul>
+<p>To bring up Ch on CSIL, login in, then simply type <strong>ch</strong> at the command prompt.</p>
+<p>You should see something like this (except the directory will be different) </p>
+<pre>-bash-3.2$ <strong>ch</strong><br />
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/faculty/pconrad&gt; </pre>
+<p>The /cs/faculty/pconrad that appears in the  prompt is an indication of what directory you are in—for you it, may be something such as: </p>
+<p><code>/cs/student/bettywhite&gt; </code></p>
+<p>or</p>
+<p><code>/cs/guest/avigoda&gt; </code></p>
+<h4>Customizing the Ch prompt</h4>
+<p>When working in Ch, I typically change the prompt to be the letters <code>Ch&gt;</code> and I invite my students to do the same. </p>
+<ul>
+  <li>Changing the prompt like this helps to remind us that we are working in Ch</li>
+  <li>If we both do it, then the examples of Ch sessions I provide to you will look the same as what you see on your screen.</li>
+</ul>
+<p>Here's how:  while in Ch, type the following command:<strong><code> _prompt = &quot;Ch&gt; &quot;</code></strong><br />
+</p>
+<p>Here's what doing that may look like:</p>
+<pre>/cs/faculty/pconrad&gt; <strong>_prompt = &quot;Ch&gt; &quot;</strong>
+Ch&gt;</pre>
+<p>Note  the following important details:</p>
+<ul>
+  <li>the underscore _ at the beginning of <code>_prompt</code></li>
+  <li>the space after the &gt; and before the &quot; inside <code>&quot;Ch&gt; &quot;</code></li>
+</ul>
+<p></p>
+<p>Now, your prompt is <code>Ch&gt; </code>(with a space after it).</p>
+<h3>Getting out of Ch</h3>
+<p>To get out of Ch and get back to the <code>-bash-3.2$</code> prompt, just type <code>exit</code> like this:</p>
+<p><code>Ch&gt; <strong>exit</strong><br />
+  -bash-3.2$ </code></p>
+<p>Now, let's get back into Ch, and explore declaring variables in C:</p>
+<p>
+  <pre>-bash-3.2$ <strong>ch</strong><br />                                   Ch <br />                Professional edition, version 6.1.0.13751 <br />              (C) Copyright 2001-2009 SoftIntegration, Inc.<br />                     http://www.softintegration.com<br />/cs/faculty/pconrad&gt; <strong>_prompt = &quot;Ch&gt; &quot;</strong><br />Ch&gt;  <br />
+  </pre>
+We'll continue below:</p>
+<h2>&nbsp;</h2>
+<h2>Basics of C</h2>
+<p>In C, every variable has to be declared the first time it appears.</p>
+<p><strong>Declaring variables:</strong> declaring a variable assigns it a name and a type. <br />
+  The declarations below also allocate memory for the variables that are declared.</p>
+<p>The part that appears after the // is a comment—it is there only for the human reader of a C program.</p>
+<pre>
+int x; // x can store an integer value like -42, 3 or 16;
+double y; // y can store a real number like 3.14, -0.00001, or 6.0221415E23
+
+char c; // c can store a single character like 'A', '3', or '?'</pre>
+
+<p>We can try these at the Ch prompt—to make the typing easier, we won't include the comments:</p>
+<p>
+  <pre>Ch&gt; <strong>int x;</strong><br />Ch&gt; <strong>double y;</strong><br />Ch&gt; <strong>char c;</strong><br />Ch&gt; </pre>
+</p>
+<p>Note that:</p>
+<ul>
+  <li> each of these declarations ends in a semicolon.</li>
+  <li>the proper names in C are <code>int</code>, not integer, and <code>char</code>, not character.</li>
+  <li>although there is a type called <code>float</code> for &quot;floating-point numbers&quot; we hardly ever use it
+    <ul>
+      <li>we use <code>double</code> instead, which works like <code>float</code>, but uses 2x the memory, so its more accurate</li>
+      <li><code>double</code> is short for double-precision floating point</li>
+      <li>back in the day, memory was expensive and the CPU was slow—so using <code>double</code> was a luxury</li>
+      <li>nowadays, memory is cheaper, and computers are faster: we almost always use <code>double</code>.</li>
+      </ul>
+  </li>
+  <li>In C, for true/false values, we generally just use <code>int</code>, and let 0 stand for false, and 1 for true.
+    <ul>
+      <li>There is usually no separate boolean type in C</li>
+      <li>There is a boolean type in C++/Java, but that's for later courses (CS24,CS32,CS56)</li>
+      </ul>
+  </li>
+  <li>There are many other types, but int, double, char is enough to get started.</li>
+</ul>
+<p><strong>Initializing variables:</strong> initializing a variable gives it an initial value.  </p>
+<pre>x = 4;
+y = 4.5;
+c = 'A'; // single characters must be in single quotes<br /></pre>
+  </p>
+  <p>At the Ch prompt, we can make these assignment statements, and then type just the 
+    name of a variable to see what was assigned. Note that y is printed with a few extra zeros—we'll discuss later how we can modify the way it gets printed.</p>
+  <p>
+  <pre>Ch&gt; <strong>x = 4;</strong><br />4 <br />Ch&gt; <strong>x</strong><br />4 <br />Ch&gt; <strong>y = 4.5;</strong><br />4.5000 <br />Ch&gt; y<br />4.5000 <br />Ch&gt; <strong>c = 'A';</strong><br />A <br />Ch&gt; <strong>c</strong><br />A <br />Ch&gt;   </pre>
+  </p>
+  <p><strong>Combining declaration and initialization:</strong> Declaration and initialization can be combined:</p>
+<p>
+  <pre>int t=4;
+double u=5.6;
+char v='B';</pre>
+  <p>This is  a way to make your code more compact. It also allows you to make sure that variables have an initial value—if you don't do it, the initial value is <em>undefined</em>, and could be anything! That's leads us to a discussion of &quot;junk data&quot; (see below).
+    </p>
+</p>
+  <p>Try these in Ch:</p>
+  <p>
+  <pre>Ch&gt; <strong>int t=4;</strong><br />Ch&gt; <strong>double u=5.6;</strong><br />Ch&gt; <strong>char v='B';</strong><br />Ch&gt; <strong>t</strong><br />4 <br />Ch&gt; <strong>u</strong><br />5.6000 <br />Ch&gt; <strong>v</strong><br />B <br />Ch&gt;   </pre>
+  </p>
+  <p>Note that if you try to redeclare a variable that has already been declared, you'll get an error, as the example below shows. After writing <code>int w=4; </code>you can write an assignment statemet such as <code>w=5;</code> to change the value of w, but you should not put the word int in front of w the second time:</p>
+  <ul>
+    <li>	You can use an assignment statement on a variable as many times as you want to give it a new value</li>
+    <li>But you can only declare a variable once to give it a type.
+      <ul>
+        <li>The actual rule is &quot;once per scope&quot;—but that's getting ahead of ourselves—we'll talk about scope later.</li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+  <pre>Ch&gt; <strong>int w=4;</strong><br />Ch&gt; <strong>int w=5;</strong><br />ERROR: identifier 'w' redeclared<br />Ch&gt; <strong>w</strong><br />4 <br />Ch&gt; <strong>w=5;</strong><br />5 <br />Ch&gt; </pre>
+  </p>
+  <p>So, in C, the type of a variable is permanent, and established when the variable is declared—e.g. once w is an int, it is always an int—but its value may be changed, for example by an assignment statement.</p>
+  <p>Try these things:</p>
+  <ol>
+    <li>What if I declare <code>int a = 5; </code>and then try <code>int a = 5; </code>(the same declaration again)
+      <ul>
+        <li>Is the result the same or different from the<code> int w=4; </code>then <code>int w=5; </code> case?</li>
+      </ul>
+    </li>
+    <li>What if I declare <code>int b = 5; </code>and then try <code>double b = 5.0; </code>(same variable but different type)?<br />
+<ul>
+        <li>Is the result the same or different from previous cases?</li>
+    </ul></li>
+  </ol>
+  <p>&nbsp;</p>
+  <p><strong>That's enough Ch for now—but we'll return for more later. </strong></p>
+  <p>&nbsp;</p>
+</div>
+</body>
+</html>

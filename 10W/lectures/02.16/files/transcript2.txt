@@ -1,0 +1,209 @@
+-bash-3.2$ ls
+01.12  01.14  01.19  01.21  01.26  01.28  02.04  02.09  02.11  02.16
+-bash-3.2$ cd 02.16
+-bash-3.2$ ls
+files  handout.pdf  index.html
+-bash-3.2$ cd files/
+-bash-3.2$ ls
+pointDemo  pointDemo2.c  pointDemo2.c~  pointDemo.c  pointDemo.c~
+-bash-3.2$ more pointDemo2.c
+// pointDemo.c   P. Conrad for CS16, Winter 2010
+// convert polar coordinates   to x,y
+
+#include <math.h> // for sin and cos
+#include <stdio.h>
+#include <stdlib.h> // for atof
+
+struct Point {
+  double x;
+  double y;
+
+};
+
+struct PolarPoint {
+  double radius;
+  double theta;
+};
+
+void printPoint(struct Point p );
+void printPolarPoint(struct PolarPoint pp );
+struct Point polarToXY(struct PolarPoint pp);
+struct PolarPoint XYToPolar(struct Point p);
+
+struct Point makePoint(double x, double y);
+struct Point makePolarPoint(double radius, double theta);
+
+
+int main(int argc, char *argv[])
+{
+  double radius, theta;
+  struct Point p;
+
+  if (argc != 3)
+    {
+      printf("Usage: %s radius theta\n", argv[0]);
+      return 1;
+    }
+
+  radius =   atof( argv[1]);
+  theta = atof(argv[2]) ;
+
+  p = polarToXY(radius, theta);
+
+  printPoint(p); // prints a point formatted as (x,y);
+
+  printf("\n");
+  return 0;
+
+}
+
+void printPoint(struct Point p )
+{
+  printf("(%lf,%lf)", p.x , p.y );
+}
+
+struct Point polarToXY(struct PolarPoint pp)
+{
+  struct Point p;
+
+  p.x = radius * cos(theta);
+  p.y = radius * sin(theta);
+
+  return p;
+}
+
+
+struct Point polarToXY(double radius, double   theta)
+{
+  struct Point p;
+
+  p.x = radius * cos(theta);
+  p.y = radius * sin(theta);
+
+  return p;
+}
+
+
+struct Point makePoint(double x, double y)
+{
+  struct Point p;
+
+  p.x = x;
+  p.y = y;
+
+  return p;
+}
+
+struct Point makePolarPoint(double radius, double theta)
+{
+  struct PolarPoint pp;
+  pp.radius = radius;
+  pp.theta = theta;
+  return pp;
+}
+-bash-3.2$ emacs +93 pointDemo2.c
+-bash-3.2$ more pointDemo2.c
+// pointDemo.c   P. Conrad for CS16, Winter 2010
+// convert polar coordinates   to x,y
+
+#include <math.h> // for sin and cos
+#include <stdio.h>
+#include <stdlib.h> // for atof
+
+struct Point {
+  double x;
+  double y;
+
+};
+
+struct PolarPoint {
+  double radius;
+  double theta;
+};
+
+void printPoint(struct Point p );
+void printPolarPoint(struct PolarPoint pp );
+struct Point polarToXY(struct PolarPoint pp);
+struct PolarPoint XYToPolar(struct Point p);
+
+-bash-3.2$ make pointDemo2.c
+make: Nothing to be done for `pointDemo2.c'.
+-bash-3.2$ make pointDemo2
+cc     pointDemo2.c   -o pointDemo2
+pointDemo2.c: In function ÃainÃ
+pointDemo2.c:42: error: incompatible type for argument 1 of ÃolarToXYÃpointDemo2.c:42: error: too many arguments to function ÃolarToXYÃpointDemo2.c: In function ÃolarToXYÃ
+pointDemo2.c:60: error: ÃadiusÃundeclared (first use in this function)
+pointDemo2.c:60: error: (Each undeclared identifier is reported only once
+pointDemo2.c:60: error: for each function it appears in.)
+pointDemo2.c:60: error: ÃhetaÃundeclared (first use in this function)
+pointDemo2.c: At top level:
+pointDemo2.c:67: error: conflicting types for ÃolarToXYÃpointDemo2.c:57: error: previous definition of ÃolarToXYÃwas here
+pointDemo2.c:88: error: conflicting types for ÃakePolarPointÃpointDemo2.c:25: error: previous declaration of ÃakePolarPointÃwas here
+make: *** [pointDemo2] Error 1
+-bash-3.2$ emacs pointDemo2.c
+-bash-3.2$ make pointDemo2
+cc     pointDemo2.c   -o pointDemo2
+pointDemo2.c: In function ÃainÃ
+pointDemo2.c:43: error: incompatible type for argument 1 of ÃolarToXYÃpointDemo2.c: At top level:
+pointDemo2.c:68: error: conflicting types for ÃolarToXYÃpointDemo2.c:58: error: previous definition of ÃolarToXYÃwas here
+pointDemo2.c:89: error: conflicting types for ÃakePolarPointÃpointDemo2.c:25: error: previous declaration of ÃakePolarPointÃwas here
+make: *** [pointDemo2] Error 1
+-bash-3.2$ emacs +43 pointDemo2.c
+-bash-3.2$ make pointDemo2
+cc     pointDemo2.c   -o pointDemo2
+pointDemo2.c:68: error: conflicting types for ÃolarToXYÃpointDemo2.c:58: error: previous definition of ÃolarToXYÃwas here
+make: *** [pointDemo2] Error 1
+-bash-3.2$ emacs +58 pointDemo2.c
+-bash-3.2$ make pointDemo2
+cc     pointDemo2.c   -o pointDemo2
+/tmp/ccwCMZMJ.o: In function `polarToXY':
+pointDemo2.c:(.text+0x12b): undefined reference to `cos'
+pointDemo2.c:(.text+0x142): undefined reference to `sin'
+collect2: ld returned 1 exit status
+make: *** [pointDemo2] Error 1
+-bash-3.2$ cc -lm pointDemo2.c -o pointDemo2
+-bash-3.2$ ./pointDemo2
+Usage: ./pointDemo2 radius theta
+-bash-3.2$ ./pointDemo2 1 0
+(1.000000,0.000000)
+-bash-3.2$ ./pointDemo2 1 3.14159
+(-1.000000,0.000003)
+-bash-3.2$ ./pointDemo2 1 1.6
+(-0.029200,0.999574)
+-bash-3.2$ emacs swapWrong.c
+-bash-3.2$ make swapWrong
+cc     swapWrong.c   -o swapWrong
+-bash-3.2$ ./swapWrong
+Before swap: a[0]=19 a[1]=4 a[2]=62 a[3]=41
+After swap: a[0]=19 a[1]=4 a[2]=62 a[3]=41
+-bash-3.2$ cp swapWrong.c swapRight.c
+-bash-3.2$ emacs swapRight.c
+-bash-3.2$ make swapWrong
+make: `swapWrong' is up to date.
+-bash-3.2$ make swapWrong
+make: `swapWrong' is up to date.
+-bash-3.2$ make swapRight
+cc     swapRight.c   -o swapRight
+swapRight.c: In function ÃainÃ
+swapRight.c:25: warning: passing argument 1 of ÃwapÃmakes pointer from integer without a cast
+swapRight.c:25: warning: passing argument 2 of ÃwapÃmakes pointer from integer without a cast
+-bash-3.2$ emacs swapRight.c
+-bash-3.2$ make swapRight
+cc     swapRight.c   -o swapRight
+-bash-3.2$ ./swapRight
+Before swap: a[0]=19 a[1]=4 a[2]=62 a[3]=41
+After swap: a[0]=19 a[1]=4 a[2]=41 a[3]=62
+-bash-3.2$ ls
+pointDemo     pointDemo2.c~  swapRight     swapWrong
+pointDemo2    pointDemo.c    swapRight.c   swapWrong.c
+pointDemo2.c  pointDemo.c~   swapRight.c~  swapWrong.c~
+-bash-3.2$ cd ..
+-bash-3.2$ ls
+files  handout.pdf  index.html
+-bash-3.2$ cd files/
+-bash-3.2$ ls
+pointDemo     pointDemo2.c~  swapRight     swapWrong
+pointDemo2    pointDemo.c    swapRight.c   swapWrong.c
+pointDemo2.c  pointDemo.c~   swapRight.c~  swapWrong.c~
+-bash-3.2$ emacs functionPointers.c
+

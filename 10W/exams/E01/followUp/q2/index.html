@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Feedback on q2, from CS16 Midterm 1, 10W, Conrad, UCSB</title>
+<meta http-equiv="Content-Type" content="text /html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+body {width: 7.7in; margin-left:0.4in; margin-right: 0.4in;padding-left:1em;}
+h2, h3 {font-family:Arial, Helvetica, sans-serif;}
+div.framed { border-style: outset; border-width: 1em; border-color: #666666; padding: 2em; }
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+pre.forLoopPre {width:15em;}
+pre.trianglePre{width:7em;}
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+
+
+pre {width:20em;}
+
+.nobreak {white-space:nowrap;}
+.pageBreakBefore {padding-top: 2em;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions">Followup on Question 2 from<br />
+  CS16 Midterm Exam 1<br />
+  <span class="subhead">E01, 10W, Phill Conrad, UC Santa Barbara<br /> 
+ Tuesday, 02/02/2010, 11am-12:15pm</span> </h1>
+<p class="instructions">&nbsp;</p>
+<hr />
+<p>For this problem, I simply made one list of errors—I didn't break it up into syntax, logic, major or minor. There were 14 different errors in all.</p>
+<p>There were 17/72  papers that received a perfect 20/20 score (~24%).<br />
+</p>
+<p>Here is a sample correct answer. The parts that the student had to supply are in bold.</p>
+
+<pre class="widePre">
+
+// starBox1.c   Answer to an exam question
+// P. Conrad, for CS16   02/02/2010
+
+
+<strong>#include &lt;stdio.h&gt;
+void starBox(int width, int height);</strong>
+
+
+int main()
+{
+
+  <strong>int width,height; 
+ 
+  printf("Please enter width: ");
+  scanf("%d",&width);
+
+  printf("Please enter height: ");
+  scanf("%d",&height);
+
+
+  starBox(width,height);
+
+  return 0;</strong>
+
+}
+
+void nStars(int n)
+{
+   int i;
+   for (i=0; i&lt;n; i++)
+      printf("*");
+
+}
+
+void starBox(int width, int height) 
+{
+   int i;
+   for (i=0; i&lt;height; i++)
+   {
+       nStars(width); printf("\n");
+   }
+
+}
+
+   
+</pre>
+<p>&nbsp;</p>
+<h2>Errors #1-#6: the six hints</h2>
+<p>I used error code #1 through #6 for the six hints that were listed right in the question text:</p>
+<table width="100%" border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <td><div align="center"><strong>Hints for full credit</strong></div></td>
+  </tr>
+  <tr>
+    <td><ul style="font-size: 0.9em;">
+      <li>#1: Use correct  % specifiers (%d or %i for int, and %lf for double)</li>
+      <li> #2: Remember the special syntax detail that applies to using scanf.</li>
+      <li>#3: Remember the line of code to access the standard input/output library</li>
+      <li>#4: Use &quot;function prototypes&quot; when function calls precede function definitions</li>
+      <li>#5: Do what is needed at the end of the output <br />
+        so that the Unix prompt after the program ends appears on a new line</li>
+      <li>#6: When the main() is finished, remember to signal success/failure to the OS<br />
+      </li>
+    </ul></td>
+  </tr>
+</table>
+<h3>Error #1: (-1)</h3>
+<p> No one made this error: everyone that used scanf used the correct specifiers, either %d or %i</p>
+<code> scanf(&quot;<strong>%d</strong>&quot;,&amp;width);</code>
+<h3>Error #2: (-1)</h3>
+<p>This one referred to using &amp; before the variables in scanf:</p>
+<p><code>scanf(&quot;%d&quot;,<strong>&amp;</strong>width);</code></p>
+<p>Three papers omitted the &amp; completely, e.g. <code>scanf(&quot;%d&quot;,width);</code><br />
+One papers use a @ instead, i.e. <code>scanf(&quot;%d&quot;,@width);</code></p>
+<p>Be sure you learn to draw the &amp; symbol—it's a skill you'll need for later C/C++ courses.</p>
+<h3>Error #3: (-1)</h3>
+<p>This one referred to remembering to insert this line before the main </p>
+<p><code>#include &lt;stdio.h&gt;</code></p>
+<h3>Error #4: (-2)</h3>
+<p>Because the function starBox is called (inside main) before it is defined, it is necessary to have a function prototype before the main:</p>
+<p><strong>
+  <code>void starBox(int width, int height);</code>
+</strong></p>
+<p>This should go above the main program. One person put it inside the main program, for which I only took off 1 point for style. Strictly speaking, it is legal to put function prototypes inside the main, but it is not good style to do so.</p>
+<h3>Error #5: (-2)</h3>
+<p>The last thing printed by a program should be a \n character.</p>
+<p>It turns out that the starBox function already takes care of this, so no-one lost points on this item.<br />
+</p>
+<h3>Error #6: (-2)</h3>
+<p>At the end of the main function, you need this line to signal success to the OS</p>
+<p><strong> <code>return 0;</code></strong></p>
+<h2>Errors #6-#14: other errors</h2>
+<h3>Error #7: putting types before params in a function call (-2)</h3>
+<p>This error pertains to the correct way to make a function call. In a function call, we do NOT precede the names of the actual parameters with their types. This is ONLY done in a function prototype, and the first line of a function definition.</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">
+starBox(<strong>int</strong> width, <strong>int</strong> height);</pre></td>
+      <td><pre class="widePre">
+starBox(width, height);</pre></td>
+  </tr>
+</table>
+<p>The reasons is that width and height are NOT being declared here as brand new variables. We only precede a variable with its type when it is being declared—i.e. introduced  for the first time. (An exception to the 'first time' rule is that we repeat the type between the function prototype and the function definition.)</p>
+Remember: <em>no types before parameters in a function call!</em>
+<h3>Error #8: improper syntax for the scanf call (-1 to -4)</h3>
+<p>There were eleven papers that had various kinds of improper syntax for the scanf call.</p>
+<p>Here are a few of the incorrect answers, contrasted with correct answers, and with commentary on what the authors of the incorrect answers might have been thinking.</p>
+<p>The proper syntax is a format specifier in double quotes, followed by the variable (preceded with &amp;):</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">printf("Please enter width: ");
+scanf("%d",&width);
+
+printf("Please enter height: ");
+scanf("%d",&height);</pre></td>
+  </tr>
+</table>
+<p>Unlike in Python, scanf does not return the value scanned, and it also doesn't take the prompt as a parameter. Each of these earned a (-4) deduction. (Error 13 may also be related to misconceptions about C related to having studied Python.)</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect in C</th>
+    <th scope="col">Deduction</th>
+    <th scope="col">Perhaps this error arises <br />
+    from this  (correct) Python syntax:</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">width = scanf(&quot;%d&quot;);</pre></td>
+    <td>-4</td>
+    <td rowspan="4"><pre class="widePre">width = int(input(&quot;Please enter width&quot;));</pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">scanf(&quot;Please enter width: %i&quot;,&amp;width);</pre></td>
+    <td>-4</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">width = scanf(%i);</pre></td>
+    <td>-4<br />
+    (two papers)</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">int w = scanf(&quot;Please enter width: &quot; &amp;%i);</pre></td>
+    <td>-4</td>
+  </tr>
+</table>
+<p> While it is possible to read both width and height together, this requires two format specifiers and two variables separated by a comma (This was a -2 deduction).</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect </th>
+    <th scope="col">Deduction</th>
+    <th scope="col">this however, would work <br />
+    (though it isn't the preferred method):</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">printf(&quot;Please enter width and height:&quot;);<br />scanf(&quot;%i&quot;, &amp;width, &amp;height);</pre></td>
+    <td>-2</td>
+    <td rowspan="4"><pre class="widePre">printf(&quot;Please enter width and height:&quot;);<br />scanf(&quot;%d%d&quot;, &amp;width, &amp;height);</pre><p>OR</p><pre class="widePre">printf(&quot;Please enter width and height:&quot;);<br />scanf(&quot;%d %d&quot;, &amp;width, &amp;height);</pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">printf(&quot;Please enter width and height:&quot;);<br />scanf(&quot;%d&quot;,&quot;%d&quot;, &amp;width, &amp;height);</pre></td>
+    <td>-2</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">printf(&quot;Please enter width and height:&quot;);<br />scanf(&quot;%d&quot;, &amp;width  &amp;height);</pre></td>
+    <td>-3</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">printf(&quot;Please enter width and height:&quot;);<br />scanf(%i width; %i height);</pre></td>
+    <td>-4</td>
+  </tr>
+</table>
+<p>Also, it is necessary to use &quot;&quot; around the format specifier</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect </th>
+    <th scope="col">Deduction</th>
+    <th scope="col">Correct:</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">scanf(%i,&amp;width);</pre></td>
+    <td>-2</td>
+    <td><pre class="widePre">scanf(&quot;%i&quot;,&amp;width);</pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">scanf(&quot;%i,&amp;width);</pre></td>
+    <td>-1</td>
+    <td><pre class="widePre">scanf(&quot;%i&quot;,&amp;width);</pre></td>
+  </tr>
+</table>
+<p>One final version was this one. Strictly speaking, this didn't follow the instructions, which indicated to prompt for width and height separately, but I would have forgiven that. The only real problem with the offered answer below is a missing comma between &amp;width and &amp;height. Strangely enough, the lack of a comma between &quot;%i&quot; and &quot;%i&quot; is actually correct—because in C, if you have consecutive string literals with no punctuation in between (only white space), then the string literals are treated as if they were concatenated.</p>
+<p>Thus <span class="widePre"><code>scanf(&quot;%i&quot; &quot;%i&quot;, &amp;width, &amp;height);</code></span> is equivalent to <span class="widePre"><code>scanf(&quot;%i%i&quot;, &amp;width, &amp;height);</code></span> which is not the preferred way to read in two variables, but it will work.</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect </th>
+    <th scope="col">Deduction</th>
+    <th scope="col">Correct, though unusual</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">printf("Please enter width and height");<br />scanf(&quot;%i&quot; &quot;%i&quot;, &amp;width &amp;height);</pre></td>
+    <td>-1</td>
+    <td><pre class="widePre">printf(&quot;Please enter width and height&quot;);<br />scanf(&quot;%i&quot; &quot;%i&quot;, &amp;width<strong>,</strong> &amp;height);</pre></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h3>Error #9: missing semicolon (-1)</h3>
+<p>For a missing semicolon after a statement, a deduction of 1 point was taken—multiple deductions were not taken on this problem (a maximum of -1 for semicolons.)</p>
+<p>Example:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">starbox(width, height)   </pre></td>
+    <td><pre class="widePre">starbox(width, height)<strong>;</strong>   </pre></td>
+  </tr>
+</table>
+<h3>Error #10: extra \n in scanf statement (-1)</h3>
+<p>In a scanf statement, many students will common place an extra \n in the format specifier. Although some textbooks suggest this, in practice, it  frequently causes problems, so I advise against it, and teach not to do it. As a reminder not to do this, I deducted one point on papers where this appeared in the answer:</p>
+<p>Example:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">scanf(&quot;%i\n&quot;,&amp;width);  </pre></td>
+    <td><pre class="widePre">scanf(&quot;%i&quot;,&amp;width); </pre></td>
+  </tr>
+</table>
+<h3>Error #11: forgetting to declare local variables (-2)</h3>
+<p>In C, local variables inside main, or any function or block for that matter, must be declared at the top of that function (or block), just after the opening curly brace ({). </p>
+<p>Example:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">...<br />int main()<br />{<br />   printf(&quot;Please enter width:&quot;);<br />   scanf(&quot;%d&quot;,&amp;width);<br />   ...</pre></td>
+    <td><pre class="widePre">...<br />int main()<br />{<br /><strong>   int width,height;</strong><br />   printf(&quot;Please enter width:&quot;);<br />   scanf(&quot;%d&quot;,&amp;width);<br />   ...</pre></td>
+  </tr>
+</table>
+<p>These should be declared local to the function in which they are used, and not global (see error @@ below).</p>
+<h3>Error #12: missing or messing up the function call to starBox (-4)</h3>
+<p>One of the main purposes of this question was to test whether students correctly mastered the notion of calling a function. The instructions were very specific: </p>
+<ul>
+  <li>Add code that calls starBox to output the box of stars.<br />
+  </li>
+</ul>
+<p>Here's what was needed</p>
+<p>Example:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">...<br />int main()<br />{<br />   ... // code to declare and prompt for width and height
+   <strong>starBox(width, height);</strong>
+   return 0;
+}</pre></td>
+  </tr>
+</table>
+<p>There were a variety of incorrect answers in this group, including the following:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Why its wrong</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">...<br />int main()<br />{<br />   ... // code to declare and prompt for width and height
+  nstars(width, height); 
+  return 0;
+}</pre></td>
+    <td>This code is simply calling the wrong function. Note that nstars only takes one parameter, n (the number of stars), while starBox takes two (a width and a height).<br />
+        <br />
+    Deduction: -4</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">...<br />int main()<br />{<br />   ... // code to declare and prompt for width and height
+  starBox(); 
+  return 0;
+}</pre></td>
+    <td>You must pass parameters width and height to starBox for it to work properly. The width and height in the main are local variables—different variables from the ones with the same name inside the function starBox. The variables in made must pass off theri values to the function starBox before it can do its job properly.<br />
+      <br />
+    Deduction: -4</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">...<br />int main()<br />{<br />   ... // code to declare and prompt for width and height
+
+
+   return 0;
+}</pre></td>
+    <td>It is not enough to initialize width and height but never call starBox. You won't get any output if that's all you do. (Two papers contained this error)<br />
+      <br />
+    Deduction: -6</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">...<br />int main()<br />{<br />   ... // code to declare and prompt for width and height
+   <strong>for (i=0; i&lt;=height; i++)</strong>
+  <strong> {  
+      for(i=0; i&lt;=width; i++)
+         printStarBox(width); printf(&quot;\n&quot;);
+   }</strong>
+}</pre></td>
+    <td>This answer is wrong in at least three different ways.  First, there is no function called <code>printStarBox()</code> defined—presumably <code>starBox()</code> is what was intended.  Second, if one uses a nested loop, the variables for the two loops must be different (they can't both be i, for example.).  Third, the function <code>starBox()</code>, which is what was supposed to be used already implicitly contains the nested loop needed, so it is incorrect to place it two more nested loops. Deduction: -6</td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">...<br />int main()<br />{<br />   <strong>int i;<br />   for (i=0; i&lt;height; i++)</strong>
+  <strong> {  
+      for(i=0; i&lt;width; i++)
+         printf(&quot;*&quot;);
+         printf(&quot;\n&quot;);
+   }</strong><br />  printf(&quot;Please enter width:&quot;);
+  scanf(&quot;%i&quot;, &amp;width);
+  printf(&quot;Please enter height:&quot;);
+  scanf(&quot;%i&quot;, &amp;height);
+
+
+}</pre></td>
+    <td>This answer contains much of the misunderstandings of the one directly above it, but compounds the error in at least one significant way—order matters! It is essential to establish values for height and width before they are used.  Also note that even if this code were correct, it still contains another misunderstanding about C: the indentation of the two printf statements is either erroneous or misleading: the second one should be &quot;outdented&quot; if it is NOT in the inner for loop—or if it is, then {} is required around both statements. Deduction: -8</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h3>Error #13: atoi is not needed (or correct) following  scanf(&quot;%d&quot;,&amp;variable); (-2)</h3>
+<p>It is not necessary—and in fact, is an error—to use atoi to conver the result of doing a scanf that reads data in with %i or %d. If data is read in with %i or %d, then it has already been converted to an int.</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect in C</th>
+    <th scope="col">Deduction</th>
+    <th scope="col">Correct</th>
+    <th scope="col">Perhaps this error arises <br />
+      from this  (correct) Python syntax:</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">scanf(%i,&amp;width);<br /><strong>width = atoi(width);</strong></pre></td>
+    <td>-2</td>
+    <td><pre class="widePre">scanf(%i,&amp;width);<br /></pre></td>
+    <td><pre class="widePre">&nbsp;</pre></td>
+  </tr>
+</table>
+<p>The error could also arise from having seen code that reads the input as a string and then does an atoi, such as in the following two examples. Note, however, that it is not reasonable for the argument to atoi (which needs to be of type char *) to be the same as the left hand side of the assignment statement (which needs to be of type int.)</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Correct<br />
+      (though bad practice—may<br />
+      lead to buffer overflow vulnerabilities
+      )</th>
+    <th scope="col">Correct<br />
+      (more secure)</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">char widthAsString[1024];
+int width;
+...<br />scanf(%s,widthAsString);
+width = atoi(widthAsString);<br />
+    </pre></td>
+    <td><pre class="widePre">
+const int MAX_LENGTH = 1024;
+char widthAsString[MAX_LENGTH];
+int width;
+...<br />fgets(widthAsString,MAX_LENGTH,stdin);
+width = atoi(widthAsString);<br />
+</pre></td>
+  </tr>
+</table>
+<h3>Error #14: width and height should be local to main, not global; (-2)<br />
+</h3>
+<p>Global variables are almost always a bad programming practice in C—there may a very small number of cases in future courses where they are warranted, but the general rule is that they are to be avoided—especially in first year programming courses.</p>
+<p> If you use a global variable in your C/C++ programming, you should have a very good reason to do so—and in this course, there will NEVER be such a reason. If you <em>think</em> you need a global variable, it is a sign that you are misunderstanding the problem in some way.<br />
+</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Bad practice</th>
+    <th scope="col">Good practice</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">
+#include &lt;stdio.h&gt;
+void starBox(int width, int height);
+
+<strong>int width,height; // outside of main, global (bad)</strong>
+
+int main()
+{
+
+  ...</pre></td>
+    <td><pre class="widePre">
+#include &lt;stdio.h&gt;
+void starBox(int width, int height);
+
+
+int main()
+{
+
+  <strong>int width,height; // inside main, local (good)
+  </strong>...</pre></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h2>Blank papers (1/72, ~1%)</h2>
+<p>There was one paper with no response to question 8, bringing the total to 72 papers total.</p>
+<p>&nbsp;</p>
+<hr />
+<p>Count of errors:</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Error</th>
+    <th scope="col">Explanation</th>
+    <th scope="col">Count</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>format specifiers</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>&amp; in scanf</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>#include &lt;stdio.h&gt;</td>
+    <td>9</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>fn prototypes</td>
+    <td>33</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>\n as last piece of output</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>return 0; at end of main</td>
+    <td>9</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>no types before params in function call</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>correct syntax for scanf</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>semicolons after statements</td>
+    <td>5</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>no \n in scanf format string</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>declare variables before use</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>function call to starBox</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>improper <code>width=atoi(width); </code><br />
+    following call to scanf</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td>making width and height global</td>
+    <td>2</td>
+  </tr>
+</table>
+<p>Point count for question 2</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">subtraction</th>
+    <th scope="col">points/20</th>
+    <th scope="col">count</th>
+  </tr>
+  <tr>
+    <td>-0</td>
+    <td>20</td>
+    <td>17</td>
+  </tr>
+  <tr>
+    <td>-1</td>
+    <td>19</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>-2</td>
+    <td>18</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>-3</td>
+    <td>17</td>
+    <td>8</td>
+  </tr>
+  <tr>
+    <td>-4</td>
+    <td>16</td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td>-5</td>
+    <td>15</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>-6</td>
+    <td>14</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>-7</td>
+    <td>13</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>-8</td>
+    <td>12</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>-9</td>
+    <td>11</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>-10</td>
+    <td>10</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>-20</td>
+    <td>0</td>
+    <td>1</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<ul class="theQuestions">
+ 
+<li style="list-style:none;"></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, H13 (Selection Sort preparation)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, UCSB</p>
+<p>H13:  (Selection sort preparation) <span id="pointCount">Total points: ?</span> (<a href="H13.pdf">printable PDF</a>)<br />
+  <strong><br />
+  About this assignment:</strong> In lecture on Tuesday February 16, we will start talking about the ideas behind selection sort. That discussion will continue on Thursday February 18. <br />
+  <br />
+  Your job here is to <em>begin</em> to turn those ideas into C code.<br />
+  <br />
+For <em><strong>this</strong></em> assignment, it is not necessary that your code be perfect. We are grading you on whether you have made a good faith effort to try to write code that will work, and have prepared yourself for lab next Thursday, Feb 18.<br />
+<br />
+If you are confident in your solution, that's great. If you are lost, please come see your instructor or a TA for help. <br /> 
+Visit <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/ofchrs/">http://www.cs.ucsb.edu/~pconrad/cs16/10W/ofchrs/</a> for a schedule of office hours.<br />
+<strong><br />
+</strong></p>
+<hr />
+<ol>
+  <li>(20 pts) First, write a function called indexOfMax that computes the index of the largest element in an array of ints.<br />
+      <br />
+    The function should take these parameters: an array (call it <code>a</code>) and  the size of the array (call it <code>n</code>, or <code>size</code>)<br />
+    It should return the index of the largest value in the array (a number between <code>0</code> and <code>n-1</code>)<br />
+      (In case of ties, return the index of <em>any one</em> of the values that is &quot;tied for largest&quot;.)<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+      <p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for more problems</span></p>
+      <p style="page-break-before:always"><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+  </p>
+  </li>
+  <li>(20 pts) Write a function called selectionSort that sorts an array.<br />
+    <br />
+    The parameters to your function selectionSort will be the same as the parameters to indexOfMax.<br />
+The function will be void—it operates by having a &quot;side effect&quot; on the array that is passed in (i.e. it sorts it.)<br />
+<br />
+Use the function that you defined in part one. You can use a function call like this one to find the location of the maximum value among all the first &quot;howMany&quot; elements of a.<br />
+    <br />
+    <pre>maxLoc = indexOfMax(a, howMany);</pre>
+    With that tool, you should be able to write a function that performs selection sort by doing this repeatedly, on smaller and smaller parts of the array (all the elements, then the first n-1 elements, then the first n-2 elements, etc. until you are down to just 2 elements.) Each time, you want to swap the largest value with the element at the &quot;end&quot; of that part of the array.<br />
+    <br />
+    Remember that to swap two values, you need code like this:<br />
+      <br />
+      <pre>temp = a[i];<br />
+a[i] = a[j];<br />
+a[j] = temp;<br />
+      </pre>
+      <br />
+    <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  </li>
+  <!--- -->
+</ol>
+
+<hr />
+End of H13
+</body>
+</html>

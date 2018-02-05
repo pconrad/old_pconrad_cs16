@@ -1,0 +1,48 @@
+\hypertarget{structDrawing}{
+\section{Drawing Struct Reference}
+\label{structDrawing}\index{Drawing@{Drawing}}
+}
+
+
+{\ttfamily \#include $<$drawing.h$>$}\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+enum DrawingType \hyperlink{structDrawing_a8539b73be2fc3239987909ae1eff6af2}{type}
+\item 
+int \hyperlink{structDrawing_abcce8d1fcf1e398497649243d6696dbf}{height}
+\item 
+int \hyperlink{structDrawing_a1844c9959ca62a84c9984f62aa9653b0}{width}
+\item 
+int \hyperlink{structDrawing_a500b2aecb1926c0ac81072b65f960f91}{pixels} \mbox{[}MAXPIXELS\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+struct \hyperlink{structDrawing}{Drawing} is the basic struct that represents a drawing in this graphics package. The actual pixels of a given drawing are contained in an instance of this struct, along with information about the width, height, and whether the drawing is black-\/and-\/white, or color. When drawing using netpbmtools, the basic steps in your code are to (1) initialize a struct \hyperlink{structDrawing}{Drawing}, choosing the type of drawing and the size, (2) use various draw and fill routines to put pretty pictures into the struct \hyperlink{structDrawing}{Drawing} (i.e. to set the pixels) (3) output the drawing to a PBM file. 
+
+\subsection{Field Documentation}
+\hypertarget{structDrawing_abcce8d1fcf1e398497649243d6696dbf}{
+\index{Drawing@{Drawing}!height@{height}}
+\index{height@{height}!Drawing@{Drawing}}
+\subsubsection[{height}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Drawing::height}}}
+\label{structDrawing_abcce8d1fcf1e398497649243d6696dbf}
+height in pixels \hypertarget{structDrawing_a500b2aecb1926c0ac81072b65f960f91}{
+\index{Drawing@{Drawing}!pixels@{pixels}}
+\index{pixels@{pixels}!Drawing@{Drawing}}
+\subsubsection[{pixels}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Drawing::pixels}\mbox{[}MAXPIXELS\mbox{]}}}
+\label{structDrawing_a500b2aecb1926c0ac81072b65f960f91}
+all pixels in row major order. Use pixels\mbox{[}(y $\ast$ width) + x\mbox{]} to set pixel (x,y)-\/-\/this is encapsulated in the setPixel function. \hypertarget{structDrawing_a8539b73be2fc3239987909ae1eff6af2}{
+\index{Drawing@{Drawing}!type@{type}}
+\index{type@{type}!Drawing@{Drawing}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}enum DrawingType {\bf Drawing::type}}}
+\label{structDrawing_a8539b73be2fc3239987909ae1eff6af2}
+BW or Color? \hypertarget{structDrawing_a1844c9959ca62a84c9984f62aa9653b0}{
+\index{Drawing@{Drawing}!width@{width}}
+\index{width@{width}!Drawing@{Drawing}}
+\subsubsection[{width}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Drawing::width}}}
+\label{structDrawing_a1844c9959ca62a84c9984f62aa9653b0}
+width in pixels 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+drawing.h\end{DoxyCompactItemize}

@@ -1,0 +1,127 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, H13 (Selection Sort preparation)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.smallerFont {font-size: 0.9em;}
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, UCSB—Handout for 02/16—Returning more than one value from a function (<a href="handout.pdf">PDF</a>)<br />
+  This handout goes with the lecture for 02/16 for CS16, Conrad, Winter 2010:<br />
+    <a href="http://www.cs.ucsb.edu/~pconrad/cs16/W10/homework/H13">http://www.cs.ucsb.edu/~pconrad/cs16/W10/homework/H13</a><br />
+</p>
+<hr />
+<h2 align="center">Returning a value from a function—review</h2>
+<p align="left">As you remember, we can return one, and only one value from a function. We do this via the return statement. For example, this function returns the larger of two integers:<br />
+  <br />
+<pre>int larger(int a, int b)<br />{<br />  if (a&lt;b)
+    return a;<br />  else
+    return b;
+}</pre>
+
+
+<h2 align="center">Returning two values from a function with structs</h2>
+    <p align="left">Suppose though, that a function is computing two values, not just one.<br />
+      <br />
+    One way to return two values from a function is to make a new type—a struct.</p>
+    <p align="left">A struct is a way to<em> create a new type</em>—in addition to int, double, char, char *, int *, etc.</p>
+    <p align="left">A struct has members inside it: for example:</p>
+    <pre>struct Point {<br />  int x;<br />  int y;<br />};</pre>
+    <p>Notice the semicolons after each member of the struct, and after the end of the entire struct.</p>
+    <p>We can create a function that returns an item that is of type &quot;struct Point&quot;, and by doing so, we can end up returning both a value for x, and a value for y.</p>
+    <p>For example, if we have an angle theta (&theta;) on the unit circle, then the value of a point on that circle is computed by these math formulas:</p>
+    <p><em>x</em> = <em>r</em> cos &theta;&nbsp;&nbsp;&nbsp;&nbsp;
+      <em>y</em> = <em>r</em> sin &theta;&nbsp;&nbsp;&nbsp;&nbsp;   where for the unit circle,<em> r</em> = 1
+    <p>In C code, we can represent that this way:
+<pre>
+struct Point unitCirclePoint(double theta)
+{
+   struct Point p;
+   p.x = cos(theta);<br />   p.y = sin(theta);
+   return p;
+}
+      
+</pre>
+
+<p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">
+      Please turn over for more problems</span></p>
+    <p style="page-break-before:always"><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br /></p>
+
+<h2 align="center">Returning two values from a function with pointers</h2>
+<p>Another way to return two values from a function is to use points.<br />
+  <br />
+  Look back at the function on the other side that computes the larger of two numbers.  
+  Suppose though, that we wanted the function to compute BOTH the larger number and the smaller number, and return them to us. </p>
+<p align="left">We can use pointers to accomplish this. Look especially at the parts in bold in the programs below.</p>
+<ul>
+  <li>In the main program, we set up two variables that will <em>receive</em> the answers from the function</li>
+  <li>We pass the address of those variables to the function—the actual parameters are addresses, and the formal parameters are pointers
+    <ul>
+      <li>But as we know from lecture, <strong>an address is a pointer, and a pointer is an address</strong></li>
+    </ul>
+  </li>
+  <li>Inside the function we dereference the pointers, and set the values</li>
+</ul>
+<p>Here's an example—this example will be (or was) discussed more in lecture on 
+<pre>
+// computeBigSmallDemo.c  P. Conrad for CS16, Winter 2010
+#include &lt;stdio.h&gt;
+
+void computeBigAndSmall(int first, int second, 
+			<strong>int *bigOnePtr, int *smallOnePtr</strong>);
+            
+
+int main(int argc, char *argv[])
+{
+  int firstOne, secondOne;
+  int bigOne, smallOne;
+  
+  if (argc!=3)
+    {
+      printf("Usage: %s num1 num2\n", argv[0]); return 1;
+    }
+  
+   // convert command line args
+  firstOne = atoi(argv[1]); secondOne = atoi(argv[2]);
+  // compute result
+  computeBigAndSmall(firstOne, secondOne, <strong>&amp;smallOne, &amp;bigOne</strong>); 
+  // print result
+  printf("The small one is %i and the big one is %i\n", smallOne, bigOne);
+
+  return 0;
+}
+
+void computeBigAndSmall(int first, int second,
+			<strong>int *smallOnePtr, int *bigOnePtr</strong>)
+{
+  if (first < second)
+    {
+      // this reaches back to the variables pointed to in the calling function
+      // and THOSE variables receive the values of first and second    
+      <strong>(*smallOnePtr)</strong> = first; <strong>(*bigOnePtr)</strong> = second;
+    }
+  else // first one is bigger, or they are the same
+    {
+      <strong>(*smallOnePtr)</strong> = second; <strong>(*bigOnePtr)</strong> = first;
+    }
+}
+</pre>
+
+
+    <hr />
+End of H13 Handout
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 09F, H01 (Style, C basics, Oualline, Chapters 1, 3)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 09F, H01 (Overview of C, Oualline, Chapters 3,4) <span id="pointCount">Total points: ?</span> (<a href="H01.pdf">printable PDF</a>)</p>
+<p>Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/homework/H01">http://www.cs.ucsb.edu/~pconrad/cs16/09F/homework/H01</a></p>
+<p>Accepted: on paper, in lecture (1pm-1:50pm, Chem 1171) on Wednesday, September 30th<br />
+  See syllabus and Homework assignment <a href="../H00">H00</a> for explanation of &quot;late policy&quot; and &quot;sick day/personal day&quot; policy.<br />
+</p>
+<hr />
+<p>&nbsp;</p>
+<p>Name: (2 pts)___________________________  <span>UMail address (2 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (1 pts) Circle one:         10am                 11am                  noon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unknown<br />
+    <br />
+  (Note: For now, circle the lab section you are registered for on GOLD.<br />
+  If you need to request a different lab section because of an ACTUAL SCHEDULE CONFLICT, please email pconrad@cs.ucsb.edu with details)<br />
+</p>
+<hr />
+<p>Please obtain the official textbook for this course by Delores Etter. <strong>You will start having homework assignments in that book next week.</strong></p>
+<p>For this week, the reading assignments are chapter 3 and 4 in an online textbook—Practical C Programming by Steve Oualline. Even though this book is a bit &quot;dated&quot;—as an example, find the sentence in Chapter 4 about how most PCs are 16 bit machines (!)—it is still a great resource for learning C, because many of the basics haven't changed.</p>
+<p>To link directly to this book, use these links:</p>
+<ul>
+  <li>Chapter 3: Style (<a href="http://search.safaribooksonline.com/1565923065/pcp3-CHP-3#pcp3-CHP-3">on campus</a>) (<a href="http://search.safaribooksonline.com.proxy.library.ucsb.edu:2048/1565923065/pcp3-CHP-3#pcp3-CHP-3">off campus</a>)</li>
+  <li>Chapter 4: Style (<a href="http://search.safaribooksonline.com/1565923065/pcp3-CHP-4">on campus</a>) (<a href="http://search.safaribooksonline.com.proxy.library.ucsb.edu:2048/1565923065/pcp3-CHP-4">off campus</a>)</li>
+</ul>
+<p>Once you've read these chapters, write answers to the questions on the reverse side of this sheet (use the <a href="H01.pdf">PDF link</a> to print a copy of this if you weren't in class).</p>
+<ol>
+  <li>In Chapter 3, the author discusses programming style.
+      <ol>
+      <li>(10 pts) According to the author, what are at least two &quot;real-world&quot; reasons that programming style is important?<br />
+      (By &quot;real-world&quot; I mean reasons that will still be true after you graduate and are working in the so-called &quot;real world&quot;. For example, &quot;I need good style to get a good grade from my TA&quot; doesn't count as a real-world reason for purposes of this question.)<br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      </li>
+      <li>(5 pts) Section 3.4 presents two segments of code. The author indicates that the bottom one is better style, but doesn't explain why. So, I'm asking you: why is the bottom segment of code better style that the top one? <br />
+        <br />
+        For full credit, give me a thoughtful answer, not a simplistic one. A simplistic answer might be:  &quot;the bottom one has more space and comments&quot;. While that is technically correct, it doesn't really address the question in a thoughtful way—it doesn't explain <em><strong>why</strong></em> a segment of code with more space and comments is better style.<br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </li>
+    </ol>
+ <blockquote>
+    <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for questions to answer</span><br />
+</blockquote>
+  <blockquote style="page-break-before:always"><br />
+    <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+  </blockquote>
+  </li>
+  <li>(3 pts) In Chapter 4, the author indicates the name of the funciton that is always called first in a C program. What is the name of that function?<br />
+    <br />
+    <br />
+  </li>
+  <li>(3 pts) In many C programs, there is a line of code at the end of main like this: <code>return 0;</code> <br />
+      <br />
+    According to the author, what is the purpose of that line of code?<br />
+      <br />
+      <br />
+  </li>
+  <li>Chapter 4 discusses variable declarations. Write variable declarations for each of the folloiwng. Include a comment after each declaration to indicate the purpose of the variable, just as you would do in a well written program:
+    <br />
+    <br />
+    <ol>
+      <li>(4 pts) A integer variable called &quot;count&quot;. The comment should indicate that this counts the number of lines in the input file<br />
+          <br />
+          <br />
+      </li>
+      <li>(4 pts) A variable that can store a hospital patient's  temperature in Fahrenheit. You should be able to store numbers such as 98.6<br />
+            <br />
+          <br />
+      </li>
+      <li>(4 pts) A variable that can store the correct response on a multiple choice test, i.e. either a single letter, such as a, b, c, d or e. <br />
+          <br />
+        <br />
+      </li>
+    </ol>
+  </li>
+  <li>Chapter 4 discusses the difference between floating point division and integer division. What would each of the following expressions evaluate to?<br />
+      <br />
+    <br />
+    <ol>
+      <li>(2 pts) 4 / 2<br />
+          <br />
+          <br />
+      </li>
+      <li>(2 pts) 2 / 4<br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 4.0 / 2.0<br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 2.0 / 4.0<br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 1/2.0<br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 1.0/2<br />  
+        <br />
+        <br />
+            </li>
+    </ol>
+  </li>
+  <!--- -->
+</ol>
+<hr />
+End of H00
+</body>
+</html>

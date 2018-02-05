@@ -1,0 +1,6 @@
+
+
+BINARIES=ptrDemo
+
+clean:
+	/bin/rm -f $(BINARIES) *.o

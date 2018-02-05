@@ -1,0 +1,4 @@
+79c79
+<   failures += assertTrue("airport1.lon  ", approxEqual(67.89,airport1.lon,tol) );
+---
+>   failures += assertTrue("airport1.lon  ", approxEqual(123.45,airport1.lat,tol) );

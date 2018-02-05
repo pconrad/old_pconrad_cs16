@@ -1,0 +1,11 @@
+09 02 1992 170 10 Nicaragua	
+12 02 1992 1000 26 Flores_Island
+07 12 1993 239 31 Okushiri,Japan
+06 02 1994 238 14 East_Java
+11 14 1994 49 7 Mindoro_Island
+10 9 1995 1 11 Jalisco,Mexico
+01 01 1996 9 3.4 Sulawesi_Island
+02 17 1996 161 7.7 Irian_Javy
+02 21 1996 12 5 Peru
+07 17 1998 2200 15 Papua,New_Guinea
+

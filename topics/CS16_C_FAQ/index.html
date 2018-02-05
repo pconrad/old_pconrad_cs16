@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../../cs16.css" />
+<title>Q&amp;A about C, for CS16, UCSB</title>
+</head>
+
+<body>
+<div id="container">
+<h1>Q&amp;A about C<br />
+for CS16, CS Dept. UCSB</h1>
+<p>Back to CS16 <a href="/~pconrad/cs16/topics">topics</a></p>
+<h2>Introduction</h2>
+<p>On this web page are some questions that students have asked about programming in C, along with some answers that I hope are helpful.</p>
+<p>Phill Conrad, CS Dept. UCSB</p>
+<h2>About atof(), atoi() and char *</h2>
+<p><strong>Question: So, when values are stored in char * are they converted to ascII? Is that why we have to atof all values we extract from it?</strong><br />
+</p>
+<p><strong>Answer: </strong>char * values are indeed ASCII representations of data.      What you type in on the command line starts out as ASCII, and then has to be converted into floating-point representation---and that's what atof does.</p>
+<p>Here's a slightly longer explanation, and then a very detailed explanation:</p>
+<h3>Slightly longer explanation<br />
+</h3>
+<p>A char * is basically a pointer to an array of char values, each of which is the bit value, in ASCII, of some character.    It is required that we have a \0 at the end.</p>
+<p>Suppose we write this on the command line:</p>
+<p>./rectPrism 2.5 3 4&lt;return&gt;</p>
+<p>Then, argv[1] is a char *, that is a &quot;pointer&quot;.   It contains the address in memory of a sequence of characters, which are, one per line:</p>
+<p>'2'       Bits in memory are the ASCII value 50, which in binary is: 0011 0010<br />
+  '.'        Bits in memory are the ASCII value 46, which in binary is: 0010 1110<br />
+  '5'       Bits in memory are the ASCII value 53, which in binary is: 0011 0101<br />
+  '\0'      Bits in memory are the ASCII value 50, which in binary is: 0000 0000</p>
+<p>So, argv[1] points to this sequence of bits in memory:</p>
+<p>0011 0010 0010 1110 0011 0101 0000 0000</p>
+<p>But we need the value 2.5 as a double.    That value is represented as 64 bits, which happen to be these (for reasons that may be explored in more detail either later in this class, or in CS64):</p>
+<p>0100 0000 0000 0100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</p>
+<p>So, literally, that's what atof does: convert an ASCII bit sequence into a floating-point bit sequence.</p>
+<p>(Just like ASCII is the standard for individual characters, there is a standard for floating-point numbers--it's called IEEE-754.   But I don't expect you to memorize that.)</p>
+<h3>An even more detailed explanation<br />
+</h3>
+<p>Here's our command line again:</p>
+<p>./rectPrism 2.5 3 4&lt;return&gt;</p>
+<p>This starts out life as a sequence of ASCII characters.  Here are some examples:</p>
+<ul>
+  <li>When you type the 'r' in rectPrism, the ascii value for 'r' is 114 decimal, or 72 in hex, 0111 0010 binary.</li>
+  <li>When you type the '2' key on your keyboard to type 2.5, what ends up somewhere in memory is the ASCII value 50 decimal, which is 32 hex, i.e. 0011 0010 in binary. </li>
+  <li>When you type the decimal point in 2.5, you type the '.' key, which ends up as ASCII value 46 decimal, 2E hex, or 0010 1110.</li>
+  <li>When you type the '5', this ends up as  ASCII value 0011 0101</li>
+  <li>What I've written as &lt;return&gt; actually starts out as the ASCII character for &quot;return&quot;, which is 13 decimal, or 15 hex, i.e. 0001 0101.</li>
+</ul>
+<p>So, back to ./rectPrism 2.5 3 4&lt;return&gt;</p>
+<p>When you hit enter on the command line, the Unix system will take this command, and do a little bit of processing on it before it hands it over to the C program.  In particular, it will take the single string:</p>
+<p>&quot;./rectPrism 2.5 3 4\n&quot;</p>
+<p>and turn it into</p>
+<p>&quot;./rectPrism&quot;  &quot;2.5&quot;  &quot;3&quot; &quot;4&quot;</p>
+<p>It does this by literally sticking in \0 after each part of the command. </p>
+<p>./rectPrism\02.5\03\04\0</p>
+<p>The character \0 is not two characters--it's just the way we write the ASCII value 0000 0000.   It is a special sentinel character that marks the end of a string (you may recall we read about this in an earlier homework assignments, because I wanted you to be familiar with it when we started talking about atoi, atof, argv, etc.)</p>
+<p>So here's how to visualize this in memory, one character per line:<br />
+  .     &lt;------ argv[0] points here<br />
+  /<br />
+  r<br />
+  e<br />
+  c<br />
+  t<br />
+  P<br />
+  r<br />
+  i<br />
+  s<br />
+  m<br />
+  \0<br />
+  2    &lt;----- argv[1] points here<br />
+  .<br />
+  5<br />
+  \0 <br />
+  3    &lt;----- argv[2] points here<br />
+  \0<br />
+  4    &lt;----- argv[3] points here<br />
+  \0</p>
+<p>And then argc has the value 4, because argv is an array with values argv[0], argv[1], argv[2] and argv[3]---four values in all.</p>
+<p>So what argv[1] in the above example is the C string &quot;2.5&quot;, represented as a pointer to a sequence of bytes in memory &quot;2.5&quot; followed by a \0 byte (which is 0000 0000 in binary.)</p>
+<p>0011 0010 0010 1110 0011 0101 0000 0000</p>
+<p>What atof does is to take this sequence of four bytes and turn it into a sequence of eight bytes that represent the number 2.5 as a floating point number ( a double).    That bit sequence turns out to be this:</p>
+<p>hex: 4004000000000000<br />
+  binary 0100 0000 0000 0100 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</p>
+<p>The exact bit sequence is a little bit tough to explain at this point----we will talk about it in class eventually, but I've already put a lot of detail into this email, and I don't want to overwhelm you---I just want to answer your question completely.    But if you want to see a calculator for this value, check out this web page:</p>
+<p><a href="http://babbage.cs.qc.cuny.edu/IEEE-754/Decimal.html">http://babbage.cs.qc.cuny.edu/IEEE-754/Decimal.html</a></p>
+<p><br />
+  <strong>Followup question: </strong>That makes sense. My follow up question would be: when would we use atoi and atof if, when we type, .<code>/myprogram 2.5 </code>we get argv[1] = 2.5 and the value is automatically converted for you?</p>
+<p><strong>Answer: </strong>So, I'm not sure what you mean by &quot;the value is automatically converted for you&quot;.   You talked about &quot;converted to ASCII&quot; in your original question too---so I'm doubly confused.</p>
+<p>I'm wondering if my explanation has led you down the wrong path.... there is no automatic conversion  at all going on here---if you think that, then you have some wrong view of the situation that we need to understand and fix. :-)<br />
+</p>
+<p> Originally the question was: <br />
+  <blockquote><br />
+    <em>So, when values are stored in char * are they converted to ascII? Is that<br />
+    why we have to atof all values we extract from it?</em></blockquote>
+  <br />
+</p>
+<p>Perhaps I should have answered your original question with &quot;NO, That is NOT the reason.&quot; :-) </p>
+<p>The reason we have to use atof to extract values from a char * is that they were <em>always ASCII in the first place</em>.   They are never &quot;converted to ASCII&quot;.   On the contrary, they  were <em>never anything other than ASCII.</em></p>
+<p>Below, I'll try to explain what I mean by &quot;they were never anything other than ASCII&quot;. </p>
+<p>(I didn't think this was a crucial point before so I sort of &quot;let it slide&quot;, but now I'm thinking that by not explaining this, I may have contributed to some misunderstanding on your part.)</p>
+<p>A char * is simply a pointer to a sequence of characters--that is the numeric address of those characters inside the computer's memory.  Those characters could be &quot;Apple&quot;, or they could be &quot;@#$#$&quot; or they could be &quot;2.5&quot;.    As far as the computer is concerned, there is no difference between these three.  They are all just meaningless symbols---just about the only thing we can do is print them on the screen, or store them on the disk.      In particular, the computer doesn't know how to do math on &quot;2.5&quot;---it can't multiply it by 2 and get 5.0.  It can't divide by 5 and get 0.5. </p>
+<p>The &quot;A&quot; character you just saw on the screen in quotes near the start of this sentence was ASCII from the time my finger hit the &quot;A&quot; key on my keyboard until it appeared on the screen in front of you---and it was ASCII the whole way over the internet in between.   Same with the number &quot;2.5&quot; that you are now seeing---ASCII all the way from my fingers to the computer in front of you.      No conversion---<em>it  never was anything other than ASCII. </em></p>
+<p>Something like &quot;2.5&quot; only acquires &quot;meaning&quot; as a number---in the sense that we can multiply it by another number, add another number, divide by another number—after we do the atof conversion to store it in a double variable:</p>
+<p>
+  <pre>double x;
+x = atof(&quot;2.5&quot;);</pre>
+</p>
+<p>or, if &quot;2.5&quot; is pointed to by argv[1], then:</p>
+<p>
+  <pre>double x;<br />x = atof(argv[1]);</pre>
+</p>
+<p>Once we do this conversion, we can then do math on the variable x.    We can compute x*2.0, or x/2.0, or sqrt(x), for example.<br />
+  <br />
+  But we can't do math on argv[1], at least not in any meaningful way.   And this conversion is NOT automatic.   We have to specify explicitly that we want the conversion from ASCII to double (i.e. double-precision floating point) to take place, using the atof function (or from ASCII to integer, using the atoi function.)</p>
+<p>Returning to your follow-up question:</p>
+<p>
+  <blockquote><em>That makes sense. My follow up question would be: when would we use atoi and atof if, when we type, .<code>/myprogram 2.5 </code>we get argv[1] = 2.5 and the value is automatically converted for you?</em></blockquote>
+  <br />So, now we understand that there is no automatic conversion---only ASCII from the time you type 2.5 until it lands in memory, pointed to by argv[1].</p>
+<p>If you type this at the Unix prompt:</p>
+<p>
+  <pre>bash-3.2$  <strong>./myprogram 2.5</strong></pre>
+</p>
+<p>Then afterwards:</p>
+<p>argv[0] is now pointing to &quot;./myprogram&quot;<br />
+  argv[1] is now pointing to &quot;2.5&quot;</p>
+<p>And what argv[1] points to is a sequence of ASCII characters.</p>
+<p>As an ASCII value, the number 2.5 is fairly useless to us.     The only thing we can do with it is print it.  We can't multiply it by 2, or divide it by 3, or calculate its square root.   The ASCII value 2.5 is just three symbols---it might as well be ###, or y.x, or !!!. </p>
+<p>We can only do MATH on the value 2.5  after we convert 2.5 to its floating point representation inside a variable like x, like this:</p>
+<p> double x,y,z;<br />
+  x = atof(argv[1]);</p>
+<p>NOW, we can do things like:<br />
+    <br />
+  y = x * 2.0;<br />
+  y = x / 3.0;<br />
+  z = sqrt(z);   // this requires #include &lt;math.h&gt;<br />
+  <br />
+  We can't do any of those things with argv[1].   In particular, the following is meaningless:</p>
+<p> y = argv[1] * 2.0; // meaningless!</p>
+<p>That probably won't even compile---but if it did, what it would mean is &quot;take some address in memory like FFCA3124 and multiply it by 2.0.&quot;  The address FFCA3124 would be the location in memory of the characters &quot;2.5&quot;.    After we multiply it by 2.0, we have a very large number that is probably not even be a valid address.  The value stored in the variable y will have no relationship to the number 2.5, and it almost certainly won't be 5.0.</p>
+<p>(As an analogy: multiplying a pointer by 2.0 is sort of like multiplying a zip code by 2. The zip code for UCSB is 93016. Multiply by 2.0, and you get 186212, but so what? That number doesn't mean anything--it isn't even a valid zip code anymore.)</p>
+<p>Turning now to the atoi function:</p>
+<p>We use atoi when we want to convert from what is in argv[1] into an integer, instead of into a floating-point number.  For example, if we had</p>
+<p>./myprogram 12 42 55</p>
+<p>we could do:</p>
+<p>int x,y,z;<br />
+  x = atoi(argv[1]);<br />
+  y = atoi(argv[2]);<br />
+  z = atoi(argv[3]);</p>
+<p>If instead, we have: ./myprogram 12.1 42.3 55.9</p>
+<p>we'd use:</p>
+<p>double x,y,z;<br />
+  x = atof(argv[1]);<br />
+  y = atof(argv[2]);<br />
+  z = atof(argv[3]);</p>
+<p>You may wonder: how do we know in advance which one to use if we don't know what the user is going to type?</p>
+<p>The answer goes sort of like this:</p>
+<p>(1) If a program needs to be able to take either  numbers with decimals or integers, then always use double along with atof. Your users will be able to type either one.   atof can convert either one and store the correct value in a double variable.</p>
+<p>(2) If only integers make sense for your program (for example, you are specifying something that only makes sense in whole numbers), then use int, along with atoi.   Anything your user types after the decimal point will just be ignored when atoi converts (it will not round, but just &quot;chop off&quot; the decimal---we call this &quot;truncation&quot;).</p>
+<p>I hope this helps to clear things up.  If not, let me know.   I want to get this explanation right!</p>
+<h2>Declaring the loop variable in a for loop<br /> 
+  e.g. for (int i=0; i&lt;n; i++)<br />
+  like you do in Java and C++</h2>
+<p><strong>Question:</strong> You taught that in C we have to declare the variable for a loop at the top of the block (i.e. the top of the set of { } the encloses the for loop—for example:</p>
+<pre>int main()
+{
+  <strong> int i;</strong>
+   printf("Santa says: \n");
+   
+   <strong>for (i=0; i&lt;3; i++)</strong>
+      printf("Ho! ");<br />
+   printf("Merry Christmas!\n");
+   return 0;
+}
+</pre>
+<p>But I was taught before that you could write a for loop like this, declaring i in the for loop:
+<pre><strong>
+   for (int i=0; i<3; i++)
+</strong></pre>
+<p>   Why can't we do that in C?</p>
+<p><strong>Answer:</strong> It turns out that C++ and Java, both of which came later than C, introduced the ability to declare the loop control variable right in the for loop. There are many other improvements that C++ and Java made over plain C, including the new style of comment (//). </p>
+<p>Some of these have made their way back into C, as C has continued to evolve. The // style of comment that was introduced into C++ and Java is now available by default on many C compilers, including the gcc C compiler that we use on CSIL.</p>
+<p>The <strong>for (int i=0; i&lt;3; i++)</strong> style of for loop is available in <a href="http://en.wikipedia.org/wiki/C99">C99</a>, a new dialect of C. This feature is available when you compile with the special command line option <strong>-std=c99</strong>, for example:<br />
+  <br />
+gcc -std=c99 myprog.c -o myprog</p>
+<p>In CS16, for now, we are avoiding these features, and sticking mostly to the older ANSI C 1989 dialect, since</p>
+<ul>
+  <li>you are likely to encounter this dialect in &quot;real-world&quot; C code.</li>
+  <li>we want to avoid features that require special compiler options, until we have learned ways to automate selecting these—that is a topic that may be covered later in CS16, or in later courses such as CS24 and CS32.</li>
+  </ul>
+<p>	We stray from ANSI C in a few small ways, for example allowing // style of comments. </p>
+<h2>C++ has inline functions. What about C?</h2>
+<p>First, see the answer about the for (int i=0; i&lt;n; i++) style of for loop above, for a discussion of C99 vs. the older dialect of C we are using in CS16.</p>
+<p>ANSI C does not have inline functions. They are available in C++, C99, and gnu extensions to C. The Wikipedia page on inline functions (retrieved on 10/19/2009) has a nice discussion of the pros/cons of inlines, including these points:</p>
+<blockquote style="font-size: smaller;">
+<p>&quot;Inline expansion is used to eliminate the time overhead when a function is called. It is typically used for functions that execute frequently. It also has a space benefit for very small functions, and is an enabling transformation for other optimizations.</p>
+<p>Without inline functions, however, the compiler decides which functions to inline. The programmer has little or no control over which functions are inlined and which are not. Giving this degree of control to the programmer allows her/him to use application-specific knowledge in choosing which functions to inline.</p>
+<p>...</p>
+<p>Besides the problems associated with in-line expansion in general, inline functions as a language feature may not be as valuable as they appear, for a number of reasons:</p>
+<ul>
+  <li> Often, a compiler is in a better position than a human to decide whether a particular function should be inlined. Sometimes the compiler may not be able to inline as many functions as the programmer indicates.</li>
+  <li> As functions evolve, they may become suitable for inlining where they were not before, or no longer suitable for inlining where they were before. While inlining or un-inlining a function is easier than converting to and from macros, it still requires extra maintenance which typically yields relatively little benefit.<br />
+  </li>
+  <li>Inline functions used in proliferation in native C-based compilation systems can increase compilation time, since the intermediate representation of their bodies is copied into each call site where they are inlined. The potential increase in code size is mirrored by a potential increase in compilation time.<br />
+    ...
+    &quot;</li>
+  </ul>
+</blockquote> <!-- smaller quote-->
+<h2>What does the error &quot;undefined reference to main&quot; mean?<br />
+  <br />
+</h2>
+<p><strong><br />
+  Question: </strong>I have been working on <a href="../../10S/homework/H04">H04</a> and have been trying to test the code after I write it.  However, when I try to test the code through csil, I get an error:<br />
+  <br />
+  <br />
+  <pre>-bash-4.1$ <strong>make xCubed</strong><br />cc     xCubed.c   -o xCubed<br />/usr/lib/gcc/i686-redhat-linux/4.4.3/../../../crt1.o: <br />In function `_start':(.text+0x18): <strong>undefined reference to `main'</strong><br />collect2: ld returned 1 exit status<br />make: *** [xCubed] Error 1<br /></pre>
+</p>
+<p>I got this error after copying the xCubed function into emacs from the <a href="../../10S/homework/H04/handout">example handout.</a> I am also getting this error for my areaOfTriangle and other functions. Any ideas why this is occuring?<br />
+</p>
+<p><strong>Answer:</strong> Thanks for your question. This error comes because every C program must have a main function.</p>
+<p>You can get past this error by doing one of two things:</p>
+<ol>
+  <li>To just check the syntax: when you compile, instead of typing:<br />
+    <br />
+    <code>make xCubed<br />
+    <br />
+    </code>instead, type this:<br />
+    <br />
+    <code>cc -c xCubed.c<br />
+    <br />
+    </code>This will &quot;compile only&quot; without producing a program you can run. You'll get a file named &quot;xCubed.o&quot; in your account if the program compiles successfully---but you won't be able to run that program---you'll only know that the C code doesn't contain any syntax errors.<br />
+    <br />
+  </li>
+  <li>If you want to actually test, you'll need to include a main program such as the following in your file. Then you can compile with &quot;make&quot; the normal way, and actually test your function for different values:<br />
+    <br />
+    <pre>
+    
+int main()
+{
+  double x;
+  
+  // prompt for input
+  
+  printf(&quot;Enter a value for x: &quot;);
+  scanf(&quot;%lf&quot;,&amp;x);
+
+  // print results
+  printf(&quot;xCubed(x)=%lf\n&quot;,xCubed(x));
+  return 0;
+  }</pre>
+
+<p>If <code>x</code> is an <code>int</code> instead of a <code>double</code>, be sure to change:</p>
+<p><code>double</code> to <code>int</code><br />
+  <code>%lf </code>to <code>%i</code></p>  
+  </li>
+</ol>
+<p>In <a href="../../10S/labs/lab02">lab02</a>, we'll be exploring even better ways to test our code.</p>
+<p></p>
+<p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. <br />
+</p>
+</div> 
+<!-- id="container"-->
+
+</body>
+</html>

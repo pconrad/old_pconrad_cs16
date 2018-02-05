@@ -1,0 +1,166 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, H12 (Arrays and Pointers, Etter 6.2)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.smallerFont {font-size: 0.9em;}
+.style2 {font-size: larger}
+.style3 {font-size: 72px; }
+.pageBreakBefore {page-break-before:always;}
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, UCSB—H12:  (Addresses, Pointers, Arrays, Etter, Section 6.2) <span id="pointCount">Total points: ?</span> (<a href="H12.pdf">printable PDF</a>)</p>
+<p>Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H12">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H12</a><br />
+</p>
+<p>Accepted: <strong>on paper, in Lecture (11am Tuesday Feb 16th</strong>)<br />
+    <br />
+    <span class="smallerFont"><strong>Late Policy:</strong> No email submission allowed—and don't &quot;slip it under my door&quot;. If you need to make it up, you must do so during office hours, or make an appointment to see me, and you must request this appointment within 48 hours of when the assignment was originally due. <br />
+    <br />
+    <strong>Personal Day/Sick Day policy</strong>: Everyone is permitted one &quot;personal day/sick day&quot; when you get to make up a missed homework assignment for free during office hours or via appointment. After that, you may not make up the homework assignment—you can only earn back the points through extra credit opportunities.       </span><span class="smallerFont">(For more details, see  the <a href="../../syllabus/index.html">syllabus</a> and the <a href="../index.php">homework policy</a>)</span><br />
+</p>
+<hr />
+<p>Name: (3 pts)___________________________  <span>UMail address (4 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (3 pts) Circle one:         3pm       4pm         5pm           unknown<br />
+</p>
+<hr />
+<p align="center" class="style2">This assignment is due <strong>IN Lecture on Tuesday. </strong><br />
+    <strong>It may ONLY be turned in during Lecture on Tuesday.</strong><br />
+</p>
+<p>Name of your pair programming partner(s), if you work together:<br />
+  <br />
+</p>
+<hr />
+<p>Read Section 6.1and 6.2 in your Etter textbook—and review your lecture notes from Thursday Feb 4. </p>
+<p>In addition, keep in mind that in the textbook, Etter uses %u as the format specifier for pointers, while in lecture I tend to use %p instead. <br />
+  <br />
+The difference is that %u prints the address value as an &quot;unsigned integer&quot;, in base 10, while %p prints the address value in hexadecimal.</p>
+<p>Then answer the questions on the back of this sheet.<br />
+  <strong><br />
+    </strong></p>
+<hr />
+<p>On p. 294, there are four practice problems—the answers to those problems can be found on p. 418 in your textbook.<br />
+  <br />
+Work through those problems for practice and then check your answers. </p>
+<p>You will find that one of the answers in the book is incorrect. <br />
+(NOTE: THIS IS NOT THE CASE—DON'T REUSE THIS QUESTION IN SPRING!)</p>
+<p>To determine which one, you can use Ch:</p>
+<p>
+<pre>-bash-3.2$ ch<br />
+Ch <br />
+Professional edition, version 6.1.0.13751 <br />
+(C) Copyright 2001-2009 SoftIntegration, Inc.<br />
+http://www.softintegration.com<br />
+/cs/faculty/pconrad&gt; int g[]={2,4,5,8,10,32,78};<br />
+/cs/faculty/pconrad&gt; *g<br />
+2 <br />
+/cs/faculty/pconrad&gt; *(g+1)<br />
+4 <br />
+/cs/faculty/pconrad&gt; </pre>
+  etc.</p>
+<p>(5 pts) Determine which of the answers in the book is incorrect and indicate that here<br />
+  (EVERYBODY JUST GOT 5 FREE POINTS FOR THIS QUESTION)
+:<br />
+</p>
+<p>Then, turn over this sheet and work a similar problem—of course, the answers to that problem are NOT in the book.<br />
+</p>
+<p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for more problems</span></p>
+        <p class="pageBreakBefore"><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span></p>
+<ol>
+  <ol>
+    <li>(5 pts) Assume that an array h is defined with the following statement:<br />
+      <br />
+      <code>int h[] = {13,42,26,98,45,11,19};</code><br />
+      <code>int *ptr1 = &amp;h[1];</code><br />
+      <p>Give a diagram of memory allocation similar to the one shown in the answer on p. 418 to the practice questions.<br />
+        <br />
+        </p>
+      <table border="1" cellspacing="1" cellpadding="1">
+        <tr>
+          <th scope="col">&nbsp;</th>
+          <th scope="col">value</th>
+          <th scope="col">offset</th>
+        </tr>
+        <tr>
+          <td>h[0]</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>h[1]</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>h[2]</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>h[3]</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>h[4]</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>h[5]</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>h[6]</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p><br />
+      </p>
+    </li>
+    <li>Continuing with the same definitions of <code>h</code> and <code>ptr1</code> give the value of each of these expressions:<br />
+      <br />
+      <blockquote>
+        <ol>
+          <li>(5 pts) <code>*h</code><br />
+            <br />
+          </li>
+          <li>(5 pts) <code>*(h+1)</code><br />
+            <br />
+          </li>
+          <li>(5 pts) <code>*h</code> + 1<br />
+              <br />
+          </li>
+          <li>(5 pts) <code>*h + 2</code><br />
+            <br />
+          </li>
+          <li>(5 pts) <code>*ptr1</code><br />
+            <br />
+          </li>
+          <li>(5 pts) <code>*(ptr1 + 1)</code><br />
+            <br />
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+  <!--- -->
+</ol>
+<hr />
+End of H12
+</body>
+</html>

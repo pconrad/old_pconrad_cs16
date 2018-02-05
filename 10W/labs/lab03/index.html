@@ -1,0 +1,765 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab03, Winter 2010 (10W)--atoi, Command Line arguments, ASCII art</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+table tr td.blackColumn {
+	color: #000000;
+	background-color: #000000;
+}
+table.outputTable tr td {text-align:left;}
+.style1 {font-size: 14px}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>lab03: <span class="smallerFont">(&quot;lab three&quot;)<br>
+   atoi, Command Line arguments, ASCII art<br>
+     <br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Customize the prompt in Ch using <code>_prompt = &quot;Ch&gt; &quot;</code></li>
+   <li>Use Ch to experiment with the atoi()  function()</li>
+   <li>Show how to use  atoi to convert from strings values to int values </li>
+   <li>Use command line arguments (int argc, char *argv[]) to get int values</li>
+   <li>Use if/else and for loops to print various kinds of shapes with &quot;ASCII Art&quot;</li>
+ </ul>
+ <p>	You'll also get more practice with:</p>
+ <ul>
+   <li>Using the <code>script</code> program to create a transcript, showing that your program runs successfully.</li>
+ </ul>
+ <h2>Skills Needed</h2>
+ <p>By now, we expect that you are comfortable with these basic skills from lab00, lab01, lab02, so we will no longer describe them in as much detail as we did previously:</p>
+ <ul>
+   <li>Using a text-editor (we suggest emacs) to create and/or edit C programs</li>
+   <li>Running C programs</li>
+   <li>Using the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>Performing basic management of directories and files</li>
+   <li>Submitting assignments in this class with the &quot;turnin program.</li>
+</ul>
+ <h2>This is a pair programming lab!</h2>
+ <p>Work with your assigned pair programming partner on this lab&mdash;the same one as for lab05. If you do not have one, consult the TA for your lab and/or your instructor for advice prior to starting.</p>
+ <ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional&mdash;see <a href="../lab02">lab02</a> for the reasons why.</li>
+   <li>We'll be switching up pair programming partners for lab04&mdash;next week in lab, its a brand new lab with a brand new pair partner.</li>
+   <li>So it is important that you get this lab done <em><strong>before</strong></em> next week's lab session. You have today's lab, plus the next six days to get it done&mdash;don't count on having time next week to continue on lab03 with your same partner.</li>
+ </ul>
+ <h3 align="center">Keep the evaluation criteria in mind</h3>
+ <p>As you work with your pair partner, keep in mind that part of your grade will be determined by how he/she answers these questions. So try to be a good partner!</p>
+ <p> 1. Did your partner read the lab assignment and preparatory materials before coming to the scheduled lab? <br>
+   2. Did your partner do a fair share of the work?<br>
+   3. Did your partner cooperatively follow the pair programming model<br>
+   (rotating roles of driver and navigator)?<br>
+   4. Did your partner make contributions to the completion of the lab assignment?<br>
+   5. Did your partner cooperate?</p>
+ <h2>What we'll be doing in this lab:<br>
+  ASCII Art, and command line arguments</h2>
+ <p>There was a time when laser printers either hadn't been invented yet, or were not yet widely available. Thus, the only kind of printer most folks had access to was something called a &quot;line printer&quot;, which printed only from left to right, top to bottom, and could only print the kinds of characters you find on a typewriter keyboard.</p>
+ <p>So, you might find folks making pictures like this one, found at <a href="http://chris.com/ascii/">http://chris.com/ascii/</a></p>
+ <pre>
+                                 .ze$$e.
+              .ed$$$eee..      .$$$$$$$P""
+           z$$$$$$$$$$$$$$$$$ee$$$$$$"
+        .d$$$$$$$$$$$$$$$$$$$$$$$$$"
+      .$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$e..
+    .$$****""""***$$$$$$$$$$$$$$$$$$$$$$$$$$$be.
+                     ""**$$$$$$$$$$$$$$$$$$$$$$$L
+                       z$$$$$$$$$$$$$$$$$$$$$$$$$
+                     .$$$$$$$$P**$$$$$$$$$$$$$$$$
+                    d$$$$$$$"              4$$$$$
+                  z$$$$$$$$$                $$$P"
+                 d$$$$$$$$$F                $P"
+                 $$$$$$$$$$F 
+                  *$$$$$$$$"
+                    "***""  Gilo94'
+</pre>
+<p>For now, we'll be keeping things much simpler: we are going to do some very simple ASCII art of letters, numbers and symbols, in order to practice with if/else and for loops.</p>
+<p>The first few exercises will be very simple, but they get progressively more challenging.</p>
+
+<p>As an example, we will write a C function that </p>
+<ul>
+  <li> prints the letter L with stars, at any width or height, provided both width and height are &gt;= 2</li>
+  <li>If either is less than 2, the function should print nothing.)<br>
+    </li>
+  </ul>
+<p>The function will have the following <em>function prototype:</em></p>
+<pre>void starL(int width, int height);</pre>
+<ul>
+  <li>As a reminder, a function prototype is the first line of the funciton definition (the header) followed by a semicolon instead of the function body&mdash;it is used to introduce the function to the compiler, in case the function definition isn't coming until later.</li>
+  </ul>
+<p>The following table shows various calls to this function, along with their output. The rule is that the L should have height at least 2, and width at least 2, otherwise, it should print no output at all.</p>
+<table border="1" cellspacing="1" cellpadding="1" class="outputTable">
+  <tr>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+  </tr>
+  <tr>
+    <td>starL(3,4)</td>
+    <td><pre>*
+*
+****
+ </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(3,5)</td>
+    <td><pre>*
+*
+*****
+    </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(4,3)</td>
+    <td><pre>
+*
+*
+*
+***
+    </pre></td>
+  </tr>
+  <tr>
+    <td>starL(2,2)</td>
+    <td><pre>*
+**
+  </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(5,2)</td>
+    <td><pre>*
+*
+*
+*
+**
+    </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(5,5)</td>
+    <td><pre>
+*
+*
+*
+*****
+    </pre></td>
+  </tr>
+  <tr>
+    <td>starL(1,1)</td>
+    <td><pre>&nbsp;
+  </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(1,2)</td>
+    <td><pre>&nbsp;
+    </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(2,2)</td>
+    <td><pre>&nbsp;
+    </pre></td>
+  </tr>
+  <tr>
+    <td>starL(4,1)</td>
+    <td><pre>&nbsp;
+  </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(2,4)</td>
+    <td><pre>*
+*
+*
+**
+    </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(4,2)</td>
+    <td><pre>
+
+*
+****
+    </pre></td>
+  </tr>
+</table>
+<p>So, this is a fairly easy function to write. This will do the job:</p>
+<p>
+  <pre>void starL(int width, int height)<br>{
+   int i;
+
+
+   // check if parameters are valid<br>   if ((width&lt;2) || (height &lt; 2))<br>     return;  // return without printing anything
+
+   // print height-1 rows of *\n
+   for (i=0; i&lt;height-1; i++)<br>     printf(&quot;*\n&quot;);
+
+   // print width stars, followed by a final \n
+   for (i=0; i&lt;width; i++)
+      printf(&quot;*&quot;);
+
+   printf(&quot;\n&quot;);
+
+   return;   //  we are finished<br>}</pre>
+</p>
+<p>To test this function though, we might have to write a tedious kind of main (you can find this in the <a href="code/starLDemo.c">starLDemo.c</a> program which is part of this week's example code.)</p>
+<pre>
+int main()
+{
+  printf("Output of starL(3,4) appears between lines below:\n");
+  printf("========================\n");
+  starL(3,4);
+  printf("========================\n\n");
+
+  printf("Output of starL(4,3) appears between lines below:\n");
+  printf("========================\n");
+  starL(4,3);
+  printf("========================\n");
+ </pre>
+<p>etc...
+</p>
+<p>Of course, we can do better that this&mdash;here are two ways that use things we already know how to do:</p>
+<ul>
+  <li>We could write a function with the function prototype <code>void testStarL(int width, int height);</code> that prints the messages and the <code>======</code> lines and calls our function, and then our main could just be:<pre>int main()<br>{
+  testStarL(3,4);
+  testStarL(4,3);<br>
+  etc...<br><br>
+  </pre>
+  </li>
+  <li>We could write a main program that prompts the user to enter the values for width and height, and run it over and over again. This is nice because we can test with any case we want.<br>
+  </li>
+</ul>
+<p>Those are both reasonable choices. Instead, though, we are going to learn another new skill&mdash;the skill of using command line arguments. </p>
+<ul>
+  <li>In addition to learning a new skill, when we are all through, we can compare the various ways of testing, and think about the pros/cons of each.</li>
+</ul>
+<p>We are going to write a main program called <a href="files/starL.c">starL.c</a> that allows us to put extra stuff on the command line after the name of the program, and access those values inside the program.</p>
+<p>That is, when we compile and run the program <a href="files/starL.c">starL.c</a>, instead of typing this at the Unix prompt:</p>
+<p>
+  <pre>./starL
+
+</pre>
+... instead, we are going to type something like this:</p>
+<p>
+  <pre>./starL 4 5
+
+
+</pre>
+Inside the program, we'll be able to grab the 4 and the 5 and store those values in int variables called width and height. Then, if we want to test with a new values for width and height, it is as simple as running the program again with different values on the command line.</p>
+<p>Ok, that's the general game plan&mdash;now lets get started.</p>
+<h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0: If you are still unpaired, or if your pair is more than 5 minutes late, or is absent from lab this week, get a new pair assignment from your TA.</h3>
+ <p>Your TA will tell you who are are assigned to&mdash;or you may get your assignment by email.<br>
+ </p>
+ <p>Please be patient&mdash;depending on who shows up, there may have to be some slight adjustments to pair assignments.</p>
+ <p>We will try to avoid the situation where someone in a group of three, but if may be necessary depending on circumstances.</p>
+ <h3>Step 1: If you are with a <em><strong><u>new</u></strong></em> partner, complete a new version of Worksheet W00, and make a <br>
+  <em><strong><u>new</u></strong></em> post to the lab02/lab03 pair partner forum on Gauchospace. <br>
+  <br>
+  (Otherwise, you can move on to step 2).</h3>
+ <p>If you are with a new partner, we'd like to ask you to complete another copy of W00 and turn it in&mdash;along with making the forum post that it calls for&mdash;for three reasons:</p>
+ <ul>
+   <li>The main reason is for you to work out schedules</li>
+   <li>We also want you to review the basics of pair programming with your new partner to be sure you both understand the process.</li>
+   <li>Finally, we want some documentation both on paper and in email of who is working together.</li>
+ </ul>
+ <p>Turn this in to your TA <strong><u>during</u></strong> your assigned lab section&mdash;at the top and in your forum post indicate that it is a &quot;new&quot; pairing for lab03. </p>
+ <p>You only need to turn in one copy per pair.</p>
+ <h3>Step 2: Decide whose account you are going to work in</h3>
+ <p>Remember: don't share passwords. Instead, use scp or email to share files with each other at the end of each work session. (See <a href="../lab02#step2">lab02, step 2</a> for details of how to use scp.)</p>
+ <div class="importantDiv">
+   <h4 align="center">How to share your work with each other</h4>
+   <p>Again for emphasis, I will say it: </p>
+ <ul>
+   <li>DO NOT share passwords with each other. <br>
+</li>
+   </ul>
+ <p>Sharing passwords is a violation of your account agreement, and can result in suspension of your computing privileges at UCSB.</p>
+ <p>Instead, what you should do is:</p>
+ <ul>
+   <li>Decide whose account you are going to work in for today's work session</li>
+   <li><strong>At the end of every work session, either</strong>
+     <ul>
+       <li><strong>email</strong> your C program  files (finished or not) to both yourself and your pair partner as an attachment, OR</li>
+       <li><strong>use scp</strong> to copy the work from person1's account into person2's account with the scp command. (See <a href="../lab02#step2">lab02, step 2</a> for details of how to use scp.)</li>
+     </ul>
+   </li>
+   <li>That way, if your pair partner <a href="http://discuss.fogcreek.com/joelonsoftware/default.asp?cmd=show&ixPost=149219">gets hit by a bus</a>, you can continue working without him/her&mdash;you aren't 'out of luck'.</li>
+ </ul>
+ </div>
+ <p>&nbsp;</p>
+ <h2>&nbsp;</h2>
+ <h3>Step 3: Log on to CSIL, bring up a terminal window, and create a ~/cs16/lab03 directory.</h3>
+ <p>If you've forgotten how, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+   <br>
+ </p>
+ <h3>Step 4: Copying some programs from my directory</h3>
+ <p>Visit the following web link&mdash;you may want to use &quot;right click&quot; (or &quot;control-click&quot; on Mac) to bring up a window where you can open this in a new window or tab:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab03/files">http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab03/files<br>
+   </a></li>
+  </ul>
+ <p>You should see a listing of several C programs. We are going to copy those into your ~/cs16/lab03 directory all at once with the following command:</p>
+ <pre><p>cp ~pconrad/public_html/cs16/10W/labs/lab03/files/* ~/cs16/lab03</p></pre>
+ <ul>
+   <li>Note: If you get the error message:<br>  
+     <code><br>
+     cp: target `/cs/student/youruserid/cs16/lab03' is not a directory</code><br>
+     <br>
+     then it probably means you didn't create a ~/cs16/lab03 directory in step 1, so go back to step 1 and do that first.</li>
+ </ul>
+ <p>The * symbol in this command is a &quot;wildcard&quot;&mdash;it means that we want all of the files from the source directory copy be copied into the destination directory namely ~/cs16/lab03. </p>
+ <p>After doing this command, if you cd into ~/cs16/lab03 and use the ls command, you should see several files in your ~/cs16/lab03 directory&mdash;the same ones that you see if you visit the link <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab03/files">http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab03/files</a></p>
+ <p>If so, you are ready to move on to the next step.</p>
+ <ul>
+   <li>If you don't see those files, work with your pair partner to go back through the instructions and make sure you didn't miss a step. If you still have trouble, ask your TA for assistance.</li>
+ </ul>
+ <pre>&nbsp;</pre>
+ <h3>Step 5: Experimenting with atoi() in Ch</h3>
+ <p>We won't be working with the C files we copied until a later step in the lab.</p>
+ <p>First,  we are going to use the Ch program to experiment with a function that is part of the standard library, <code>stdlib.h</code>. </p>
+ <p>This function is called atoi(), and we'll need it for a later step in this week's lab.</p>
+ <ul>
+   <li>	atoi() is for  for converting strings to integer values</li>
+   <li>atoi stands for &quot;ASCII to integer&quot; (we'll explain what this means below).</li>
+ </ul>
+ <p>In a regular C program, if you want to use these functions, you need to use</p>
+ <pre>#include &lt;stdlib.h&gt;</pre>
+ <p>to pull in the definitions of these functions. In Ch, though, we can just type in some sample function calls and see what happens.</p>
+ <h4>Step 5a: Bringing up Ch</h4>
+ <p>When logged in at a terminal session in the Cooper lab or on CSIL, type <code>ch</code> at the Unix prompt.</p>
+ <p>You should see something like this (except the directory will be different) </p>
+ <pre>-bash-3.2$ <strong>ch</strong><br>
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/faculty/pconrad/cs16/lab03&gt; </pre>
+The very long prompt is an indication of what directory you are in. In lab02, we just used cd to  go back to our home directory, shortening the prompt:
+<pre>/cs/faculty/pconrad/cs16/lab03&gt; <strong>cd</strong><br>
+/cs/faculty/pconrad&gt;</pre>
+<p>But there is an even better way, which we'll discuss next:</p>
+ <h4>Step 5b: Customizing the Ch prompt</h4>
+ <p>While in Ch, type the following command:<code> _prompt = &quot;Ch&gt; &quot;</code><br>
+  </p>
+ <p>This will change your prompt to <code>Ch&gt;</code></p>
+ <p>Note  the following important details:</p>
+ <ul>
+   <li>the underscore _ at the beginning of  <code>_prompt</code></li>
+   <li>the space after the &gt; and before the &quot; inside <code>"Ch> "</code></li>
+  </ul>
+ <p>Here's what doing that may look like:</p>
+ <pre>/cs/faculty/pconrad&gt; <strong>_prompt = &quot;Ch&gt; &quot;</strong>
+Ch&gt;</pre>
+ <p>Now, your prompt is <code>Ch&gt; </code>(with a space after it).</p>
+ <p><strong>Step 5c: Experimenting with atoi() </strong></p>
+ <p>The atoi function converts from a string such as &quot;3&quot; into an int value like 3. We can see how this works at the Ch prompt:</p>
+ <pre>Ch&gt; <strong>atoi(&quot;3&quot;)</strong><br>3 <br>Ch&gt; <strong>atoi(&quot;5&quot;)</strong><br>5 <br>Ch&gt; <strong>atoi(&quot;-42&quot;)</strong><br>-42 <br>Ch&gt; </pre>
+ <p>Note that the argument to atoi must be a string&mdash;something in &quot;&quot; such as &quot;3&quot; or &quot;-42&quot;. If we use a single character, in single quotes such as '3', we will get an error:</p>
+ <pre>Ch&gt; <strong>atoi('4')</strong>
+WARNING: found char where pointer to char is expected
+Ch&gt; </pre>
+ <p>The error message is saying the atoi found a char ('4') but what it expected was a &quot;pointer to char&quot; such as &quot;4&quot;. Here's what &quot;pointer to char&quot; means in this context:</p>
+ <ul>
+   <li>The type associated with string values in C (such as &quot;4&quot;) is <code>char&nbsp;*</code></li>
+   <li>We read <code>char *</code> as  &quot;char star&quot;</li>
+   <li>What <code>char *</code> <em>means</em> is  &quot;pointer to char&quot;.</li>
+   <li>We'll learn more about pointers in coming days/weeks, but for now just know that a string value such<code> &quot;4&quot;,</code> <code>&quot;Pam&quot;</code>, or <code>&quot;Michael&nbsp;Scott&quot; </code>is represented in C as a <code>char&nbsp;*</code>, which means &quot;pointer to char&quot;.</li>
+  </ul>
+ <p>Here's another thing we cannot do with atoi()&mdash;we can't pass in an int or a double. Try both of these and see what you get:</p>
+ <p>
+  <pre>atoi(4)<br>
+atoi(4.5)</pre>
+ </p>
+ <p>Read the error messages and see if they make sense to you.</p>
+ <p>Here's a couple of other things to try. These will not result in error messages&mdash;instead, you'll get to see what atoi() does when the argument is a string, but does not contain an int&mdash;at least not an int all by itself:</p>
+ <p><code>atoi(&quot;six&quot;)<br>
+   atoi(&quot;Go Gauchos&quot;)<br>
+   atoi(&quot;4ever&quot;)<br>
+   atoi(&quot;d4&quot;)<br>
+   atoi(&quot;3.14&quot;)<br>
+   atoi(&quot;7.99&quot;)<br>
+  atoi(&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&quot;)</code></p>
+ <p>Based on what you see here, see if you can discover answers to the following questions. Type in more examples if you need to, in order to find the general rules:</p>
+ <ul>
+   <li>What does <code>atoi() </code>do when its input starts with a letter?</li>
+   <li>What does <code>atoi()</code> do with real numbers such as 3.14 or 7.99?</li>
+   <li>What does <code>atoi()</code> do when its input starts with a valid integer, but then contains letters after it?</li>
+   <li>What does <code>atoi()</code> do when it encounters input that starts with lots of spaces?</li>
+  </ul>
+ <p>In case you are wondering, the name <code>atoi() </code>comes from &quot;ASCII to integer&quot;. ASCII is the code that is used to convert individual characters are converted into binary and stored in the computers memory. In this code, the digit 0 is represented as 48, 1 as 49, 2 as 50, etc. </p>
+ <p>So, this function converts, for example, </p>
+ <ul>
+   <li>From '3' which is represented as 51 in ASCII, or 00110011 binary,</li>
+   <li>Into the actual int value 3 which is 00000011 in binary.</li>
+ </ul>
+ <p>&nbsp;</p>
+ 
+ </p>
+ <p>Once you are satisfied that you understand how <code>atoi</code> works, you are ready for some programming. Use the exit command get out of Ch and return to the regular Unix prompt.</p>
+ <p>
+  <pre>Ch&gt; <strong>exit</strong><br>-bash-3.2$ </pre>
+ </p>
+ <h3>Step 6: Working with command line arguments</h3>
+ <p>So far, if we wanted to get input into a program, we could only do it by using scanf.</p>
+ <p>This week, we'll see another way of getting input into a program: using command line arguments.</p>
+ <p>As an example, consider two programs that you'll find among the files you copied into your lab03 directory:</p>
+ <ul>
+   <li><a href="files/computeAreaOfSquare.c">computeAreaOfSquare.c</a></li>
+   <li><a href="files/areaOfSquare.c">areaOfSquare.c</a></li>
+  </ul>
+ <p>The first of these two files, <a href="files/computeAreaOfSquare.c">computeAreaOfSquare.c</a> is a traditional interactive program of the type you've seen before. </p>
+ <ul>
+   <li>Look at it with your pair partner</li>
+   <li>Compile it and run it a few times</li>
+  </ul>
+ <p>Now, contrast that with <a href="files/areaOfSquare.c">areaOfSquare.c</a>. Look at this one with your pair partner. Notice:  </p>
+ <ol><li>The difference on the first line of the main:<br>  
+     <code>int main(int argc, char *argv[])</code> instead of <code>int main()</code>
+       <ul>
+         <li>argc is a variable that indicates the number of things on the command line, and argv is an array (or &quot;vector&quot;) of the those things.</li>
+             <li>For example, if we type ./areaOfSquare 4, that is two things on the command line
+               <ul>
+                 <li>./areaOfSquare is the first thing, and will appear in argv[0]</li>
+                 <li>4 is the second thing and will appear in argv[1]</li>
+               </ul>
+         </li>
+             <li>This has been, or will be, discussed further in lecture<br>
+               <br>
+             </li>
+      </ul>
+      </li>
+   <li>The check of <code>argc</code> to make sure it is 2, and the error message that prints if it isn't.    
+     <ul>
+       <li>If argc is not exactly 2, then we don't have the right number of things on the command line.  </li>
+       <li>Either there are too many, which means the user is confused, or there are two few, and if we try to convert argv[1], there won't be anything there to convert.</li>
+       <li>So if argc isn't 2, we print an error message.</li>
+       <li>The standard error message for Unix progams is called a &quot;Usage&quot; message, and it shows the correct usage of the program&mdash;i.e. an example of what the command line arguments <em>should</em> be.</li>
+     </ul>
+   </li>
+   <li>The conversion of <code>argv[1]</code> using <code>atoi()</code>, so that it can be stored in the int variable <code>side</code></li>
+ </ol>
+ <ol>
+ </ol>
+ <p>Now, compile the program in the usual way ( <code>make areaOfSquare</code> ) and then run it, but when you run it, try these various ways of running it. Based on your understanding of the code you read, and how argc and atoi work, can you explain what happens in each case?</p>
+ <p>./areaOfSquare<br>
+ ./areaOfSquare 4<br>
+ ./areaOfSquare 6<br>
+ ./areaOfSquare 4 6<br>
+ ./areaOfSquare two<br>
+ ./areaOfSquare 4ever<br>
+ ./areaOfSquare 4.9</p>
+ <p>&nbsp;</p>
+ <p>As you can see one nice thing about command line arguments is that we can test our program with a lot of different values very efficiently.</p>
+<div class="sideNoteDiv">
+ <p>Optional: If you'd like to see another example of a program that uses interactive input vs. command line arguments, you may also look at the following files, which should also be in your lab03 directory:</p>
+ <ul>
+   <li><a href="files/multiplyInteractive.c">multiplyInteractive.c</a> vs.<a href="files/multiply.c">multiply.c</a></li>
+ </ul>
+</div>
+ <p>Once you've experimented with <a href="files/computeAreaOfSquare.c">computeAreaOfSquare.c</a> and <a href="files/areaOfSquare.c">areaOfSquare.c</a> and feel you understand how they work, you can move on to step 7.</p>
+ <h3>Step 7: Practicing with the starL program</h3>
+ <p>Now, look at the <a href="files/starL.c">starL.c</a> program that you have in this week's directory. You'll see that it has the same kind of first line in the main that <a href="files/areaOfSquare.c">areaOfSquare.c</a> did: </p>
+ <pre>int main(int argc, char *argv[])</pre>
+ <p>and it has an extra #include, which is needed for the atoi function:   </p>
+<pre>#include &lt;stdlib.h&gt;</pre>
+<p>This allows us to make the kinds of ASCII Art L's constructed with stars that are shown in the introduction to this week's lab.</p>
+<p>Try compiling <a href="files/starL.c">starL.c</a>, and then run it with various command lines:</p>
+<p>./starL 3 4<br>
+  ./starL 4 3<br>
+  ./starL<br>
+  ./starL 2 1<br>
+  ./starL foo bar fum<br>
+  ./starL foo bar</p>
+<p>Try to understand what is happening in each case.</p>
+<p>When you understand this, move on to step 8.</p>
+<h3>Step 8: Writing the starT program.</h3>
+<p>Your job now is to start with the <a href="files/starL.c">starL.c</a> program as an example, and write a new program called starT.c</p>
+<p>It should do roughtly what the starL program does, but instead of having a function starL to make making L's with stars, it will have a function starT that makes the letter T according to these rules:</p>
+<ul>
+  <li>draw the letter T with the correct width and height, but only if height &gt;=2, and width is an odd number &gt;=3</li>
+  <li>if the height and width values are not valid, do nothing at all.</li>
+  <li>Hints: recall that:
+    <ul>
+      <li>the % operator can be used to test where a number is odd or even</li>
+      <li>the &amp;&amp; operator means &quot;and&quot;</li>
+      <li>the || operator means &quot;or&quot;</li>
+      <li>the opposite of &gt;= is &lt;, not &lt;=</li>
+    </ul>
+  </li>
+  </ul>
+<p>Here is sample output:</p>
+<table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+  <tr>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+  </tr>
+  <tr>
+    <td>starT(3,4)<br>
+      <br>
+      <span class="highlightedBold style1">(See note* below)</span></td>
+    <td>
+<pre>
+***
+ *
+ *
+ *  </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(3,5)</td>
+    <td><pre>***
+ *
+ *
+ *
+ *   </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(5,3)</td>
+    <td><pre>
+*****
+  *
+  *
+    </pre></td>
+  </tr>
+  <tr>
+    <td>starT(3,2)</td>
+    <td><pre>***
+ *
+  </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(5,2)</td>
+    <td><pre>*****
+  *
+    </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(5,4)</td>
+    <td><pre>
+*****<br>  *
+  *
+  *
+    </pre></td>
+  </tr>
+  <tr>
+    <td>starT(5,1)</td>
+    <td><pre>&nbsp;
+  </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(6,5)</td>
+    <td><pre>&nbsp;
+    </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(7,3)</td>
+    <td><pre>*******
+   *
+   *
+    </pre></td>
+  </tr>
+</table>
+<p><span class="highlightedBold"><em>*Note:</em></span><em> The output for starT(3,4) was blank in the original version of this lab&mdash;this was a typo. The correct output is now shown&mdash;but if any submissions have special case code so that starT(3,4) would produce blank output, those submissions should get full credit. (P. Conrad, 1/28/2010)</em></p>
+<p>Another hint: you may find the logic of your printKSpacesNXs() function from your homework assignment <a href="../../homework/H06">H06</a> to be useful here for printing the &quot;stem&quot; of the T.</p>
+<p>Test your program by running it on all of the values shown in this table, plus at least two others of your own choosing.</p>
+<p>e.g.</p>
+<p>
+  <pre>./starT 3 4<br>
+./starT 3 5<br>
+./starT 5 3<br>
+./starT 3 2<br>
+./starT 5 2<br>
+./starT 5 4<br>
+./starT 5 1<br>
+./starT 6 5<br>
+./starT 7 3<br>
+... and then two more of your own choosing.</pre>
+  </p>
+<p>Also test it on cases where you don't have exactly two command line arguments. In those cases, there should be code in the main program (not the function starT) that prints the following message, and returns 1 (instead of 0):<br>
+  <br>
+Usage: ./starT width height</p>
+<p>When your starT.c program can do all of that, you are ready to script this week's lab:</p>
+<h3>Step 8a (optional, but helpful testing step---added 11am 01/22/10)</h3>
+<p>I sent out the following email just before 11am on Friday 01/22/10, the day after this lab was distributed.</p>
+<div class="sideNoteDiv">
+<p>Dear CS16 students:</p>
+<p>I'm working on an automated test script for lab03 that will help you find errors in your program _before_ you submit it for grading.</p>
+<p>I am not 100% sure that the test script itself is bug free, but it seems to be working pretty well at the moment, so I think it is ready for you to try it out.</p>
+<p>To use the test script:</p>
+<ol>
+<li><p>cd into your ~/cs16/lab03 directory</p></li>
+<li><p>run the following unix command:</p>
+<p><strong> ~pconrad/public_html/cs16/10W/labs/lab03/test.sh</strong></p>
+</li>
+<li>
+<p>The output you are hoping for is something like this:</p>
+<p>
+  <pre> -bash-3.2$ ~pconrad/public_html/cs16/10W/labs/lab03/test.sh
+  make: `starT' is up to date.
+  Test passed for ./starT
+  Test passed for ./starT 3 4
+  Test passed for ./starT 3 5
+  Test passed for ./starT 5 3
+  Test passed for ./starT 3 2
+  Test passed for ./starT 5 2
+  Test passed for ./starT 5 4
+  Test passed for ./starT 5 1
+  Test passed for ./starT 6 5
+  Test passed for ./starT 7 3
+  -bash-3.2$</pre>
+</p>
+<p> If so, you are in good shape.</p>
+</li><li>
+<p> The output you might see instead is something like this:</p>
+<p> 
+  <pre>Test FAILED: for ./starT
+=============expected output==========
+Usage: ./starT width height
+==============actual output===========
+Usage: ./starL width height
+======================================
+</pre>
+  </p>
+<p> which shows that you forgot to change your &quot;usage&quot; message (starL vs starT)</p>
+<p> Or:</p>
+<pre>
+Test FAILED: for ./starT 3 4
+=============expected output==========
+***
+ *
+ *
+ *
+==============actual output===========
+***
+ *
+ *
+ *
+ *
+======================================
+</pre>
+<p> which shows that you didn't quite count the height of the vertical bar correctly (remember that the top row already contributes one star to the height.)</p>
+<p> Finally, if you get an error like this one:</p>
+<p>
+  <pre> /cs/faculty/pconrad/public_html/cs16/10W/labs/lab03/tests/checkit.sh: line 20: 25243<strong> Segmentation fault</strong> (core dumped) $@</pre>
+</p>
+<p> It probably means that you are trying to do something like:</p>
+<p>
+  <pre> width = atoi(argv[1]);</pre>
+before you check the value of <code>argc</code>, which is a no-no.</p>
+<p> Always check <code>argc</code> first to make sure that <code>argv[1], argv[2]</code>, etc actually exist before doing anything with the<code> argv[1], argv[2],</code> etc. values.</p>
+<p> Otherwise, you may get the infamous &quot;segmentation fault&quot; error that occurs when you try to access a piece of memory that isn't really there, or that you aren't allowed to see...</p>
+</li><li><p>If you find errors, and you already submitted, no worries---just fix the errors, and submit again, as long as it is before the deadline of next Friday. The &quot;turnin&quot; program is configured to allow up to 5 submissions per lab at the moment.</p></li>
+<li>
+<p>If you find any problems with the testing script itself, please let me know.</p>
+</li>
+</ol>
+<p>Happy testing!</p>
+</div>
+<h3>Step 9: Scripting your assignment</h3>
+<p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.<br>
+  </p>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Use the proper form of the cd command to put yourself in your ~/cs16/lab03 directory (if you aren't already there)</li>
+   <li>Type <strong>script lab03.txt</strong><br>
+     You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab03.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. </li>
+   <li>Carefully&mdash;type <strong>rm starT</strong> to remove the starT excutable.
+     <ul>
+       <li> We do this so that when you type &quot;make starT&quot; in a later step, we'll see your program compining instead of the message &quot;make: `starT' is up to date.&quot; </li>
+       <li>Don't accidentally remove the starT.c file or you'll be starting over from scratch!)</li>
+     </ul>
+   </li>
+   <li>Now, type <strong>make starT</strong> to compile your program. There should be no warnings and no errors.</li>
+   <li>Next, run through all the commands listed in Step 8 to show that your program works properly, e.g.<br>
+     <br>
+   ./starT 3 4<br>
+./starT 3 5<br>
+./starT 5 3<strong><br>
+etc.<br>
+<br>
+</strong>Don't forget to include the commands that show that it works when you don't have the right number of command line parameters.<br>
+<br>
+   </li>
+   <li>Type <strong>exit</strong> to stop the recording of commands and responses into lab03.txt</li>
+ </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab03 directory called lab03.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab03.txt</p>
+ <p>You should see your life flashing before your eyes, so to speak&mdash;a feeling of d&eacute;j&agrave; vu should come over you&mdash;because everything in the file will be what you just typed and what came back over the last few minutes.</p>
+ <p>If so, you are ready to submit!</p>
+ <h3>Step 9. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+<pre>turnin lab03@cs16a lab03</pre>
+<p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+<hr>
+ <h2>Evaluation and Grading (200 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab03 directory containing
+           <ul>
+             <li> required: starT.c and lab03.txt (a transcript file) </li>
+             <li>optional: other programs that were part of the files you copied for the lab this week</li>
+           </ul>
+         </li>
+         <li>20 points: submission is on time and follows submission instructions
+           <ul>
+             <li>(i.e. is done via turnin by the Due Date.)</li>
+           </ul>
+         </li>
+        <li>20 points: The starT.c file submitted  has a good header comment 
+          <ul>
+            <li>on first line with name &quot;cs16 lab03&quot; and date, and your name, and that of your pair partner(s)</li>
+          </ul>
+        </li>
+        <li>50 points: transcript file contains everything asked for in the instructions
+         <ul>
+           <li>especially important is that the script contains each of the tests required</li>
+         </ul>
+       </li>
+      </ul>
+   </li>
+   <li>Programming Tasks
+     (points for correctness and style)
+     <ul>
+        <li>20 points: correctly handles command line arguments (i.e. prints a &quot;Usage&quot; message and returns 1 when argc is not the correct value.)</li>
+        <li>20 points: correctly handles situation where starT function should produce no output (i.e. logic of the if test is correct)</li>
+        <li>30 points: correctly prints letter T at correct width and height in all other cases</li>
+        <li>30 points: indentation, variables names, comments, show understanding of good programming style</li>
+     </ul>
+   </li>
+  </ul>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section in which it was assigned.</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until <strong>5pm on Friday January 29.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through <strong>5PM on Wednesday Feb 3rd</strong></p>
+ <ul>
+   <li><em>but you are strongly encouraged to finish it <strong>before the midterm exam</strong> on Tuesday Feb 2nd</em>!<br>
+     <br>
+    </li>
+  </ul>
+ <p>After 5PM Wednesday Feb 3rd, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

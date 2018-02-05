@@ -1,0 +1,446 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="../../../css/syllabus.css"/>
+<link rel="stylesheet" href="../../cs16.css" />
+<style type="text/css">
+.pageBreakBefore {page-break-before:always; padding-top:1em;}
+.style1 {color: #999999}
+.style2 {font-size: smaller}
+table#sched  tr td {font-size: 0.7em;}
+h2, h3, h4 {margin-bottom:1px; padding-bottom:1px;}
+
+</style>
+<title>CS16, UCSB, Spring 2010 (Conrad)</title>
+</head>
+
+<body>
+<div id="container">
+<h1 class="closeOnBottom">CS16:&nbsp;Problem Solving With Computers I<br />
+<strong>Syllabus, Spring 2010</strong></h1>
+<h2 class="closeOnTop"><strong>Dept. of Computer Science, UC Santa Barbara<br />
+</strong></h2>
+<p><strong>I</strong><strong>nstructor:</strong> &nbsp;&nbsp;Dr. Phill Conrad, Lecturer (PSOE), Dept. of Computer Science  
+  (Joint Appointment, College of Creative Studies).</p>
+<p>Website: <a href="http://www.cs.ucsb.edu/~pconrad/cs16">http://www.cs.ucsb.edu/~pconrad/cs16</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Printer friendly <a href="../../10S/syllabus/CS16_10S_syllabus.pdf">PDF version of this syllabus</a></p>
+<p><strong>Lecture:</strong> MWF 1-1:50pm, Chem 1171. <br />
+  <strong>Discussion sections: </strong>All held  in ESB 1003 (Cooper Lab)—Fridays 9am, 10am, 11am, 12 noon.</p>
+<strong>Textbook:</strong> <a href="../textbook">Engineering Problem Solving with C, 3rd Edition</a> (by Delores M. Etter) <br />
+</p>
+<p style="margin-bottom:0.1em; padding-bottom:0.1em"><strong>Teaching Staff:</strong></p>
+<table  border="1" cellspacing="1" cellpadding="3" style="margin-top:0.1em; padding-top:0.1em;">
+  <tr>
+    <td>Phillip Conrad</td>
+    <td>Instructor</td>
+    <td>pconrad@cs.ucsb.edu</td>
+  </tr>
+  <tr>
+    <td>Youngjoon Choi</td>
+    <td>TA</td>
+    <td>ychoi01@cs.ucsb.edu</td>
+  </tr>
+  <tr>
+    <td>Wendy Chun  	</td>
+    <td>TA</td>
+    <td>chun0216@cs.ucsb.edu</td>
+  </tr>
+  <tr>
+    <td> Damon Valenzona </td>
+    <td>TA</td>
+    <td>dvalenzona@cs.ucsb.edu</td>
+  </tr>
+  <tr>
+    <td>Urmish Shah</td>
+    <td>Grader</td>
+    <td>urmish@umail.ucsb.edu</td>
+  </tr>
+</table>
+<p><strong>Course Office Hours</strong> for the instructor and TAs are shown on the following web page:<br />
+  <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/ofchrs/">http://www.cs.ucsb.edu/~pconrad/cs16/10S/ofchrs/</a><br />
+</p>
+<p><strong>Prof. Conrad is also available by appointment</strong>—email him to request an appointment. Include &quot;CS16 appointment&quot; in your subject line, and indicate your available times.</p>
+<h2><strong>What this course is about</strong></h2>
+<p>CS16 is an  <strong>intermediate course in programming</strong>, focusing on <strong>problem solving</strong>, and  fundamentals of software development.</p>
+<p>What this course provides is a solid grounding in problem solving, and basic concepts of programming in C, so that you are well  prepared to take CS24 and CS40 (which are the next CS courses in the curriculum.)</p>
+<p>I say that the course &quot;provides an opportunity&quot;, because you will get a solid grounding in problem solving and C programming <strong>only</strong> if <strong>you</strong> put a lot of time and effort into this course—that is true no matter how much thought and attention I put in my lectures, assignments, and exams.</p>
+<h2 ><strong>Catalog Description</strong></h2>
+<div style="font-size: 0.9em;"><p>Fundamental building blocks for solving problems using computers. Topics include basic computer organization and programming constructs: memory, CPU, binary arithmetic, variables, expressions, statements, conditionals, iteration, functions, parameters, recursion, primitive and composite data types, and basic operating system<br />
+  and debugging tools.</p>
+<p class="closeOnBottom"><strong>Official Prerequisites/Restrictions (from Catalog)</strong></p>
+<ul class="closeOnTop">
+  <li><em>Prerequisite: Math 3A.</em></li>
+  <li><em>Students with no experience with computer programming are encouraged to take Computer Science 5 or 8 before Computer Science 16. </em></li>
+  <li><em>Not open for credit to students who have completed Computer Science 10.</em></li>
+</ul>
+</div>
+
+<h2 class="pageBreakBefore"><strong>Are you ready for CS16?</strong><br />
+</h2>
+<p><em><strong>CS16 should not be your first programming course!</strong></em></p>
+<p>This course assumes you have already done <em>some</em> programming. </p>
+<p>No prior knowledge of any <strong>particular</strong> programming language is required. We will use the C programming language in this course to teach problem solving—however, we do <strong>not</strong> require  any prior knowledge of C.</p>
+<p><strong>However, we do assume you are already a beginning programmer </strong>in <strong>some</strong> language such as Python, Java, C, C++, C#, Visual Basic, JavaScript or ActionScript. You should  have already taken a course in programming prior to enrolling in CS16—either in high school, and a previous college or university, or perhaps ENGR3, CMPSC5 or CMPSC8 here at UCSB. <br />
+  <br />
+  You should 
+already be comfortable with concepts such as:</p>
+<ul>
+  <li>variables and assignment statements (e.g. x = x + 1;)</li>
+  <li>function definitions and function calls (e.g. <code>celsiusTemp = convertToCelsius(fahrenheitTemp);</code> )</li>
+  <li>if/else for making decisions, and expressions involving and, or and not</li>
+  <li>loops, such as for loops and while loops</li>
+  <li>arrays (or a similar structure such as lists in Python)</li>
+</ul>
+<p>If you are not comfortable with all those things, you should drop CS16 from your schedule and try to enroll in CS8 instead.<br />
+</p>
+<p><strong>If you did not earn at least a C in CS8, you should strongly consider repeating CS8 before taking CS16.</strong></p>
+<p><strong>If you got a D or worse in CS8, you should NOT take CS16 without first repeating CS8.</strong></p>
+<p>Note: prior experience with web pages and HTML is <strong>NOT</strong> enough background to be successful in this course.<br />
+</p>
+<p>If you don't have the proper background for CS16, please don't enroll just because:</p>
+<ul>
+  <li>it &quot;fits your schedule better&quot; than CS8 (bad idea!)</li>
+  <li>there was room in CS16 on GOLD, but CS8 was full (bad idea!)</li>
+</ul>
+<p>If you really should be in CS8 but are having scheduling issues, please see Benji Dunson, the undergraduate advisor for CS, who is available during normal business hours in the CS office, on the 2nd floor of Harold Frank Hall. He can help with authorization to enroll (&quot;add codes&quot;), and other similar problems.</p>
+<h3><strong>Learning to program: the swimming/guitar/painting analogy</strong></h3>
+<p>You cannot learn to swim, play guitar, or paint from a textbook or a lecture. You can only</p>
+<ul>
+  <li> learn swimming by spending many hours in the pool, </li>
+  <li>guitar by spending many hours playing the instrument</li>
+  <li>painting, by spending many hours putting brush to canvas.</li>
+</ul>
+<p>The same is true of the type of problem solving involved in programming. Programming is not a serious of facts to be memorized—you cannot &quot;cram&quot; for a computer science exam. You must practice, practice, practice.</p>
+<h3 class="pageBreakBefore"><strong>This course may have a heavy workload</strong></h3>
+<p>As a result, the workload in this course may feel heavy. It may even feel unreasonable compared to your other courses. However, I assure you that it is not unreasonable, given the goal of making you an solid problem solver, and preparing you for CS24.</p>
+<h3 class><strong>What you need to learn</strong></h3>
+<p>So, what is it that you need to know to be ready for CS24?</p>
+<p>At the very least, mastery of basic computer organization and programming constructs: </p>
+<ul>
+  <li>computer organization: memory, CPU, I/O devices</li>
+  <li>data representation and number systems: binary, octal, hex, binary arithmetic</li>
+  <li>variables and expressions, statements</li>
+  <li>control structures: conditionals and iteration (i.e. loops such as for loops and while loops)</li>
+  <li>functions (parameters, recursion)</li>
+  <li>primitive and composite data types, e.g. arrays and structs </li>
+  <li>basic operating system and debugging tools.</li>
+</ul>
+<p>Finally, here is a list of some things you need to begin to appreciate that are more subtle, but perhaps even more important in the long run:</p>
+<ul>
+  <li>problem solving skills</li>
+  <li>software development &quot;team&quot; and &quot;communication&quot; skills</li>
+</ul>
+<p>Here's a bit more detail about these aspects of the course:</p>
+<h4 >Problem Solving</h4>
+<p>Problem solving is something that is difficult to &quot;pin down&quot;. We can't give you a step-by-step process for doing it—if we could, it wouldn't be problem solving! It is that part of developing software that involves seeing how to combine all the pieces you've learned about in a new way in order to make a piece of software work. </p>
+<p>It is something that can't be learned from a lecture or a book—though it can be learned! The only way for you to learn it is for us—your instructors and TAs—to offer you many opportunities to try doing it. You'll make mistakes, and then have flashes of insight, and learn from those. Eventually, both your skill and self-confidence will increase.</p>
+<h4>Team and Communication Skills</h4>
+<p>In terms of &quot;the real world&quot;----i.e. what employers want us here at UCSB to &quot;do better at&quot;---these are the things they almost always bring up.  Companies that hire programmers don't complain that UCSB grads lack technical skills, but they do wish they were better at these things:</p>
+<ul>
+  <li>Understanding the importance of making your code easy for other people to read, understand and modify</li>
+  <li>Being able to talk about your code, and write  about your code.</li>
+  <li>Understanding that code lives for a long time—you don't just write it, and then walk away from it.</li>
+  <li>Understanding the value of working with others on software, rather than all by yourself (more on this below).</li>
+</ul>
+<p>These last four points are often difficult to convey in a 10 week class at the introductory/intermediate level, but we are going to do our best to try!</p>
+<h2 class="pageBreakBefore">Rough Schedule (subject to change)</h2>
+<p>Because this is an intermediate course, and the textbook is designed for an &quot;introductory course&quot; (where students have no prior exposure to programming), we will introduce some concepts in lecture at a &quot;basic level&quot; earlier than the full detailed treatment in the textbook. Therefore,  participation at every lecture is crucial to your success.</p>
+<table id="sched" border="1" cellspacing="1" cellpadding="1" class="closeOnTop">
+  <tr>
+    <th scope="col">Week</th>
+    <th scope="col">Dates</th>
+    <th scope="col">Reading</th>
+    <th scope="col">Mon</th>
+    <th scope="col">Wed</th>
+    <th scope="col">Fri</th>
+    <th scope="col">Topics</th>
+    <th scope="col">Exercises</th>
+    <th scope="col">Labs</th>
+  </tr>
+  <tr>
+    <th scope="row">1</th>
+    <td>03/29-04/02</td>
+    <td><a href="http://proquest.safaribooksonline.com.proxy.library.ucsb.edu:2048/1-56592-306-5">Oualline</a>, Ch 1, Ch3, Ch&nbsp;4<br />
+      Etter, Ch1, Ch2</td>
+    <td>03/29</td>
+    <td>03/31</td>
+    <td>04/02</td>
+    <td>basic C program structure,<br />
+      printf/scanf,<br />
+      types: int, double, char<br />
+      assignment statements</td>
+    <td>orientation, simple interactive programs</td>
+    <td>lab00, lab01</td>
+  </tr>
+  <tr>
+    <th scope="row">2</th>
+    <td>04/05-04/09</td>
+    <td>Etter Chapter 3,4</td>
+    <td>04/05</td>
+    <td>04/07</td>
+    <td>04/09</td>
+    <td><p>control: if<br />
+      print vs. return<br />
+simple functions<br />
+    </p>      </td>
+    <td>tdd on simple functions</td>
+    <td>lab02, </td>
+  </tr>
+  <tr>
+    <th scope="row">3</th>
+    <td>04/12-04/16</td>
+    <td>more on 3,4</td>
+    <td>04/12</td>
+    <td>04/14</td>
+    <td>04/16</td>
+    <td>control: loops (for, while)</td>
+    <td>ASCII Art letters</td>
+    <td>lab03</td>
+  </tr>
+  <tr>
+    <th scope="row">4</th>
+    <td>04/19-04/23</td>
+    <td>&nbsp;</td>
+    <td>04/19<strong><br />
+    </strong></td>
+    <td>04/21<br />
+      <strong>midterm<br />
+exam 1</strong></td>
+    <td>04/23</td>
+    <td>reading/writing  files</td>
+    <td>min, max, average of file of numbers</td>
+    <td>lab04</td>
+  </tr>
+  <tr>
+    <th scope="row"><span class="style1">Notes</span></th>
+    <td colspan="8"><span class="style1">Friday  04/23: Last day for undergraduates in the Colleges of L&amp;S and Engineering to drop classes at the Office of the Registrar by 4 p.m</span></td>
+    </tr>
+  <tr>
+    <th scope="row">5</th>
+    <td>04/26-04/30</td>
+    <td>Etter Chapter 5,6</td>
+    <td>04/26</td>
+    <td>04/28</td>
+    <td>04/30</td>
+    <td>arrays, pointers, parameter passing</td>
+    <td>TDD on 1-d array problems,<br />
+      writing BW simple graphics lines only (pbm)</td>
+    <td>lab05,<br />
+      proj1</td>
+  </tr>
+  <tr>
+    <th scope="row">6</th>
+    <td>05/03-05/07</td>
+    <td>Etter Chapter 7</td>
+    <td>05/03</td>
+    <td>05/05</td>
+    <td>05/07</td>
+    <td>selection sort, structs</td>
+    <td>lab on selection sort, structs with TDD</td>
+    <td>lab06</td>
+  </tr>
+  <tr>
+    <th scope="row">7</th>
+    <td>05/10-05/14</td>
+    <td>More on Chapter 5,6,7</td>
+    <td>05/10</td>
+    <td>05/12</td>
+    <td>05/14</td>
+    <td>recursion, color graphics, fills</td>
+    <td>recursive array problems, more  graphics</td>
+    <td>lab07,<br />
+      proj2</td>
+  </tr>
+  <tr>
+    <th scope="row">8</th>
+    <td>05/17-05/21</td>
+    <td>More on Chapter 5,6,7</td>
+    <td>05/17</td>
+    <td><strong>05/19<br />
+      midterm exam E02</strong></td>
+    <td>05/21</td>
+    <td>dynamic memory allocation, strings</td>
+    <td>lab on strings, dynamic mem allocation; project to process earthquake data</td>
+    <td>lab08, proj3</td>
+  </tr>
+  <tr>
+    <th scope="row">9</th>
+    <td>05/24-05/28</td>
+    <td>no new reading</td>
+    <td>05/24</td>
+    <td>05/26</td>
+    <td>05/28</td>
+    <td>efficiency</td>
+    <td>more interesting graphics, efficiency challenges</td>
+    <td>proj4</td>
+  </tr>
+  <tr>
+    <th scope="row"><span class="style1">Notes</span></th>
+    <td colspan="8"><span class="style1">Monday 05/31 is a University Holiday</span></td>
+  </tr>
+  <tr>
+    <th scope="row">10</th>
+    <td>05/31-06/04</td>
+    <td>no new reading</td>
+    <td><strong>05/31<br />
+      Holiday</strong></td>
+    <td>06/02</td>
+    <td>06/04</td>
+    <td>review</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <th scope="row">Final<br />
+      Exam<br />
+      Week</th>
+    <td>06/05-06/11</td>
+    <td colspan="7">Exam for this course is scheduled for: Wed 06/09, 4-7PM</td>
+    </tr>
+</table>
+<h2 class="pageBreakBefore"><strong>A special note about collaboration</strong></h2>
+<p>As mentioned above, one of the things we really want to convey in this course is that real-world software development is very seldom an 'individual sport'—is it much more often a 'team sport'. Companies want to hire CS and CE graduates that know how to collaborate with others on producing software.</p>
+<p>In the CS Department at UCSB, we understand the value of this. However, it puts us in a tricky position. </p>
+<p>On the one hand, we want to encourage working together in ways that help you develop your skills and teamwork, and help you understand that programming can be a social, collaborative, creative activity—not something done only by loner nerds in cubicles. The sooner you start with activities such as pair programming, code reviews, and other collaborative software development activities, the more skill you'll develop, and the sooner you'll be ready for the real world. Plus, for many people, working together with others is a lot more enjoyable and fun than being a loner.</p>
+<p>On the other hand, we need to avoid any situations where freeloaders are &quot;coasting&quot; through courses by leaning too much on others—never developing independent skills as programmers. This situation creates huge problems. Mostly it is damaging to the freeloaders themselves, who eventually crash and burn, perhaps far too late to choose another career path without significant difficulty. However, it also creates problems for everyone else—some hardworking students become demoralized by the unfairness of it all, and the value of a UCSB education is diminished by the  freeloaders' lack of accomplishment.</p>
+<p>Thus, we must strike a balance. </p>
+<p>Our emphasis on collaboration means:</p>
+<ul>
+  <li>We will try to create opportunities for you to work in pairs on assignments—in some cases, we may even require it.</li>
+  <li>We will try to create opportunities for you to develop skills at talking about and reflecting on your own code and other people's code in small groups (code reviews).</li>
+  <li>Some in-class assignments will permit discussion with other students.</li>
+</ul>
+<p>It doesn't not mean, however: </p>
+<ul><li>That you can &quot;just copy&quot; homework or code from others and claim it as your own work.</li>
+  <li>That you can work together on assignments where you've been specifically told not to.</li>
+</ul>
+<p>The bottom line:</p>
+<ul>
+  <li>We'll try to be very specific about what kinds of collaboration are permitted, and what kinds of collaboration are not permitted, and are considered academic dishonesty.</li>
+  <li>If you are not sure about whether some kind of collaboration is permitted or not, it is your responsibility to<strong> ask questions.</strong></li>
+</ul>
+<p>A final note:  the emphasis on collaboration in this course does not necessarily extend to other CS courses you make take in the future.</p>
+<ul>
+  <li>Each course will have its own policies, and the default policy is still: <strong>no collaboration.</strong></li>
+  <li>Please be sure you understand each instructors policy on collaboration carefully, and don't assume it will be the same as that from previous courses.</li>
+</ul>
+<h2 class="pageBreakBefore closeOnBottom">Grading</h2>
+
+<p class="closeOnTop">To determine your final letter grade, I will calculate two numbers:</p>
+<table border="2">
+  <tr>
+    <th scope="row">Weighted course average<br /></th>
+    <td>40% <span class="style2">Assignments/Quizzes/Homework/Projects</span><br /> 
+      + 60%  Exams <br />
+      (2 midterms and final, 20% each)</td>
+    </tr>
+  <tr>
+    <th scope="row">Weighted exam average</th>
+    <td>Average score of two midterms and final (weighted equally)</td>
+    </tr>
+</table>
+<p class="closeOnBottom">I will then use the following table. This is a conventional 10 point scale with +, - with the lower three and upper three points of each range representing plus/minus. It also enforces a policy that your final course grade can be no more than one letter grade higher than your exam average.</p>
+<table border="2" class="gradeScale closeOnTop">
+  <tr>
+    <th scope="col">to earn this letter grade</th>
+    <th scope="col">your weighted course average<br /> 
+      must be at least </th>
+    <th scope="col">AND, your weighted exam average<br /> 
+      must be at least</th>
+    </tr>
+  <tr>
+    <td>A</td>
+    <td>93</td>
+    <td>83</td>
+    </tr>
+  <tr>
+    <td>A-</td>
+    <td>90</td>
+    <td>80</td>
+  </tr>
+  <tr>
+    <td>B+</td>
+    <td>87</td>
+    <td>77</td>
+  </tr>
+  <tr>
+    <td>B</td>
+    <td>83</td>
+    <td>73</td>
+  </tr>
+  <tr>
+    <td>B-</td>
+    <td>80</td>
+    <td>70</td>
+  </tr>
+  <tr>
+    <td>C+</td>
+    <td>77</td>
+    <td>67</td>
+  </tr>
+  <tr>
+    <td>C</td>
+    <td>73</td>
+    <td>63</td>
+  </tr>
+  <tr>
+    <td>C-</td>
+    <td>70</td>
+    <td>60</td>
+  </tr>
+  <tr>
+    <td>D+</td>
+    <td>67</td>
+    <td>57</td>
+  </tr>
+  <tr>
+    <td>D</td>
+    <td>63</td>
+    <td>53</td>
+  </tr>
+  <tr>
+    <td>D-</td>
+    <td>60</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>F</td>
+    <td colspan="2">weighted course average below 60 <strong>OR</strong> weighted exam average below 50</td>
+    </tr>
+</table>
+<p><strong>Curving: </strong>The grade  scale above represents the <em>minimum</em> letter grade you will be assigned&#8212;at the instructor's discretion, the grading scale  may be altered <em>in the students' favor</em> if this will be better reflect the students' mastery of the material. Thus, <em>if</em> there is a &quot;curve&quot;, it will be applied at the <em>end</em>, not to individual assignments.</p>
+<p><strong>A+ grades: </strong>These may be awarded to the very best performing students in the class—but the cutoff for A+ grades will be determined at the end of the course at the discretion of the instructor (there is no pre-determined cutoff---an average of 97 or more doesn't guarantee you an A+ grade.)</p>
+<h2><strong>Academic Honesty</strong></h2>
+<p>You should read and understand the UCSB policy on academic honesty listed below. You should also understand that I take academic honesty and personal integrity very seriously, and will do my best to uphold and enforce this UCSB policy. (Also see the section on collaboration, earlier in this syllabus.)</p>
+<blockquote class="finePrint">It is expected that students attending the University of California understand and subscribe to the ideal of academic integrity, and are willing to bear individual responsibility for their work. Any work (written or otherwise) submitted to fulfill an academic requirement must represent a student’s original work. Any act of academic dishonesty, such as cheating or plagiarism, will subject a person to University disciplinary action. Using or attempting to use materials, information, study aids, or commercial “research” services not authorized by the instructor of the course constitutes cheating. Representing the words, ideas, or concepts of another person without appropriate attribution is plagiarism. Whenever another person’s written work is utilized, whether it be a single phrase or longer, quotation marks must be used and sources cited. Paraphrasing another’s work, i.e., borrowing the ideas or concepts and putting them into one’s “own” words, must also be acknowledged. Although a person’s state of mind and intention will be considered in determining the University response to an act of academic dishonesty, this in no way lessens the responsibility of the student.<br />
+    <br />
+    <em> (Section A.2 from: <a href="http://www.sa.ucsb.edu/regulations"><strong>http://www.sa.ucsb.edu/regulations</strong></a>,  Student Conduct, General Standards of Conduct)</em></blockquote>
+<h2 class="pageBreakBefore">Other Policies</h2>
+<h3>Attendance</h3>
+<p>This course moves quickly. So attendance is very important.</p>
+<p>We'll be trying to master the material from about 14 chapters in the book, at about 2 chapters per week. We need to go at that pace, because we'll lose a couple of weeks to exams, and the last few lectures the quarter, you can't really start anything new, because there isn't time to put it into practice with programming assignments. If you don't put it into practice, you aren't very likely to learn it in any way that is going to stick with you, so there isn't much point in just &quot;going through the motions&quot;. </p>
+<p>As a result, <strong>there will be something you have to turn in at almost every class</strong>. In this way, attendance is taken, and required.</p>
+<p>These things you have to turn in will be a combination of in-class activities, and homework completed outside of class, but handed in on paper during class.</p>
+<p>Quizzes may occur at anytime, announced or unannounced. Missed quizzes may not be made up, except per the &quot;personal day/sick day&quot; below—if you miss a quiz for any reason, and have already used your personal day/sick day, you will have to make up the points with extra credit.<br />
+  <br />
+Thus <strong>attendance is required</strong>, and <strong>reading the assigned readings is required.</strong></p>
+<p></p>
+<p><strong>Missing in-class activities.</strong></p>
+<p>If you miss a class, you miss the opportunity for the points on that in-class assignment, or homework that was due. Period. </p>
+<p>There is no makeup, except for </p>
+<ul>
+  <li>excused absences arranged and agreed to by the instructor <strong>in advance</strong>, for official UCSB activities</li>
+  <li>one &quot;sick-day/personal day&quot; per student, per quarter (see below)</li>
+</ul>
+<p><strong>Sick day/personal day</strong></p>
+<p>To make up an assignment from a &quot;sick-day/personal-day&quot;, you must email me within 48 hours of the absence, to make an appointment to make up the assignment during the next scheduled office hours following your absence (or at an appointment time to be negotiated, if you have a conflict with those hours.) This make up must happen within one week of the absence, or 24 hours before the final exam, which ever is earlier.</p>
+<p>In rare cases, if there is a documented family emergency, documented extended illness, documented required court appearance, or other situation beyond the students' control (with documentation) the instructor may grant additional make up days entirely at the instructor's discretion—but this is <strong>not</strong> a guarantee or a right.</p>
+<h2>&nbsp;</h2>
+<h2>Accommodations for disabilities</h2>
+<p> Information about how UCSB supports students with disabilities is available at the campus ADA website: <a href="http://www.ada.ucsb.edu">http://www.ada.ucsb.edu. </a>If you require any special accommodations due to disabilities, please let me know as soon as possible. You may contact me by email to request an appointment: .</p>
+<h2>Disclaimer</h2>
+<p>This syllabus is as accurate as possible, but is subject to change as the instructors discretion, within the bounds of UC policy.</p>
+</div> 
+<!--id="container"-->
+</body>
+</html>

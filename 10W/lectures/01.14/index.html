@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<title>CS16, 10W,Conrad,  Thu 01.14, Lecture Outline</title>
+<style type="text/css">
+pre {white-space:pre;}
+
+</style>
+</head>
+
+<body>
+<div id="container">
+<h1>CS16, 10W,Conrad,  Thu 01.14, Lecture Outline</h1>
+<p>Todays <a href="code">code</a>      Back to <a href="../../../">CS16</a></p>
+<h2>Pair Programming</h2>
+<p>Today's lab is a Pair Programming Lab.</p>
+<ul>
+  <li>Many of you have already experienced pair programming</li>
+  <li>But in case it is new, or as a reminder, here is a video that covers the basics<br />
+   (
+ <a href="http://agile.csc.ncsu.edu/pairlearning/ppflash.php">flash</a> |
+ <a href="http://agile.csc.ncsu.edu/pairlearning/pairprogramming.mov">mov</a> |
+ <a href="http://agile.csc.ncsu.edu/pairlearning/pairprogramming.wmv">wmv</a> |
+ <a href="http://www.youtube.com/watch?v=rG_U12uqRhE">YouTube</a>)  </li>
+  </ul>
+<p>You MUST attend today's lab in person.</p>
+<ul>
+  <li>If you are unable to do so, you must make special arrangements with the instructor (not the TA). Those arrangements must be confirmed by email—a &quot;conversation&quot; is not good enough. </li>
+  <li>In the absence of such an arrangement, you may still complete the lab on your own, but will earn a &quot;zero&quot; for the pair evaluation part of today's lab (50 points.)</li>
+  </ul>
+<p>For this week, you may choose your own pair partner.<br />
+  </p>
+<ul>
+  <li>If you don't know someone in the class, the TA will assign you a pair partner.</li>
+  <li>If there are an odd number of students, there will be one group of three partners—the last person left doesn't just &quot;get to work by herself/himself.&quot;</li>
+  <li>In later weeks, pair partners will be assigned by the instructor/TA—though you still have the option to choose your own partner, provided he/she was not your partner for a previous assignment.</li>
+  <li>We'll be switching pair partners about every two weeks or so.</li>
+  </ul>
+<h2>Review</h2>
+<p><strong>Declaring variables:</strong> declaring a variable assigns it a name and a type. <br />
+  The declarations below also allocate memory for the variables that are declared.</p>
+
+  <pre>
+int x; // x can store an integer value like -42, 3 or 16;
+double y; // y can store a real number like 3.14, -0.00001, or 6.0221415E23
+
+char c; // c can store a single character like 'A', '3', or '?'</pre>
+
+<p>Note that we use <code>int</code>, not integer, and <code>char</code>, not character</p>
+<p><strong>Initializing variables:</strong> initializing a variable gives it an initial value. </p>
+<p>
+  <pre>x = 4;
+y = 4.5;
+c = 'A'; // single characters must be in single quotes<br /></pre>
+  </p>
+<p><strong>Combining declaration and initialization:</strong> Declaration and initialization can be combined:</p>
+<p>
+  <pre>int x=4;
+double y=5.6;
+char c='B';</pre>
+This is  a way to make your code more compact. It also allows you to make sure that variables have an initial value—if you don't do it, the initial value is <em>undefined</em>, and could be anything! That's leads us to a discussion of &quot;junk data&quot; (see below).</p>
+<p><strong>Junk data:</strong> In C, in most cases if you don't give a variable an initial value, it contains &quot;junk&quot; left over from whatever piece of code previously used that piece of memory—it isn't necessarly initialized to zero automatically.</p>
+  <pre>int x;
+printf(&quot;x=%i\n&quot;,x); // output is unpredictable!  may contain junk data<br />
+  </pre>
+<p> Some people call these &quot;garbage values&quot;, but I prefer to avoid that term, because the word &quot;garbage&quot; has a particular meaning in later CS courses that is related to memory management and the use of pointers. Instead, I call it &quot;junk data&quot;, or &quot;arbitrary bits&quot;, or &quot;leftover bits&quot;.</p>
+<h2>Review: Simple function definition and function call</h2>
+<p>Last time, we went over the following simple function definition and function call:</p>
+<p><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/01.12/code/tripleTheValue.c">http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/01.12/code/tripleTheValue.c</a></p>
+<p>We talked about how the value in that program is &quot;hard coded&quot;, and this make the program not particularly flexible. If we want to check whether our function tripleTheValue works for different values, we have to keep editing the file, recompling and re-running the program. This is inefficient.</p>
+<p>Instead, we can find a way to get data into our program.</p>
+<p>One way is with scanf, which we started to discuss last time.</p>
+<p>To use scanf for a integer:</p>
+
+  <pre>
+int a;
+
+// get value of a from the user
+
+printf("Please enter an integer value: "); // prompt the user
+scanf("%i",&amp;a); // &amp; means address of a
+  
+</pre>
+<p>To use scanf with a double:</p>
+  <pre>
+double b;
+
+// get value of b from the user
+
+printf("Please enter a numeric value: "); // prompt the user
+scanf("%lf",&amp;b); // &amp; means address of b
+  
+</pre>
+  <p>To use scanf with a char:</p>
+  <pre>
+char c;
+
+// get value of c from the user
+
+printf("Please enter a single character: "); // prompt the user
+scanf("%c",&amp;c); // &amp; means address of c
+  
+</pre>
+<p>Using scanf with strings (i.e. char * values) is possibly, but is slightly more complex, so we'll discuss it a little later in the course.</p>
+<p>The string that we print out before we use scanf is called a &quot;prompt&quot;, i.e. a message asking the user for input. Typically, the prompt does NOT end with a \n, because we want the cursor to appear right after the question we are asking the user.</p>
+<p>Inside the format string of the scanf function call, we always have one of the following:</p>
+<p>scanf(&quot;%d&quot;) or scanf(&quot;%i&quot;) for int variables<br />
+scanf(&quot;%lf&quot;) for double variables<br />
+  scanf(&quot;%c&quot;)  for char variables<br />
+</p>
+<p>The &quot;percent thingy&quot; is called a &quot;format specifier&quot;. If you use the wrong format specifier, you'll get an incorrect result—the program will interpret the bits you provide in a different way than you intend.</p>
+<p>The following trick can help you find errors like these when using &quot;make program.c&quot;:</p>
+<p>Type this at the Unix prompt before you type &quot;make program.c&quot;. The spacing and capitalization must be exactly as shown here:<br />
+  <br />
+  <pre>export CFLAGS=-Wall</pre>
+</p>
+<p>Then when you &quot;make&quot; your program, you'll get extra warning messages telling you about mismatches between the types of your variables, and the types of your format specifiers.</p>
+<ul>
+  <li>In case you are interested, here is some extra detail—you don't really need to know all this yet, but it case you are curious:
+    <ul>
+      <li><code>export</code> is a Unix command specific to the &quot;bash shell&quot;</li>
+      <li>the &quot;bash shell&quot; is the program that interprets what you type at the Unix prompt.</li>
+      <li><code>export</code> is used to set up an assignment statement for something called an &quot;environment variable&quot;</li>
+      <li>here, CFLAGS is the environment variable</li>
+      <li>an environment variable is a variable that can modify the behavior of Unix programs—programs can check its value, and do different things based on how it is defined.</li>
+      <li>Here, setting CFLAGS to the value -Wall means that we want &quot;All warnings&quot;. W means &quot;warning&quot; and &quot;all&quot; means exactly that.</li>
+      </ul>
+  </li>
+  </ul>
+<h2>Today's lab</h2>
+<p>Today's lab is about Test-Driven Development.</p>
+<p>One &quot;old-fashioned&quot; idea about programming is that you write code like this:</p>
+<ol>
+  <li>understand the problem</li>
+  <li>identify inputs/outputs and write pseudocode for a solution</li>
+  <li>write code for a solution (in C, Python, Java, etc.)</li>
+  <li>test your code</li>
+  <li>if you don't get the correct result, return to step 1 and try again.</li>
+</ol>
+<p>Recently, though many programmers have found the following approach yields better results:</p>
+<ol>
+  <li>understand  the problem</li>
+  <li>identify inputs/outputs, and what kind of function would solve the problem</li>
+  <li>write test cases for that function</li>
+  <li>write  a stub for that function (i.e. a dummy function that always returns the wrong answer)</li>
+  <li>test your code and watch it fail all the tests</li>
+  <li>fix the function to return the correct answer</li>
+  <li>test your code and watch it pass all the tests (we hope!)</li>
+</ol>
+<p>Although there are <em>more steps</em> involved, this approach is <em>not necessarily more work. </em></p>
+<p>In fact, folks who have tried it will often report that it is <em>less</em> work in the long run.<br />
+(Those who say it is more work are often those who haven't really tried it. :-) ).</p>
+<p>I will demonstrate this in lecture with some code—after lecture you should be able to find a link to that code below:</p>
+<p><a href="code">code</a></p>
+<p><br />
+  Questions:</p>
+<ol>
+  <li> Why do you think it would be the case that it may be less work?</li>
+  <li>What do you think is the purpose of writing a stub (a &quot;wrong&quot; function) first?</li>
+  </ol>
+</div>
+</body>
+</html>

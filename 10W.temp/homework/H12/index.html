@@ -1,0 +1,153 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 09F, H11 (Pointers, Etter 6.1)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.smallerFont {font-size: 0.9em;}
+.style2 {font-size: larger}
+.style3 {font-size: 72px; }
+.pageBreakBefore {page-break-before:always;}
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, UCSB—H11:  (Addresses, Pointers, Arrays, Etter, Section 6.1) <span id="pointCount">Total points: ?</span> (<a href="H11.pdf">printable PDF</a>)</p>
+<p>Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H11">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H11</a><br />
+</p>
+<p>Accepted: <strong>on paper, in Lecture (11am Thursday Feb 11th</strong>)<br />
+    <br />
+    <span class="smallerFont"><strong>Late Policy:</strong> No email submission allowed—and don't &quot;slip it under my door&quot;. If you need to make it up, you must do so during office hours, or make an appointment to see me, and you must request this appointment within 48 hours of when the assignment was originally due. <br />
+    <br />
+    <strong>Personal Day/Sick Day policy</strong>: Everyone is permitted one &quot;personal day/sick day&quot; when you get to make up a missed homework assignment for free during office hours or via appointment. After that, you may not make up the homework assignment—you can only earn back the points through extra credit opportunities.       </span><span class="smallerFont">(For more details, see  the <a href="../../syllabus/index.html">syllabus</a> and the <a href="../index.php">homework policy</a>)</span><br />
+</p>
+<hr />
+<p>Name: (3 pts)___________________________  <span>UMail address (4 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (3 pts) Circle one:         3pm       4pm         5pm           unknown<br />
+</p>
+<hr />
+<p align="center" class="style2">This assignment is due <strong>IN Lecture on Thursday. </strong><br />
+    <strong>It may ONLY be turned in during Lecture on Thursday.</strong><br />
+  Do NOT turn it in early to your TA on Tuesday in lecture,<br />
+  or late to your TA in Lab on Thursday
+  .</p>
+<p>Name of your pair programming partner(s), if you work together:<br />
+  <br />
+</p>
+<hr />
+<p>Read Section 6.1and 6.2 in your Etter textbook—and review your lecture notes from Thursday Feb 4. </p>
+<p>In addition, keep in mind that in the textbook, Etter uses %u as the format specifier for pointers, while in lecture I tend to use %p instead. <br />
+  <br />
+The difference is that %u prints the address value as an &quot;unsigned integer&quot;, in base 10, while %p prints the address value in hexadecimal.</p>
+<p>Then answer these questions:<br />
+  <strong><br />
+    </strong></p>
+<hr />
+<ol>
+  <li>p. 285 shows the program <a href="../../../textbooks/etterC3e/Source/C/p6_1.c">chapter6_1</a> and p. 285 shows the program <a href="../../../textbooks/etterC3e/Source/C/p6_2.c">chapter6_2</a> <br />
+    <br />
+    (In the online version of this homework, you can click on those names as links and get access to the source code in case you want to copy and paste the code and run it.)<br />
+      <br />
+    <br />
+    <ol>
+      <li>(5 pts) p. 284 in your book shows sample output from the program <a href="../../../textbooks/etterC3e/Source/C/p6_1.c">chapter6_1:</a><br />
+<pre>a = 1; address of a = 1245052<br />
+b = 2; address of b = 1245048<br />
+<br /></pre> 
+<p>My question to you is this: if you ran this program on CSIL, would the output be the same or different?  If different, which parts would be the same, and which parts would be different? And most importantly, <strong>explain why. <br />
+  <br />
+</strong>(Hint: the answer I'm looking for can be found somewhere in the textbook on pages 284-285.)<br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</p>       
+      </li>
+      <li>(5 pts) Same question, but for the sample output from the program  <a href="../../../textbooks/etterC3e/Source/C/p6_2.c">chapter6_2</a> <br />
+          <br />
+        <pre>a = -858993460;  address of a = 1245052<br />b = -858993460;  address of b = 1245048<br />                      </pre>
+        (Hint: again, the answer I'm looking for can be found somewhere in the textbook on pages 284-285.)<br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for more problems</span></p>
+        <p class="pageBreakBefore"><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span></p>
+      </li>
+    </ol>
+  </li>
+  <li>On p. 288, there are four practice problems—the answers to those problems can be found on p. 417 in your textbook.<br />
+    <br />
+  The following problems should be done in a similar fashion—of course, the answers are NOT in your book—you need to come up with those on your own answers!<br />
+  <br />
+  Remember that if p is a pointer, its meaning depends on whether it is deferenced with a *.<br />
+  Also, how you think about it depends on whether it is on the right hand side (<em><strong>rhs</strong></em>) of an assignment statment (<em><strong>rvalue</strong></em>) or the left hand side (<em><strong>lhs</strong></em>) of an assignment statment (<em><strong>lvalue</strong></em>)<br />
+  <br />
+  <ul>
+    <li>p as an <em><strong>rvalue</strong></em> returns the address stored in p (i.e. the address of what p points to)</li>
+    <li>(*p) as an <em><strong>rvalue</strong></em> returns the value of what p points to (e.g. an int, if p is an int *)</li>
+    <li>p as an <em><strong>lvalue</strong></em> means store the result of the <em><strong>rhs</strong></em> (which should be an address) in p.<br />
+    i.e. make p point to some place new!</li>
+    <li>(*p) as an lvalue doesn't change <em><strong>where</strong></em> p points—it changes the value</li>
+  </ul>
+    <br />
+    <ol>
+      <li>(5 pts) <br />
+        <br />
+        <pre>int a=3, b=4, *ptr;<br /><br />ptr = &amp;a;
+        </pre>
+        <p>&nbsp;</p>
+      </li>
+      <li>(5 pts) <br />
+        <br />
+        <pre>int a=5, b=6, *ptr=&amp;a;<br /><br />b = *ptr;
+         </pre>
+        <p>&nbsp;</p>
+      </li>
+      <li>(5 pts) <br />
+        <br />
+        <pre>int a=7, b=8, c=9, *ptr=&amp;b;<br /><br />a = *ptr;<br />*ptr = c;
+              </pre>
+        <p>&nbsp;</p>
+      </li>
+      <li>(5 pts) <br />
+        <br />
+        <pre>int a=10, b=11, c=12 *p1=&amp;b, *p2;<br /><br />p2 = &amp;c;
+a = *p1;
+p1 = &amp;a;
+<br /><br />
+              </pre>
+      </li>
+      <li>(5 pts) <br />
+        <br />
+        <pre>int a=13, b=14, *p1=&amp;a, *p2=&amp;b, *p3;<br /><br />(*p1) = (*p2);
+p3 = p1;</pre>
+        <p>&nbsp;</p>
+      </li>  <li>(5 pts) <br />
+        <br />
+        <pre>int a=15, b=16, *p1=&amp;a, *p2=&amp;b, *p3;<br /><br />p3 = p1;<br />p1 = p2;<br />p2 = p3;<br /></pre>
+        <p>&nbsp;</p>
+      </li>
+    </ol>
+  </li>
+  <!--- -->
+</ol>
+
+<hr />
+End of H11
+</body>
+</html>

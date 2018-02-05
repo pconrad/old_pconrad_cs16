@@ -1,0 +1,370 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab00, Fall 2009 (09F)--Orientation to Cooper Lab,  and the turnin program</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Fall 2009</h1>
+ <h1>lab00: <span class="smallerFont">(&quot;lab zero&quot;)<br>
+  Orientation&nbsp;to CSIL, the&nbsp;Cooper&nbsp;Lab,</span><span class="smallerFont"><br>
+  and submitting&nbsp;assignments via the turnin&nbsp;program.</span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to </p>
+ <ul>
+   <li>use the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>perform basic management of directories and files</li>
+   <li>know how to submit assignments in this class with the &quot;turnin program.</li>
+</ul>
+ <p>That's a bit general, so let's get more specific...</p>
+ <ul>
+   <li>Use the computers in both the CSIL and the Cooper labs
+     <ul>
+       <li>Know where the CSIL lab is located <span class="subtle">(in Harold Frank Hall, on the side of the building closest to the ocean, outside the glass double doors)</span></li>
+       <li>Know where the Cooper lab is <em class="subtle">(ground floor of the Engineering Science Building, room ESB1003, at the corner of campus closest to the airport.)</em></li>
+       <li>Be able to login with your &quot;CSIL account&quot;  <span class="subtle">(This the same as your &quot;College of Engineering account&quot;the one you created at https://accounts.engr.ucsb.edu/create. It is a  special username/password used with the computers that are set aside for College of Engineering classes)</span></li>
+       <li>Be able to find the web browser on those computers <span class="subtle">(Firefox)</span></li>
+       <li>Be able to find the command prompt on those computers <span class="subtle">(also known as the <strong><em>Unix prompt</em></strong>)</span></li>
+       <li>Be able to log out of those computers</li>
+     </ul>
+   </li>
+   <li>Basic management of directories and files
+     <ul>
+       <li>Be able to create subdirectories under your &quot;home directory&quot;  on those computers <span class="subtle">(&quot;directory&quot; is another name for what is often called a &quot;Folder&quot; in the Windows and Mac operating systems)</span></li>
+       <li>Be able to use a text editor to make changes to files <span class="subtle">(We encourage the use of emacs or vim, but there are other options.)</span></li>
+       <li>Be able to copy a program into your directory from the course website. (<span class="subtle">This can be done by &quot;save as&quot; in a web browser, or with a direct cp command at the Unix command prompt.)</span></li>
+     </ul>
+   </li>
+   <li>Run a C program copied from my account <span class="subtle">(see instructions below for details.)</span><br>
+    </li>
+   <li>Know how to submit assignments in this class with the &quot;turnin program&quot;
+     <ul>
+       <li>This requires bringing up a terminal window, possibly ssh'ing into CSIL <span class="subtle">(We'll explain all this in more detail later on this web page)</span></li>
+       <li>It also requires knowing how to use the cd command at the Unix prompt to get into the correct directory</li>
+       <li>Finally, you need the correct form of the turnin command</li>
+     </ul>
+   </li>
+  </ul>
+ <p>This assignment is designed to make sure you are comfortable working in the Cooper Lab/CSIL environment and know how to submit your work. So, this  lab is mostly about mechanics, not concepts. As a result, this assignment is not particularly intellectually challenging. I hope that will not be the case in future labs!  </p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step1">Step 0: If you haven't created your College of Engineering Account&quot;, do so now.</h3>
+ <p>Ideally, before this lab begins, you will have been instructed to visit the link below, and create your &quot;College of Engineering&quot; computer account:</p>
+ <ul>
+   <li><a href="https://accounts.engr.ucsb.edu/create/">https://accounts.engr.ucsb.edu/create/</a></li>
+ </ul>
+ <p>If you already did that, then wonderful! Proceed to step 1.</p>
+ <p>Otherwise, if you've arrived at your lab session without having already done this:</p>
+ <ul>
+   <li>Your TA can log on to one of the machines, and provide a web browser for you to use to fill out the form to create the account.</li>
+   <li>Once you create the account, it may take several minutes before the account is active. So you may like to ask one of your classmates if you can look on with him or her for 5-10 minutes while you wait.</li>
+   <li>Once you've created the account, and waited 5-10 minutes, try moving on to Step 1.</li>
+  </ul>
+ <h4>If it doesn't work</h4>
+ <p>If you try to create a College of Engineering account, and it doesn't work, then send email to support@cs.ucsb.edu. In your email, </p>
+ <ul>
+   <li>cc your instructor and your TA on the email.</li>
+   <li>Indicate that you are enrolled in CS16 </li>
+   <li>Indicate that you tried the form at <a href="https://accounts.engr.ucsb.edu/create/">https://accounts.engr.ucsb.edu/create/</a> and it didn't work.</li>
+   <li>Provide your full name, perm number and your UCSB &quot;umail&quot; email address. </li>
+   <li>Tell them approximately when you enrolled in the class on GOLD&mdash;not the exact day/time, just whether it was &quot;weeks ago&quot;,&quot;a few days ago&quot;, &quot;yesterday&quot;, &quot;this morning&quot; or &quot;about an hour ago&quot; is all they need to know. </li>
+  </ul>
+ <p>Note that <em>if you are not enrolled in the course on GOLD</em>, you normally cannot get a College of Engineering account&mdash;if there is some problem with your GOLD registration, but you still need to start the work in the course speak with your instructor about this.</p>
+ <h3>Step 1: Locate a computer in CSIL or Cooper lab</h3>
+ <p>The purpose of this lab is to orient you to the computers in CSIL and Cooper. </p>
+ <p>So while, in future weeks, you may be able to do <em>some</em> of your work on your own PC, Mac or Linux computer, this particular lab must be completed in Cooper or CSIL.</p>
+ <ul>
+   <li>Cooper Lab is where your weekly Lab sessions (discussion sections) will be held. </li>
+   <li>Cooper Lab is only available during your weekly scheduled discussion section&mdash;it is not open for your use at other times.</li>
+   <li>At other times during the week, you can work in CSIL, the &quot;Computer Science Instructional Lab&quot;. During the summer months, CSIL is open 8:30am-5:30pm Monday through Friday.</li>
+ </ul>
+ <p><strong>Finding Cooper Lab:</strong> Cooper Lab is located in the Engineering Science Building, room ESB1003. ESB is located at the corner of campus closest to the airport, furthest away from Isla Vista. ESB is divided into two parts, with a pedestrian bridge overhead. ESB1003 is in the part of the building closest to the bike path. The door to ESB1003 is on the ground floor, at the corner of that faces the airport.</p>
+ <p><strong>Finding CSIL:</strong> CSIL is located in Harold Frank Hall (HFH). You enter from an outside door. To locate CSIL, find the &quot;main front entrance&quot; to Harold Frank Hall, on the side of the building that faces the ocean. Stand <em>outside</em> the double glass doors, with your <em>back</em> to the building, <em>facing the ocean</em>. The entrance to CSIL is now on your <em>left</em>.</p>
+ <h3>Step 2: Logging on</h3>
+ <p>When you sit down at a terminal in CSIL or Cooper lab, you'll see a prompt that asks you for your username. Enter the username that you created for your College of Engineering computer account. This is probably the same as your UCSBNetID (your umail account), unless you specified something different when you created your account.</p>
+ <p>When you are asked for a password, enter the password you chose for your College of Engineering account (which is not necessarily the same as your umail password.)<br>
+ </p>
+ <p><strong>Don't worry if nothing appears on the screen while you are typing your password.</strong></p>
+ <ul><li>As you type your password, you might be used to seeing little dots or stars pop up. </li>
+   <li>On the systems in Cooper and CSIL, this doesn't happen.</li>
+   <li>Your password is still being accepted&mdash;just have faith, and type away. </li>
+   <li>When finished, hit the &quot;enter&quot; key or the &quot;return&quot; key&mdash;which ever one appears on your keyboard.</li>
+ </ul>
+ <p>You should find that your username and password are accepted, and you get a &quot;desktop&quot; that looks similar to the Windows or Mac OS desktop. In fact, what you get is neither&mdash;the systems in Cooper and CSIL use &quot;Linux&quot;, which is a different operating system.</p>
+ <p>In the rest of this lab, we'll walk you through a few of the basics of using this desktop. Most things, though will likely be pretty familiar to you, because they aren't that different from Windows or Mac. </p>
+ <p>If you got in, move on to Step 3.</p>
+ <h4><strong>If your username/password don't work</strong></h4>
+ <p>If your username/password isn't accepted then:</p>
+ <ul>
+   <li>If you just created your College of Engineering account, wait 15-20 minutes and try again.</li>
+   <li>If you created your College of Engineering account more than 15-20 minutes ago, then:
+     <ul>
+       <li>cc your instructor and your TA on the email.</li>
+       <li>Indicate that you are enrolled in CS16 </li>
+       <li>Indicate that created an account at <a href="https://accounts.engr.ucsb.edu/create/">https://accounts.engr.ucsb.edu/create/</a> but you were not able to log in</li>
+       <li>Indicate whether you were trying to login in Cooper, or in CSIL at the time you had the problem</li>
+       <li>Provide your full name, perm number, UCSB &quot;umail&quot; email address, and the username you were trying to use.</li>
+       <li>Tell them approximately when you enrolled in the class on GOLD&mdash;not the exact day/time, just whether it was &quot;weeks ago&quot;,&quot;a few days ago&quot;, &quot;yesterday&quot;, &quot;this morning&quot; or &quot;about an hour ago&quot; is all they need to know. </li>
+      </ul>
+   </li>
+  </ul>
+ <p>Note: DO NOT include your password in your email to support. In fact, NEVER send your password through email, and NEVER tell anyone else your password, not even the support staff. Real support staff will NEVER ASK YOU FOR YOUR PASSWORD&mdash;not over email, and not in person. They won't need it to help you. </p>
+ <p>If someone is asking for your password over email, it is a scam called a &quot;phishing attack&quot;&mdash;don't be fooled by these dastardly villains. </p>
+ <h3>Step 3: Bring up a web browser</h3>
+ <p>To bring up a web browser:</p>
+ <ul>
+   <li>Use your mouse and find the Applications Menu at the top left of the screen.</li>
+   <li>Select Internet, then Firefox</li>
+   <li>Wait a few seconds, then Firefox should appear</li>
+  </ul>
+ <p>Here's what selecting the menu looks like:</p>
+ <p><img src="../../../../images/cooper/Applications.Internet.Firefox.cropped.png" alt="Applications, Internet, Firefox" width="429" height="590"></p>
+ <p>&nbsp;</p>
+ <h3>Step 4: Find these instructions online</h3>
+ <p>You should now be able to find these instructions online at this link:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab00">http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab00</a></li>
+ </ul>
+ <p>Note that the <span class="bigLiteral">~</span> symbol (called
+ &quot;tilde&quot;, or &quot;squiggle&quot;) in front of pconrad is
+ located at the upper left hand corner of the keyboard&mdash;and it
+ requires a shift, otherwise you'll
+ get <span class="bigLiteral">`</span> which is called the
+ &quot;backtick&quot;.</p>
+ <p>If you received a paper copy of these instructions, this is where
+ the printed copy will end&mdash;to save paper, the rest of the
+ instructions can be found online.</p>
+ <h3>Step 5: Bringing up a terminal window</h3>
+ <p>On the Linux systems, there a lot of things we can do with pointing and clicking with the mouse, just like on Windows or Mac. But there are also many things we can only do with the command line, or can do more easily with the command line.</p>
+ <p>So, one of the first steps will often be to bring up a &quot;Terminal Window&quot;, which is the Linux &quot;command line&quot;.</p>
+ <p>Here's how:</p>
+ <ul>
+   <li>Find the Applications Menu at the top left of the screen.</li>
+   <li>Select System Tools, then Terminal Window</li>
+   <li>A Terminal Window should pop up.</li>
+  </ul>
+ <p>Here's what it should look like (click on a thumbnail to bring up a bigger image)</p>
+ <table  border="2">
+   <tr>
+     <td>Selecting the menu option</td>
+     <td>Result</td>
+    </tr>
+   <tr>
+     <td><a href="../../../../images/cooper/Applications.SystemTools.Terminal.png"><img src="../../../../images/cooper/thumbnails/Applications.SystemTools.Terminal.png.gif" alt="Applications, Internet, System Tools" width="113" height="90" longdesc="#"></a></td>
+     <td><a href="../../../../images/cooper/Applications.SystemTools.Terminal.Result.png"><img src="../../../../images/cooper/thumbnails/Applications.SystemTools.Terminal.Result.png.gif" alt="Terminal Window" width="113" height="90"></a></td>
+    </tr>
+ </table>
+ <h3>Step 6: Making sure your username/password work on both Cooper and CSIL</h3>
+ <p>If you are working in the Cooper lab, before we go any further, we need to make sure that your username/password also work on the CSIL computers.</p>
+ <p>If you are working in CSIL (e.g. because you missed the first week's lab and are making it up by working in CSIL), we need to make sure your username/password also work on the Cooper computers.</p>
+ <p>This is just a &quot;check&quot; to see if there are any problems with your account. </p>
+ <h4>What we are going to do</h4>
+ <p>We will try your username/password over the internet using a program called ssh, which stands for secure shell.</p>
+ <ul>
+   <li> If we are successful, we'll just immediately log out, and move on to Step 4. </li>
+   <li>If it doesn't work, we'll need you to send an email to support.</li>
+  </ul>
+ <h4>Here's how to do it (if you are in Cooper)</h4>
+ <p>In the Terminal Window that you brought up in the previous step, enter the following command:</p>
+ <pre>ssh csil.cs.ucsb.edu</pre>
+ <p>When you type this at the Unix command line, you may see something like this:</p>
+ <pre>-bash-3.00$ <strong>ssh csil.cs.ucsb.edu</strong>
+The authenticity of host 'csil.cs.ucsb.edu (128.111.43.14)' can't be established.
+RSA key fingerprint is 90:ab:6a:31:0b:81:62:25:9b:11:50:05:18:d3:1a:b5.
+Are you sure you want to continue connecting (yes/no)?</pre>
+ <p>Answer the question by typing <strong>yes</strong>, and pressing &quot;enter&quot; (or &quot;return&quot;)</p>
+ <p>Then, you'll be prompted for your password.</p>
+ <p><strong>Don't worry if nothing appears on the screen while you are typing your password.</strong></p>
+ <ul>
+   <li>As you type your password, you might be used to seeing little dots or stars pop up. </li>
+   <li>On the systems in Cooper and CSIL, this doesn't happen.</li>
+   <li>Your password is still being accepted&mdash;just have faith, and type away. </li>
+   <li>When finished, hit the &quot;enter&quot; key or the &quot;return&quot; key&mdash;which ever one appears on your keyboard.</li>
+ </ul>
+ <p>If it worked, here's what you'll see something like this:</p>
+ <pre>pconrad@csil.cs.ucsb.edu's password: 
+Last login: Thu Aug  6 08:09:04 2009 from linux32.engr.ucsb.edu<br><br>Welcome to Computer Science's Remote Access server -- csil.cs.ucsb.edu<br><br>You may run your graphically intensive programs on specific workstations in CSIL.<br>-bash-3.2$ </pre>
+ <p>At this point, we know that you can connect to CSIL. We'll need to do again later, at the step where you are ready to submit your work for grading. But for now, we can exit from our session on CSIL by typing the word <strong>exit</strong>, like this:</p>
+ <pre>-bash-3.2$ <strong>exit</strong>
+logout
+Connection to csil.cs.ucsb.edu closed.
+-bash-3.2$ </pre>
+ <p>If you are ever not sure whether you are logged in to CSIL or not, you can type the command <strong>hostname</strong> at the command prompt. If you are logged into CSIL, it will look like this:</p>
+ <pre>-bash-3.00$ <strong>hostname</strong>
+csil.cs.ucsb.edu
+-bash-3.00$ </pre>
+ <p>If you just have a plain terminal window in Cooper, it will look like this:</p>
+ <ul>
+   <li> the ___ will be filled in with the name/number of your computer</li>
+ </ul>
+ <pre>-bash-3.00$ <strong>hostname</strong>
+_____.engr.ucsb.edu
+-bash-3.00$ </pre>
+ <h4>If you are in CSIL instead</h4>
+ <p>If you are working in CSIL (e.g. because you missed the first week's lab and are making it up by working in CSIL), we need to make sure your username/password also work on the Cooper computers.<br>
+    <br>
+  The instructions are exactly the same as those for Cooper, except the command you use is this one:</p>
+<pre>ssh linux.engr.ucsb.edu</pre>
+ <p>Please follow the instructions above, and make sure that everything works properly.</p>
+ <h3>Step 7: Creating some directories</h3>
+ <p>At the command prompt, we are going to type several commands to create folders (called &quot;directories&quot;) on Linux in which you can store your programs. The commands are shown in the box below&mdash;but first, a little explanation.</p>
+ <p>Each of the <strong>cd</strong> commands shown below is a command to &quot;change directory&quot;&mdash;that is to move into a different folder on the hard drive. </p>
+ <ul>
+   <li>When you type <strong>cd</strong> by itself, it takes you to your 'home directory'.</li>
+   <li>cd followed by a directory name (e.g. <strong>cd cs16</strong>) moves you into a directory under the current one</li>
+  </ul>
+ <p>Each of the <strong>mkdir</strong> commands &quot;makes a new directory&quot; (i.e. a new folder). </p>
+ <ul>
+   <li>For example,<strong> mkdir cs16</strong> creates a new directory called cs16,	inside the current directory.</li>
+  </ul>
+ <p>Each of the pwd commands &quot;prints the working directory&quot;, i.e. it tells you where you are on the hard drive.</p>
+ <ul>
+   <li>Your home directory is something like <strong>/cs/student/jsmith</strong> or <strong>/engr/student/mdiaz</strong></li>
+   <li>Under that, you might have a directory cs16&mdash;that would show up as <strong>/cs/student/jsmith/cs16</strong>, or <strong>/engr/student/mdiaz/cs16</strong></li>
+ </ul>
+ <p>At the command prompt, type each of these commands. What you type is shown in bold. You should get back exactly the output shown, (except that the part in italics may be different&mdash;each user will have something different show up there.)</p>
+ <pre>-bash-3.00$ <strong>cd</strong>
+-bash-3.00$ <strong>pwd</strong>
+/<em>cs</em>/<em>student</em>/<em>yourusername</em>
+-bash-3.00$ <strong>mkdir cs16</strong>
+-bash-3.00$ <strong>cd cs16</strong>
+-bash-3.00$ <strong>pwd</strong>
+/<em>cs</em>/<em>student</em>/<em>yourusername</em>/cs16
+-bash-3.00$ <strong>mkdir lab00</strong>
+-bash-3.00$ <strong>cd lab00</strong>
+-bash-3.00$ <strong>pwd</strong>
+/<em>cs</em>/<em>student</em>/<em>yourusername</em>/cs16/lab00
+-bash-3.00$ <strong>cd</strong>
+-bash-3.00$ <strong>pwd</strong>
+/<em>cs</em>/<em>student</em>/<em>yourusername</em></pre>
+ <h4>Checking if it worked</h4>
+ <p>To see if it worked, you can use the file manager on the desktop. Drag any windows that might be covering up the little icon that says &quot;home&quot; on your desktop&mdash;it should be near the upper left hand corner of the screen, and looks like this:</p>
+ <p><img src="../../../../images/cooper/HomeDirectoryCropped.png" alt="Home Directory" width="535" height="286"></p>
+ <p>When you double click on this, it will bring up your home directory. You should see inside a folder called cs16. If you double click on that, you should see inside of it, a folder called lab00</p>
+ <p>Note that you could also use mouse clicks and menu options to create these folders, instead of the command line. If you have trouble with the command line, then for today, its ok to do it that way. </p>
+ <p>Eventually, though, we want you to learn some of the Unix commands also&mdash;the reasons its important to know both will become more clear as you move deeper into the study of programming and Computer Science.</p>
+ <h3>Step 8: Copying a C program file into your account</h3>
+ <p>Next we want to copy a file called firstCProgram.c into the directory that we'll refer to as ~/cs16/lab00.</p>
+ <p>Remember that &quot;folder&quot; and &quot;directory&quot; are interchangeable words.</p>
+ <p>As review, what does ~/cs16/lab00 mean? </p>
+ <ul>
+   <li> ~ means your home directory (see the photo in step 8). It will have a name like /cs/students/jsmith</li>
+   <li>~/cs16 means the cs16 directory inside your home directory</li>
+   <li>~/cs16/lab00 means the lab00 directory inside the ~/cs16 directory</li>
+ </ul>
+ <p>Open a terminal window, and use the cd command to navigate to the ~/cs16/lab00 directory as you did in step 7. When you type pwd, you should see that you are in ~/cs16/lab00.</p>
+ <p>The type this command at the Unix prompt. This says you want to copy a file from my directory into your ~/cs16/lab00 directory. </p>
+ <p>
+   <pre>cp ~pconrad/public_html/cs16/09F/labs/lab00/firstCProgram.c ~/cs16/lab00
+</pre>
+  If you get an error message, see &quot;<strong>Troubleshooting</strong>&quot; below before asking the TA for help.</p>
+ <p>If it works, then you should be able to type the <code>ls</code> command (that's the lowercase letter L as in &quot;list&quot; followed by the letter &quot;s&quot;) to see that you now have a file called firstCProgram.c in your directory:<br> 
+    <br> 
+  <pre>-bash-3.2$ <strong>cp ~pconrad/public_html/cs16/09F/labs/lab00/firstCProgram.c ~/cs16/lab00</strong><br>
+-bash-3.2$ <strong>ls</strong><br>
+firstCProgram.c<br>
+-bash-3.2$</pre>
+ </p>
+ <p><strong>Troubleshooting</strong>: If you have trouble, check this:</p>
+ <ul>
+   <li>Note that there is no slash between the first ~ and the word pconrad, but there is a slash between the second ~ and the word cs16.</li>
+   <li>Note that capital vs. lowercase letters matter: it is firstCProgram, with the C and the P capitalized.</li>
+ </ul>
+
+ <h3>Step 9: Running the file </h3>
+ <p>Assuming you successfully completed Step 8, and are now in the ~/cs16/lab00 directory and it contains the file firstCProgram.c, we are ready to run the program. Before you do, type the pwd and <code>ls</code> commands (print working directory, and list files). The result should look like this&mdash;except you'll see your home directory listed instead of /cs/faculty/pconrad.</p>
+ <p>
+  <pre>-bash-3.2$ <strong>pwd</strong><br>
+/cs/faculty/pconrad/cs16/lab00<br>-bash-3.2$ <strong>ls</strong><br>firstCProgram.c<br>
+-bash-3.2$ </pre>
+ </p>
+ <p><br>
+   If that's ok, then we are ready for the next step. To prepare to run the program, we can use the following command:</p>
+ <pre>make firstCProgram</pre>
+ <p>Try typing that now. It should look like this:</p>
+ <pre>-bash-3.2$ <strong>make firstCProgram</strong>
+cc     firstCProgram.c   -o firstCProgram<br>-bash-3.2$ </pre>
+ <p>If you get something else, see &quot;Troubleshooting&quot; below before asking the TA for help.</p>
+ <p>If it worked, then try typing ls. You should see that you now have another file in your account, called firstCProgram. This is the machine language version of your program. To run it, you type the following at the Unix prompt:</p>
+ <p>
+  <pre>./firstCProgram</pre>
+ Here's an example of what that would look like:</p>
+ <pre>-bash-3.2$ <strong>./firstCProgram</strong>
+Please enter a fahrenheit temperature: <strong>68</strong>
+68.000000 degrees F is 20.000000 degrees C
+More conversions? Enter 0 for no, 1 for yes: <strong>0</strong>
+Goodbye!
+-bash-3.2$ </pre>
+ <p><strong>Troubleshooting</strong>: If something goes wrong, check these things</p>
+ <ul>
+   <li>Did you spell the filename correctly? The first time I tried it, I messed it up, and here's what I got. Do you see what I did wrong? <br>
+ <pre>
+-bash-3.2$ <strong>make firstProgram</strong>
+make: *** No rule to make target `firstProgram'.  Stop.
+-bash-3.2$ 
+</pre>
+   </li><li>If you still can't figure out what is wrong, ask your TA or instructor for help.</li>
+ </ul>
+ <p>&nbsp;</p>
+ <h3>Step 10. Submit your assignment using the turnin program on CSIL</h3>
+ <p><strong>A special note for lab00</strong></p>
+ <p>Normally, before submitting an assignment in this class you'd have to do something more than just download a file and run it! But since the first lab is occurring before the first lecture this quarter, we are keeping things fairly simple. </p>
+ <p>So this lab isn't worth very many points&mdash;it is mainly here to make sure that you are comfortable with all the mechanics of working in the lab. So, this week, you get 40 points for just being able to download a file, and submit it properly. By next week, you'll be writing your own C programs to submit, and you'll have to work and think a bit harder to earn the points.</p>
+ <p><strong>How to submit your assignment</strong></p>
+ <p>To submit your assignment, you need to bring up a terminal window on CSIL.</p>
+ <p>To start this process, we use two steps that we practiced earlier:</p>
+<ul>
+  <li>Bring up a terminal window  exactly the same way that we brought up a terminal window in step 5</li>
+  <li>If you are in Cooper, use the <strong>ssh&nbsp;csil.cs.ucsb.edu</strong> command from Step 6 to log in to CSIL
+    <ul>
+      <li>If you are already in the CSIL lab room, you don't need to do this step&mdash;just directly use the terminal window that comes up.</li>
+      </ul>
+  </li>
+  </ul>
+<p>Next, we use the cd command that we practiced earlier:</p>
+<pre>-bash-3.00$ <strong>cd</strong> 
+-bash-3.00$ <strong>pwd</strong> 
+/<em>cs</em>/<em>student</em>/<em>yourusername</em> 
+
+-bash-3.00$ <strong>cd cs16</strong> 
+-bash-3.00$ <strong>pwd</strong> 
+/<em>cs</em>/<em>student</em>/<em>yourusername</em>/cs16 
+-bash-3.00$ </pre>
+<p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+<p>Type the following at the prompt:</p>
+<pre>turnin lab00@cs16 lab00</pre>
+<p>You should be asked if you want to turn in this program. Respond &quot;yes&quot;, and then you should get a message indicating that your efforts were successful!</p>
+<hr>
+ <h2>Evaluation and Grading (40 pts total) </h2>
+ <ul>
+   <li>10 points: successfully submitting the contents of your lab00 directory</li>
+   <li>10 points: lab00 directory contains firstCProgram.c</li>
+   <li>10 points: lab00 directory contains firstCProgram executable</li>
+   <li>10 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+  </ul>
+ <p>Due Date: You should try to complete this assignment by the end of end of your first discussion section, i.e. before 10:50am, 11:50am, or 12:50pm on Friday 09/25/2009 (depending on which section you are enrolled in.)</p>
+ <p>I will accept it late, without penalty from students who register for the class later than 09/25/2009, or anyone who has difficulty and needs extra help, provided it is completed before you submit any other labs for the course. <br>
+   <br>
+  So, there is no latest due date, but it<strong> must be completed before we will accept</strong> submissions for lab01, lab02, etc. </p>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, lab08, Problem solving on arrays (Part 2) (code) (Extra credit, and practice for Final Exam)</title>
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+table.functionGroups tr td {  padding: 1em; vertical-align:top; text-align:left;} 
+table.functionGroups {width: 95%;}
+.indented {padding-left: 2em;}
+.bigSansSerif {font-family:Arial, Helvetica, sans-serif; font-size: 2.0em;}
+pre.indentedPre { padding-left: 2em; width: auto; font-size: 0.7em;}
+table.commandSummary tr td {font-size: 0.8em; padding: 0.5em;}
+/* table.commandSummary  {width: 80%;} */
+
+.style1 {font-size: x-small}
+td.noBorder {border:none;}
+</style>
+</head>
+
+<body>
+<div style="background-color: yellow; padding: 1em; margin: 1em; border: red 2em inset; font-size: 150%;">
+<p>THIS IS NOT THE LAB FOR THE CURRENT QUARTER!!!!</p> 
+<p>If you are in one of Conrad's CS16 sections,  please visit <a href="https://foo.cs.ucsb.edu/16wiki">foo.cs.ucsb.edu/16wiki</a> for information on the current quarter of CS16.</p>
+</div>
+
+<div id="linksBox" style="width:8em;"><p class="closeOnTop closeOnBottom"><a href="code">code</a></p></div>
+<div id="container">
+ <h1>CS16, Spring 2010</h1>
+ <h1>lab08<span class="smallerFont"><br>
+ Problem solving on arrays (Part 2)</span></h1>
+ <div class="importantDiv">
+ <p>lab08 is offered as a final opportunity to earn extra credit in CS16 for those that are shy and not comfortable volunteering in class.<br>
+ </p>
+ <p> 	You may do this alone, or with any pair programming partner you choose.<br>
+   <br>
+ However you may only work on it with one pair partner you may not share code with anyone other than your pair. <br>
+   <br>
+   (You may work in a trio only if you are already working in a trio for lab07/proj0.)</p>
+ <p>Suggestions: </p>
+ <ul>
+   <ul>
+     <li>Work on lab08 only  <em>after</em> completing lab07</li>
+        <li>If you miss the deadline to submit this for extra credit, <br>
+        do it anyway&mdash;make it part of your studying for the final exam.</li>
+     </ul>
+ </ul>
+ </div>
+ 
+ <hr>
+ <span class="smallerFont"><br>
+  </span><span class="smallerFont"></span>
+  <h2>Goals for this lab</h2>
+ <p>This lab is a continuation of the problem solving exercises in lab07, and uses the exact same test harness.</p>
+ <p>This lab contains three more problems dealing with arrays.</p>
+ <ol>
+   <li>Adding up all the numbers in an array</li>
+   <li>Copying only the odd numbers in one array into another array</li>
+   <li>Multiplying all the numbers in one array by all the numbers in another and storing the result in a third array.</li>
+ </ol>
+ <p>As before, the isOdd problem is offered as a warm up to remind you how the test harness works.</p>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>Before completing this lab, you should be familiar with everything from lab07.</p>
+ <h2>Step by Step Instructions</h2>
+ <h2>&nbsp;</h2>
+ <h3>Step 1: Log on to CSIL, create  ~/cs16/lab08 and copy this labs files:</h3>
+ <p>&nbsp;</p>
+ <p>The files for this  lab can be found here:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab08/code">http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab08/code<br>
+   </a></li>
+  </ul>
+ <p>And here:</p>
+ <p><code> ~pconrad/public_html/cs16/10S/labs/lab08/code/* </code></p>
+ <p>&nbsp;</p>
+ <h3>Step 2: Familiarize yourself with the test harness files</h3>
+ <p>This week's lab is about problem solving. </p>
+ <p>To allow you to focus on the problem as much as possible, we've provided a<em><strong> test harness</strong></em> for you&mdash;</p>
+ <div class="sideNoteDiv"> <p>As a remidner, a <em><strong>test harness</strong></em> is a software system that allows you to determine whether a piece of code you are developing has been written correctly or not.</p>
+   <p>The test harness for lab08 works pretty much the same as the one provided in lab07.</p>
+ </div>
+ <p>Start by cd'ing into the directory ~/cs16/lab08, and typing the command ls to list all of your files, as shown:  </p>
+ <pre>
+-bash-3.2$ <strong>ls</strong>
+copyOdds.c  multiplyPairwise.c  tdd.h               testMultiplyPairwiseMain.c
+isOdd.c     sumArray.c          testCopyOddsMain.c  testSumArrayMain.c
+Makefile    tdd.c               testIsOddMain.c
+-bash-3.2$
+</pre>
+ </p>
+ <p>Since you should be familiar with the basic outline from lab07. As a reminder, there are four groups of files, as shown in the table below:</p>
+ <table border="2" cellspacing="1" cellpadding="1" class="functionGroups">
+   <tr>
+     <td ><p><strong>Group 1:</strong> <strong>stubs for functions</strong><br>
+         <br>
+       Each of these files contains </p>
+       <ul>
+         <li>a function definition in stub form</li>
+         <li>a function that runs tests on the function just defined.<br>
+            <br>
+         </li>
+        </ul>
+        
+        <p>&nbsp;</p></td>
+     <td><p><code><a href="../lab08/code/isOdd.c">isOdd.c</a></code><br>
+     <code><a href="../lab08/code/sumArray.c">sumArray.c</a><a href="../lab08/code/isOdd.c"></a></code>
+     <code><a href="../lab08/code/multiplyPairwise.c">multiplyPairwise.c</a></code><br>
+     <code><a href="../lab08/code/copyOdds.c">copyOdds.c</a></code></p>      </td>
+   </tr>
+   <tr>
+     <td ><p><strong>Group 2:</strong> main programs to run tests<br>
+          <br>
+       For each of the files in Group 1, there is a corresponding file in Group 2 containing the main program that tests that function. </p>      </td>
+
+     <td><p><code><a href="../lab08/code/testIsOddMain.c">testIsOddMain.c</a></code><br>
+<code><a href="../lab08/code/testSumArrayMain.c">testSumArrayMain.c</a></code><br>
+<code><a href="../lab08/code/testMultiplyPairwiseMain.c">testMultiplyPairwiseMain.c</a></code><br>
+<code><a href="../lab08/code/testCopyOddsMain.c">testCopyOddsMain.c</a></code><br>
+</p></td>
+   </tr>
+   <tr>
+     <td ><p><strong>Group 3:</strong> Functions for Test-Driven Development</p>
+      <p>tdd.h contains function prototypes for:</p>
+      <pre class="indentedPre">
+int assertTrue(char * label, int  assertion);
+int checkExpectInt(char * label, int check, int expect);
+int checkExpectDouble(char * label, double check, double expect, <br>                double tolerance);
+int checkExpectIntArray(char * label, int * check, int * expect, int n); 
+void tddSummary(int failures);
+
+</pre>      
+<p>tdd.c contains the function definitions for these. 
+<p>&nbsp;</p></td>
+     <td><code><a href="../lab08/code/tdd.h">tdd.h</a><br>
+         <a href="../lab08/code/tdd.c">tdd.c</a></code></td>
+   </tr>
+   <tr>
+     <td ><p><strong>Group 4: The Makefile</strong></p>
+      <p>This group consists of a single file called <code>Makefile</code>&mdash;the information in the Makefile makes reusing functions much easier. <br>
+        <br>
+      The Makefile also contains rules that allow several special commands to be type. Try each of these at the shell prompt:</p>
+      
+  <table border="2" cellspacing="1" cellpadding="1" class="commandSummary">
+  <tr>
+    <td style="width: 8em;"><code>make</code></td>
+    <td>Compile all of the programs.</td>
+  </tr>
+  <tr>
+    <td style="width: 8em;"><code>make all</code></td>
+    <td><p>Compile all of the programs.</p>
+      <p>Because this is the first rule in the file, it is also the default rule&mdash;the one that is run when you just type make</p></td>
+  </tr>
+  <tr>
+    <td><code>make clean</code></td>
+    <td>Delete all of the executable files&mdash;typing this before make all allows you to recompile everything from scratch.</td>
+  </tr>
+  <tr>
+    <td><code>make test</code></td>
+    <td>Run each of the test programs.<br>
+      If the programs aren't compiled yet, this rule will do a make all first.</td>
+  </tr>
+</table>
+<p>You aren't responsible for learning the syntax of Makefiles in CS16&mdash;that's a topic for CS32. You only need to know how to use Makefiles in CS16.</p></td>
+     <td><a href="../lab08/code/Makefile"><code>Makefile</code></a></td>
+   </tr>
+ </table>
+ <h4><br>
+ </h4>
+ <h3>Step 2: Practicing working with the test harness on the isOdd function</h3>
+ <p>Before we move on to the problem solving, here's a quick review of how the test harness works.</p>
+ <p>(You may be tempted to skip this if you already understand&mdash;but you'll need the isOdd function for the copyOdds problem later in this lab, so you might as well do it anyway&mdash;it will only take 2 minutes if you remember how this goes.)<br>
+ </p>
+ <p>Working from your ~/cs16/lab08 directory, type the commands shown below at the Unix prompt&mdash;this will<br>
+ </p>
+ <ul>
+   <li> clean out any old executables (<code>make clean</code>)</li>
+   <li>compile the test program for the isOdd() function (<code>make testIsOdd</code>)</li>
+   <li>and then run the test program (<code>./testIsOdd</code>).   You'll see all the tests fail.
+     </p>
+ </li>
+ </ul>
+ <p>Now, open up isOdd.c in the editor, and locate the stub for the isOdd() function.</p>
+ <p>Change the stub code (the code that returns -42) to code that:</p>
+ <ul>
+   <li>returns 1 when x is odd</li>
+   <li>return 0 when x is not odd (i.e. when x is even)</li>
+  </ul>
+  <p>Once you've done that, repeat the <code>make testIsOdd</code> and <code>./testIsOdd</code> steps, and the tests should pass:  </p>
+ <pre>
+-bash-4.1$ <strong>make testIsOdd</strong>
+cc isOdd.c tdd.c testIsOddMain.c -o testIsOdd
+-bash-4.1$ ./testIsOdd
+ test passed: isOdd.c line 22 isOdd(1) got 1
+ test passed: isOdd.c line 23 isOdd(2) got 0
+ test passed: isOdd.c line 24 isOdd(33) got 1
+ test passed: isOdd.c line 25 isOdd(44) got 0
+ test passed: isOdd.c line 26 isOdd(-7) got 1
+ test passed: isOdd.c line 27 isOdd(-8) got 0
+ :-)  All tests passed! 
+-bash-4.1$ 
+
+  </pre>
+ <p>Note that is is not necessary to run the <code>make clean</code> step every time:</p>
+ <ul>
+   <li>Usually,     <code>make testIsOdd</code>    is enough (put any of the test programs in place of testIsOdd).</li>
+   <li><code>make clean</code> is generally used only right before make to force one or more programs to be recompiled</li>
+   <li>Otherwise, if the program has already been compiled, and none of the none of the files it depends on have been changed, you'll get the message:<code> 'testIsOdd' is up to date. </code>
+     <pre>-bash-3.2$ <strong>make testIsOdd</strong>
+make: `testIsOdd' is up to date.
+-bash-3.2$ 
+</pre>
+   </li>
+   <li>You also can use the make clean rule if you want to delete the executables to save disk space after you are finished running a program. (You can always remake it from the .c files if you need it again.)</li>
+ </ul>
+ <p>You'll repeat this process for each of the remaining problems in this assignment:</p>
+ <ol>
+   <li>make the test program and run it, to see that all the tests fail</li>
+   <li>edit the function to replace it with code that you think will solve the problem</li>
+   <li>make the test program again, and hopefully the tests pass&mdash;if not, repeat  2 and 3 as needed.</li>
+  </ol>
+ <h3>Step 3: Finding the sum of an array</h3>
+ <p>Next, at the shell prompt, use the commands:</p>
+ <p class="indented">
+  <strong><code>make testSumArray</code></strong> to compile the test program<br>
+  <strong><code>./testSumArray</code></strong> to run the tests for the functions in <a href="../lab08/code/sumArray.c"><code>sumArray.c</code></a></p>
+ <p>Make sure you understand the test cases:</p>
+ <ul>
+   <li>You can find them inside the file <a href="../lab08/code/sumArray.c"><code>sumArray.c</code></a><a href="../lab08/code/maxValue.c"></a> in the <code>testSumArray()</code> function.</li>
+ </ul>
+ <p>After seeing the tests fail, open up <a href="../lab08/code/sumArray.c"><code>sumArray.c</code></a>in the editor (emacs or vi) and change the stubs to functions that return the correct values.</p>
+ <p>Some hints:</p>
+ <ul>
+   <li>Use a variable called sum to store the sum of the array&mdash;remember to initialize it to zero.</li>
+   <li>Use a for loop that steps through every value in the array</li>
+   <li> Inside the loop, add each value into the sum. The += operator may be useful here.</li>
+   <li>Return the value of sum, but only after you've added in every value in the array.</li>
+  </ul>
+  <p>When all the tests pass:</p>
+  <ul>
+    <li>If you are completing this to submit for credit, for now move on to the next problem</li>
+    <li>If you are working through this to study for the exam, also consider the following extra challenges</li>
+  </ul>
+  <div class="extraChallengeDiv">
+ <p><strong>For an extra challenge</strong>&mdash;consider the following variations on the sumArray problem:</p>
+ <ul>
+   <li>How would you find the sum of only the values in the array that are positive?</li>
+   <li>How would you find the sum of only the even values in the array?</li>
+   <li>How would you find the sum of only the values who indexes are even (i.e. a[0] + a[2] + a[4] + ...)</li>
+   <li>Can you think how to solve the basic sumArray problem&mdash;and each of the variations listed above&mdash;using recursion instead of a for loop?</li>
+  </ul>
+  </div>
+ <h3>&nbsp;</h3>
+ <h3><strong>Step 4: Multiplying two arrays pairwise</strong></h3>
+ <p>This problem involves working with three arrays:</p>
+ <ul>
+   <li>two source arrays, each containing n integers</li>
+   <li>a destination array&mdash;we are going to overwrite the contents of that array with the pairwise product of the two source arrays&mdash;that is result[i] will be set to a[i] times b[i] for every value of i</li>
+  </ul>
+ <p>A precondition is that the destination array must have capacity no smaller than n.</p>
+ <p>As an example, if a and b are the arrays:</p>
+  <pre class="indented">
+int a[] = {1,2,3,4};
+int b[] = {2,4,6,8};<br>int result[4];
+</pre>
+ <p>Then if we called <code>multPairwise(a,b,result,4)</code>; we would expect that afterwards, the first four elements of result are set equal to  <code>{2,8,18,32}</code>.</p>
+ <p>As another example, if we multiply the array </p>
+ <pre class="indented">
+int a[] = { 1,  2, 3, 4};
+int c[] = {-1, 10, 5, 0};
+int result[4];</pre>
+ <p>Then after calling <code>multPairwise(a,b,result,4)</code>; we would expect result to contain <code>{-1,20,15,0}</code>.</p>
+ <p>This one is fairly straightforward&mdash;you can use a for loop to go through and set each element of the result array to the correct value.</p>
+ <p>When all the tests pass:</p>
+ <ul>
+   <li>If you are completing this to submit for credit, for now move on to the next problem</li>
+   <li>If you are working through this to study for the exam, also consider the following extra challenges</li>
+ </ul>
+ <div class="extraChallengeDiv"><p>Challenge problems:</p>
+  <ul>
+    <li>How would you set each element result[i] to be the larger of a[i] or b[i]?</li>
+    <li>Suppose there was only a single source array a[i], but you wanted each element of result[i] to be the sum of all the elements from a[0] up to and including a[i], that is:
+      <ul>
+        <li>result[0] = a[0]</li>
+        <li>result[1] = a[0] + a[1]</li>
+        <li>result[2] = a[0] + a[1] + a[2]</li>
+        <li>...</li>
+        <li>result[n-1] = a[0] + a[1] + a[2] + ... a[n-2] + a[n-1]</li>
+      </ul>
+    </li>
+    <li>How would you solve the basic multPairwise problem&mdash;and all the other challenge problems above&mdash;using recursion instead of a for loop?</li>
+  </ul>
+  </div>
+ <p>&nbsp;</p>
+ <h3>Step 5: copying all the odd numbers into another array</h3>
+ <p>This problem involves working with two arrays:</p>
+ <ul>
+   <li>a source array, containing n integers</li>
+   <li>a destination array&mdash;we are going to overwrite the contents of that array with only the odd integers from the source array.</li>
+  </ul>
+ <p>A precondition is that the destination array must have capacity no smaller than n.</p>
+ <p>The function will return an int value, which is the number of integers that were placed in the destination array.</p>
+ <p>Here's the function prototype for copyOdds:</p>
+ <pre class="indentedPre">int copyOdds(int *src, int *dest, int n);</pre>
+ <p>Here, it may be helpful to review the concepts of the capacity of an array, and the occupancy of an array.</p>
+ <p>Let's consider the test cases in <a href="../lab08/code/copyOdds.c"><code>copyOdds.c</code></a> as an example&mdash;starting with the first one:  </p>
+ <pre class="indentedPre">
+   // TEST CASE 1: source and destination array are of equal sizes               
+
+  int a[] = {1,2,3};
+  int aOdds[3] = {-42,-42,-42}; // fill with dummy values                       
+  int aOddsExpected[3] = {1,3}; // occupancy is 2                               
+  int aNumOdds;
+
+  aNumOdds = copyOdds(a,3,aOdds,3);
+  failures += checkExpectInt("copyOdds(a,3,aOdds,3)--checking return--",
+                             aNumOdds, 2);
+  failures += checkExpectIntArray("copyOdds(a,3,aOdds,3)--checking array---",
+                                  aOdds, aOddsExpected, 2);
+ </pre>
+ <p>Here, the source array is a, and it has both occupancy and capacity of 3:
+ <table border="2" cellspacing="1" cellpadding="1">
+    <tr>
+      <td>a[0]</td>
+      <td>a[1]</td>
+      <td>a[2]</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+  </table>
+  <p>The destination array is aOdds, and it initially has capacity of 3, but when we first declare it, it has occupancy&nbsp;of&nbsp;0&mdash;because we haven't stored any values in it yet. The values that it contains are unknown, which we can represent with the ? in the diagram below:</p>
+  <table border="2" cellspacing="1" cellpadding="1">
+    <tr>
+      <td>aOdds[0]</td>
+      <td>aOdds[1]</td>
+      <td>aOdds[2]</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>?</td>
+      <td>?</td>
+    </tr>
+  </table>
+  <p>After we make the call to copyOdds(a,aOdds,3), what we want is for the aOdds to contain only the odd numbers from the original array a. That is, its occupancy will be 2&mdash;which the number we expect to be assigned into aNumOdds (the number of odds that are in the a array.)</p>
+  <table border="2" cellpadding="1" cellspacing="1">
+    <tr>
+      <td>aOdds[0]</td>
+      <td>aOdds[1]</td>
+      <td>aOdds[2]</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>3</td>
+      <td>?</td>
+    </tr>
+  </table>
+  <p>The value returned by copyOdds is the new occupancy of aOdds&mdash;a number that we must return, because without it, we have no way (in C) to determine the actual occupancy of aOdds. We can use checkExpectIntArray() to verify that the first 2 elements of aOdds match the values in aOddsExpected:</p>
+  <table border="2" cellpadding="1" cellspacing="1">
+    <tr>
+      <td>aOdds[0]</td>
+      <td>aOdds[1]</td>
+      <td>aOdds[2]</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>3</td>
+      <td>?</td>
+    </tr>
+    
+    <tr>
+      <td><span class="style1">aOddsExpected[0]</span></td>
+      <td><span class="style1">aOddsExpected[1]</span></td>
+      <td rowspan="2" class="noBorder">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>3</td>
+    </tr>
+  </table>
+  <p>The rest of the test cases proceed in a similar fashion.</p>
+  <p>When writing the function, consider these hints:</p>
+  <ul>
+    <li>You'll need to keep track of how many odd numbers you've encountered so far&mdash;in the end, you have to return that as the result of the function.</li>
+    <li>When placing values into the consecutive elements of an array called a, you place the first value you find into a[0], the second into a[1], etc.
+      This leads to an important thing to keep in mind&mdash;and a frequent cause of errors in functions such as copyOdds:
+      <ul>
+        <li>Suppose you have  variable called count that is keeping track of how many element you've put into an array.</li>
+        <li>If count is 2, that means you have already used a[0] and a[1], and the next value goes into a[2]. After you store that value into a[2], THEN you want count to become 3.</li>
+        <li>Think about that when deciding which comes first: storing a result into the destination array, or incrementing the count variable.</li>
+      </ul>
+    </li>
+  </ul>
+  <p><strong>When you are finished, and the tests pass, you are ready to submit.</strong></p>
+  <h3>Step 6: Scripting and submitting</h3>
+  <p>To script and submit your lab, follow the usual process&mdash;except the fact that we have a makefile simplifies things a bit:</p>
+  <ol>
+    <li>Start the script command with <code>script lab08.txt</code></li>
+    <li>Typing <code>pwd</code> to establish what directory you are in, and then <code>ls</code> to show what files you have.</li>
+    <li>Type <code>make clean</code> to get rid of old files</li>
+    <li>Type <code>make all</code> to compile all your code</li>
+    <li>Type <code>make test </code>to run all your tests</li>
+    <li>Type <code>exit</code> to stop your script</li>
+  </ol>
+  <p>Then, before submitting type <code>make clean</code> again&mdash;this will minimize the space your submitted code takes up.</p>
+  <p>Use cd .. to move to the parent directory, and submit with </p>
+  <p>
+    <pre>turnin lab08@cs16 lab08</pre>
+  </p>
+  <p>Then you are finished!</p>
+  <h3>Grading Rubric (200 pts total)</h3>
+  <ul>
+    <li><strong>Mechanics (80 pts) </strong>
+        <ul>
+          <li>30 points: submission is on time and follows submission instructions
+            <ul>
+                <li> (i.e. is done via turnin by the Due Date.)</li>
+            </ul>
+          </li>
+          <li>20 points:
+            <ul>
+                <li>successfully submitting a lab08 directory containing all code from the assignment, but where all the stubs are replaced with working code so that all tests pass,<strong> and</strong></li>
+                <li><strong> the direcory contains a lab08.txt transcript file.</strong></li>
+              <li>each C file contains a header comment on first line with name &quot;cs16 lab08&quot; and date and name(s) of students submitting the work.</li>
+              <li>all @@@ comments are removed in all  files</li>
+            </ul>
+          </li>
+          <li>Warm up (10 pts)
+            <ul>
+                <li>Replace isOdd.c
+                  stub with code that passes the test</li>
+            </ul>
+          </li>
+        </ul>
+    </li>
+    <li><strong>Steps 3,4,5&mdash;sumArray, multPairwise,copyOdds (150 pts--50 pts each) </strong></li>
+    <ul>
+      <ul>
+        <li>Replace three stubs with correct code </li>
+      </ul>
+    </ul>
+  </ul>
+  <p><strong>Deadline:</strong></p>
+  <ul>
+    <li>Accepted through 5pm on Friday 06/04 for 200 pts extra credit</li>
+    <li>NOT ACCEPTED for extra credit after 5pm on Friday 06/04&mdash;this is a STRICT deadline.</li>
+    <li>However, you are still encouraged to complete it as part of studying for the final exam, even if you miss the extra credit deadline.</li>
+  </ul>
+
+  <p>&nbsp;</p>
+  <p><strong>Studying for the exam&mdash;some extra challenge problems</strong></p>
+  <div class="extraChallengeDiv">
+    <p><strong>For an extra challenge</strong></p>
+    <p>&nbsp;</p>
+    <ol>
+      <li>Revisit the min, max, and indexMax problems from lab07. </li>
+      <ul>
+        <li>Can you write tests and a stub for indexMin?</li>
+        <li>Can you then fix the stub so that it works correctly?</li>
+        <li>How would you solve  each of the lab07 problems using recursion? Try your solutions using a new copy of the test harness from lab07<br>  
+          <br>
+          </li>
+      </ul>
+      <li>Consider the following variations on the copyOdds problem from lab08. <br>
+        <br>
+        For each one, also consider a good name for the function, what its parameters should be, and what the function should return.<br>
+        <br>
+      Then you may like to try writing a file with tests and a stub, then implementing the function.</li>
+    </ol>
+    <ul>
+      <li>How would you copy only the even elements or the positive ones, or the negative ones?</li>
+      <li>How would you copy only the values with odd indexes, or even indexes?</li>
+      <li>Here's an easy one: how would you copy only the 1st half of the array&mdash;e.g. for an array with 8 elements, copy elements src[0],src[1], src[2],src[3] into dest[0], dest[1], dest[2] and dest[3]?
+        <ul>
+          <li>If there are an odd number of elements, round up so that you include the middle element---e.g. for n=5, copy src[1],src[2] into dest[0], dest[1], dest[2].</li>
+        </ul>
+      </li>
+      <li>Slightly harder, how would you copy only the 2nd half of the array&mdash;e.g. for an array with 8 elements, copy elements src[4],src[5], src[6],src[7] into dest[0], dest[1], dest[2] and dest[3]?
+        <ul>
+          <li>If there are an odd number of elements, round up so that you include the middle element---e.g. for n=5, copy src[2],src[3],src[4] into dest[0], dest[1], dest[2].</li>
+        </ul>
+      </li>
+      <li>How would you copy the array backwards---e.g. dest[0] get src[n-1], dest[1] gets src[n-2], ... dest[n-1] gets src[0] ?</li>
+      <li>Can you think how to solve the basic copyOdds problem&mdash;and each of the variations listed above&mdash;using recursion instead of a for loop?</li>
+    </ul>
+  </div>
+  <p>&nbsp;</p>
+  <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

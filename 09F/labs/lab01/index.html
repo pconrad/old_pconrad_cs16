@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab01, Fall 2009 (09F)--Second C Program---learning the basics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Fall 2009</h1>
+ <h1>lab01: <span class="smallerFont">(&quot;lab one&quot;)<br>
+ Turning one C program into another</span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Use the Unix cp command to copy one file to another</li>
+   <li>Use a text editor (we suggest emacs) to make changes to a file</li>
+   <li>Work with some of the basic elements of C programming</li>
+  </ul>
+ <p>More specifically, we'll show:</p>
+ <ul>
+   <li>How to write simple functions in C</li>
+   <li>How to print messages to the console in C</li>
+   <li>How to prompt for and read numeric input</li>
+   <li>How to print out the value of variables</li>
+   <li>The <strong>while</strong> loop and the <strong>if </strong>statements in C </li>
+   <li>How to use a while loop and an if statement to repeat a section of code until the user decides to quit the program.</li>
+ </ul>
+ <p>You'll also get more practice with the things you learned in lab00:</p>
+ <ul>
+   <li>use the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>perform basic management of directories and files</li>
+   <li>know how to submit assignments in this class with the &quot;turnin program.</li>
+</ul>
+ <h2>Step by Step Instructions</h2>
+ <h2 id="step1">&nbsp;</h2>
+ <h3>Step 0: If you haven't complete lab00, do so now.</h3>
+ <p>We will not accept your lab01 submission until lab00 is complete. So please go finish lab00 if you haven't submitted it yet via the turnin program.</p>
+ <p>Also, you'll need some of the skills from lab00 in order to complete this lab, including how to log in to CSIL, create a new directory, and use the turnin command.</p>
+ <h3>Step 1: Log on to CSIL and bring up a terminal window.</h3>
+ <p>As a reminder, that's the <strong>Application</strong> Menu, then <strong>System Tools</strong>, then <strong>Terminal Window</strong>.</p>
+ <p>Here's what it should look like (click on a thumbnail to bring up a bigger image)</p>
+ <table  border="2">
+   <tr>
+     <td>Selecting the menu option</td>
+     <td>Result</td>
+    </tr>
+   <tr>
+     <td><a href="../../../../images/cooper/Applications.SystemTools.Terminal.png"><img src="../../../../images/cooper/thumbnails/Applications.SystemTools.Terminal.png.gif" alt="Applications, Internet, System Tools" width="113" height="90" longdesc="#"></a></td>
+     <td><a href="../../../../images/cooper/Applications.SystemTools.Terminal.Result.png"><img src="../../../../images/cooper/thumbnails/Applications.SystemTools.Terminal.Result.png.gif" alt="Terminal Window" width="113" height="90"></a></td>
+    </tr>
+ </table>
+ <p>In future weeks, we'll assume you know how to pull up a terminal window, and we won't walk you through those details.</p>
+ <h3>Step 2: Create a ~/cs16/lab01 directory</h3>
+ <p>Last week, we created your ~/cs16 directory, and the ~/cs16/lab00 directory.</p>
+ <p>This week, we'll create the ~/cs16/lab01 directory.</p>
+ <p>You can do this with the following unix command:</p>
+ <p>mkdir ~/cs16/lab01</p>
+ <p>Then you can use a cd command to go directly into that directory:</p>
+ <p>cd ~/cs16/lab01</p>
+ <p>You can then use the pwd command to make sure that you are in the proper spot. The result should look like this (except in place of /cs/faculty/pconrad, you'll see your own home directory listed, e.g. /cs/student/jsmith, or /cs/guest/kchen).</p>
+ <p>-bash-3.2$ <strong>mkdir ~/cs16/lab01</strong><br>
+   -bash-3.2$ <strong>cd ~/cs16/lab01</strong><br>
+   -bash-3.2$ <strong>pwd</strong><br>
+   /cs/faculty/pconrad/cs16/lab01<br>
+  -bash-3.2$ </p>
+ <p>In future weeks, we may simply say something like &quot;create a ~/cs16/lab02 directory and make it your current directory&quot;, without spelling out the unix commands to do this. You can always refer back to previous labs  if you forget the details, but eventually you'll want to memorize some of the most useful commands such as mkdir, cd, pwd and ls.</p>
+ <h3>Step 3: Copying the program you worked on in lab00</h3>
+ <p>During lab00, you copied a file into your directory ~/cs16/lab00 called firstCProgram.c</p>
+ <p>This week, we are going to copy that program into your ~/cs16/lab01 directory.</p>
+ <p>Here's a unix command that will do that:</p>
+ <p><strong>cp ~/cs16/lab00/firstCProgram.c ~/cs16/lab01</strong></p>
+ <p>This command says to copy the file firstCProgram.c from where it lives, in ~/cs16/lab00 into ~/cs16/lab01. After executing this command, if you are in ~/cs16/lab01 (which you can verify with the pwd command, as shown below, the ls command should show you that you have a copy of the file ~/cs16/lab00/firstCProgram.c in your account:</p>
+ <p>-bash-3.2$ <strong>cp ~/cs16/lab00/firstCProgram.c ~/cs16/lab01</strong><br>
+   -bash-3.2$ <strong>pwd</strong><br>
+   /cs/faculty/pconrad/cs16/lab01<br>
+   -bash-3.2$ <strong>ls</strong><br>
+   firstCProgram.c<br>
+  -bash-3.2$ </p>
+ <p>Next, we are going to copy this file to another file called secondCProgram.c like this:</p>
+ <p>cp firstCProgram.c secondCProgram.c</p>
+ <p>We'll then run the ls command to see that it worked:<br>
+  </p>
+ <p>-bash-3.2$ <strong>cp firstCProgram.c secondCProgram.c</strong><br>
+   -bash-3.2$ <strong>ls</strong><br>
+   firstCProgram.c  secondCProgram.c<br>
+  -bash-3.2$ </p>
+ <p>Now we are ready to start editing secondCProgram.c to make it different from firstCProgram.c</p>
+ <h3>Step 4: Bring up secondCProgram.c in an editor (e.g. emacs)</h3>
+ <p>By now, in lecture you should have seen a demonstration of a text editor that is available on CSIL called emacs.</p>
+ <p>You'll use that program now to make changes to the file secondCProgram.c</p>
+ <p>To bring up emacs to make changes to secondCProgram.c, type:</p>
+ <p><strong>emacs secondCProgram.c</strong></p>
+ <p>This may bring up a new window where you can edit this program.</p>
+ <h4>Do I have to use emacs?</h4>
+ <p>If there is another program  that you prefer, e.g. vim, that is already available on CSIL, and you already know how to use it (or are willing to take responsibility for learning how) that's fine. So, no, you don't <em>have</em> to use emacs, specifically. However you will need to learn some editor that works on CSIL. Working only on your own PC or Mac at home will not be sufficient.</p>
+ <p>I'll also add that knowing how to use either vi/vim or emacs is really a kind of &quot;basic skill&quot; that every software developer should have in his/her toolkit. So if you don't already know one of those editors, now is as good a time as any to start learning one of them.</p>
+ <h4>Assuming you are using emacs, for the time being...</h4>
+ <p>Here are a few emacs commands that may be helpful to know. </p>
+ <p>Remember that:</p>
+ <p>C-x is called &quot;control-X&quot; and means &quot;hold down the <strong>control</strong> or <strong>Ctrl</strong> key while typing the letter x&quot;<br> 
+   C-x 1 means &quot;type control-X, then type the number 1&quot;.<br>
+  C-x C-c means &quot;type control-X then type control-C&quot;.</p>
+ <table border="2">
+   <tr>
+     <th scope="col">Keystroke</th>
+     <th scope="col">Command</th>
+   </tr>
+   <tr>
+     <td>C-x 1</td>
+     <td>If there are multiple windows, get rid of the other ones.<br>
+      I only want the one the cursor is in right now.</td>
+   </tr>
+   <tr>
+     <td>Arrow Keys</td>
+     <td>Used to move around</td>
+   </tr>
+   <tr>
+     <td>Delete/Backspace</td>
+     <td>Deletes the previous character</td>
+   </tr>
+   <tr>
+     <td>C-d</td>
+     <td>Deletes the character immediately under the cursor</td>
+   </tr>
+   <tr>
+     <td>C-x C-w</td>
+     <td>Save As</td>
+   </tr>
+   <tr>
+     <td>C-x C-s</td>
+     <td>Save</td>
+   </tr>
+   <tr>
+     <td>C-x C-c</td>
+     <td>Exit emacs (it will ask if you want to save)</td>
+   </tr>
+   <tr>
+     <td>C-g</td>
+     <td>Cancel current command (&quot;<strong>g</strong>et me out of trouble&quot;)</td>
+   </tr>
+   <tr>
+     <td>C-k</td>
+     <td>Kill (delete) the current line</td>
+   </tr>
+ </table>
+ <p>Here's a link to a <a href="http://www.cs.ucsb.edu/~pconrad/emacs/refcard.pdf">PDF File with lots more emacs commands</a>&mdash;it is suitable for printing on a single sheet of paper (front and back) and having handy while you work in Emacs.</p>
+ <p>Once you've brought up the file in some editor, be it emacs or something else, we are ready to start making changes. Continue with the next step.</p>
+ <h3>Step 5: Making changes to secondCProgram.c&mdash;and learning about C</h3>
+ <p> So, now that we have secondCProgram.c loaded up in emacs (or an alternative), here are the changes we want to make.</p>
+ <p>As we make these changes, we'll review some basics of C programming, including</p>
+ <ul>
+   <li>function definitions and function calls</li>
+   <li>if statements</li>
+   <li>while loops</li>
+   <li>boolean expressions</li>
+   <li>variables</li>
+   <li>input/output</li>
+   <li>assignment statements</li>
+  </ul>
+ <p>We are assuming that <em>none of those ideas is new to you</em>&mdash;only the way of <em>expressing them in C is new</em> to you.<br>
+   <br> 
+  If that's not the case, then you are probably in the wrong class&mdash;and there may still be time to switch to CS8, so let your instructor know if that's the case!</p>
+ <h4>Step 5a: Changing the comment at the top of the file</h4>
+ <p>At the top of the file, you'll see a comment like this one:</p>
+ <p>// firstCProgram.c  convert Fahrenheit to Celsius <br>
+  // P. Conrad for CS16, Fall 2009, UCSB CS Dept., 09/25/2009 </p>
+ <p>Change this comment so that instead, the first line reads:</p>
+ <p>// secondCProgram.c  convert  Celsius to Fahrenheit</p>
+ <p>In general, we always want the first line of our file to have the filename, and a brief description of the program. As you can now see, we are going to modify the first C program we encountered, changing it from a program that converts Fahrenheit to Celsius, into one that does the reverse.</p>
+ <p>Now change the second line from:</p>
+ <p>// P. Conrad for CS16, Fall 2009, UCSB CS Dept., 09/25/2009 </p>
+ <p>to something like this (but insert your name where it says Your Name Here, and insert the correct date for the day you are working on the lab.)</p>
+ <p>// Your Name Here, for CS16 lab01, 10/02/2009</p>
+ <p>Generally speaking, we want the second line of a program file to have the name of the programmer, and the date the file was created.</p>
+ <h4>Step 5b: Changing the function definition</h4>
+ <p>We'll skip on past this line, which as you probably know by now, tells C that we are going to be using &quot;standard input output functions&quot; such as printf and scanf in our program&mdash;we won't be changing this line. In fact, you'll see this line in most of the files that we work on in this course (though not necessarily all).</p>
+ <p>#include &lt;stdio.h&gt;</p>
+ <p>Instead, lets turn our attention to the function definition for the fToC() function, which consists of these four lines:</p>
+ <p>double fToC(double fTemp) // ftemp is temperature in Fahrenheit <br>
+   {<br>
+&nbsp;&nbsp;&nbsp;return (fTemp - 32.0)*(5.0/9.0); // return Celsius temperature <br>
+}</p>
+ <p>Your job is to do the following  five things with this function definition:</p>
+ <ol>
+   <li>Change the name of the function&mdash;instead of fToC, we will call our function cToF. Generally speaking, we start function names and variables with lowercase letters in C&mdash;this isn't required by the language, but it is a convention that is very often followed.</li>
+   <li>Change the name of the formal parameter fTemp&mdash;call it cTemp instead. For our new cToF function, we are not going to be passing in a fTemp, but rather a cTemp.</li>
+   <li>Change the comment on the first line of the function definition (it starts with // and continues to the end of the line). Change it to one that describes what cTemp stands for (a temperature in Celsius). </li>
+   <li>Inside the braces { } we have the &quot;body&quot; of the function. This body consists of only one line: a line that returns a value. After the word return we have an expression that returns the Celsius temperature, by doing a calculation based on the value of fTemp. <br>
+     <br>
+    Your job is to replace the expression after the word return with one that will calculate a fahrenheit temperature by doing a calculation based on the value of cTemp. <br>
+    <br>
+    The following web page has both formulas, but beware: you may have to adapt them to C: <a href="http://www.usatoday.com/weather/wtempcf.htm">http://www.usatoday.com/weather/wtempcf.htm</a> <br>
+    <br>
+    Keep in mind, especially, the rules about order of operations, and how the division operator works on integers.</li>
+   <li>Change the comment that says &quot;return Celsius temperature&quot; to something more appropriate given the other changes you've made.</li>
+ </ol>
+ <h4>Step 5c: Changing the main program</h4>
+ <p>Next we have the main program. Here are the changes you'll need to make here:</p>
+ <ol>
+   <li>There is a comment immediately before the main that will need to change.</li>
+   <li>The comment immediately inside the main is fine, as is the declaration of the variables fTemp and cTemp, and the declaration of the variable again (and the associated comment.) Look over all this and understand how it works.<br>
+     <br>
+   Then notice the while loop. The while loop will always be executed at least once, because the first time we evaluate the condition <strong>while&nbsp;(again)</strong>, the variable again has the value&nbsp;1, which is C is treated as &quot;true&quot;. So we enter the while loop, and the first thing that happens is we have a prompt (a printf statements) that asks the user to enter a fahrenheit temperature. As you probably realize by now, you will need to change this prompt to one that asks the user to enter a Fahrenheit temperature.<br>
+   </li>
+   <li>The next line looks like this:<br>
+     <br>
+      scanf(&quot;%lf&quot;,&amp;fTemp);  // reads a double into &quot;fTemp&quot; <br>
+        <br>
+      That line is a little complex, and we'll explore the details in lecture&mdash;but for now, all you need to know is that it reads a value from what the user types in, and places it into the variable fTemp. <br>
+        <br>
+    Instead, we want to read a value in to the variable cTemp. Carefully replace the variable name fTemp with cTemp in both the scanf function call, and the comment that follows it, being careful to leave all the other punctuation intact. We'll eventually be able to understand all the details of the %lf, the &amp; symbol, and so forth.<br>
+    <br>
+    <br>
+   </li>
+   <li>The next line is an assignment statement where the left hand side is the variable cTemp, and the right hand side is a function call to the fToC function, where we pass in the value of fTemp that was read from the user.<br>
+     <br>
+    Instead, replace this with an assignment statement with fTemp on the left hand side, and a function call to cToF on the right hand side, where we pass in the value of cTemp that was read from the user.<br>
+    <br>
+   </li>
+   <li>Next, we find a line of code with a comment above it, &quot;provide output to user&quot;.This is an example of how we can use printf sort of like a &quot;form letter&quot; or a &quot;mail merge&quot;. Look at the places in the string 
+     shown below 
+     where we see %lf
+     <pre>&quot;%lf degrees F is %lf degrees C&quot;</pre>
+     These are the places the the values of fTemp and cTemp will appear, in that order. If we want to reverse this, with a format string like the following:<br>
+     <br>
+     &quot;%lf degrees C is %lf degrees F&quot;<br>
+     <br>
+    then we will need to reverse the order in which fTemp and cTemp appear in the printf statement. So, go ahead and make those changes.<br>
+    <br>
+   </li>
+   <li>Look over the rest of the program. I think you'll see that no further changes are needed! Try to understand how it works though. There is a printf that prompts the user to enter either a 1 or a 0, and the value typed in is placed into the variable &quot;again&quot;. This controls whether the while loop goes around for another conversion, or whether the program ends with the Goodbye message.</li>
+  </ol>
+ <p>Ok, if you've made all those changes, you are ready to save the file and try running the program. </p>
+ <p>To save, in emacs you can use C-x C-c (control-X, control-C), and then answer the question &quot;Save file ~/cs16/lab01/secondCProgram.c?&quot; with the letter y (for yes). Then proceed to step 6.<br>
+   <br>
+ </p>
+ <h3>Step 6: Running the file </h3>
+ <p>Assuming you successfully completed Steps 1-5, and are now in the ~/cs16/lab01 directory and it contains the file secondCProgram.c, we are just about ready to try to run the program. </p>
+ <h4>An initial check</h4>
+ <p>But, before you do, type the pwd and <code>ls</code> commands (print working directory, and list files). The result should look like this&mdash;except you'll see your home directory listed instead of /cs/faculty/pconrad.</p>
+ <p>-bash-3.2$ <strong>pwd</strong><br>
+   /cs/faculty/pconrad/cs16/lab01<br>
+   -bash-3.2$ <strong>ls</strong><br>
+   firstCProgram.c  secondCProgram.c  secondCProgram.c~<br>
+   -bash-3.2$
+  <p>One of the things you may notice (if you are using emacs) is the secondCProgram.c~ file&mdash;this is an emacs 
+  backup file, which saves an &quot;older&quot; version of your program, in case you decide you don't like your most recent changes, and want to go back a version. It is also handy in case you accidentally delete the main file.
+  <p>For now, we can ignore this secondCProgram.c~ file.  
+  <h4>The possibility of syntax errors...</h4>
+  <p>One thing that will be different this week is that instead of trying to run a program that you copied directly from my account (which presumably is error free), since you made some changes, there is the possibility of typos introducing syntax errors in the program. </p>
+  <p>Since CS16 is not your first encounter with programming, we assume this is also not your first encounter with syntax errors! So if you type the next few commands and get error messages:</p>
+  <ul>
+    <li>don't panic!</li>
+    <li>don't immediately ask the TA for help! </li>
+  </ul>
+  <p>Instead, take a deep breath, and then actually read the message that comes up. It will often give a line number, and some hint as to what might be wrong. </p>
+  <p>Then, look at your program, around that line, and also <strong>immediately before that line</strong>. Often, if the error is reported on, say, line 15, it is because of a missing semicolon, on line 13 or 14, for example.</p>
+  <p>If you've really looked, and are still stumped after two or three tries, then you might ask the TA for help. But try to fix it on your own first.</p>
+  <p>Ok, with that said, here's what to do:</p>
+  <p>To prepare your program to be run, we do this step:</p>
+  <p>make secondCProgram</p>
+  <p>Try typing that now. It should look like this:</p>
+  <pre>-bash-3.2$ <strong>make secondCProgram</strong>
+cc     secondCProgram.c   -o secondCProgram<br>-bash-3.2$ </pre>
+  <p>If it worked, then try typing the ls command to list your files. You should see that you now have another file in your account, called secondCProgram. This is the machine language version of your program. To run it, you type the following at the Unix prompt:  </p>
+ <pre>./secondCProgram</pre>
+ <p>Try running your program on a few sample values. It should work just like the firstCProgram from last week, except this time, the conversion goes in the opposite direction.</p>
+ <p>If it worked, lucky you&mdash;you can skip directly to step 8!</p>
+ <p>But if it didn't work.... continue with step 7:<br>
+    <br>
+   </p>
+ <h3>Step 7. edit, compile, edit compile, edit compile run, until done...</h3>
+ <p>If you program didn't compile, then as mentioned before, really look carefully at the error message that was printed. Here are some  problems you may have, and samples of the resulting error messages you may get:</p>
+ <ol>
+   <li>Function call doesn't match function definition&mdash;if you have a function call to fToC, but you don't have a function definition for fToC&mdash;say, because you changed it to cToF, but didn't make the change in both places, you'll get an error like this. It's kind of ugly, but the truth is buried in there somewhere:
+   
+      <pre>-bash-3.2$ make secondCProgram<br>
+cc     secondCProgram.c   -o secondCProgram<br>
+/tmp/ccmCwEH1.o: In function `main':<br>
+secondCProgram.c:(.text+0x67): undefined reference to `fToC'<br>
+collect2: ld returned 1 exit status<br>
+make: *** [secondCProgram] Error 1<br>
+-bash-3.2$ </pre>
+      <p>The most useful part of this error message is the part that says <code>&quot;In function `main' ... undefined reference to `fToC'</code> &mdash; the rest is mostly just &quot;noise&quot;. Learning to find the useful parts of an error message is an important skill!</p>
+   </li>
+   <li>Missing semicolon. Here's a sample error message for that one:<br>
+     <br>
+     <pre>-bash-3.2$ make secondCProgram<br>
+cc     secondCProgram.c   -o secondCProgram<br>
+secondCProgram.c: In function &lsquo;fToC&rsquo;:<br>
+secondCProgram.c:13: error: expected &lsquo;;&rsquo; before &lsquo;}&rsquo; token<br>
+make: *** [secondCProgram] Error 1<br>
+-bash-3.2$ <br> 
+     </pre>
+      <br>
+    <p>The useful part here is &quot;secondCProgram.c:13: error: expected `;' before '}' token<br>
+      <br>
+    This is telling us the exact line number where the compiler encountered the error. A trick we can use is this: if we type this at the unix command prompt, emacs will put us in the editor, with the cursor right on line 13!<br>
+      <br>
+      emacs +13 secondCProgram.c<br>
+      <br>
+    Then, we are likely to find the missing semicolon just before the place where the error was spotted. In this case, the compiler didn't realize a semicolon was missing until it hit a later } character (which it calls a &quot;token&quot; for technical reasons we may discuss later.)</p>
+</li>
+   <li>Forgetting the closing &quot; on a string, e.g in a printf or scanf call. Here's an error message for that:<br>
+     <br>
+   cc     secondCProgram.c   -o secondCProgram<br>
+     secondCProgram.c:28:14: warning: missing terminating &quot; character<br>
+     secondCProgram.c: In function &lsquo;main&rsquo;:<br>
+     secondCProgram.c:28: error: missing terminating &quot; character<br>
+     secondCProgram.c:29: error: expected &lsquo;)&rsquo; before &lsquo;;&rsquo; token<br>
+     secondCProgram.c:41: warning: passing argument 1 of &lsquo;printf&rsquo; makes pointer from integer without a cast<br>
+    secondCProgram.c:41: error: expected &lsquo;;&rsquo; before &lsquo;}&rsquo; token<br>
+    <br>
+   This can be a particularly confusing one, because except for the first error message about a missing terminating &quot; character, all the rest of the error messages are bogus. Once the missing terminating character is fixed, all the rest of the errors go away. <br>
+   <br>
+   One conclusion that you may draw from this is the following&mdash;until you are fairly experienced in looking at syntax error reports from the compiler you are using, it is best to focus on only fixing one error at a time, generally the <strong>first</strong> one reported from the compiler. Often, fixing that one will make many other error messages go away at the same time.</li>
+ </ol>
+ <p>
+ </p>
+ <p>There are many others, too numerous to mention, but I hope this gives you a &quot;good start&quot;.</p>
+ <p>Your task now is this&mdash;if you got syntax errors, go back into the editor with:</p>
+ <p>emacs secondCProgram.c</p>
+ <p>or, if you know the problem is on a particular line, say line 28, use:</p>
+ <p>emacs +28 secondCProgram.c</p>
+ <p>Fix the problem, and try the <strong>make secondCProgram</strong> command again.</p>
+ <p>When it finally works, run the program with </p>
+ <p>./secondCProgram</p>
+ <p>and make sure the output is reasonable. If it doesn't work properly, then continue to make changes until it does.</p>
+ <p>Once it is working properly, you are ready for step 9, the &quot;scripting step&quot;.</p>
+ <h3>Step 8: Scripting your assignment</h3>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.</p>
+ <p>Here are the steps to <em>prepare</em> to make a transcript for lab01</p>
+ <ol>
+   <li>Type <strong>pwd</strong>, and make sure you are in the <strong>~/cs16/lab01</strong> directory.</li>
+   <li>Type <strong>ls</strong>, and make sure that you have a file called secondCProgram.c in your directory</li>
+   <li>Type <strong>./secondCProgram</strong> and make sure your program works correctly.</li>
+   <li>Type <strong>rm ./secondCProgram</strong> (WITHOUT the .c on the end) to delete ONLY the executable.
+     <ul>
+       <li>Be sure you KEEP the secondCProgram.c file!  Otherwise you'll be starting from scratch! </li>
+       <li> (I've been there and done that before!)</li>
+      </ul>
+   </li>
+  </ol>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Type <strong>script lab01.txt</strong><br>
+   You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab01.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. (If you did the preparation correctly, we should see secondCProgram.c, but we should NOT see the executable file <strong>secondCProgram</strong> (the one without the .c on the end.)</li>
+   <li>Type <strong>make secondCProgram</strong> to show that your program compiles with no errors.</li>
+   <li>Type <strong>./secondCProgram</strong> and run your program with several inputs to show that it works correctly, converting from Celsius to Fahrenheit. After doing at least three conversions on different numbers, type 0 when asked if you want to do more conversions, to end your program and return to the Unix prompt.</li>
+   <li>Type <strong>exit</strong> to stop the recording of commands and responses into lab01.txt</li>
+  </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab01 directory called lab01.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab01.txt</p>
+ <p>You should see your life flashing before your eyes, so to speak&mdash;a feeling of d&eacute;j&agrave; vu should come over you&mdash;becuase everything in the file will be what you just typed and what came back over the last few minutes.</p>
+ <p>If so, you are ready to submit!</p>
+ <h3>Step 9. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step.</p>
+ <p>You can use the command <strong>cd ..</strong> to put yourself there, or <strong>cd ~/cs16</strong></p>
+ <p>Do a pwd command to make sure that you did land in ~/cs16.</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+<p>Type the following at the prompt:</p>
+<pre>turnin lab01@cs16 lab01</pre>
+<p>You may see a warning like this one:</p>
+<pre>
+************** WARNINGS **************
+lab01/secondCProgram.c~: NOT TURNED IN: temporary file
+<br>*** Do you want to continue? </pre>
+<p>If so, don't worry&mdash;just type y and hit return to indicate you want to continue.</p>
+<p>You'll be asked if you really want to turn in these files&mdash;the message will look something like this:</p>
+<pre>These are the regular files being turned in:
+   Last Modified   Size   Filename<br>
+  -------------- ------  -------------------------<br>
+  1: 09/30/09 23:35   1232  lab01/firstCProgram.c<br>
+  2: 10/01/09 01:12   1234  lab01/secondCProgram.c<br>
+  3: 10/01/09 01:12    167  lab01/lab01.txt<br>
+  4: 10/01/09 01:12   5360  lab01/secondCProgram
+****************************************************************************
+You are about to turnin 4 files [11KB] for lab01 to cs16
+*** Do you want to continue? </pre>
+<p>The main thing is to be sure that lab01.txt and secondCProgram.c appear in the list. (If the other two appear or don't appear, it doesn't really matter.)</p>
+<p>Go ahead and hit y and enter, and you should see a message like this one:</p>
+<pre><p>lab01/firstCProgram.c<br>
+lab01/secondCProgram.c<br>
+lab01/lab01.txt<br>
+lab01/secondCProgram</p><p>*** TURNIN OF lab01 TO cs16 COMPLETE! ***</p></pre>
+<p>Congratulations&mdash;you've completed your second  lab in cs16!</p>
+<p>Note: they do get progressively more challenging!</p>
+<hr>
+ <h2>Evaluation and Grading (200 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+       <li>10 points: successfully submitting the contents of your lab00 directory</li>
+       <li>10 points: lab01 directory contains secondCProgram.c and lab01.txt (a transcript file)</li>
+       <li>20 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+      </ul>
+   </li>
+   <li>Programming Tasks
+     <ul>
+       <li>10 points&mdash;Changing the header comment (Step 5a)</li>
+       <li>50 points&mdash;Changing the function definition per instructions (Step 5b)</li>
+       <li>50 points&mdash;Changing the main program per instructions (Step 5c)</li>
+      </ul>
+   </li>
+   <li>Correctness
+     <ul>
+       <li>20 points&mdash;program compiles</li>
+       <li>20 points&mdash;program runs correctly</li>
+       <li>10 points&mdash;transcript file contains everything asked for in the instructions</li>
+     </ul>
+   </li>
+  </ul>
+ <p>Due Date: You should try to complete this assignment by the end of end of your second discussion section, i.e. before 10:50am, 11:50am, or 12:50pm on Friday 10/02/2009 (depending on which section you are enrolled in.)</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week. Please have it completed and turnin command finished by <strong>10pm on Wednesday October 7.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) up until the time the TA doing the grading is finished with grading and posting a particular assignment.  There is no specific guarantee as to the length of that period of time.<br>
+   <br>
+  After that, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

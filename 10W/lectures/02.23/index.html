@@ -1,0 +1,277 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, 02.23 Handout--working with arrays</title>
+<script type="text/javascript" src="../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+.pageBreak {page-break-before:always;}
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+div.floatRight {float:right}
+div.floatLeft {float:left;}
+div.tableDiv {width: 20em;}
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.smallerFont {font-size: 0.9em;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+
+table.tableWithSpaceToLeftAndRight {margin-left: 3em; margin-right: 3em;}
+
+p { margin-top: 0.4em; margin-bottom: 0.1em; padding-top: 0.1em; padding-bottom: 0.1em;}
+-->
+h1 {font-size: 1em; font-family: Arial, Helvetica, sans-serif; text-align:left; margin: 0em; padding: 0em;}
+h2 {font-size: 1.3em; font-family: Arial, Helvetica, sans-serif; text-align:center; margin: 0em; padding: 0em; margin-top: 0.2em; margin-bottom: 0.2em;}
+code {white-space:pre;}
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<h1>CS16, 10W, UCSB—Handout for 02/23—Working with arrays (<a href="handout.pdf">PDF</a>)</h1>
+<p style="margin:0em; padding:0em;">  <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/02.23">http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/02.23</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+  PLEASE REVIEW: Etter: discussion of #define on p. 42, Section 5.1&nbsp;&nbsp;&nbsp;&nbsp;PLEASE READ: Etter 5.2-5.4<br />
+</p>
+<hr />
+<h2 align="center">Arrays: index vs. value (int and double)</h2>
+<p>As review, when working with an array, we can distinguish between the indexes (or indicies), and the values.
+<p>If we declare an array: <code>int a[] = {23, 45, 67, 89}; </code> then the indexes are 0,1,2,3 and the values are 23, 45, 67, 89
+<p>This works with double also: <code>double b[] = {2.3, 4.5, 6.7};</code> has indexes 0,1,2 and values 2.3, 4.5, 6.7.</p>
+<p>In working problems, it is important to keep the  indexes and the values separate in your thinking.<br />
+Confusion between the two is a common source of errors in working with C/C++ arrays (or similar structures, such as lists in Python.)</p>
+<p>&nbsp;</p>
+<div style="font-size: 0.8em; width:30%; margin-left:2em; float:right; border: gray 6px inset;">
+<pre>
+-bash-3.2$<strong> c</strong>h
+                   Ch 
+Professional edition, ...
+(C) Copyright 2001-2009 ...
+  http://www.softinteg...
+/cs/faculty/pconrad&gt; <strong>_prompt="Ch&gt; "</strong>
+Ch&gt;  
+Ch&gt; <strong>'A'</strong>
+A 
+Ch&gt; <strong>(int) 'A'</strong>
+65 
+Ch&gt; <strong>'B'</strong>
+B 
+Ch&gt; <strong>(int) 'B'</strong>
+66 
+Ch&gt; <strong>48</strong>
+48 
+
+Ch&gt; <strong>'0'</strong>
+0 
+Ch&gt; <strong>(int) '0'</strong>
+48 
+Ch&gt; <strong>0x34  </strong>  <br />52 <br />Ch&gt; <strong>(char) 0x34</strong><br />4 <br />Ch&gt; <strong>'\0'</strong><br /> <br />Ch&gt; <strong>(int) '\0'</strong><br />0 <br />Ch&gt;
+</pre>
+</div>
+
+<div id="ASCIIValues" style="width:65%";>
+<h2 align="left">A few notes about ASCII values—especially '0' vs '\0'</h2>
+<p>In a moment we'll look at index vs. value for char arrays—but first a review of ASCII values.</p>
+<ul>
+  <li>For every character there is some pattern of bits to represent that character. </li>
+  <li>For example, the capital letter <code>'A'</code> is represented by 0100 0001
+    <ul>
+      <li>That pattern of bits also represents the number 65 in decimal (or 0x45 in hex) <br />
+        (the prefix 0x indicates in C that a number is a hex number)</li>
+    </ul>
+  </li>
+  <ul>
+    <li>So the expression <code>(int) 'A' </code>returns 65—as shown in the Ch output below.</li>
+  </ul>
+  <li>The int <code>4</code> and the character <code>'4'</code> are different
+    <ul>
+      <li><code>4</code> is an int, and represents the number of sides a square has—it is a number we can do math on</li>
+      <li><code>'4'</code> is a char—it is the printable character that shows up in position [4] in the string        <code>&quot;love4you&quot;</code>      —it is just a symbol </li>
+      <li><code>4</code> has the bit pattern 0000 0100 but </li>
+      <li><code>'4'</code> has the bit pattern 0011 0100 which is 52 in decimal, and 0x34 in hex </li>
+    </ul>
+  </li>
+  
+  <li>The character '\0' is the termination character for strings in C
+    —it is a<em> single character
+      </em>
+    <ul>
+      <li>It has ASCII value 0, and is sometimes called the NULL character</li>
+      <li>If you try to print it out, you'll see nothing printed at all</li>
+    </ul>
+  </li>
+  <li>By contrast, '0' is the digit zero, as a printable character
+    <ul>
+      <li>It has bit pattern 0011 0000, or 48 decimal, 0x30 hex.</li>
+      <li>If you print it, you'll see a 0 show up on the screen</li>
+    </ul>
+  </li>
+</ul>
+<p>This Ch session shown to the right illustrates these ideas, and the idea of <em><strong>type casting:</strong></em></p>
+</div>
+  </p>
+  <ul>
+    <li>We can put (int) in front of a char expression to <em><strong>type cast</strong></em> it to an int—when we do this with char values, the value we get back is the <em>ASCII code</em> for that character. So, <code>(int) 'A' </code>returns the value <code>65</code></li>
+    <li>Similarly, we can put (char) in front of an int expression to &quot;cast&quot; it to a char—when we do this, we get the character that corresponds to the ASCII value of the int expression.  So <code>(char) 65</code> gives us <code>'A'</code></li>
+  </ul>
+<h2 align="left">Arrays: index vs. value with char arrays</h2>
+<p>We can also have an array of characters, such as <code>char name[] = &quot;Conrad&quot;;</code><br /> 
+  In this case, the indexes are 0,1,2,3,4,5,6 and the values are 'C', 'o', 'n', 'r', 'a', 'd', '\0'.
+<p>In the case of char arrays,, because of the way that C treats string literals (i.e. quoted strings like &quot;Conrad&quot;, or &quot;UCSB&quot;), there is one extra value in the array, which is the character '\0'. The '\0' character has the ASCII value 0, and as we saw above, '\0' is different from the digit '0' which has ASCII value 48.
+<p>
+<p>This '\0' thing ONLY applies to arrays of char—there is NO such \0 value for int or double arrays—or any other array, for that matter, except arrays of char.<br />
+<h2 align="center" class="pageBreak">Arrays: occupancy vs. capacity</h2>
+<p>In  programming exercises, and in  test cases for functions, it is fairly common to see hard coded values to initialize arrays such as the ones we saw previously in these notes:</p>
+<p><code>int a[] = {23, 45, 67, 89}; </code> </p>
+<p><code>double b[] = {2.3, 4.5, 6.7}</code>;</p>
+<p><code>char name[] = &quot;Conrad&quot;;</code></p>
+<p>There are a handful of real world situations where you might see this in practice. However, in practical real-world programing, this is <em>not the normal situation</em> when dealing with an array. The normal case is that we declare an array with some initial capacity, such as:</p>
+<p>int scores[10];</p>
+<p>and then we read some scores from user input, for example:</p>
+<ul>
+  <li>sometimes from interactive input (e.g. printf/scanf)</li>
+  <li>through a graphical user interface (you may learn about these in CS32, CS48 and/or CS56) OR</li>
+  <li> most commonly at this stage in our learning journey, from a file on the disk.</li>
+</ul>
+<p>Let's take the case of a file on the disk. If we declare our array with capacity 10, then there are three cases we need to consider:</p>
+<ul><li>	If we have fewer than 10 values, than not all of the array is used</li>
+  <li>If we have exactly 10 values, we use the entire array</li>
+  <li>If we have more than 10 values, our array is too small
+    <ul>
+      <li>we may need to change the size of the array and then recompile the program</li>
+    </ul>
+  </li>
+</ul>
+<p>This has several important consequences:</p>
+<p><strong>Consequence #1</strong>: It is important to distinguish between array capacity and array occupancy.</p>
+<p>If my array is int scores[10], but I only have 5 values in my file, then I may have an array like this.</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <td>a[0]</td>
+    <td>a[1]</td>
+    <td>a[2]</td>
+    <td>a[3]</td>
+    <td>a[4]</td>
+    <td>a[5]</td>
+    <td>a[6]</td>
+    <td>a[7]</td>
+    <td>a[8]</td>
+    <td>a[9]</td>
+  </tr>
+  <tr>
+    <td>23</td>
+    <td>45</td>
+    <td>67</td>
+    <td>89</td>
+    <td>100</td>
+    <td>?</td>
+    <td>?</td>
+    <td>?</td>
+    <td>?</td>
+    <td>?</td>
+  </tr>
+</table>
+<p>The ? symbols here indicate values that have not been initialized. Unlike in Java, where accessing an uninitialized value may give you either a compile time or run time error, in C/C++, if you access an uninitialized value you will get something back—but the value is <em>arbitrary</em>— it just whatever left over value is in that memory location from the last time it was used. It won't <em>necessarily</em> be zero.</p>
+<p>The point here is that we need, in addition to the variable int scores[10]; two other variables:</p>
+<pre>int occupancy; // how many initialized values it DOES hold right now<br />
+int capacity;  // how many values it CAN hold</pre>
+<p>In the example above, occupancy would be 5, and capacity would be 10. </p>
+<p>A question for thought: when we print out the array with a for loop, <strong>which one should we use, occupancy or capacity?</strong></p>
+<p><strong>Which is correct?</strong></p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">occupancy</th>
+    <th scope="col">capacity</th>
+  </tr>
+  <tr>
+    <td align="left"><pre class="widePre" style="text-align:left;">
+int i;
+...<br />for (i=0; i&lt;<strong>occupancy</strong>; i++)
+   printf(&quot;a[%i]=%i\n&quot;,i,a[i]);</pre></td>
+    <td align="left"><pre class="widePre" style="text-align:left;">
+int i;
+...<br />for (i=0; i&lt;<strong>capacity</strong>; i++)
+   printf(&quot;a[%i]=%i\n&quot;,i,a[i]);</pre></td>
+  </tr>
+</table>
+<p>Of course, the variable for occupancy and capacity are <strong>not always called occupancy and capacity</strong>. Sometimes they are called things like <strong>n</strong>, <strong>size</strong>, <strong>count</strong>, etc.—and it is up to you to <strong>figure out </strong>whether each of those actually represents an occupancy or a capacity, and use it correctly. This is an important skill that we'll practice throughout the rest of the course.</p>
+<h2 class="pageBreak">Good practice: Using a const int or a #define for capacity</h2>
+<p>Consider the case where we may have to increase the size of an array and recompile. The size of the array may be used throughout the program. As a result, rather than hard-coding the number, it is better to define it in only one place, and then use it repeatedly.</p>
+<p>So the common practice it to use either a #define or a const int to define the capacity, like this:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">hard coding<br />
+    (poor practice)</th>
+    <th scope="col">#define<br />
+    (better practice)</th>
+    <th scope="col">const int<br />
+(best practice)</th>
+  </tr>
+  <tr>
+    <td align="left"><pre class="widePre" style="text-align:left;">int scores[10];
+...<br />
+// zero out all scores<br />for (i=0; i&lt;10; i++)
+   scores[i] = 0;</pre></td>
+    <td align="left"><pre class="widePre" style="text-align:left;">#define SCORES_SIZE 10<br />int scores[SCORES_SIZE];
+...<br />
+// zero out all scores<br />for (i=0; i&lt;SCORES_SIZE; i++)
+   scores[i] = 0;</pre></td>
+    <td align="left"><pre class="widePre" style="text-align:left;">const int SCORES_SIZE=10;<br />int scores[SCORES_SIZE];
+...<br />
+// zero out all scores<br />for (i=0; i&lt;SCORES_SIZE; i++)
+   scores[i] = 0;</pre></td>
+  </tr>
+</table>
+<p>A few notes:</p>
+<ul>
+  <li>Putting const in front of a variable declaration means its value can never be changed
+    <ul>
+      <li>For <code>const</code> variables, you must give the variable an initial value when you declare it.</li>
+      <li>I have listed <code>const int</code> as the best practice—i.e. better than a <code>#define</code>—but not all programmers would agree with my opinion here.</li>
+    </ul>
+  </li>
+  <li>If you use a #define, be sure to NOT put a ; at the end
+    <ul>
+      <li>#define works like a &quot;search and replace&quot; that happens just at the compiler starts to process your program<br /> 
+        (it is called the &quot;C pre-processor&quot;). </li>
+      <li>So, if you use <code><span class="widePre" style="text-align:left;">#define SCORES_SIZE 10</span>; </code>the effect is that you get<code> int scores[10;]; </code>instead of <code>int scores[10];</code><br />
+      and you'll get an error message</li>
+    </ul>
+  </li>
+  <li>When you use #define, the definition is global to the whole program.</li>
+  <li>It is usually considered acceptable style to use a const int as a global
+    <ul>
+      <li>global variables are generally considered bad because it is difficult to predict how they will change</li>
+      <li>since const variables are unchanging, those problems don't apply to them.</li>
+    </ul>
+  </li>
+</ul>
+<h2>Exercise: look at countOddInFile.c from lab05/lab06<br />
+(Use this to study for midterm 2)</h2>
+<p>In the program <a href="../../labs/lab06/files/countOddInFile.c">countOddInFile.c</a> from lab05 and lab06</p>
+<ul>
+  <li>Locate the integer array <code>nums</code>
+    <ul>
+      <li>What variable in this program represents the capacity of <code>nums</code>?</li>
+      <li>What variable in this program represents the occupancy of  <code>nums</code>?</li>
+      <li>Is there  a check in the code to make sure that the occupancy never exceeds the capacity? 
+        <ul>
+          <li>If so, where is that code?</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>The variable LINESIZE is used with the chararacter array thisLine.
+    <ul>
+      <li>Does LINESIZE represent an occupancy or a capacity?</li>
+    </ul>
+  </li>
+</ul>
+<p>&nbsp;</p>
+<h2>Final Note: fixed size vs. variable size arrays</h2>
+<p>A major limitation of the arrays we've seen so far is that they are fixed size—their size is fixed at compile time, and cannot be changed.</p>
+<p>We'll soon encounter arrays that are more flexible—ones there the size can be determined at run-time. This involved the use of pointers, and the heap, and functions called malloc(), calloc() and free(). If you are curious to read ahead, you can start reading about those in Section 6.7 of your text—but that topic won't be on the 2nd midterm—only on the final exam.</p>
+<hr />
+End of  Handout for 02.18
+</body>
+</html>

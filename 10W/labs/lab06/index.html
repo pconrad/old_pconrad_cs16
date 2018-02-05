@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab06, Winter 2010 (10W)--Reusing functions, more work on arrays</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" >
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" >
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+ol li ol li {list-style-type: lower-alpha;}
+code {white-space:pre;}
+.thanks {
+	font-size: smaller;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>lab06: <span class="smallerFont">(&quot;lab six&quot;)<br>
+   Reusing functions, more work on arrays<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>This lab is a little shorter than usual&mdash;<br>
+  but you also have a quiz today!<br>
+ </h2>
+ <p>If you want to study for the quiz, see my <a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/lectures/numberConversions/">number systems practice web page</a>.</p>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Understand how to reuse functions between programs</li>
+   <li>Understand how to find the minimum and maximum value in an array</li>
+   <li>Understand how to find the index of the first occurence of a value in an array</li>
+  </ul>
+ <h2>This lab builds on lab05</h2>
+ <p>This lab is an extension of lab05&mdash;so if you run into anything unfamiliar, review the material from lab05.</p>
+ <h2>Continue with your same pair partner&mdash;<br>
+  unless he/she is unavailable, or you failed to switch last week.</h2>
+<p>At the start of lab05, you were supposed to switch to a new pair partner. If you did so, and your partner is available again this week, please continue working with the same person.</p>
+<ul>
+  <li><strong>If you didn't switch partners last week</strong>, your TA will try to help you do so this week. </li>
+  <li><strong>If your pair from last week isn't available</strong>, your TA may pair you with a new partner.</li>
+  <li><strong>If (and only if) you have a new partner for lab06&mdash;</strong>one you didn't work with on lab05&mdash;complete a new version of <a href="../../../10W/worksheets/W01/W01.pdf">W01</a>, and post to the lab05 pair partner forum on Gauchospace. Indicate that this is a new pairing for lab06.</li>
+</ul>
+<p>Also keep in mind:<br>
+</p>
+<ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional&mdash;see <a href="../lab02">lab02</a> for the reasons why.</li>
+   <li>Keep the evaluation criteria in mind&mdash;you can find those listed in the intro to <a href="../lab02">lab02</a> and <a href="../lab02">lab03</a></li>
+  </ul>
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0: Get together with your assigned lab partner and do the set up steps.</h3>
+ <p>Choose a pilot and a navigator, and remember to switch often.</p>
+ <p>Check your PC&mdash;if you are in Cooper, there might be two mice attached. The navigator might be able to use the second mouse to help point things out, and feel a bit more connected to what is going on.</p>
+ <p>The driver should:</p>
+ <ul>
+   <li> Bring up a terminal window and create a ~/cs16/lab06 directory</li>
+   <li>Copy files from my directory at  <code><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab06/files">~pconrad/public_html/cs16/10W/labs/lab06/files/</a></code></li>
+ </ul>
+ <p><strong>Refer back to lab04 </strong>for clues about how to turn that directory name into a Unix command that will copy the files in to your lab06 directory. (This is the last week I'll tell you where to find that.)</p>
+ <h3>Step 1: Reviewing what we did in lab05&mdash;and what we are going to do next</h3>
+ <p>Assuming you successfully completed lab05, you did the following steps:</p>
+ <ul>
+   <li>You started with the program <a href="../../../10W/labs/lab05/files/countOddWithTests.c">countOddWithTests.c</a>, and used test-driven development to develop two functions: 
+     <ul>
+       <li><code>int isOdd(int x)</code>; <code>// return true if x is odd </code></li>
+       <li><code>int countOdd(int *a, int n)</code>; <code>// return a count of the number of odd integers in a</code></li>
+      </ul>
+   </li>
+   <li>Once both of the functions passed the tests, you then implemented <em>exactly the same functions</em> in the program <a href="../../../10W/labs/lab05/files/countOddInFile.c">countOddInFile.c</a>.</li>
+ </ul>
+ <p>Did you have the sense that you were working too hard&mdash;that it was inefficient to have to write the same function twice? I hope so&mdash;because if that thought occured to you, then you have what Larry Wall (author of Perl) calls one of the <a href="http://en.wikipedia.org/wiki/Larry_Wall#Virtues_of_a_programmer">Three Virtues of a Programmer</a>:<em> Laziness.</em> </p>
+ <p>Wall writes that Laziness is &quot;the quality that makes you go to great effort to reduce overall energy expenditure.&quot;</p>
+ <p>Wouldn't it be better if the functions that we wrote and tested in the countOddWithTests.c program could be directly used in the countOddInFile.c program?</p>
+ <p>Well it turns out that we CAN do this.</p>
+ <p>Your first step this week will be to illustrate that by re-doing a step from lab05&mdash;yes, we are going to implement isOdd and countOdd <em>one more time</em>&mdash;but this time, we'll see that its the <em>last</em> time, because we'll implement it once and then reuse it in as many programs as we want.</p>
+ <h3>Step 2: Reviewing the files oddFunctions.c, oddTester.c, countOddInFile.c</h3>
+ <p>Three of this weeks files are a re-mix of the files we saw in lab05. Together with your lab partner, take a look at each one of them:</p>
+ <ul>
+   <li>testOddFunctions.c contains almost everything from last week's countOddWithTests.c file
+     <ul>
+       <li>except we left out the definitions of isOdd() and countOdd() </li>
+     </ul>
+   </li>
+   <li>countOddInFile.c is almost the same as last week's countOddInFile.c
+     <ul>
+       
+       <li>except we left out the definitions of isOdd() and countOdd() </li>
+      </ul>
+   </li>
+   <li>oddFunctions.c contains ONLY the stub function definitions for the isOdd() and countOdd() functions.
+     <ul>
+       <li>Note that this file does not #include &lt;stdio.h&gt; because it contains no I/O&mdash;no printf, and no scanf</li>
+      </ul>
+   </li>
+  </ul>
+ <p>Since testOddFunctions.c does NOT contain the function definitions for isOdd and countOdd, if we try to compile it the way we've compiled programs so far, it doesn't work. Try this yourself&mdash;you should see output like the following:</p>
+ <p>
+  <pre>-bash-3.2$ <strong>make testOddFunctions</strong><br>cc     testOddFunctions.c   -o testOddFunctions<br>/tmp/ccOzuKZF.o: In function `main':<br>testOddFunctions.c:(.text+0xc4): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0xeb): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0x112): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0x139): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0x160): undefined reference to `isOdd'<br>/tmp/ccOzuKZF.o:testOddFunctions.c:(.text+0x187): more undefined references to `isOdd' follow<br>/tmp/ccOzuKZF.o: In function `main':<br>testOddFunctions.c:(.text+0x1b5): undefined reference to `countOdd'<br>testOddFunctions.c:(.text+0x1e3): undefined reference to `countOdd'<br>testOddFunctions.c:(.text+0x211): undefined reference to `countOdd'<br>collect2: ld returned 1 exit status<br>make: *** [testOddFunctions] Error 1<br>-bash-3.2$ </pre>
+ But if instead, we take the compile command that make generates for us, namely:<br>
+ <code>cc     testOddFunctions.c   -o testOddFunctions</code><br>
+ <br>
+ and add to it the file oddFunctions.c, like this, it works!<br>
+ </p>
+ <p>
+  <pre>-bash-3.2$ <strong>cc oddFunctions.c testOddFunctions.c -o testOddFunctions</strong><br>
+-bash-3.2$ 
+</pre>
+  We can then run the program with <code>./testOddFunctions
+  </p>
+  </code>
+  <p>We can also compile the <code>countOddInFile.c</code> program the same way:</p>
+ <p>
+  <pre>-bash-3.2$ <strong>cc oddFunctions.c countOddInFile.c -o countOddInFile</strong>
+
+<br>
+</pre>
+ </p>
+ <p>We can then run the program with <code><br>
+   ./countOddInFile
+       <br>
+ </code>or with <br>
+ <code>./countOddInFile</code><code> TEST</code> <br>
+ to run the tests <br>
+ <br>
+ Try compiling each of these programs using the command lines shown above, and running it.</p>
+ <p>What you should see is that the programs run but the tests fail.</p>
+ <p>&nbsp;</p>
+ <h3>Step 3: Adding the isOdd and countOdd functions one last time</h3>
+ <p>Now, one last time, enter the correct code for isOdd and countOdd in the file oddFunctions.c in place of the stubs.</p>
+ <p>Change the code at the top of the file too, to have your name(s) (you and your pair partner(s)) and the date.</p>
+ <p>Compile and run again, using the commands from Step 2 above. Now all the tests should pass!</p>
+ <p>And, also you should be able to run the countOddInFile program on a data file, e.g.:</p>
+ <pre><p>-bash-3.2$ <strong>./countOddInFile nums.dat </strong><br>
+<span style="font-family: sans-serif"><em>(number of odd numbers in file appears here)</em></span><br>
+-bash-3.2$ </p><p>&nbsp;</p> </pre>
+<p>Once you've done that, you are finished... and ready to submit&mdash;except that you need to take the quiz on numbers systems.</p>
+<h3>Step 7: Scripting your assignment</h3>
+
+ 
+ <p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.<br>
+ </p>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Use the proper form of the cd command to put yourself in your ~/cs16/lab06 directory (if you aren't already there)</li>
+   <li>Type <strong>script lab06.txt</strong><br>
+     (By now you know what that does.)</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. </li>
+   <li>Now for each of the programs you worked on this week&mdash;<code>testOddFunctions</code> and <code>countOddInFile</code>&mdash;do the following steps:<br>
+     <ol>
+       <li>Carefully&mdash;type <strong>rm <em>filename</em> </strong>to remove the  executable for each of the programs that you worked on this this week</li>
+       <li>Now, for each of the programs you worked on this week, type the command needed to compile your program. (This may be a "make" command, or it may be something more complex if your program is split across multiple files.) <ul><li>There should be no warnings and no errors&mdash;and since you did the rm command, it should NOT say: <br>
+           <code><em>filename</em> is up to date</code></li>
+           </ul>
+       </li>
+       <li>Next, for each of the programs you worked on this week, run the progrto show that it works properly. In some cases you can do this with a single run.  In other cases, you may need to run it several times with different input each time.    If applicable, include command lines that show the &quot;Usage&quot; message, as well as several command lines that show it working properly with good input.<br>
+         <br>
+      </li>
+     </ol>
+    </li>
+   <li>Once you've done steps 5a,5b,5c for both <code>testOddFunctions</code> and <code>countOddInFile</code>, type <strong>exit</strong> to stop the recording of commands and responses into lab06.txt</li>
+ </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab06 directory called lab06.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab06.txt</p>
+ <p>If it all looks ok, you are ready to submit!</p>
+ <h3>Step 8. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+ <pre>turnin lab06@cs16a lab06</pre>
+ <p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+ <p>&nbsp; </p>
+ <hr>
+ <h2>Evaluation and Grading (200 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab06 directory containing
+           <ul>
+               <li> required:  testOddFunctions.c, oddFunctions.c, countOddInFile.c, lab06.txt (a transcript file) </li>
+               <li>optional: other programs that were part of the files you copied for the lab this week</li>
+           </ul>
+         </li>
+       <li>20 points: submission is on time and follows submission instructions
+         <ul>
+               <li>(i.e. is done via turnin by the Due Date.)</li>
+         </ul>
+       </li>
+       <li>20 points: The .c files submitted  have good header comments
+         <ul>
+               <li>on first line with name &quot;cs16 lab06&quot; and date, and your name, and that of your pair partner(s)</li>
+         </ul>
+       </li>
+       <li>50 points: transcript file contains everything asked for in the instructions
+         <ul>
+               <li>especially important is that the script contains each of the tests required</li>
+         </ul>
+       </li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     for oddFunctions.c (points for correctness and style)
+     <ul>
+         <li>30 points: correct implementation of isOdd</li>
+         <li>40 points: correct implementation of countOdd
+           <ul>
+             <li>-10 points if you didn't reuse the isOdd function inside your countOdd function</li>
+           </ul>
+         </li>
+        <li>30 points: indentation, variables names, comments, show understanding of good programming style</li>
+      </ul>
+   </li>
+  </ul>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section in which it was assigned.</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until <strong>5pm on Friday Feburary 19.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through <strong>5PM on Wednesday Feb 24th</strong><br>
+     <br>
+  </p>
+ <p>After 5PM Wednesday Feb 24th, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+ <p>&nbsp;</p>
+ 
+</div>
+<!-- id = "container" -->
+</body>
+</html>

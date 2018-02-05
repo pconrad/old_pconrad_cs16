@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, notes on command line args (argc, argv)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+.style1 {
+	font-size: smaller;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Spring 2010</h1>
+ <h1>lab04&mdash;notes on command line args<span class="smallerFont"><br>
+   <br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>&nbsp;</h2>
+ <p>Here's a review of command line arguments from lab03 and various lecture notes</p>
+ <h3>Purpose of command line arguments</h3>
+ <p>&nbsp;</p>
+ <ul>
+   <li>Command line arguments are a way of providing input to a program&mdash;an alternative to prompting with printf and reading values with scanf.
+     <ul>
+       <li>Many real-world unix programs use command line arguments rather than printf/scanf dialogs to get their input.</li>
+      </ul>
+   </li>
+   <li>The user of the program types the input to the program after the name of the program on the command line, for example:<br>
+       <br>
+      <pre>-bash-3.2$ <strong>./areaOfSquare 3</strong><br>The area is 9<br>-bash-3.2$</pre>
+          <br>
+        This is instead of having a dialog with the user such as: <br>
+        <br>
+        <pre>-bash-3.2$ <strong>./areaOfSquare</strong><br>Please enter the value of one side of the square: <strong>3</strong><br>The area is 9<br>-bash-3.2$</pre>
+    </li>
+   <li>One  benefit of using command line arguments is easier testing of your program.<br>
+      <br>
+    </li>
+  </ul>
+ <h3>How to use command line arguments</h3>
+ <p>To use command line arguments, we use a different first line of the main program:<br>
+   Instead of:<br>  
+     <code> &nbsp;int main()</code><br>
+   we use:<br>
+  &nbsp;&nbsp;<code>int main(int argc, char *argv[])</code></p>
+ <ul>
+   <li> argc is a variable that indicates the number of things on the command line</li>
+   <li>argv is an array (or &quot;vector&quot;) of the those things. </li>
+ </ul>
+ <p>Examples: </p>
+ <table border="1" cellspacing="1" cellpadding="1">
+   <tr>
+     <th scope="col">command line</th>
+     <th scope="col">argc</th>
+     <th scope="col">argv[0]</th>
+     <th scope="col">argv[1]</th>
+     <th scope="col">argv[2]</th>
+     <th scope="col">argv[3]</th>
+     <th scope="col">argv[4]</th>
+     <th scope="col">argv[5]</th>
+     <th scope="col">argv[6]</th>
+   </tr>
+   <tr>
+     <th scope="row"><div align="left"><code>./areaOfSquare</code></div></th>
+     <td>1</td>
+     <td><code>&quot;./areaOfSquare&quot;</code></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+   </tr>
+   <tr>
+     <th scope="row"><div align="left"><code>./areaOfSquare 9</code></div></th>
+     <td>2</td>
+     <td><code>&quot;./areaOfSquare&quot;</code></td>
+     <td><code>&quot;9&quot;</code></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+   </tr>
+   <tr>
+     <th scope="row"><div align="left"><code>./boxOfStars 5 4</code></div></th>
+     <td>3</td>
+     <td><code>&quot;./boxOfStars&quot;</code></td>
+     <td><code>&quot;5&quot;</code></td>
+     <td>&quot;4&quot;</td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+     <td><span class="style1">undefined</span></td>
+   </tr>
+   <tr>
+     <th scope="row"><div align="left">
+       <pre>./p1 foo bar fum 23 4.5</pre>
+     </div></th>
+     <td>6</td>
+     <td><code>&quot;./p1&quot;</code></td>
+     <td><code>&quot;foo&quot;</code></td>
+     <td><code>&quot;bar&quot;</code></td>
+     <td><code>&quot;fum&quot;</code></td>
+     <td><code>&quot;23&quot;</code></td>
+     <td><code>&quot;4.5&quot;</code></td>
+     <td><span class="style1">undefined</span></td>
+   </tr>
+ </table>
+ <p>&nbsp;</p>
+ <h3>Checking argc before accessing argv</h3>
+ <p>If we have defined argc and argv by putting &nbsp;<code>int main(int argc, char *argv[])</code> as the first line of our main, then argc is always at least 1, and argv[0] always exists and is the name of the program (as typed on the Unix command line.)</p>
+ <p>However, argv[1], argv[2], don't necessarily exist, unless there are sufficient items on the command line.</p>
+ <p>So, before accessing the value of <code>argv[1]</code>, <code>argv[2]</code>, etc. it is necessary to always first check the value of <code>argc</code>.</p>
+ <p>We typically do that with code like the following</p>
+ <p>
+  <pre>if (argc != 3)<br>{<br>   printf(&quot;Usage: ./areaOfRectangle width height\n&quot;);<br>   return 1;<br>}</pre>
+ </p>
+ <p>This code prints a Usage message, which is a special kind of error message telling the user that he/she didn't use the program correctly&mdash;that is, the program was expecting three things on the command line:</p>
+ <ol>
+   <li> the program name (in this case, <code>./areaOfRectangle</code>)</li>
+   <li>a value for width</li>
+   <li>a value for height</li>
+  </ol>
+ <p>The program returns the value 1, because that signals an error condition.</p>
+ 
+ <div class="sideNoteDiv">
+ <p>A side note: </p>
+ <p>Sometimes, to make things a little easier to maintain as we share code among different programs, we can write it this way: </p>
+
+   <pre>if (argc != 3)<br>
+{<br>
+    printf(&quot;Usage: %s width height\n&quot;, argv[0]);<br>
+    return 1;
+}
+
+</pre>
+
+ <p>In this case, the <code>%s</code> indicates that we are printing a string ( a <code>char *</code>) value, and the <code>argv[0] </code>indicates that we want to print the name of the program.</p>
+ </div>
+ 
+ 
+ <h3>Converting command line arguments to int or double values</h3>
+ <p>When accessing command line arguments that are integers or floating-point numbers, we typically need to use atoi() or atof().</p>
+ <p>For example consider the code listed below, especially the part in bold <br>
+  (the full program is available at  <a href="files/raiseToPower.c">raiseToPower.c</a>):</p>
+
+
+   <pre>
+// raiseToPower.c
+// A program that illustrates command line args with both int and double
+// P. Conrad for CS16, Winter 2010
+
+#include &lt;stdio.h>
+<strong>#include &lt;stdlib.h> // for atoi, atof</strong>
+
+int main(int argc, char *argv[]) // for command line args
+{
+  
+  double base;
+  int exponent;
+  ...
+
+  
+  // check command line args
+
+ <strong> if (argc != 3)</strong>
+    {
+      printf("Usage: raiseToPower base exponent\n");
+      return 1;
+    }
+  
+  // convert command line args
+
+  <strong>base = atof(argv[1]);</strong> // use atof with double
+  <strong>exponent = atoi(argv[2]);</strong> // use atoi with integer
+
+  ...
+   
+   </pre>
+   <p>As we can see, if we are converting a command line argument to use it as an integer, we use <strong>atoi</strong>, and if we use it as a double, we use <strong>atof</strong>. In both cases, we need to check argc first, and in both cases, we need to <strong>#include&nbsp;&lt;stdlib.h&gt;</strong></p>
+   <p>A final note:</p>
+   <ul>
+     <li> You can sometimes &quot;get away with&quot; not doing #include &lt;stdlib.h&gt; for atoi, because the &quot;default&quot; is for a function you haven't declare to return something of type int. You program will seem to work, and you may be lulled into a false sense of security</li>
+     <li>But, if you try this with atof, you might not see any compiler warnings, but your program will fail to work properly&mdash;you'll just get nonsense results.</li>
+     <li>So, get in the habit of always using #include &lt;stdlib.h&gt; when using atoi and/or atof.</li>
+     <li>We will always reserve the right to take off points for not using #include &lt;stdlib.h&gt; with atoi and atof&mdash;if we notice that you did this.</li>
+   </ul>
+   <p>For more information:</p>
+   <ul>
+     <li>Notes on <a href="../notes_on_atoi/">atoi</a></li>
+     <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H07/handout/">Handout on command line arguments from H07</a></li>
+   </ul>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

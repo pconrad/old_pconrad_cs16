@@ -1,0 +1,130 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 09F, H07 (Selection Sort)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.style1 {
+	font-size: x-large;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.style3 {font-family: Geneva, Arial, Helvetica, sans-serif}
+.style4 {font-weight: bold; background-color: yellow;}
+.style5 {font-size: small}
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 09F, UCSB</p>
+<p>H07:  (Selection sort, initial C code) <span id="pointCount">Total points: ?</span> (<a href="H06.pdf">printable PDF</a>)</p>
+<p><span class="style3">Accepted: on paper, <strong>IN LECTURE</strong> on 09/30 <span class="style4">10/30</span><br />
+  But, bring it to LAB with you on 09/29 or 09/30 <span class="style4">10/29 or 10/30</span></span><span class="style1"><br />
+  </span></p>
+<p><span class="style5">(You may make this up ONLY for excused absence from lab due to illness or excused absences arranged in advance, e.g. attending a conference related to academic or school sponsored student activities—and you may only make it up during Conrad's office hours, or by appointment, within one week of <span class="highlight">10/30.)</span><br />
+  </span><br /> 
+  DO THIS AS PREPARATION FOR YOUR DISCUSSION SECTION (lab) on <span class="highlight">10/29 or 10/30
+  </span><br />
+You may do this individually, or together with your pair programming partner—but be sure that you each hand this one in separately.</p>
+<p>Name : (3 pts)______________________________   <span>Umail address  (3 pts)</span>  _____________________ </p>
+<p><strong>Section (4 pts) Circle one:         </strong>Thu 8am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fri 10am       Fri 11am        Fri noon</p>
+<p>Name of your pair programming partner(s), if you work together:</p>
+<p><strong><br />
+  About this assignment:</strong> In lecture on Monday 10/26 and Wednesday 10/28, we went over the main ideas of selection sort. Your job here is to begin to turn those ideas into C code.<br />
+  <br />
+For <em><strong>this</strong></em> assignment, it is not necessary that your code be perfect. We are grading you on whether you have made a good faith effort to try to write code that will work, and have prepared yourself for lab on Thursday/Friday.<br />
+<br />
+If you are confident in your solution, that's great. If you are lost, please come see your instructor or a TA for help. <br />
+Conrad has office hours today 10/28, 4:15-5:15, and Harry has office hours 1-2pm on Thursday 10/29.<br />
+<strong><br />
+</strong></p>
+<hr />
+<ol>
+  <li>(20 pts) First, write a function called indexOfMax that computes the index of the largest element in an array of ints.<br />
+      <br />
+    The function should take these parameters: an array (call it <code>a</code>) and  the size of the array (call it <code>n</code>, or <code>size</code>)<br />
+    It should return the index of the largest value in the array (a number between <code>0</code> and <code>n-1</code>)<br />
+      (In case of ties, return the index of <em>any one</em> of the values that is &quot;tied for largest&quot;.)<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+      <p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for more problems</span></p>
+      <p style="page-break-before:always"><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+  </p>
+  </li>
+  <li>(20 pts) Write a function called selectionSort that sorts an array.<br />
+    <br />
+    The parameters to your function selectionSort will be the same as the parameters to indexOfMax.<br />
+The function will be void—it operates by having a &quot;side effect&quot; on the array that is passed in (i.e. it sorts it.)<br />
+<br />
+Use the function that you defined in part one. You can use a function call like this one to find the location of the maximum value among all the first &quot;howMany&quot; elements of a.<br />
+    <br />
+    maxLoc = indexOfMax(a, howMany);<br />
+    <br />
+    With that tool, you should be able to write a function that performs selection sort by doing this repeatedly, on smaller and smaller parts of the array (all the elements, then the first n-1 elements, then the first n-2 elements, etc. until you are down to just 2 elements.) Each time, you want to swap the largest value with the element at the &quot;end&quot; of that part of the array.<br />
+      <br />
+    <br />
+    Remember that to swap two values, you need code like this:<br />
+      <br />
+    temp = a[i];<br />
+    a[i] = a[j];<br />
+    a[j] = temp;<br />
+      <br />
+    <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  </li>
+  <!--- -->
+</ol>
+
+<hr />
+End of H07
+</body>
+</html>

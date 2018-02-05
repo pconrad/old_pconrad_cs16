@@ -1,0 +1,3 @@
+This directory is for little code examples that I write up 
+with students during office hours.
+

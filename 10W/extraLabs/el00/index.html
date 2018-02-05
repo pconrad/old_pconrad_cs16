@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, el00, 10W--Reading from files, arrays of structs (Extra Credit, Practice for Final Exam)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2009</h1>
+ <h1>el00: <span class="smallerFont">(&quot;extra lab zero&quot;)<br>
+ Extra Credit Lab: <br>
+ Reading from files, arrays of structs<br>
+ </span></h1>
+ <hr>
+ <span class="smallerFont"><br>
+  </span><span class="smallerFont"></span>
+  <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should:</p>
+ <ul>
+   <li>Be able to read lines from a file into an array of structs</li>
+   <li>Work with that array of structs to find various values</li>
+ </ul>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>Before completing this lab, you should have completed the labs up through lab06. In particular, you should be comfortable working with both arrays and structs separately. In this lab, we'll combine the two concepts.<br>
+   <br>
+ </p>
+ <h2>For this lab, you may use pair programming<br>
+ or you may work alone.</h2>
+ <h2>Step by Step Instructions</h2>
+ <h2>&nbsp;</h2>
+ <h3>Step 1: Log on to CSIL, create  ~/cs16/el00 and copy this labs files:</h3>
+ <p>&nbsp;</p>
+ <p>The files for this  lab can be found here:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/extraLabs/el00/files">http://www.cs.ucsb.edu/~pconrad/cs16/10W/extraLabs/el00/files<br>
+   </a></li>
+  </ul>
+ <p>And here:</p>
+ <p><code> ~pconrad/public_html/cs16/10W/extraLabs/el00/files/* </code></p>
+ <p>&nbsp;</p>
+ <h3>Step 2: Look at the files <a href="files/5airports.csv">5airports.csv</a> and <a href="files/airports.csv">airports.csv</a></h3>
+ <p>Use the &quot;more&quot; command to look first at the file 5airports.csv, then at airports.csv (you may need the &quot;q&quot; command in more or CTRL/C to exit since airports.csv is kind of long!)</p>
+ <p>These files contain latitude and longitude information for various airports. </p>
+ <ul>
+   <li>As the name suggests, 5airports.csv contains information on only five airports</li>
+   <li>airports.csv contains information on a large number of airports.</li>
+  </ul>
+ <p>The first line in each file gives us some clues as to what the files contain:  </p>
+ <pre>Code,Lat,Lon,City,State</pre>
+ <p>The file is in &quot;CSV&quot; format, i.e. &quot;comma separated values&quot;.</p>
+ <p>We can get an idea of how long the airports.csv file is using the command <code>wc -l airports.csv</code></p>
+ <p>This command allows us to see how many lines there are in the file ('wc stands for word count, but when we pass the -l flag it counts lines instead of words):</p>
+ <pre>-bash-3.2$ <strong>wc -l airports.csv</strong><br>1218 airports.csv<br>-bash-3.2$ 
+
+</pre>
+ We can see that if we want to make an array big enough to store all of these airports, it will need to have at least 1217 elements in it.</p>
+ <h3>Step 3: Look at the file readAirports.c</h3>
+ <p>Next,  look through the file <a href="files/readAirports.c">readAirports.c</a>&mdash;open it up in the text editor (i.e. emacs).</p>
+ <p>This is a fairly long program, and some parts of it present new concepts that may be unfamiliar at first. </p>
+ <p>Here are a few of the new things you'll encounter. Try to find each one, and look over it with your pair programming partner. See if you can figure out what the code is doing.</p>
+ <ol>
+   <li>The struct definition is in a separate header file: <a href="files/airport.h">airport.h
+     </a>
+     <ul>
+       <li>Take a look at that file</li>
+       <li>There are a few new things in there&mdash;the #ifndef stuff, for example&mdash;but don't worry about that for now.</li>
+       <li>Just look at the struct Airport definition</li>
+       <li>We put it in a separate file because we might <strong>reuse</strong> it in other programs.</li>
+     </ul>
+   </li>
+   <li>In the main, we declare a <code>FILE *</code> variable
+     <ul>
+       <li>This is a pointer to a file</li>
+       <li>It allows is to read data from a file</li>
+      </ul>
+   </li>
+   <li>In the main, we declare an array of structs
+     <ul>
+       <li>We are going to read every line from an input file into this array</li>
+      </ul>
+   </li>
+   <li>Inside the function initAirportFromString, we see calls to strtok
+     <ul>
+       <li> strtok stands for &quot;string tokenize&quot;&mdash;this means to pull it apart into its pieces</li>
+       <li>In this case, we are pulling apart a string such as<br>
+           <code>&quot;LAX,33.93,118.4,LosAngeles,CA</code>&quot;<br>
+           and turning it into separate strings, i.e. <code>&quot;LAX&quot;</code>, <code>&quot;33&quot;</code>, <code>&quot;93&quot;</code>, <code>&quot;118.4&quot;</code>, <code>&quot;LosAngeles&quot;</code>, and <code>&quot;CA&quot;</code>.<br>
+       </li>
+       <li>Notice that &quot;,&quot; is a parameter to each call&mdash;this is because our data is separated by commas</li>
+      </ul>
+   </li>
+   <li>Inside the function initAirportFromString, we see calls to strncpy
+     <ul>
+       <li>The strncpy function is used to copy a string</li>
+       <li>strncpy allows us to copy the <strong>contents </strong>of the string, not just the <strong>pointer</strong> value</li>
+       <li>The n in strncpy refers to the third argument, which is the maximum number of characters to be copied.</li>
+     </ul>
+   </li>
+   <li>In the main program, we find a call to strcmp&mdash;the string compare function
+     <ul>
+       <li>This function allows us to see whether two strings are equal</li>
+       <li>If the strings are equal, strcmp returns a value of 0 (think: there is 0 difference between them.)</li>
+       <li>We use strcmp to check whether the name of the file passed in is the special value: &quot;test&quot;</li>
+       <li>If argv[1] is &quot;test&quot;, instead of opening a file, we run some tests, and quit.</li>
+      </ul>
+   </li>
+   <li>The test function runTests() also uses strcmp
+     <ul>
+       <li>Notice that we use our test-driven development approach to check whether the function initAirportFromString did its job properly.</li>
+      </ul>
+   </li>
+   <li>The main program has code to open a file with fopen, and read data from it
+     <ul>
+       <li> The fgets() function (file get string) is used to read lines from the file</li>
+       <li>We combine this with a while loop that tests feof (end of file) and ferror (file error) each time through the loop to see whether to continue into the loop&mdash;in case the fgets call didn't return any data.</li>
+       <li>Note that feof is only true AFTER you try to read and find nothing there.</li>
+       <li>We only continue into the loop if both feof and ferror are NOT true&mdash;i.e. our attempt to read was successful and we have some data to process!</li>
+      </ul>
+   </li>
+   <li>After reading the data into the array, we use the array to look for the easternmost airport.
+     <ul>
+       <li>You get to add code for finding the westernmost, northernmost, and southernmost airports.</li>
+     </ul>
+   </li>
+  </ol>
+ <p>Once you've looked over all of that, you are ready to start coding yourself!</p>
+ <h3>Step 4: What you need to do&mdash;adding some tests, and some new code</h3>
+ <p>You job is to add a few tests, and then add some extra code at the end of the main function. (That extra code will also require you to add three functions.)</p>
+ <ol>
+   <li>Compile the <a href="files/readAirports.c">readAirports.c</a> program.<br>
+    </li>
+   <li>Run it with the command: <code>./readAirports test</code>
+     <ul>
+       <li>You should see that five tests fail</li>
+        <li>Find the &quot;stub&quot; line in the function <code>initAirportFromString()</code> and comment it out
+          <ul>
+            <li>For now, don't remove it entirely&mdash;we'll do that at a later step</li>
+          </ul>
+        </li>
+        <li>Recompile and run again with <code>./readAirports test</code></li>
+        <li>All five tests should pass</li>
+     </ul>
+   </li>
+   <li>Next, find the function runTests()
+     <ul>
+       <li>Inside this function, find the comment where it indicates you should add five tests</li>
+       <li>Add those tests</li>
+       <li>Then, bring the stub back in <code>initAirportFromString()</code>
+         <ul>
+           <li><code>i.e. </code> the line that just says <code>return; </code>as the first line of the function</li>
+           <li>this prevents the function from doing any useful work</li>
+          </ul>
+       </li>
+       <li>You should see 10 tests fail</li>
+       <li>Then take the stub back out&mdash;permanently&mdash;and all the tests should pass.</li>
+      </ul>
+   </li>
+   <li>Finally, look at the end of the main function
+     <ul>
+       <li>There is a place there where the program prints out the easternmost airport</li>
+       <li>Your job is to add code to also print out the westernmost, southernmost and northernmost airport</li>
+       <li>In the process of doing that, you'll need to create three new functions:
+         <ul>
+           <li>indexOfAirportWithLargestLongitude</li>
+           <li>indexOfAirportWithSmallestLatitude</li>
+           <li>indexOfAirportWithLargestLatitude</li>
+         </ul>
+       </li>
+       <li>Once you've written the new functions, and the new code in the main, you can test this code by running the program first with <code>./readAirports 5airports.csv </code>
+         <ul>
+           <li>You should see that San Diego is the easternmost airport&mdash;look at a map if you don't believe it!</li>
+           <li>Similarly, by simple inspection of the data, you should be able to determine which of the airports (SBA, SAN, SFO, LAX, SMF) is the southernmost, northernmost, and westernmost.</li>
+          </ul>
+       </li>
+       <li>Then run your program with <code>./readAirports airports.csv</code> to see if the answers make sense (i.e. you'd expect the northernmost airport to be in Alaska, the easternmost to be in Maine, etc.)</li>
+     </ul>
+   </li>
+  </ol>
+ <p>When you've done all that, you are ready to submit!</p>
+ <h3>Step 5: Script and submit</h3>
+ <p>Before scripting be sure to look through the grading rubric to make sure you've done everything possible to maximize your grade on the assignment. </p>
+ <ul>
+   <li>You might put the rubric in one window, and have the code open in another window. </li>
+   <li>One pair partner can read each item on the rubric out loud, and keep track of where you are in the rubric.</li>
+   <li>The other pair partner can scroll through the code to bring up the parts of the program it refers to.</li>
+   <li>Both partners can be responsible for looking to see that that item on the rubric is satisfied.</li>
+ </ul>
+ <p>Script your assignment just as in previous weeks. Consult lab04 if you need a refresher on the process. Remember to script each of your programs.</p>
+ <p>Your script file should be located in your <strong>~/cs16/el00</strong> directory and should be called <strong>el00.txt</strong></p>
+<div class="importantDiv"> <p>To submit use the turnin command: <strong>turnin el00@cs16a el00</strong><br>
+  <br>
+  Note: when you submit this, it is el00, which is:<br> 
+  lowercase E, lowercase L, zero zero</p>
+  <p>I think there have been some confusion about whether the l was a one or an L, and whether the 00 were letter Os, or zeros.</p>
+  <p>So, again: el00 is lower case E, lower case L, zero zero</p>
+ </div>
+ <ul>
+   <li>As a reminder: to submit your assignment, <strong>you need to be in the ~/cs16 directory</strong>&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</li>
+   <li>More details on scripting can be found in lab04</li>
+   <li>More details on using turnin can be found in lab00 through lab02.</li>
+  </ul>
+ <p>Once you've scripted and submitted, you are <em>almost</em> done, but not quite... Two more steps!</p>
+ <h4>Step 8: Will this stuff be on the final exam? Here's a guide</h4>
+ <p></p>
+ <p>The final exam for Winter 2010  <em>will</em> cover:</p>
+ <ul>
+   <li> working with arrays of structs. </li>
+   <li>strings functions: strncpy, strcmp, strtok</li>
+   <li>reading from files (FILE *, fgets, feof, ferror)</li>
+ </ul>
+ <h4>&nbsp;</h4>
+ <hr>
+<h2>Evaluation and Grading (300 pts total) </h2>
+ <ul>
+   <li>Mechanics 75 pts:
+     <ul>
+         <li>5 points: successfully submitting the contents of your el00 directory</li>
+         <li>5 points: el00 directory contains required C programs and el00.txt (a transcript file)</li>
+         <li>30 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+       <li>10 points: each C file contains a header comment on first line with name &quot;cs16 el00&quot; and date and name(s) of students submitting the work.</li>
+       <li>10 points: all @@@ comments are removed in your C files</li>
+       <li>15 points: transcript file contains everything asked for in the instructions</li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     (points for correctness and style)
+       <ul>
+         <li>75 points&mdash;adding tests in 
+           runTests as indicated by the comment
+           <ul>
+               <li>Add tests and remove the @@@ comments</li>
+               <li>The results of the tests should be added into the 'failure' variable</li>
+               <li>The tests should fail when there is a stub in <code>initAirportFromString()</code>, and should pass when the stub is replaced with working code.</li>
+           </ul>
+         </li>
+         <li>50  points&mdash;code for printing western most point
+           <ul>
+             <li>This code should call a new function <code>indexOfAirportWithLargestLongitude()</code> to do its calculation</li>
+           </ul>
+         </li>
+         <li>50 points&mdash;similar code for printing northernmost point
+           <ul>
+             <li>It too should call a new function</li>
+           </ul>
+         </li>
+         <li>50 points&mdash;similar code for priming southernmost point
+           <ul>
+             <li>Same here</li>
+           </ul>
+         </li>
+       </ul>
+   </li>
+ </ul>
+ <h2>Due Date</h2>
+ <p><strong>To earn full 300 pts extra credit: </strong>You must submit this via turnin on CSIL by midnight on Friday March 12.</p>
+ <p><strong>To earn half credit (i.e. 1/2 of the points you would have earned) in extra credit: </strong>submit by midnight on Sunday March 14.</p>
+ <p>After that, it is still worth doing as part of your studying for the final exam, but no extra credit is available.</p>
+ <p>&nbsp;</p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

@@ -1,0 +1,72 @@
+-bash-3.2$ ls
+ptrSyntax1.c
+-bash-3.2$ more ptrSyntax1.c 
+// ptrSyntax1.c    Checking precdence of * and .
+// P. Conrad for Cs16, Fall 2009
+
+// If we have the following struct:
+struct Point {
+  double x;
+  double y;
+};
+
+// And we have struct Point p, do we need the parens
+//   in (*p).x (*p).y, or is *p.x and *p.y ok?
+void initPoint (struct Point *p, int theX, int theY)
+{
+  (*p).x = theX;
+  *p.y = theY;
+}
+
+int main()
+{
+  struct Point pt;
+  // a function call to test our function
+  initPoint(&pt, 2.0, 3.0);
+  return 0;
+-bash-3.2$ ls
+ptrSyntax1.c
+-bash-3.2$ cat ptrSyntax1.c 
+// ptrSyntax1.c    Checking precdence of * and .
+// P. Conrad for Cs16, Fall 2009
+
+// If we have the following struct:
+struct Point {
+  double x;
+  double y;
+};
+
+// And we have struct Point p, do we need the parens
+//   in (*p).x (*p).y, or is *p.x and *p.y ok?
+void initPoint (struct Point *p, int theX, int theY)
+{
+  (*p).x = theX;
+  *p.y = theY;
+}
+
+int main()
+{
+  struct Point pt;
+  // a function call to test our function
+  initPoint(&pt, 2.0, 3.0);
+  return 0;
+} 
+-bash-3.2$ make ptrSyntax1
+cc     ptrSyntax1.c   -o ptrSyntax1
+ptrSyntax1.c: In function ‘initPoint’:
+ptrSyntax1.c:15: error: request for member ‘y’ in something not a structure or union
+make: *** [ptrSyntax1] Error 1
+-bash-3.2$ chmod 755 ptrSyntax1.c 
+-bash-3.2$ Ch
+-bash: Ch: command not found
+-bash-3.2$ ch
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+/cs/faculty/pconrad/public_html/cs16/09F/lectures/11.23> ./ptrSyntax1.c
+ERROR: left operand of '.' is not struct/class/union object
+ERROR: cannot recover from previous errors
+       at line 15 in file /cs/faculty/pconrad/public_html/cs16/09F/lectures/11.23/ptrSyntax1.c
+
+/cs/faculty/pconrad/public_html/cs16/09F/lectures/11.23> 

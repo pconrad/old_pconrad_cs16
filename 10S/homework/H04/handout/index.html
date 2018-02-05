@@ -1,0 +1,94 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10S, H04 Handout (Simple function definitions)</title>
+<script type="text/javascript" src="../../exam.js" ></script>
+<link rel="stylesheet" href="../../homework.css" type="text/css" />
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p style="padding-top: .55em;">CS16, 10S, Handout to go with H04 (Simple function definitions) (<a href="../handout.pdf">printable PDF</a>)<br />
+  Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H03/handout">http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H04/handout<br />
+</a>The assignment is available at <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H03">http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H04</a><br />
+</p>
+<div  style="border: 1px grey solid; padding: 0em; margin:0em; font-size: 0.9em;">
+<p>This handout is your reading assignment to go with H04. </p>
+<ul>
+  <li>This handout presents a simplified version of a topic that is covered later in the Etter textbook (in Chapter 4)—namely the definition of simple functions.</li>
+  <li>We are introducing this topic a bit earlier than in the Etter text, because it is <strong>so fundamental to Computer Science.</strong>
+    <ul>
+      <li>Computer Science is the study of algorithms and abstractions</li>
+      <li>A function definition involves both of these key concepts</li>
+      <li>It is, in a sense, an abstraction of an algorithm.</li>
+    </ul>
+  </li>
+  <li>The material on this handout should be all you need to complete H04.
+    <ul>
+      <li>However, if you want to read more about functions—though this is not required for now—you may like to read ahead in Chapter 4, particularly pages 156-160.<br />
+          </li>
+    </ul>
+  </li>
+</ul>
+</div>
+<hr />
+<p>Homework H04 involves writing simple function definitions. Here are some example solved problems you can use as models.</p>
+<p><strong>Question</strong>: Write a function definition for a function called xSquared that takes an integer x as its parameter, and returns an integer value x<sup>2</sup> (or x times x).</p>
+<p><strong>Answer</strong>:</p>
+<pre>int xSquared(int x)<br />{<br /> &nbsp;&nbsp;return x*x;<br />}</pre><p>Here's some more detail:</p>
+<div style="font-size: 0.9em; margin:0px; padding:0px;">
+<ul>
+  <li>This function definition starts with <code>int</code>, because the instructions say it should return an integer value. On this assignment, your function definitions will always start with either <code>int</code> (if they are supposed to return a value that is an integer), or <code>double</code> (if they are supposed to return a value that is a real number that may have decimals.)</li>
+  <li>The next thing that appears is the name of the function, in this case, xSquared</li>
+  <li>What comes next is always a set of parentheses. What goes inside the parentheses is a list of parameters.
+    <ul>
+      <li>Parameters are special variables that are assigned a value when we call the function (the values that are assigned to these parameters are called arguments.) </li>
+      <li>For example, if we call the function by writing int y= xSquared(3); then 3 is the argument, and x is the parameter that will be assigned the value 3.</li>
+      <li> In this case there is only one parameter, namely x. </li>
+      <li>The variable name x is preceded by the type of x, which is int in this case.</li>
+    </ul>
+  </li>
+  <li>Then, we have a set of braces { }. These braces mark the beginning and end of the body of the function</li>
+  <li>Since this function is a simple computation, we simply have the word return, followed by the formula for what we are trying to compute. On this homework assignment, all the function definitions will take this form.</li>
+  <li>We need a semicolon at the end of the return statement, after the expression—and in this case that's the only semicolon we need.<p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for more</span><br />
+</p></li>
+</ul>
+</div>
+
+<p style="page-break-before:always"><br />
+    <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span></p>
+<p>Here's another example:</p>
+<p><strong>Question</strong>: Write a function definition for a function called xCubed that takes a real number x as its parameter, and returns a real number value x<sup>3</sup> (or x times x times x).</p>
+<p><strong>Answer</strong>:</p>
+<pre>double xCubed(double x)<br />{<br /> &nbsp;&nbsp;return x*x*x;<br />}</pre>
+<p>The differences here are:</p>
+<ul>
+  <li>The function name is different—we have xCubed instead of xSquared.</li>
+  <li>The fact that it takes a real number x as its parameter, where x is not necessarily an integer—so in the parentheses <code>()</code> we have <code>(double x)</code> instead of <code>(int x)</code></li>
+  <li>The fact that it returns an answer that is a real number (not necessarily an integer), so we have <code>double</code> as the word in front of the name of the function.</li>
+  <li>The formula after the word return is different—we multiply x*x*x</li>
+</ul>
+
+                  <p>&nbsp;</p>
+       <p>One last example—this one has two parameters:</p>
+       <p><strong>Question</strong>: Write a function definition for a function called perimeterOfRectangle that takes real numbers w and h as parameters (which stand for width and height), and returns the perimeter of the rectangle as a real number. The formula is <em>p</em> = 2<em>w</em> + 2<em>h</em></p>
+       <p><strong>Answer</strong>:</p>
+       <pre>double perimeterOfRectangle(double w, double h)<br />{<br /> &nbsp;&nbsp;return 2*w + 2*h;<br />}</pre>
+       <p>Note here that:</p>
+       <ul>
+         <li>If we have two parameters, we specify the type in front of each of them, as in <code>double w, double h</code></li>
+         <li>In math notation, multplication is implied when we write a number in front of a variable (e.g,  2<em>w</em> + 2<em>h</em>), or put two single letter variables together as in <em>a=wh </em>(as in area equals width times height). But we cannot do this in most programming languages, including C. We must write the * when we want to multiply, as in <code>2*w + 2*h</code></li>
+       </ul>
+       <p>With those examples, you should be able to complete homework H04.</p>
+<hr />
+End of H04 handout
+</body>
+</html>

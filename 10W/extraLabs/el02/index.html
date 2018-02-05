@@ -1,0 +1,462 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, el02, 10W--Problem solving on arrays (Part 1)--(Practice for Final Exam)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+table.functionGroups tr td {  padding: 1em; vertical-align:top; text-align:left;} 
+table.functionGroups {width: 80%;}
+.indented {padding-left: 2em;}
+.bigSansSerif {font-family:Arial, Helvetica, sans-serif; font-size: 2.0em;}
+pre.indentedPre { padding-left: 2em; width: auto; font-size: 0.7em;}
+table.commandSummary tr td {font-size: 0.8em; padding: 0.5em;}
+/* table.commandSummary  {width: 80%;} */
+
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>el02: <span class="smallerFont">(&quot;extra lab two&quot;)<br>
+ Problem solving on arrays (Part 1)</span></h1>
+ <div class="importantDiv">
+ <p>el02 is offered as a <em><strong>recommended</strong></em> activity to help you study for the final exam.<br>
+ </p>
+ <p> It will not be graded, and is not offered for extra credit.<span class="smallerFont"></p>
+ <p>Since this is not graded:</p>
+ <ul>
+   <li>	You may do this alone, or with any pair programming partner you choose.</li>
+   <li>Suggestion:
+     <ul>
+       <li>Work on it <em>after</em> completing proj0 and el00</li>
+       <li>Make it part of your studying for the final exam.</li>
+     </ul>
+   </li>
+   </ul>
+ </div>
+ 
+ <hr>
+ <span class="smallerFont"><br>
+  </span><span class="smallerFont"></span>
+  <h2>Goals for this lab</h2>
+ <p>This lab is an exercise in problem solving&mdash;writing various functions that operate on arrays. </p>
+ <p>As a warm up, we'll solve a problem you've no doubt seen before&mdash;returning whether an integer is odd or not.</p>
+ <p>Then, we'll solve three problems dealing with arrays&mdash;in each case by writing a function to solve the problem.</p>
+ <p>The three problems are:</p>
+ <ol>
+   <li>finding the minimum value in an array</li>
+   <li>finding the maximum value in an array</li>
+   <li>finding the index of the maximum value in an array</li>
+  </ol>
+ <p>&nbsp;</p>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>Before completing this lab, you should be familiar with the following:</p>
+ <ul>
+   <li>Some basics: if/else (Etter 3.3),  for loops (Etter 3.4), using % to test for odd/even</li>
+   <li>Working with functions in C (Etter section 4.1 and 4.2)</li>
+   <li>Working with one-dimensional arrays in C (Etter section 5.1)
+     <ul>
+       <li>You should have already seen for loops used with arrays</li>
+       <li>You should know how arrays are passed to functions</li>
+     </ul>
+   </li>
+   <li>Test-driven development concepts (introduced in lab02 in W10)</li>
+   <li>Reuse of functions (introduced in lab06 in W10)
+     <ul>
+       <li>You may also want to review the section titled &quot;Custom Header File&quot; on pp. 229-230 (Etter 5.4)<br>
+       </li>
+     </ul>
+   </li>
+  </ul>
+ <h2>Step by Step Instructions</h2>
+ <h2>&nbsp;</h2>
+ <h3>Step 1: Log on to CSIL, create  ~/cs16/el02 and copy this labs files:</h3>
+ <p>&nbsp;</p>
+ <p>The files for this  lab can be found here:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/extraLabs/el02/files">http://www.cs.ucsb.edu/~pconrad/cs16/10W/extraLabs/el02/files<br>
+   </a></li>
+  </ul>
+ <p>And here:</p>
+ <p><code> ~pconrad/public_html/cs16/10W/extraLabs/el02/files/* </code></p>
+ <p>&nbsp;</p>
+ <h3>Step 2: Familiarize yourself with the test harness files</h3>
+ <p>This week's lab is about problem solving. </p>
+ <p>To allow you to focus on the problem as much as possible, we've provided a<em><strong> test harness</strong></em> for you.</p>
+ <div class="sideNoteDiv"> <p>A <em><strong>test harness</strong></em> is a software system that allows you to determine whether a piece of code you are developing has been written correctly or not.</p>
+ </div>
+ <p>So, before we start on the problem solving, we need to spend a little time getting familiar with the test harness.</p>
+ <p>Start by cd'ing into the directory ~/cs16/el02, and typing the command ls to list all of your files, as shown:  </p>
+ <pre>
+-bash-3.2$<strong> ls</strong><br>
+indexOfMax.c  maxValue.c  tdd.h                 testMaxValueMain.c
+isOdd.c       minValue.c  testIndexOfMaxMain.c  testMinValueMain.c
+Makefile      tdd.c       testIsOddMain.c
+-bash-3.2$ 
+</pre>
+ </p>
+ <p>As you can see, there are a lot of files here.   </p>
+ <p>Let's try to make sense of these by dividing them into four groups.</p>
+ <ul>
+   <li>Group 1: function definitions (stubs)
+     <ul>
+       <li><strong>These are the only files you'll be modifying in this assignment</strong></li>
+       <li><strong>Your job in this assignment is replace stubs with working code.</strong></li>
+     </ul>
+   </li>
+   <li>Group 2: main programs to run tests</li>
+   <li>Group 3: tdd.h, tdd.c&mdash;a library for test-driven development</li>
+   <li>Group 4: a Makefile to pull everything together.</li>
+ </ul>
+ <p>Now, let's look at each of these groups of file in a bit more detail:</p>
+ <ul>
+   <li>Read the explanation in the left column</li>
+   <li>Then, look at the contents of the files in that group, and try to understand the explanation.
+     <ul>
+       <li>You can either use another web browser window and click on the links to the files, or...</li>
+       <li>You can also use a terminal window, and go into the file with the editor (emacs/vi), or...</li>
+       <li>Use <code>more <em>filename</em></code> at the shell prompt to look at the contents of the files.</li>
+      </ul>
+   </li>
+   <li>When unix commands are given in the explanation, actually try them at the shell prompt.</li>
+ </ul>
+ <table border="2" cellspacing="1" cellpadding="1"class="functionGroups">
+   <tr>
+     <td ><p><strong>Group 1:</strong> <strong>stubs for functions</strong><br>
+         <br>
+       Each of these files contains </p>
+       <ul>
+         <li>a function definition in stub form</li>
+         <li>a function that runs tests on the function just defined.<br>
+            <br>
+         </li>
+        </ul>
+        
+        <p>For example, isOdd.c contains the stub:</p><pre class="indentedPre">
+// return 1 if x is odd, otherwise return 0
+int isOdd(int x)
+{
+  return -42; // stub @@@ FIX THIS 
+}
+</pre><p>Along with a void function that runs tests on isOdd:</p><pre class="indentedPre">
+int testIsOdd()
+{
+  int failures = 0; // this counts the number of failures
+
+  // We use += to add the number of failures each time...
+
+  failures += checkExpectInt("1: isOdd(1)",isOdd(1),1);
+  failures += checkExpectInt("2: isOdd(2)",isOdd(2),0);
+<span style="bigSansSerif">...</span>
+</pre><p>The other files are similar, but the functions are ones that work on arrays, such as:</p><pre class="indentedPre">
+// create a void function that multiplies two arrays of the same size and
+// place the product into a third array 
+void multiplyPairwise(int *a, int *b, int *result, int n)
+{
+  // In a stub for a void function, just do nothing and return
+  return;  // stub @@@ FIX THIS
+}
+
+</pre><p>The files maxValue.c and minValue.c actually each contain two stubs, with a test function for each one.</p></td>
+     <td><p><code><a href="files/indexOfMax.c">indexOfMax.c</a><br>
+           <a href="files/isOdd.c">isOdd.c</a><br>
+           <a href="files/maxValue.c">maxValue.c</a><br>
+          <a href="files/minValue.c">minValue.c</a><br>
+     </code></p>      </td>
+   </tr>
+   <tr>
+     <td ><p><strong>Group 2:</strong> main programs to run tests<br>
+          <br>
+       For each of the files in Group 1, there is a corresponding file in Group 2 containing the main program that tests that function. </p>
+       <p>Each of these contains a main() that:</p>
+       <ul>
+         <li>defines a variable failures that counts the number of failed tests</li>
+         <li>calls the corresponding test function</li>
+         <li>calls the function tddSummary(failures); which prints a one line report summarizing the results of the tests. </li>
+        </ul>
+       <p>The definition of tddSummary is in tdd.c, and looks like this:        </p>
+      
+           <pre class="indentedPre">
+void tddSummary(int failures)
+{
+  if (failures==0)
+    printf("All tests passed!\n");
+  else
+    printf("%d tests failed\n",failures);
+}                          
+             </pre>    </td>
+
+     <td><code><a href="files/testIndexOfMaxMain.c">testIndexOfMaxMain.c</a><br>
+         <a href="files/testIsOddMain.c">testIsOddMain.c</a><br>
+         <a href="files/testMaxValueMain.c">testMaxValueMain.c</a><br>
+        <a href="files/testMinValueMain.c">testMinValueMain.c</a><br>
+     </code></td>
+   </tr>
+   <tr>
+     <td ><p><strong>Group 3:</strong> Functions for Test-Driven Development</p>
+      <p>In lab02, we encountered functions like checkExpectInt(), checkExpectDouble(), etc.<br>
+        <br>
+      It is tedious to have to include those functions in every single function we write. </p>
+      <p>A more efficient approach is to put those functions into a library and reuse them&mdash;much the same way we access printf and scanf out of #include &lt;stdio.h&gt;.<br>
+        <br>
+      The file tdd.h contains function prototypes for these functions&mdash;just by putting #include &quot;tdd.h&quot; in each of the files in Group&nbsp;1, we can put use these functions without having to define them all over again.</p>
+<pre class="indentedPre">
+int assertTrue(char * label, int  assertion);
+int checkExpectInt(char * label, int check, int expect);
+int checkExpectDouble(char * label, double check, double expect, <br>                double tolerance);
+int checkExpectIntArray(char * label, int * check, int * expect, int n); 
+void tddSummary(int failures);
+
+</pre>      
+<p>Of course, it is still necessary to have the function definitions someplace. Those are in the file tdd.c&mdash;and when we compile, we have to mention that file, as in this example. (The <code>-o testIsOdd </code>part means that the executable file will be called<code> testIsOdd):</code><br>
+  <br>
+  <pre class="indentedPre">-bash-3.2$ <strong>cc isOdd.c tdd.c testIsOddMain.c -o testIsOdd</strong>
+-bash-3.2$ </pre>
+<p>Try that&mdash;and then run the test program with <code>./testIsOdd</code>&mdash;you should see the familar messages for failed tests from a stub:</p>
+<pre class="indentedPre">-bash-3.2$ <strong>./testIsOdd</strong>
+Test 1: isOdd(1) FAILED: got -42 expected 1
+Test 2: isOdd(2) FAILED: got -42 expected 0
+<span class="bigSansSerif">...</span>
+</pre>
+<p>
+  Then, see if you can figure out the command you need to type to compile and run the test program that go with  each of the folllowing (they are similar):<code> indexMax.c</code>, <code>maxValue.c</code>, <code>minValue.c</code>.<br>
+  <br>
+  <br>
+  Having to type all of that each time we want to compile a file is also tedious&mdash;so there is a way to give the <code>make</code> command the information it needs to automate that process for us&mdash;that brings us to the only file in Group 4, namely the <a href="files/Makefile"><code>Makefile</code></a>.</p>
+</td>
+     <td><code><a href="files/tdd.h">tdd.h</a><br>
+         <a href="files/tdd.c">tdd.c</a></code></td>
+   </tr>
+   <tr>
+     <td ><p><strong>Group 4: The Makefile</strong></p>
+      <p>This group consists of a single file called <code>Makefile</code>&mdash;the information in the Makefile makes reusing functions much easier.<br>
+        <br>
+      As you may remember from an earlier lab (in Winter 2010, this was <a href="../../../10W/labs/lab06/">lab06</a>), when we split up function definitions across multiple files, we have to bring all of those files together when we compile our program with a command such as:</p>
+      
+  <pre>-bash-3.2$ <strong>cc isOdd.c tdd.c testIsOddMain.c -o testIsOdd</strong><br>
+-bash-3.2$ </pre>    
+      
+      <p>The Makefile contains lines called <em>rules</em> that automate this process.   This allows us to simply type <code>make</code> at the Unix prompt, and the proper compiler commands are automatically run&mdash;for example:</p>
+<pre class="indentedPre">
+-bash-3.2$ <strong>make</strong>
+cc indexOfMax.c tdd.c testIndexOfMaxMain.c -o testIndexOfMax
+cc isOdd.c tdd.c testIsOddMain.c -o testIsOdd
+
+
+cc maxValue.c tdd.c testMaxValueMain.c -o testMaxValue
+cc minValue.c tdd.c testMinValueMain.c -o testMinValue
+
+-bash-3.2$ 
+</pre>      
+<p>The Makefile also contains rules that allow several special commands to be type. Try each of these at the shell prompt:</p>
+
+<table border="2" cellspacing="1" cellpadding="1" class="commandSummary">
+  <tr>
+    <td style="width: 8em;"><code>make</code></td>
+    <td>Compile all of the programs.</td>
+  </tr>
+  <tr>
+    <td style="width: 8em;"><code>make all</code></td>
+    <td><p>Compile all of the programs.</p>
+      <p>Because this is the first rule in the file, it is also the default rule&mdash;the one that is run when you just type make</p></td>
+  </tr>
+  <tr>
+    <td><code>make clean</code></td>
+    <td>Delete all of the executable files&mdash;typing this before make all allows you to recompile everything from scratch.</td>
+  </tr>
+  <tr>
+    <td><code>make test</code></td>
+    <td>Run each of the test programs.<br>
+      If the programs aren't compiled yet, this rule will do a make all first.</td>
+  </tr>
+</table>
+<p>For now, don't worry about the syntax of the rules in the Makefile</p>
+<ul>
+  <li>You won't have to write any of those rules in this assignment</li>
+  <li>You won't need to modify the contents of the Makefile in any way</li>
+  <li>The details of Makefiles are not covered on any exam in this course.</li>
+  <li>For now, it is enough to understand how to use the commands<br>
+  listed in the table above (<code>make</code>, <code>make all</code> , <code>make clean</code>, <code>make test</code>)</li>
+  <li>Learning how to write your own Makefile is a topic for later courses<br>
+    (CMPSC32, CMPSC48).</li>
+</ul>
+</td>
+     <td><a href="files/Makefile"><code>Makefile</code></a></td>
+   </tr>
+ </table>
+ <h4>Summarizing what we've seen here</h4>
+ <p>To summarize:</p>
+ <ul>
+   <li>We have a set of files, each of which contains a stub for some function, and a test for that function
+     <ul>
+       <li><code><a href="files/indexOfMax.c">indexOfMax.c</a>, <a href="files/isOdd.c">isOdd.c</a></code>, ... </li>
+       <li>Your job will be to replace the stubs with working code.</li>
+     </ul>
+   </li>
+   <li>For each of those files, there is a main program that tests that function
+     <ul>
+       <li><code><a href="files/testIndexOfMaxMain.c">testIndexOfMaxMain.c</a>, <a href="files/testIsOddMain.c">testIsOddMain.c</a></code>, ...</li>
+       <li>These main programs are already supplied for you.</li>
+     </ul>
+   </li>
+   <li>In each case, the file relies on a library of test-driven development functions already written for you:
+     <ul>
+       <li> <a href="files/tdd.h"><code>tdd.h</code></a> has the prototypes</li>
+       <li><a href="files/tdd.c"><code>tdd,c</code></a> has the function definitions</li>
+       <li>To  you have to use a long form compile comand such as:<br>
+        <strong><code>cc isOdd.c tdd.c testIsOddMain.c -o testIsOdd</code></strong></li>
+      </ul>
+   </li>
+   <li>To avoid the tedium of all those long form compile commands, we use a <a href="files/Makefile"><code>Makefile</code></a>
+     <ul>
+       <li>That allows us to just use <strong><code>make all</code></strong>, <strong><code>make clean</code></strong>, <strong><code>make test</code></strong><br>
+         </li>
+     </ul>
+   </li>
+  </ul>
+ <h3>&nbsp;</h3>
+ <h3>Step 2: Practicing working with the test harness on the isOdd function</h3>
+ <p>Before we move on to the problem solving, let's practice a bit with the test harness.</p>
+ <p>Working from your ~/cs16/el02 directory, type the commands shown below at the Unix prompt&mdash;this will<br>
+ </p>
+ <ul>
+   <li> clean out any old executables (<code>make clean</code>)</li>
+   <li>compile the test program for the isOdd() function (<code>make testIsOdd</code>)</li>
+   <li>and then run the test program (<code>./testIsOdd</code>)  </li>
+ </ul>
+ <pre class="indentedPre">-bash-3.2$ <strong>make clean</strong>
+/bin/rm -f testIndexOfMax testIsOdd testMaxValue testMinValue 
+-bash-3.2$ <strong>make testIsOdd</strong>
+cc isOdd.c tdd.c testIsOddMain.c -o testIsOdd
+-bash-3.2$ <strong>./testIsOdd</strong>
+Test 1: isOdd(1) FAILED: got -42 expected 1
+Test 2: isOdd(2) FAILED: got -42 expected 0
+Test 3: isOdd(33) FAILED: got -42 expected 1
+Test 4: isOdd(44) FAILED: got -42 expected 0
+Test 5: isOdd(-7) FAILED: got -42 expected 1
+Test 6: isOdd(-8) FAILED: got -42 expected 0
+6 tests failed
+-bash-3.2$ </pre>
+ </p>
+ <p>Now, open up isOdd.c in the editor, and locate the stub for the isOdd() function.</p>
+ <p>Change the stub code (the code that returns -42) to code that:</p>
+ <ul>
+   <li>returns 1 when x is odd</li>
+   <li>return 0 when x is not odd (i.e. when x is even)</li>
+  </ul>
+ <p>Once you've done that, repeat the <code>make testIsOdd</code> and <code>./testIsOdd</code> steps, and the tests should pass:  </p>
+ <pre>
+-bash-3.2$ <strong>make testIsOdd</strong>
+cc isOdd.c tdd.c testIsOddMain.c -o testIsOdd
+-bash-3.2$ <strong>./testIsOdd</strong>
+Test 1: isOdd(1) passed
+Test 2: isOdd(2) passed
+Test 3: isOdd(33) passed
+Test 4: isOdd(44) passed
+Test 5: isOdd(-7) passed
+Test 6: isOdd(-8) passed
+All tests passed!
+-bash-3.2$ 
+  </pre>
+ <p>Note that is is not necessary to run the <code>make clean</code> step every time:</p>
+ <ul>
+   <li>Usually,     <code>make testIsOdd</code>    is enough (put any of the test programs in place of testIsOdd).</li>
+   <li><code>make clean</code> is generally used only right before make to force one or more programs to be recompiled</li>
+   <li>Otherwise, if the program has already been compiled, and none of the none of the files it depends on have been changed, you'll get the message:<code> 'testIsOdd' is up to date. </code>
+     <pre>-bash-3.2$ <strong>make testIsOdd</strong>
+make: `testIsOdd' is up to date.
+-bash-3.2$ 
+</pre>
+   </li>
+   <li>You also can use the make clean rule if you want to delete the executables to save disk space after you are finished running a program. (You can always remake it from the .c files if you need it again.)</li>
+ </ul>
+ <p>You'll repeat this process for each of the remaining problems in this assignment:</p>
+ <ol>
+   <li>make the test program and run it, to see that all the tests fail</li>
+   <li>edit the function to replace it with code that you think will solve the problem</li>
+   <li>make the test program again, and hopefully the tests pass&mdash;if not, repeat  2 and 3 as needed.</li>
+  </ol>
+ <h3>Step 3: Finding the maximum   value in an array</h3>
+ <p>Next, at the shell prompt, use the commands:</p>
+ <p class="indented">
+  <strong><code>make testMaxValue</code></strong> to compile the test program<br>
+  <strong><code>./testMaxValue</code></strong> to run the tests for the functions in maxValue.c</p>
+ <p>In the output, you'll see that this time we are testing two functions:</p>
+ <ul>
+   <li><code>larger(num1, num2)</code>  which returns the larger of two double values</li>
+   <li><code>maxValue(a, n)</code> which returns the largest value in an array of doubles</li>
+  </ul>
+ <p>Make sure you understand the test cases:</p>
+ <ul>
+   <li>You can find them inside the file <a href="files/maxValue.c"><code>maxValue.c</code></a>. in the <code>testMaxValue()</code> function.</li>
+ </ul>
+ <p>After seeing the tests fail, open up <code>maxValue.c</code> in the editor (emacs or vi) and change the stubs to functions that return the correct values.</p>
+ <p>Some hints:</p>
+ <ul>
+   <li>Use a variable called max to store the largest value you've seen so far&mdash;initialize it to the first element in the array (remember that arrays start at zero in C).</li>
+   <li>Use a for loop that steps through every value in the array</li>
+   <li> Inside the loop, compare each element in the array with max&mdash;if this element is larger, then change the value of max.</li>
+   <li>Return the value of max, but only after you've looked at every element in the array.</li>
+  </ul>
+ <p>When all the tests pass, move on to the the next problem&mdash;finding the minimum value in an array.</p>
+ <h3>Step 4: Finding the minimum value in an array</h3>
+ <p>Next, at the shell prompt, use the commands:</p>
+ <p class="indented">
+  <strong><code>make testMinValue</code></strong> to compile the test program<br>
+  <strong><code>./testMinValue</code></strong> to run the tests for the functions in minValue.c</p>
+ <p>As with testMaxValue, we are testing two functions, not just one&mdash;but this time they are:</p>
+ <ul>
+   <li><code>smaller(num1, num2)</code> which returns the smaller of two double values</li>
+   <li><code>minValue(a, n)</code> which returns the smallest value in an array of doubles</li>
+ </ul>
+ <p>Make sure you understand the test cases:</p>
+ <ul>
+   <li>You can find them inside the file <a href="files/minValue.c"><code>minValue.c</code></a>. in the <code>testMinValue()</code> function.</li>
+ </ul>
+ <p>Proceed as before&mdash;use <strong><code>emacs minValue.c</code></strong> to replace the stubs with correct code.</p>
+ <p>Finding the smallest value in an array is pretty similar to finding the largest value&mdash;so you shouldn't need any additional hints.</p>
+ <h3><br>
+   Step 5: Finding the <em>index</em> of the maximum value in an array</h3>
+ <p>The next problem requires us to think carefully about the difference between indexes and values.</p>
+ <p>As a reminder of the difference, consider the following array:</p>
+ <p><code>int a[] = {12, 78, 99,  34, 56};</code></p>
+ <p>In this array:</p>
+ <ul>
+   <li> The values are 12, 78, 99, 34 and 56,</li>
+   <li>The indexes (or indices) are 0, 1, 2, 3, 4.</li>
+   <li>The largest value is 99, and the index of the largest value is 2.</li>
+ </ul>
+ <p>To see the test cases, at the shell prompt, run the commands:</p>
+ <p class="indented"> <strong><code>make testIndexOfMax</code></strong> to compile the test program<br>
+     <strong><code>./testIndexOfMax </code></strong>to run the tests for the functions in indexOfMax.c</p>
+ <p>Make sure you understand the test cases&mdash;they are in the <code>testIndexOfMax()</code> function in <a href="files/indexOfMax.c"><code>indexOfMax.c</code></a>:</p>
+ <ul>
+   <li>Note that some of them use the trick of &quot;lying&quot; about the size of the array&mdash;i.e. passing in a value for the size of the array that causes the function to only consider a portion of the array (e.g. the first 3 values, or the first 4 values).</li>
+   <li>This trick can often be very useful when we want to consider only part of an array&mdash;this is used, for example, in some versions of selection sort.</li>
+   <li>Read the comments in the file <a href="files/indexOfMax.c"><code>indexOfMax.c</code></a><a href="files/testIndexOfMaxMain.c"></a> for more information.</li>
+ </ul>
+ <p>Once you understand the test cases, proceed to solve the problem by editing the <code>indexOfMax()</code> function inside <a href="files/indexOfMax.c"><code>indexOfMax.c</code></a> and get the tests to pass. </p>
+ <p><strong>If you get to this point, you are finished.</strong></p>
+ <p><strong>This is an extra lab, only for practice&mdash;to help prepare for the final exam&mdash;so there is nothing to turn in.</strong></p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

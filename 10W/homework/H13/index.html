@@ -1,0 +1,165 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, H13 (Type Expressions)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.9em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.style5 {font-family: Verdana, Arial, Helvetica, sans-serif}
+.smallerFont {font-size: 0.9em;}
+.style2 {font-size: larger}
+.style6 {font-size: small}
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, UCSB—H13:  (Type Expressions) <span id="pointCount">Total points: ?</span> (<a href="H13.pdf">printable PDF</a>)<br />
+</p>
+<hr />
+<p>Name: (3 pts)___________________________  <span>UMail address (4 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (3 pts) Circle one:         3pm       4pm         5pm           unknown<br />
+    <br />
+  Name of your pair programming partner, if you work together: <br />
+</p>
+<p align="center" class="style2">This assignment is due <strong>IN Lecture on Tuesday 02/23. </strong><br />
+    <strong>It may ONLY be turned in during Lecture on Tuesday<br />
+<span class="style6">(usual policies apply)</span></strong></p>
+<hr />
+<br />
+<p>The lecture on 02/18 covered &quot;type expressions&quot; in C—some notes from that lecture are available on the <a href="../../lectures/02.18/index.html">handout</a> that was given out in class.</p>
+<p>Together with this homework assignment, there is a program (on a separate handout).</p>
+<ul>
+  <li>If you didn't get one, you can find the program at:<br />
+    <a href="files/types.c">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H13/files/types.c</a><br />
+  </li>
+</ul>
+<p>Assuming each of the expressions below appeared in this program, indicate the type they would have.<br />
+  The first few are done for you as an example.</p>
+<p>Hints--for full credit:</p>
+<ul>
+  <li> don't write<em> pointer to character</em>; instead, write <strong>char *</strong></li>
+  <li>don't write<em> address of int</em>; instead, write <strong>int *</strong></li>
+</ul>
+<p>(40 pts) (2 points each for the ones not already filled in)<br />
+</p>
+<table border="1" cellspacing="1" cellpadding="1">
+  <tr>
+    <td width="90">Expression</td>
+    <td width="199">Type</td>
+    <td width="13" bgcolor="#000000">&nbsp;&nbsp; &nbsp;  </td>
+    <td width="90">Expression</td>
+    <td width="199">Type</td>
+  </tr>
+  <tr>
+    <td>x</td>
+    <td><span class="style5">int</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>end</td>
+    <td>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;x</td>
+    <td><span class="style5">int *</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>end.hrs</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>*x</td>
+    <td><span class="style5">error</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>end-&gt;min</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>c.center</td>
+    <td><span class="style5">struct Point</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;(end-&gt;min)</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;(c.center.x)</td>
+    <td><span class="style5">double *</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>pt</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>*val</td>
+    <td><span class="style5">double</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>argc</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>c.x</td>
+    <td><span class="style5">error</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;argc</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;end</td>
+    <td><span class="style5">struct Time **</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>*argc</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>(*cir).x</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>argv[0]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>(*cir).radius</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>argv[0][0]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>cir-&gt;center</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;num</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>cir-&gt;center.y</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;y</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>cir-&gt;center-&gt;y</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;val</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>start</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>*num</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<hr />
+End of H13
+</body>
+</html>

@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Feedback on q1, from CS16 Midterm 1, 10W, Conrad, UCSB</title>
+<meta http-equiv="Content-Type" content="text /html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+body {width: 7.7in; margin-left:0.4in; margin-right: 0.4in;padding-left:1em;}
+h2, h3 {font-family:Arial, Helvetica, sans-serif;}
+div.framed { border-style: outset; border-width: 1em; border-color: #666666; padding: 2em; }
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+pre.forLoopPre {width:15em;}
+pre.trianglePre{width:7em;}
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+
+
+pre {width:20em;}
+
+.nobreak {white-space:nowrap;}
+.pageBreakBefore {padding-top: 2em;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions">Followup on Question 1 from<br />
+  CS16 Midterm Exam 1<br />
+  <span class="subhead">E01, 10W, Phill Conrad, UC Santa Barbara<br /> 
+ Tuesday, 02/02/2010, 11am-12:15pm</span> </h1>
+<p class="instructions">&nbsp;</p>
+<hr />
+<p><br />
+  Nearly half the class received a perfect score on this problem
+(34/72 responses, ~47%).</p>
+<p>The total breakdown was as follows (all percentages rounded to nearest whole number):</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">&nbsp;</th>
+    <th scope="col"><div align="right"></div></th>
+    <th scope="col"><div align="right"></div></th>
+  </tr>
+  <tr>
+    <th scope="row">Correct Answers</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">34</div></td>
+    <td><div align="right">47%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>Group 1</td>
+    <td>23</td>
+    <td><div align="right"></div></td>
+    <td><div align="right"></div></td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>Group 2</td>
+    <td>12</td>
+    <td><div align="right"></div></td>
+    <td><div align="right"></div></td>
+  </tr>
+  <tr>
+    <th scope="row">Syntax errors only</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">6</div></td>
+    <td><div align="right">8%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">At least one minor error,<br />
+    but no major errors</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">13</div></td>
+    <td><div align="right">18%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">At least one major error</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">18</div></td>
+    <td><div align="right">25%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">Blank Papers</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">1</div></td>
+    <td><div align="right">1%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">TOTAL</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">72</div></td>
+    <td><div align="right">100%</div></td>
+  </tr>
+</table>
+<p>There are many ways to answer this question correctly—here's an analysis of the correct answers I got:<br />
+</p>
+<h2>Correct Answer Group 1: (23/72 responses, ~32%)<br /> 
+Simple one line function
+</h2>
+<p> Most folks gave the following answer exactly—with the only difference between the choice of function name, or the choice of parameters names for a,b</p>
+<pre class="widePre">int squareOfDiff (int a, int b)<br />{<br />  return (a-b) * (a-b);<br />}</pre>
+
+<p> Among this group, choices of names for the function and the variables names broke down as follows</p>
+<div style="float:left; width: 30em;">
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">name</th>
+    <th scope="col">count</th>
+  </tr>
+  <tr>
+    <td>squareOfDiff</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>squareDifference</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>diffSquared</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>differenceSquared</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>squaredif</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>squareOfDiff</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>squareOfDifference</td>
+    <td>6</td>
+  </tr>
+  <tr>
+    <td>sqDifference</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>squareDif</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>square</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>difference</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>squareFunction</td>
+    <td>1</td>
+  </tr>
+</table></div>
+<div style=" margin-left: 3em; padding-left:3em;">
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">name</th>
+    <th scope="col">count</th>
+  </tr>
+  <tr>
+    <td>int a, int b</td>
+    <td>21</td>
+  </tr>
+  <tr>
+    <td>int num1, int num2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>int var1, int var 2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>Note that strictly speaking, I could have deducted points for answers other than int a, int b, since the instructions were specific about what the names of the formal parameters should be. I didn't this time, but I reserve the right to do so on the 2nd midterm or final exam.</p>
+</div>
+<h2 style="clear:both"><br />
+  Correct Answer Group 2: (@@/72 responses, ~@@%)<br />
+Using extra variables</h2>
+<p>The only other kind of correct responses students turned in used local variables in various ways. This is not wrong, but it is probably overkill for this kind of a function.</p>
+<p>Here are the various kinds of answers I saw:</p>
+<h3>Correct answer group 2a: temporary variable for (a-b) (<span style="clear:both"> (8/72 responses, ~10%)</span></h3>
+<pre class="widePre">int squareOfDiff (int a, int b)<br />{<br />  int difference;
+  difference = a-b;
+  return difference * difference;<br />}</pre>
+<p>The most popular choice of name for this variable was c (5 papers), with one paper using d, and only one using difference.<br />
+</p>
+<p>Other slight variations were in whether the assignment and declaration were separate as in the answer above (3 papers) or combined as in this answer (4 papers):</p>
+<pre class="widePre">int squareOfDiff (int a, int b)<br />{<br />  int c=a-b;
+  return c * c;<br />}<br />
+</pre>
+<h3>Correct answer group 2b: temporary variable for squared<span style="clear:both"> (1/72 responses, ~1%)</span></h3>
+<p>The next paper was almost the same, but used a different local variable:</p>
+<pre class="widePre">int squareOfDiff (int a, int b)<br />{<br />  int squared;
+  squared = (a-b) * (a-b);
+  return squared;<br />}</pre>
+<h3>Correct Answer group 2c (2/72 responses, ~3%)</h3>
+<p>The next group of responses made things even more complicated by introducting local variables for both the difference and the final result:</p>
+<pre class="widePre">int squareOfDiff (int a, int b)<br />{<br />  int difference;
+  int squared;
+  difference = a-b;
+  squared = difference * difference;
+  return squared;
+}<br />
+</pre>
+<h3>Correct Answer 2d (1/72, ~1%)</h3>
+<p>One answer introduced a whole other level of complication. This answer is technically &quot;correct&quot; in the sense that it will produce the correct output for each different set of input values for a,b—but it is needlessly complex.</p>
+<p>As an exercise: what basic mathematical fact is the person who wrote this code overlooking that could simplify the code greatly?<br />
+  <br />
+</p>
+<pre class="widePre">int function (int a, int b)<br />{<br />  int squaredvalue;
+  int difference;
+  if (a &gt; b)
+    difference = a-b;
+  else
+    difference = b-a;
+  squaredvalue = difference * difference;
+  return squaredvalue;
+}</pre>
+<p>Also I'd point out that the name &quot;function&quot; is not a keyword, so it is, technically speaking, a legal function name—neverthless, it is probably not the best choice as it is probably the least descriptive name possible. It is sort of like naming a baby boy &quot;he&quot;, or a baby girl &quot;she&quot;.<br />
+  <br />
+And finally in this group, it is also possible to count from 1 to height, but then you must adjust the parameters to the function by subtracting 1 from i:</p>
+<h2>Correct responses with only syntax errors (6/72, ~8%)</h2>
+<p>There were 7 papers that had correct answers with only syntax errors.</p>
+<p>The totals below may not add to 7 because there were some papers on which more than one error appeared.</p>
+<h3>syntax error 1: implicit multiplication (-2) (2/72 papers)</h3>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><span class="widePre">
+<pre>
+int squareOfDiff(int a, int b)
+{
+  return (a-b)(a-b);
+}</pre>
+    </span></td>
+    <td><span class="widePre">
+<pre>
+int squareOfDiff(int a, int b)
+{
+  return (a-b) <strong>*</strong> (a-b);
+}</pre>
+    </span></td>
+  </tr>
+</table>
+<h3>syntax error 2: no ; on end of first line of function def (-2) (2/72 papers)</h3>
+<p>&nbsp;</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a, int b)<strong>;</strong>
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a, int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<h3>syntax error 3: missing semicolon on line in function body (-1) (6/72 papers)</h3>
+<p>&nbsp;</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><span class="widePre">
+      <pre>
+int squareOfDiff(int a, int b)
+{
+  return (a-b)*(a-b)
+}</pre>
+    </span></td>
+    <td><span class="widePre">
+      <pre>
+int squareOfDiff(int a, int b)
+{
+  return (a-b)<strong>*</strong>(a-b)<strong>;</strong>
+}</pre>
+    </span></td>
+  </tr>
+</table>
+<h3>syntax error 4: no { } on function body (-3) (3/72 papers)</h3>
+<p>This error may arise from a confusion with the Python syntax where { } is not required.</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><span class="widePre">
+      <pre>
+int squareOfDiff(int a, int b)
+
+  return (a-b) * (a-b);
+</pre>
+    </span></td>
+    <td>      <pre><span class="widePre">
+int squareOfDiff(int a, int b)
+<strong>{</strong>
+  return (a-b) * (a-b);
+<strong>}</strong></span></pre>    </td>
+  </tr>
+</table>
+<h3>syntax error 5: semicolon  vs. comma in function header (-1) (1/72 papers)</h3>
+<p>&nbsp;</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td>      <pre><span class="widePre">
+int squareOfDiff(int a<strong>;</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre></td>
+    <td>      <pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>    </td>
+  </tr>
+</table>
+<h3>syntax error 6: failing to declare a variable (-2) (1/72 papers)</h3>
+<p>In C (unlike in Python) variables must be declared before they are used.</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>;</strong> int b)
+{
+  value =  (a-b) * (a-b);
+  return value;
+}</span></pre></td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+ <strong> int value;</strong>
+  value =  (a-b) * (a-b);
+  return value;
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+
+<h2>Minor  Errors (12/72, ~17%)</h2>
+<p>The distinction between minor errors and major errors is a bit subjective, I admit. </p>
+<p>In any case, I categorized the following as minor errors. This category  includes some things that are in the grey area between syntax and logical errors.</p>
+<p>Subtotals may not sum to the category total because some papers had more than one error.</p>
+<h3>Minor  error 1: return type of double instead of int (-1 or -2) (4/72 papers)</h3>
+<p>One version of this error is getting the return type wrong (-1)</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+<strong>double</strong> squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre></td>
+    <td><pre><span class="widePre">
+<strong>int</strong> squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<p>Another version of this error is getting the parameter types wrong (-2)</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">
+int squareOfDiff(<strong>double</strong> a<strong>,</strong> <strong>double</strong> b)
+{
+  return (a-b) * (a-b);
+}</pre></td>
+    <td><pre class="widePre">
+int squareOfDiff(<strong>int</strong> a<strong>,</strong> <strong>int</strong> b)
+{
+  return (a-b) * (a-b);
+}</pre></td>
+  </tr>
+</table>
+<h3>Minor  error 2: ^2 doesn't do exponentiation (-2) (2/72 papers)</h3>
+<p>&nbsp;</p>
+<p>In some languages, the ^ operator can be used to raise a quantity to a power. In C/C++, however, the ^ operator doesn't raise a quantity to a power. Instead, it performs the operation &quot;bitwise exclusive or&quot;, which is an entirely different operation.</p>
+<p> That's an bit of C's history as an OS development language showing through: the bitwise exclusive or operation  is useful in low-level programming for things like device drivers, network routers, compression algorithms, etc., but not so much in a first programming course. So, this is one of those things you just need to memorize: stay away from ^ in C unless you know what &quot;bitwise exclusive or&quot; is, and know that this is what you really want!</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b)<strong>^2</strong>;
+}</span></pre></td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<h3>Minor  error 3: void vs. int for return type (-2) (6/72 papers)</h3>
+<p>If a function contains a return statement with something after it, such as (a-b)*(a-b), it cannot be a void function. Instead, the return type must match the return type of the expression that comes after the word return, i.e. in this case, int.</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+<strong>void</strong> squareOfDiff(int a<strong>,</strong> int b)
+{
+  <strong>return</strong> (a-b) * (a-b);
+}</span></pre></td>
+    <td><pre><span class="widePre">
+<strong>int</strong> squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<h3>Minor  error 4: using Python keyword def in  C function definition (-2) (1/72 papers)</h3>
+<p>In Python, function definitions start with <code>def</code>. But in C, they start with the type of the quantity returned, e.g . <code>int</code>, <code>double</code>, etc. or <code>void</code> if the function doesn't give back a return value.</p>
+<p>(Side note: In Python, a given function can return more than one type of expression, but in C, any given function is restricted to only one type of return value. There are pros/cons to each approach to language design—that's something you can learn more about in the upper division course CMPSC162.)</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+<strong>def</strong> squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre></td>
+    <td><pre><span class="widePre">
+<strong>int</strong> squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<h3>Minor  error 5: omitting return type in  C function definition (-2) (5/72 papers)</h3>
+<p>In a C function definition, the name of the function is preceeded with the type of the quantity returned, e.g . <code>int</code>, <code>double</code>, etc. or <code>void</code> if the function doesn't give back a return value.<br />
+  <br />
+Strictly speaking, it is permitted to omit the return type if the return type is int. However, I would still argue that to rely on this is a serious style violation, worth a 2 point deduction.</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+<strong></strong>squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre></td>
+    <td><pre><span class="widePre">
+<strong>int</strong> squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<h3>Minor  error 6: pow not appropriate in this context (-1) (1/72 papers)</h3>
+<p>There is a built-in function called pow that will raise a quantity to a power. However, the value it returns is of type double. So, if it were used here, you'd either need to convert the result back to an int, or have double as the return type of the function. </p>
+<p>In general, pow is appropriate when working with doubles, but not when working with integer quantities.</p>
+<p>This is a debatable point, but in the end I decided that a 1 point deduction was warranted, if nothing else, to call attention to the issue.</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  return pow(a-b,2);
+}</span></pre></td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<h2>Major  Errors (18/72,  25%)</h2>
+<p>Sixteen of the responses contained at least one major  error. These are listed here in no particular order—i.e. they are not &quot;most serious to least serious&quot;, for example—this is just the order in which I pulled them from the stack of papers.</p>
+<p>Again, some of these relate to logic while others relate to syntax, but they all represent serious gaps in understanding how to write a proper function definition in C.</p>
+<p>Again, the subtotals may not add up to the category total—the subtotals represent the number of times each error occurred on any paper, but some papers had more than one error.</p>
+<h3>major  error 1: misunderstanding printf vs. return (-2 or -5) (8/72 papers)</h3>
+<p>One of the most crucial things to understand in this course is the difference between printing a result on the screen, and returning a value from a function.</p>
+<p><strong><code></code></strong>Here's a sample of an incorrect answer vs. a correct answer:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  int result = (a-b) * (a-b);<br />  <strong>printf(&quot;result=%d\n&quot;,result);
+  return 0;</strong>
+}</span></pre></td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  int result = (a-b) * (a-b);<br />  <strong>return result;</strong>
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<p>The answer on the right—the correct answer—shows how to return a value. </p>
+<p>Why does this distinction matter so much? Here's why:</p>
+<p>When a function returns a value, that value can be used in many different ways: it can be printed on the screen, written to a file, sent over the internet,  passed to another function, or stored in a variable for later use.   </p>
+<p>By contrast, a function that just prints a value can do one and only one thing—print that value. Period. This is not nearly as useful.</p>
+<p>Please—if you made this mistake, and don't understand the difference, come to office hours for additional help with this issue.</p>
+<p>A less serious, but still signifcant version of this error was including a gratuitous printf in an otherwise correct function. This only resulted in a deduction of -2, but is still a significant misstep:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  int result = (a-b) * (a-b);<br />  <strong>printf(&quot;result=%d\n&quot;,result);</strong>
+  return result;
+}</span></pre></td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  int result = (a-b) * (a-b);<br />  return result;
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h3>major 2:<br /> 
+not understanding  basic form of C function definition (-5) (7/72 papers, 8%)</h3>
+<p>Even more basic that understanding how to return a value (see major error 1), is understanding the form of a function definition in the first place.</p>
+<p>Here are a few examples of wrong answers. In each case, can you identify both what is right about the answer, and what is wrong?</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col"><p>Incorrect</p>    </th>
+  </tr>
+  <tr>
+    <td><pre class="widePre">
+squareOfDiff(a<strong>,</strong> b);
+int a;
+int b;
+{
+  printf(&quot;result=%d\n&quot;,(int a - int b) * (int  a - int b));
+
+}</span>
+return 0;</pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">int a, b;
+{
+  return (a-b) * (a-b); 
+}</pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">int a;
+int b;
+int difference = a-b;
+return difference * difference;
+</pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">int a, b, c;
+c = (a-b) * (a-b)
+return c;
+  </pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">int a;
+int b;
+return (a-b) * (a-b)</pre></td>
+  </tr>
+  <tr>
+    <td><pre class="widePre">squareofdifference<br />{
+  int a;
+  int b;
+  return (a-b) * (a-b);<br />}</pre></td>
+  </tr>
+</table>
+<p>If your answer is similar to one of these, then you are still missing a crucial concept, and you need much more practice with writing basic function definitions. Please come to office hours for more help!</p>
+<h3>major  error 3:<br />
+  shadowing formal parameters (-5) (3/72 papers, 8%)</h3>
+<p>This is a subtle error, but an important one to learn about.</p>
+<p>If you declare a local variable that has the same name as a formal parameter, this is called &quot;shadowing&quot; the parameter. </p>
+<p>If you look up in the night sky, you may be able to see many stars. If you can't see the stars, it doesn't mean they are not there—it just means that there may be clouds or fog in the way. And if you look up in the day time, the stars are still there—you just can't see them because the sun's light is too bright.</p>
+<p>What does this have to do with C programming? Consider the following pair of incorrect and correct functions:</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  <strong>int a;
+  int b;</strong>
+  return (a-b) * (a-b);<br />
+}</span></pre></td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a<strong>,</strong> int b)
+{
+  return (a-b) * (a-b);
+}</span></pre>    </td>
+  </tr>
+</table>
+<p>The functions are the same, except the incorrect one has two extra lines declaring local variables a and b. The problem is that when we compute the value result, instead of using the values that were passsed into the function, we are using the<em> uninitialized values</em> of the local variables a and b. These local variables happen to have the same <em>names</em> as the formal parameters a and b, but they are <em>different variables.</em></p>
+<p>Thus, the value returned will be <em>completely unpredictable.</em></p>
+<p>So, it is important to NOT declare local variables with the same names as your formal parameters. </p>
+<p>This is a very common mistake that students make not only in C (in courses like CS16) but also later courses in C++ such as CS24, CS32, CS130A and in Java in CS56. This comes up again in writing member functions for C++ and Java classes (where not only can you shadow a formal parameter, but also a class  variable). So it is good to learn about this idea early on.</p>
+<p>&nbsp;</p>
+<h3>Major errors 4: misc major errors  (3/72, ~4%)</h3>
+<p>One paper had illegible symbols in key places, making it impossible to determine whether the answer was correct or not. Strictly I could have deducted for syntax errors 1 and 3, ( total of -3 off) but I generously only deducted 2 pts.</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect<br />
+      <code>@</code> appears where there were illegible smudges</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a, int b)
+{
+  return (a-b)<strong>@</strong>(a-b)<strong>@</strong>
+}</span></pre>
+    </td>
+    <td><pre><span class="widePre">
+int squareOfDiff(int a, int b)
+{
+  return (a-b)<strong>*</strong>(a-b)<strong>;</strong>
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<p>Another paper contained syntax error #3, minor error #2, and major error #2 along with this logic error:</p>
+<p><code>value = (a * a) - (b * b);</code></p>
+<p>Given that the problem stated that you needed to return the quantity (a-b)<sup>2</sup>, which evalutes to a<sup>2</sup> - 2ab + b<sup>2</sup>, I think we'd have to categorize this as an algebra error or a logic error. I deducted -3.</p>
+<p>Finally one paper contained the following. Note the the superscript(<sup> 2</sup>) was part of the answer—even though that could not possibly be written in a C program. Also note that the R in return was capitalized, which is not something we can do in C.</p>
+<table border="2" cellpadding="4" cellspacing="4">
+  <tr>
+    <th scope="col">Incorrect<br />
+        <code>@</code> appears where there were illegible smudges</th>
+    <th scope="col">Correct</th>
+  </tr>
+  <tr>
+    <td><p>int differenceOfTwo(int a, int b)<br />
+      {<br />
+    &nbsp;&nbsp; (a - b)<sup>2</sup>;<br />
+    &nbsp;&nbsp;&nbsp;Return;<br />
+    }</p>
+      </td>
+    <td><pre><span class="widePre">
+int differenceOfTwo(int a, int b)
+{
+  return (a-b)<strong>*</strong>(a-b)<strong>;</strong>
+}</span></pre>
+    </td>
+  </tr>
+</table>
+<p>It was difficult to know how to assign a grade to this one, but I settled on -4 for illegal syntax (superscript), -4 for no return value, and -1 for the uppercase return.</p>
+<h2>Blank papers (1/72, ~1%)</h2>
+<p>There was one paper with no response to question 8, bringing the total to 72 papers total.</p>
+<p>&nbsp;</p>
+<hr />
+<p>Final score for this problem:</p>
+<table  border="0" cellpadding="0" cellspacing="0" >
+  <col  span="4" />
+  <tr height="13">
+    <td height="13" width="90">Points Off</td>
+    <td width="90">Score out of 1<span style='display:none'>0</span></td>
+    <td  width="183">Number earning</td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">0</td>
+    <td align="right">10</td>
+    <td align="right">34</td>
+    <td width="1"></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-1</td>
+    <td align="right">9</td>
+    <td align="right">7</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-2</td>
+    <td align="right">8</td>
+    <td align="right">10</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-3</td>
+    <td align="right">7</td>
+    <td align="right">3</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-4</td>
+    <td align="right">6</td>
+    <td align="right">0</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-5</td>
+    <td align="right">5</td>
+    <td align="right">6</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-6</td>
+    <td align="right">4</td>
+    <td align="right">3</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-7</td>
+    <td align="right">3</td>
+    <td align="right">2</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-8</td>
+    <td align="right">2</td>
+    <td align="right">0</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-9</td>
+    <td align="right">1</td>
+    <td align="right">2</td>
+    <td></td>
+  </tr>
+  <tr height="13">
+    <td height="13" align="right">-10</td>
+    <td align="right">0</td>
+    <td align="right">5</td>
+    <td></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<ul class="theQuestions">
+ 
+<li style="list-style:none;"></li>
+</ul>
+</body>
+</html>

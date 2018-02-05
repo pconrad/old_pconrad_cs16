@@ -1,0 +1,733 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, lab02, Test Driven Development (code)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+</style>
+</head>
+
+<body>
+
+<div style="background-color: yellow; padding: 1em; margin: 1em; border: red 2em inset; font-size: 150%;">
+<p>THIS IS NOT THE LAB FOR THE CURRENT QUARTER!!!!</p> 
+<p>If you are in one of Conrad's CS16 sections,  please visit <a href="https://foo.cs.ucsb.edu/16wiki">foo.cs.ucsb.edu/16wiki</a> for information on the current quarter of CS16.</p>
+</div>
+
+<div id="linksBox"><a href="code">code</a></div>
+<div id="container">
+ <h1>CS16, Spring 2010</h1>
+ <h1>lab02: <span class="smallerFont">(&quot;lab two&quot;)<br>
+ Test-driven development</span><span class="smallerFont"></span><br>
+ </h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Apply some basic ideas of test-driven development in C programming, including
+     <ul>
+       <li>A simple test framework: the check_expect function</li>
+       <li>The role of stubs in &quot;testing the tests&quot;</li>
+      </ul>
+   </li>
+   <li>Use the Ch shell to experiment with expressions in C</li>
+   <li>Explain the idea of &quot;floating-point inaccuracies&quot;
+     <ul>
+       <li>Why we can't be sure that a floating-point number is &quot;exactly&quot; equal to some value</li>
+       <li>What we do if we want to test whether a floating-point number equals some other floating point number</li>
+      </ul>
+   </li>
+   <li>Explain the idea of using the int values 0 and 1 to represent false and true</li>
+   <li>Be able to use various values with the %lf format specifier in printf to format floating point numbers</li>
+ </ul>
+ <p>You'll also get more practice with the things you learned in labs lab00 and lab01:</p>
+ <ul>
+   <li>Using a text-editor (we suggest emacs) to create and/or edit C programs</li>
+   <li>Running C programs</li>
+   <li>Using the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>Performing basic management of directories and files</li>
+   <li>Submitting assignments in this class with the &quot;turnin program.</li>
+</ul>
+
+<h2>This is a pair programming lab!</h2>
+ <p>Work with your assigned pair programming partner on this lab. If you do not have one, consult the TA for your lab and/or your instructor for advice prior to starting.</p>
+ <ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional.</li>
+   <li> Why? pair programming is a real-world skill that is highly valued by employers. </li>
+   <li>Feedback from companies that employ UCSB CS and CE grads. They tell us that they want our graduates to get more experience with working in pairs and in groups.</li>
+   <li>Most students find it helpful and enjoyable
+     <ul>
+
+       <li>UCSB student that used pair programming in Spring 2009 in CS10 were surveyed, to ask what advantages of pair programming they experienced.</li>
+       <li>74% indicated &quot;I was able to make better progress on assignments&quot; </li>
+       <li>64% indicated &quot;It helped me learn more&quot;</li>
+       <li>60% indicated &quot;It was more fun that working alone&quot;</li>
+       <li>85% said yes when asked &quot;Based on your personal experience, would you recommend that Pair Programming be used in future introductory programming courses at UCSB?&quot;<br>
+
+       </li>
+     </ul>
+   </li>
+   <li>There is also <a href="http://www.cs.ucsb.edu/~pconrad/csed/pair-programming">evidence in the scientific literature</a> that it improves student learning, and helps you get better grades.</li>
+  </ul>
+ <h2>Watch the pair programming video from NC State to prepare</h2>
+
+ <p>You can find the video &quot;Fun with Pair Programming&quot; at this link. It takes less than 10 minutes to watch it.</p>
+ <ul>
+   <li><a href="http://agile.csc.ncsu.edu/pairlearning/educators.php">http://agile.csc.ncsu.edu/pairlearning/educators.php</a></li>
+  </ul>
+ <h2>How pair programming will work</h2>
+ <h3>What you'll do</h3>
+
+ <p>Just as the in the video &quot;Fun with Pair Programming&quot;, you and one other person will sit at a single terminal and write code.</p>
+ <ul>
+   <li>The person at the keyboard is the driver</li>
+   <li>The person watching over her/his shoulder is the navigator</li>
+  </ul>
+ <p>From the video, you should be familiar with the roles of &quot;driver&quot; and &quot;navigator&quot;, and the need for switching roles often. If not, then <strong>watch the video</strong>.</p>
+
+ <h3>How you'll be matched with a pair</h3>
+ <ul>
+   <li>If there is someone you want to work with, and who wants to work with you, that is fine. But you must attend the same lab section this week and next.</li>
+   <li> If you haven't already chosen someone to work with, your TA will help to match you up with someone in your lab section.</li>
+   <li> If there ends up being an odd number, there will be one group of three.</li>
+ </ul>
+
+ <h3>How your pair programming will be evaluated</h3>
+ <p>You'll be asked to evaluate your pair partner, and your pair partner will also evaluate you. These are the questions you'll be asked. You may find it helpful to consider those before you begin work&mdash;you certainly want your pair partner to say good things about you. <br>
+   <br>
+  (Previous experience with pair-programming in courses suggests that 95% of students do end up giving their pair good evaluations&mdash;make sure you are part of the 95%!)</p>
+ <p> 1. Did your partner read the lab assignment and preparatory materials before coming to the scheduled lab? [For example, did he/she watch the pair programming video before coming to lab]<br>
+
+   2. Did your partner do their fair share of the work?<br>
+   3. Did your partner cooperatively follow the pair programming model<br>
+   (rotating roles of driver and navigator)?<br>
+   4. Did your partner make contributions to the completion of the lab assignment?<br>
+  5. Did your partner cooperate?</p>
+ <p>Your pair partners evaluation will be counted as part of your grade for the course.</p>
+
+ <p>So please do work with your pair in a constructive way!</p>
+ <p>Also: know that the vast majority of your grade in this course is still based on individual work, not pair work&mdash;so while you do need to try to have the best pair experience possible, in the unlikely event that your experience does not go well, the impact on your grade is limited.</p>
+ <p><strong>The pair programming roles: <em>driver (</em>or<em> pilot)</em> and <em>navigato</em></strong><em>r</em></p>
+ <p>This may be your first experience with &quot;Pair Programming.&quot; You will learn more about it as the quarter progresses. There are two roles: <em>pilot</em> and <em>navigator</em>. </p>
+ <ul>
+   <li>The pilot sits at the computer and types, and the navigator helps. </li>
+   <li>It is important that each of you thinks about the problems independently.
+     <ul>
+       <li>The pilot directs, but does not leave the navigator behind. </li>
+       <li>The navigator assists, but does not give the pilots commands. </li>
+      </ul>
+   </li>
+   <li>You are helping each other so that you both understand the work.</li>
+ </ul>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step1">Step 0: Find a pair partner, or get your pair assignment from your TA</h3>
+ <p>If there is an odd number of students, there may have to be one group of three, but if may be necessary depending on circumstances.</p>
+ <h3>Step 1: Together with your pair partner, complete Worksheet W01</h3>
+ <p>W01  is a one-page (back and front) worksheet to make sure that you and your pair partner:</p>
+ <ul>
+
+   <li>understand the basic ideas of pair programming</li>
+   <li>are compatible in terms of schedules</li>
+ </ul>
+ <p>This second item is particularly important. The single biggest obstacle to pair programming&mdash;or for that matter and kind of group work in courses&mdash;is incompatible schedules. So, this will help us detect that situation up front, and try to resolve it.</p>
+ <p>Your TA will have copies of W01, or you can print out a copy from this link:</p>
+ <p><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/worksheets/W01/W01.pdf">http://www.cs.ucsb.edu/~pconrad/cs16/10S/worksheets/W01/W01.pdf</a></p>
+ <p>Turn this in during your assigned lab section.  You only need to turn in one copy per pair.</p>
+ <h3 id="step2">Step 2: Decide who will be the initial pilot and the initial navigator(s)</h3>
+ <p>Choose who will be the pilot for the first part of the lab. The pilot should sit down in front of the computer now. The navigator gets a chair and sits next to the pilot. (If two navigators, sit on either side).<br>
+   <br>
+   You will exchange roles about halfway through the lab.<br>
+    <br>
+  You'll start your work in the account of the initial driver. Halfway through, you'll change roles.</p>
+ <p>Before you finish up, you'll copy your work to each of the other student's accounts on your team.</p>
+ <div class="importantDiv">
+ <p><strong>Note: DO NOT share passwords with each other.</strong> </p>
+ <p>That is a violation of your account agreement, and can result in suspension of your computing privileges at UCSB.</p>
+ <p>Here's what you can do instead:</p>
+ <ul>
+   <li><strong>At the end of every work session,</strong><strong> email </strong>the C program  files&mdash;finished or not&mdash;<strong>from the account you worked in, to both yourself and your pair partner as  attachments </strong></li>
+   </ul>
+  <p>OR use the scp solution below, which is even better.</p>
+  <p>That way, if your pair partner <a href="http://discuss.fogcreek.com/joelonsoftware/default.asp?cmd=show&ixPost=149219">gets hit by a bus</a>, you can continue working without him/her&mdash;you aren't 'out of luck'.</p>
+ </div>
+  <div class="sideNoteDiv">
+ <p>A better solution is to <em><strong>use scp to copy the work</strong></em> from person1's account into person2's account with the scp command&mdash;here's how:</p>
+ <ol>
+   <li>When you are about to finish working for the day, have person2 log into their CSIL account.</li>
+   <li>Person2 cd's into their ~/cs16 directory</li>
+   <li>Person2 types this command<br>
+   scp -r <strong><em>person1</em></strong>@csil.cs.ucsb.edu:cs16/lab02 lab02.snapshot.<strong>date</strong><em><strong>.time</strong></em><br>
+       <ul>
+         <li>replace <em><strong>person1</strong></em> with person1's CSIL username (e.g. jsmith)</li>
+         <li>replace <em><strong>date.time</strong></em> with the date and time (e.g. <strong>Oct29.1pm</strong>)</li>
+         <li>don't include any slashes or spaces in the <strong>date.time</strong> string&mdash;it must be a valid part of a filename.</li>
+       </ul>
+    </li>
+   <li>After  you type this command, you'll be prompted for a password. Person1 should type his/her password. Don't <em><strong>share</strong></em> the password, just have person1 <em><strong>type it </strong></em>in person2's window.'</li>
+   <li>If it works, there  will now be a directory called lab02.snapshot.date.time in person2's directory that is a complete copy of the ~/cs16/lab02 directory from person1's account.
+     <ul>
+       <li>Please read the &quot;final thoughts&quot; below so that you understand what the proper use of this process it&mdash;it is a powerful command, but it has the potential to be abused. With great power comes great responsibility.</li>
+     </ul>
+   </li>
+  </ol>
+ <p><strong>It is only necessary for one of you to submit the work via turnin, as long as both names are in each file.</strong></p>
+ <p>But, if you are the person whose account is not the one from which the turnin step is done, be SURE that your name appears! You need to work carefully with your pair partner to avoid misunderstandings and problems.<br>
+     <br>
+    <strong>Some final thoughts on this step: </strong></p>
+ <ul>
+   <li>In this class pair programming is permitted on <em><strong>some</strong></em> assignments. </li>
+   <li>The scp command above <em><strong>could</strong></em> be used to copy code from one account to another on assignments where you are <em><strong>not</strong></em> permitted to work together&mdash;but <em><strong>that would be wrong</strong></em>. </li>
+   <li>So don't do that.</li>
+ </ul>
+  </div>
+ <p>&nbsp;</p>
+ <h3>Step 3: Log on to CSIL and create a directory ~/cs16/lab02 on one of your accounts.</h3>
+
+ 
+ <p>If you've forgotten how, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+   <br>
+ </p>
+
+ <h3>Step 4: Copying some programs from my directory</h3>
+ <p>Visit the following web link&mdash;you may want to use &quot;right click&quot; (or &quot;control-click&quot; on Mac) to bring up a window where you can open this in a new window or tab:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab02/code">http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab02/code<br>
+   </a></li>
+  </ul>
+ <p>You should see a listing of several C programs. We are going to copy those into your ~/cs16/lab02 directory all at once with the following command:</p>
+ <pre><p>cp ~pconrad/public_html/cs16/10S/labs/lab02/code/* ~/cs16/lab02</p></pre>
+ <ul>
+   <li>Note: If you get the error message:<br>  
+     <code><br>
+     cp: target `/cs/student/youruserid/cs16/lab02' is not a directory</code><br>
+     <br>
+     then it probably means you didn't create a ~/cs16/lab02 directory in step 1, so go back to step 1 and do that first.</li>
+ </ul>
+ <p>The * symbol in this command is a &quot;wildcard&quot;&mdash;it means that we want all of the files from the source directory copy be copied into the destination directory namely <code>~/cs16/lab02</code>. </p>
+ <p>After doing this command, if you cd into <code>~/cs16/lab02</code> and use the ls command, you should see three files in your <code>~/cs16/lab02</code> directory:</p>
+   <pre>-bash-4.1$ <strong>ls</strong><br>fourthCProgram.c  fToCWithTests.c  thirdCProgram.c<br>-bash-4.1$ </pre>
+ 
+ If so, you are ready for step 5.</p>
+ <h3>Step 5: Look over thirdCProgram.c</h3>
+ <p>Our next step is to look over the contents of thirdCProgram.c</p>
+ <p>There are at least three ways we can display the contents of thirdCProgram.c on our screen. Try each of them in turn:</p>
+ <ul>
+   <li>The Unix command <strong>cat thirdCProgram.c</strong> 
+     <ul>
+       <li>This will show the entire contents&mdash;but if the contents don't all fit our our screen, we may have to &quot;scroll backwards&quot; to see the part that went by&mdash;and this isn't always possible or convenient.</li>
+     </ul>
+   </li>
+   <li>The Unix command <strong>more thirdCProgram.c</strong>
+     <ul>
+       <li>This shows us a little bit at a time, and we use either the space bar or the return key to see a little bit more at a time. (You can type &quot;q&quot; or &quot;CTRL-C&quot; to exit the more program.) </li>
+       <li>There is also a program called less that is an alternative to more&mdash;Unix programmers are prone to bad puns and plays-on-words. You can type <strong>less&nbsp;thirdCProgram.c</strong> instead of <strong>more&nbsp;thirdCProgram.c</strong> and experiment with this program if you like. Fans of less say that &quot;less is more&quot;&mdash;it works the same way, only better.</li>
+     </ul>
+   </li>
+   <li>Bring up the program in a text-editor, for example: <strong>emacs thirdCProgram.c</strong>
+     <ul>
+       <li>This is probably the best way. Not only can we use the arrow keys to scroll around the page&mdash;we can also make changes if we want&mdash;and eventually, we will want to do this!</li>
+     </ul>
+   </li>
+  </ul>
+ <p>Now that I've got a way to look over thirdCProgram.c, what am I looking for?</p>
+ <p>Note that thirdCProgram.c is a program we've seen in lecture before&mdash;in our lecture about test-driven development. I want you to see the checkExpect function that we discussed in lecture, the smaller function&mdash;with a stub, and our main function.</p>
+ <p>Your first task is to just read over the code and understand it&mdash;don't make any changes yet.</p>
+ <p>Once you feel that you understand what is in the code, go ahead and compile and run it, with the commands:</p>
+ <p><strong>make thirdCProgram<br>
+ ./thirdCProgram</strong></p>
+ <p>It should look something like this:</p>
+ <pre>-bash-3.2$ <strong>make thirdCProgram</strong>
+cc     thirdCProgram.c   -o thirdCProgram
+-bash-3.2$ <strong>./thirdCProgram</strong>
+Test failed for Test case 1: expected 3.000000 got -1234567.000000: <br>Test failed for Test case 2: expected 3.000000 got -1234567.000000: <br>Test failed for Test case 3: expected 3.000000 got -1234567.000000: <br>Test failed for Test case 4: expected 7.000000 got -1234567.000000: <br>Test failed for Test case 5: expected 0.000000 got -1234567.000000: <br>Test failed for Test case 6: expected 0.000000 got -1234567.000000: <br>Test failed for Test case 7: expected -5.000000 got -1234567.000000: <br>Test failed for Test case 8: expected -5.000000 got -1234567.000000: 
+-bash-3.2$ </pre>
+ <p>You can see that the test cases are all failing, because we have a stub for the smaller() function instead of some working code. </p>
+ <p>That is, we have:  </p>
+ <pre>// return the smaller of two integers a,b---or return a if they are both equal<br>
+int smaller(int a, int b)<br>
+{<br>
+   return -1234567; // stub value!  This tests the test.<br>
+}</pre>
+   <p>where we should have something like this:</p>
+ <pre>// return the smaller of two integers a,b---or return a if they are both equal<br>
+int smaller(int a, int b)<br>{<br>
+  if (a &lt;= b)
+    return a;
+  else
+    return b;<br>
+}</pre>
+ <p>This fact that all the test cases are failing here is actually a good sign! It means our test cases are working! </p>
+ <p>(Later in this lab, we'll see a case where the opposite is true&mdash;a case that I hope will help you appreciate the value of using stub functions to 'test the test')</p>
+ <p>Now that we've seen that the test function is doing its job, our next step is to replace the stub code with working code.</p>
+ <h3>Step 6: Replace the non-functional stub for smaller() with working code</h3>
+ <p>To bring up emacs to make changes to thirdCProgram.c, type:</p>
+ <p><strong>emacs thirdCProgram.c</strong></p>
+ <p>This will either bring up a new window where you can edit this program, or if you are working with a basic terminal program (such as PuTTY on Windows), it will bring up the program directly in your terminal window.</p>
+ <h4>Do I have to use emacs?</h4>
+ <p>See the discussion of this question in lab01. The short answer is: no, you may use any text editor&mdash;but the only ones we'll provide help for are emacs (and maybe vim too)&mdash;and learning either emacs or vim is a pretty basic skill that is very helpful to learn.</p>
+ <h4>Assuming you are using emacs, for the time being...</h4>
+ <p>If you need a review of emacs command, look back at lab01, where there is a handy chart of basic emacs commands, plus a link to a handy emacs tip-sheet.</p>
+ <p>What to change</p>
+ <ol>
+   <li>First, before changing anything else, put a comment at the very top of the file like this:<br>
+   // Your name here, for CS16 lab02, Today's date here.<br>
+   <br>
+   Don't literally write that&mdash;put in your name, and the date!<br>
+     <br>
+    </li>
+   <li>Change the non-functional stub code in the smaller() function to a working version of the smaller function.</li>
+   <li>Find all the comments that start with // @@@ and remove them from your code. (This will be a common task in many labs in this course.)</li>
+ </ol>
+ <p>Then, use the following commands to compile and run the program again.</p>
+ <p><strong>make thirdCProgram<br>
+./thirdCProgram</strong></p>
+ <p>If you have syntax errors in your program&mdash;for example, a missing semicolon, or some other problem, you may get error messages when you type the make&nbsp;thirdCProgram command. If this happens, try&mdash;at first&mdash;to <strong>see if you can figure out what is wrong on your own before asking the TA for help</strong>. But, if after 5-10 minutes of really trying to figure it out, you are still stuck, then you may want to ask for assistance. <br>
+   <br>
+   If you don't have errors, then 
+  the output should look something like this:</p>
+ <pre>
+-bash-3.2$<strong> make thirdCProgram</strong><br>cc     thirdCProgram.c   -o thirdCProgram<br>-bash-3.2$ ./thirdCProgram<br>Test passed for Test case 1<br>Test passed for Test case 2<br>Test passed for Test case 3<br>Test passed for Test case 4<br>Test passed for Test case 5<br>Test passed for Test case 6<br>Test passed for Test case 7<br>Test passed for Test case 8<br>-bash-3.2$ </pre>
+ <p>If so, then you are almost ready to move on to Step 6&mdash;but first, one more Unix trick. Earlier, you were told that you needed to remove all the comments with @@@ in them from your code. Here's a trick to make sure you did it. </p>
+ <p>At the Unix prompt, type:</p>
+ <p>grep @@@ thirdCProgram.c</p>
+ <p>If you see the following output&mdash;i.e. just another Unix prompt&mdash;it means that the sequence @@@ does not appear anywhere in your thirdCProgram.c file. You are ready to move on!</p>
+ <p>
+  <pre>-bash-3.2$ grep @@@ thirdCProgram.c<br>
+-bash-3.2$ </pre>
+ If instead, you see this, then it is a listing of all the lines containing @@@&mdash;lines that you need to remove from thirdCProgram.c before you submit it for grading.</p>
+ <pre>-bash-3.2$ grep @@@ thirdCProgram.c
+// @@@ The function &quot;smaller&quot; below is &quot;deliberately broken&quot; in the version of the file
+// @@@ you will copy from the website.  The first version has, as the body:
+// @@@     return -1234567; // stub value!
+// @@@ where it should have something like this:
+// @@@    if (a &lt;= b)
+// @@@      return a;
+// @@@    else
+// @@@      return b;
+// @@@ First, run the program with the stub in place, and see all the tests fail.
+// @@@ Then replace the stub with corrected code, and see all the tests pass.
+// @@@ Finally, remove this entire comment block.
+-bash-3.2$ </pre>
+ <p>In general, the <strong>grep</strong> program is a Unix utility program that allows you to find all matches of a particular sequence of a characters in a file.</p>
+ <p>One last item: use this command to make sure that the first line in the file contains your name:<br>
+   <br>
+  <strong>head -1 thirdCProgram.c</strong></p>
+ <p>This should show a command with your name, CS16 lab02 and the date, like this:  </p>
+ <pre>-bash-3.2$ <strong>head -1 thirdCProgram.c </strong>
+// Chris J. Gaucho for CS16 lab02, 04/09/2010
+-bash-3.2$ </pre>
+ </p>
+ <p>If instead, you see this, then you forgot your header comment&mdash;so fix it now!  </p>
+ <pre>-bash-3.2$ <strong>head -1 thirdCProgram.c </strong>
+// thirdCProgram.c    example of test driven development
+-bash-3.2$ </pre>
+ </p>
+ <div class="importantDiv">
+   <p>At this point, <strong>switch roles</strong> between pilot and navigator.<br>
+    Stay logged into the original pilot's account.</p>
+  </div>
+ <h3 id="brokenTestHarness">Step 7: Moving on to fourthCProgram.c&mdash;a broken test harness.</h3>
+ <p>Now, take a look at fourthCProgram.c. </p>
+ <p>It is similar to thirdCProgram.c, except that:</p>
+ <ul>
+   <li> now, we are testing a function called larger that returns the larger of two integers.</li>
+   <li>this time, the test harness is broken!</li>
+  </ul>
+ <p> Specifically, the checkExpect function has a bug in it&mdash;one of the most common bugs that C/C++ programmers make. The bug is easy to spot&mdash;I've even put a comment on it. But, I don't want you to fix it right away.</p>
+ <p>Instead, run the program first, and notice the weird output that we get. We would expect, with a stub such as:</p>
+ <pre>// return the larger of two integers a,b---or return a if they are both equal
+int larger(int a, int b)
+{
+  return -1234567; // @@@ STUB---DON'T replace with the correct answer at first...
+}
+
+</pre>
+ 
+ 
+   <p>that we'd see all the tests failing.  But instead, we see:  </p>
+  <pre>-bash-3.2$ <strong>./fourthCProgram </strong><br>Test passed for Test case 1<br>Test passed for Test case 2<br>Test passed for Test case 3<br>Test passed for Test case 4<br>Test failed for Test case 5: expected 0.000000 got 0.000000<br>Test failed for Test case 6: expected 0.000000 got 0.000000<br>Test passed for Test case 7<br>Test passed for Test case 8<br>Test passed for Test case 9<br>Test passed for Test case 10<br>-bash-3.2$ </pre>
+   </p>
+  <p>As we discussed in lecture, the reason is that in our test function, we have:  </p>
+   <pre> if ( check <strong>=</strong> expect)  // @@@ FIX ME AT THE APPROPRIATE STEP, BUT NOT RIGHT AWAY<br>    {<br>      printf(&quot;Test passed for %s\n&quot;,label);<br><em>... etc
+
+</em></pre>
+   </p>
+   <p>where instead, what we need is:</p>
+   <pre> if ( check <strong>==</strong> expect)  // test whether we got what we expect<br>    {<br>      printf(&quot;Test passed for %s\n&quot;,label);<br><em>... etc
+
+</em></pre>
+   <p>That much, you may have already guessed&mdash;but the more interesting question is: why did we get the results that we got? Specifically:</p>
+   <ul>
+     <li>Why did test cases 1-4 and 7-10 seem to &quot;pass&quot;?</li>
+     <li>Why did  test cases 5 and 6 seem to &quot;fail&quot;, even though according to the output, we &quot;got&quot; what we &quot;expected&quot;?</li>
+   </ul>
+   <p>The answer lies in two curious aspects of C:</p>
+   <ul>
+   <li>the way it treats assignments as expressions that return a value</li>
+   <li>the way it uses integers as boolean values.</li>
+  </ul>
+   <p>The assignment check = expect takes the value on the right hand side, and assigns check to be the same value&mdash;then uses that value as the result of the if test. So:</p>
+   <ul>
+     <li> if the value of expect is 0, the if test becomes <strong>if (false),</strong> so the test <em>fails</em></li>
+     <li>if the value of expect is non-zero, the if test becomes if (true) so the test <em>passes</em></li>
+   </ul>
+   <p>Look back at which tests passed, and which ones failed&mdash;can you see now why tests 5 and 6 &quot;failed&quot;, while all the rest &quot;passed&quot;?</p>
+   <p><strong>Here's what to do next</strong></p>
+   <p>To complete this step, first add your header comment at the top of fourthCProgram.c:</p>
+   <p>
+  <pre>// Chris J. Gaucho for CS16 lab02, 04/09/2010</pre>
+</p>
+   <p><em>Then</em> change the line of code in the checkExpect function from:</p>
+   <pre> if ( check <strong>=</strong> expect)  // @@@ FIX ME A THE APPROPRIATE STEP, BUT NOT RIGHT AWAY   </pre>
+   <p>where instead, what we need is:</p>
+  <pre> if ( check <strong>==</strong> expect)  // test whether we got what we expect<br><em>
+
+</em></pre>
+   <p>Then, recompile and run fourthCProgram to see if we now have all tests failing&mdash;which, with a stub for the larger function, is what we would hope for!</p>
+   <pre>-bash-3.2$ <strong>make fourthCProgram</strong><br>cc     fourthCProgram.c   -o fourthCProgram<br>-bash-3.2$ <strong>./fourthCProgram</strong> <br>Test failed for Test case 1: expected 7.000000 got -1234567.000000<br>Test failed for Test case 2: expected 7.000000 got -1234567.000000<br>Test failed for Test case 3: expected 3.000000 got -1234567.000000<br>Test failed for Test case 4: expected 7.000000 got -1234567.000000<br>Test failed for Test case 5: expected 0.000000 got -1234567.000000<br>Test failed for Test case 6: expected 0.000000 got -1234567.000000<br>Test failed for Test case 7: expected 5.000000 got -1234567.000000<br>Test failed for Test case 8: expected 5.000000 got -1234567.000000<br>Test failed for Test case 9: expected -3.000000 got -1234567.000000<br>Test failed for Test case 10: expected -3.000000 got -1234567.000000<br>-bash-3.2$ </pre>
+  <p>Then, fix the stub, replacing it with real code so that the test cases pass&mdash;and remove all comments that have @@@ in them. When you are done this sequence of commands should produce this output: </p>
+   <p>
+  <pre>-bash-3.2$ <strong>make fourthCProgram</strong><br>cc     fourthCProgram.c   -o fourthCProgram<br>-bash-3.2$ <strong>./fourthCProgram</strong> <br>Test passed for Test case 1<br>Test passed for Test case 2<br>Test passed for Test case 3<br>Test passed for Test case 4<br>Test passed for Test case 5<br>Test passed for Test case 6<br>Test passed for Test case 7<br>Test passed for Test case 8<br>Test passed for Test case 9<br>Test passed for Test case 10<br>-bash-3.2$ <strong>grep @@@ fourthCProgram.c</strong><br>-bash-3.2$ <strong>head -1 fourthCProgram.c</strong><br>// Chris J. Gaucho for CS16 lab02, 04/09/2010
+-bash-3.2$ <br><br></pre>
+   When you finish that, you are ready for step 8
+   </p>
+   <h3>Step 8: Working with Ch to learn about floating point inaccuracies</h3>
+   <p>There is a very useful program on CSIL called Ch that you can use to learn about some of the basic properties of the C programming language.</p>
+   <p>Ch is an 'interpreter' for C&mdash;it allows you to type in C statements one at a time, and have those statements be immediately turned into something that can be executed by the computer, one at a time. This is really helpful for trying out small bits of code to see what they will do. </p>
+   <p>Ch has many other uses, as we may see later in the course&mdash;but for this lab, we'll primarily be using it for little experiments with floating point numbers&mdash;float and double&mdash;and the printf command.</p>
+   <p>To bring up Ch on CSIL, simply type <strong>ch</strong> at the command prompt.</p>
+   <p>You should see something like this (except the directory will be different)   </p>
+   <pre>-bash-3.2$ <strong>ch</strong><br>
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/faculty/pconrad/cs16/lab02&gt; </pre>
+   The very long prompt is an indication of what directory you are in. You may want to simply type cd at the prompt to go back to your home directory&mdash;this will give you more space to work:</p>
+   <p>
+  <pre>/cs/faculty/pconrad/cs16/lab02&gt; <strong>cd</strong><br>
+/cs/faculty/pconrad&gt; 
+
+</pre>
+   Now that we are at the Ch prompt, the first thing we might want to know is how to get out of it. The command to get out of Ch and back to the Unix prompt is <strong>exit</strong>. Try it now:</p>
+   <p>
+  <pre>/cs/faculty/pconrad&gt; <strong>exit</strong><br>
+-bash-3.2$ </pre>
+   </p>
+   <p>That puts us back at the Unix prompt. For now, though lets go back into Ch:</p>
+   <pre>-bash-3.2$ <strong>ch</strong><br>
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/faculty/pconrad/cs16/lab02&gt; cd<br>/cs/faculty/pconrad&gt; </pre>
+  <p>Now, let's try a few things. First, let's note that we can declare variables, and print out their values. Try these commands:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>int a = 5;</strong><br>
+     /cs/faculty/pconrad&gt; <strong>double x = 2.5;</strong><br>
+     /cs/faculty/pconrad&gt; <strong>a</strong> <br>
+     5 <br>
+     /cs/faculty/pconrad&gt; <strong>x</strong><br>
+     2.5000 <br>
+     /cs/faculty/pconrad&gt; <strong>a * x</strong><br>
+     12.5000 <br>
+     /cs/faculty/pconrad&gt; <strong>a/x</strong><br>
+     2.0000 <br>
+     /cs/faculty/pconrad&gt; <br>
+     <br>
+  Now, notice that I can declare a variable with lots of precision, but when I print its value, I only see some of those digits:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>double d = 1.23456789</strong><br>
+     /cs/faculty/pconrad&gt; <strong>d</strong><br>
+     1.2346 <br>
+   /cs/faculty/pconrad&gt; </p>
+   <p>If I want to see all the digits, I can use a printf statement with a format specifier. As we discussed in lecture, and as you can read about in your textbook:</p>
+   <ul>
+     <li> format specifiers for double have the form %lf </li>
+     <li>we can add numbers such as %5.2lf or %10.8lf to indicate how to print the number</li>
+     <li>the first number, e.g. 5 in %5.2lf, indicates the total number of spaces</li>
+     <li>the second number, e.g. 2 in %5.2lf indicates how many digits after the decimal point.</li>
+   </ul>
+   <p>For example, try typing these at the ch prompt. Note that you can use the &quot;up arrow&quot; to bring back your previous commands and edit them&mdash;that will save you some typing:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>d</strong><br>
+     1.2346 <br>
+     /cs/faculty/pconrad&gt; <strong>printf(&quot;%lf&quot;,d)</strong><br>
+     1.234568 <br>
+     /cs/faculty/pconrad&gt; <strong>printf(&quot;%5.2lf&quot;,d) </strong><br>
+&nbsp;1.23 <br>
+/cs/faculty/pconrad&gt; <strong>printf(&quot;%5.3lf&quot;,d) </strong><br>
+1.235 <br>
+/cs/faculty/pconrad&gt; <strong>printf(&quot;%10.8lf&quot;,d) </strong><br>
+1.23456789 <br>
+/cs/faculty/pconrad&gt; <strong>printf(&quot;%12.10lf&quot;,d) </strong><br>
+1.2345678900 <br>
+/cs/faculty/pconrad&gt; </p>
+   <p>Try a few more and see if you can predict in advance what the output will be. You might be asked to do this on a future quiz or exam, so it is worth spending some time to practice your &quot;prediction abilities&quot; here. Note that in some cases, extra spaces are added at the start, and in others, rounding takes place, or the addition of extra zeros.</p>
+   <p><strong><br>
+     printf(&quot;%6.3lf&quot;,d)<br>
+     printf(&quot;%6.2lf&quot;,d) </strong><br>
+     <strong>printf(&quot;%6.1lf&quot;,d)</strong><br>
+     <strong>printf(&quot;%6.0lf&quot;,d)</strong><br>
+     <strong>printf(&quot;%10.5lf&quot;,d)</strong><br>
+   <strong>printf(&quot;%10.4lf&quot;,d)</strong></p>
+   <p> Once you are comfortable with that, there is another topic to explore&mdash;inaccuracy of floating point numbers.</p>
+   <p>Type in these C variable declarations at the Ch prompt:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>double y=1.0/3000.0</strong><br>
+/cs/faculty/pconrad&gt; <strong>double z=1.0/2999.0</strong><br>
+/cs/faculty/pconrad&gt;</p>
+   <p>Note that if we type the variable names, these variables seem to have the same value:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>y</strong> <br>
+     0.0003 <br>
+     /cs/faculty/pconrad&gt; <strong>z</strong><br>
+     0.0003 <br>
+     /cs/faculty/pconrad&gt;<br>
+  </p>
+   <p>But, if we actually use a format specifier to print out more digits, we can see that they are quite different:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>printf(&quot;%12.10lf&quot;,y)</strong><br>
+     0.0003333333 <br>
+     /cs/faculty/pconrad&gt; <strong>printf(&quot;%12.10lf&quot;,z) </strong><br>
+     0.0003334445 <br>
+     /cs/faculty/pconrad&gt; </p>
+   <p>So, next, check this out:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>(3000.0 == 3000.0)</strong><br>
+     1 <br>
+     /cs/faculty/pconrad&gt; <strong>(3000.0 == 2999.0) </strong><br>
+     0 <br>
+     /cs/faculty/pconrad&gt; </p>
+   <p>What we see here is a reminder that C represents true and false with integers:</p>
+   <ul>
+     <li>1 (and every other non-zero value) stands for true, </li>
+     <li>0 stands for false.</li>
+   </ul>
+   <p></p>
+   <p>Now comes the potentially surprising part. We would expect that y * 3000.0 would give us 1.0, and that z * 2999.0 would give us 1.0. And, at first, it might seem that this is indeed the case:</p>
+   <p>/cs/faculty/pconrad&gt;<strong> y * 3000.0</strong><br>
+     1.0000 <br>
+     /cs/faculty/pconrad&gt;<strong> z * 2999.0</strong><br>
+     1.0000 <br>
+   /cs/faculty/pconrad&gt; </p>
+   <p>But there is a subtle trap here! </p>
+   <p>So, if we type in ( y * 3000.0 == 1.0) we expect the answer 1&mdash;after all that's why y * 3000.0 is equal to, right? <br>
+     <br>
+   So, we try it and we get 1 as we expect:</p>
+   <p>/cs/faculty/pconrad&gt; (y * 3000.0 == 1.0) <br>
+   1 <br>
+   /cs/faculty/pconrad&gt;</p>
+   <p>But, when we try this with (z * 2999.0 == 1.0) get a different result:</p>
+   <p>/cs/faculty/pconrad&gt; (z * 2999.0 == 1.0)<br>
+  0<br>
+  /cs/faculty/pconrad&gt; </p>
+   <p>Ouch! What just happened? </p>
+   <p>A clue comes if we print out  <strong>y * 3000.0</strong> and <strong>z * 2999.0</strong> with more precision. Compare:</p>
+   <p>/cs/faculty/pconrad&gt; <strong>printf(&quot;%22.20lf&quot;,z * 2999.0)</strong><br>
+     0.99999999999999988898 <br>
+     /cs/faculty/pconrad&gt; <strong>printf(&quot;%22.20lf&quot;,y * 3000.0) </strong><br>
+     1.00000000000000000000 <br>
+   /cs/faculty/pconrad&gt; </p>
+   <p>Here's what's going on: a double value has many bits of precision&mdash;in Ch, we can see that it is 8 bytes, or 64 bits:</p>
+   <p>/cs/faculty/pconrad&gt; sizeof(double)<br>
+     8 <br>
+   /cs/faculty/pconrad&gt; </p>
+   <p>But even that is not enough to store certain numbers in binary. We can understand this if we think about the problem of representing 1/3 exactly in a fixed number of decimal digits. No matter how many digits we use: 0.333, 0.33333, 0.33333333&mdash;if it is a finite number of digits, we cannot represent 1/3 exactly. </p>
+   <p>The same is true of representing certain numbers in binary&mdash;the reciprocal of 1/2999 happens to be one that can't be represented exactly in 64 bits. Thus, what we get is an approximation of the number&mdash;and when we multiply back by 2999.0, the error that was introduced comes back to bite us.</p>
+   <p>What is the way out of this? The way out is to <strong>never compare floating point numbers for equality.</strong></p>
+   <p>Instead, we:</p>
+   <ul>
+     <li>Choose some small value called a &quot;tolerance&quot;&mdash;this is the amount of inaccuracy we can tolerate. </li>
+     <li>For example, we might choose 0.000001 (i.e. 10<sup>-6</sup>), or 10<sup>-9</sup>, or even 10<sup>-15</sup> depending on how accurate our results need to be.</li>
+     <li>Then, instead of checking for equality, we see if the numbers are nearly equal. </li>
+     <li>We can use the C built-in function fabs() (floating-point absolute value) to find the absolute value of the difference between the two numbers, and compare that to our tolerance.</li>
+   </ul>
+   <p>Here's an example, illustrated in Ch. The last line shows the proper way to check whether z&nbsp;*&nbsp;2999 is approximately equal to 1.0&mdash;we subtract 1.0 from z&nbsp;*&nbsp;2999, take the absolute value with fabs(), and then see if that is less than our tolerance value.</p>
+   <p>/cs/faculty/pconrad&gt; <strong>double tol = 1E-9; // 10 to the minus 9</strong><br>
+     /cs/faculty/pconrad&gt; <strong>z * 2999</strong><br>
+     1.0000 <br>
+     /cs/faculty/pconrad&gt; <strong>(z * 2999 == 1.0)</strong> // the wrong way to test for equality<br>
+     0 <br>
+     /cs/faculty/pconrad&gt; <strong>( fabs(z * 2999 - 1.0) &lt; tol )</strong> // the right way to text approximate equality<br>
+     1 <br>
+   /cs/faculty/pconrad&gt; </p>
+   <p>There is nothing to turn in for this step&mdash;but questions about it may appears on the first midterm, so if you are confused, ask your TA or instructor for additional help with understanding this step. </p>
+   <p>The idea from this step will also be used in the final program we are writing&mdash;though you can still work on this program even if you are hazy on the details of this step&mdash;so if that the case don't let it stop you from moving on to step 9 anyway. You can come back to step 8 later.</p>
+   <div class="importantDiv">
+     <p>At this point, <strong>switch roles</strong> one more time.<br>
+       If you have only two folks in your pair, you are switching back to your original roles.<br>
+     If you have a group of three, now the third person is the pilot.</p>
+   </div>
+   <h3>&nbsp;</h3>
+   <h3>Step 9: Turning the fToCWithTests.c program into the cToFWithTests.c program</h3>
+  <p>Now, take a look at fToCWithTests.c&mdash;bring it up in a text editor. Look at how this program operates. We find that it contains many similarities with thirdCProgram.c and fourthCProgram.c, but some differences as well. See if you can find all of these:</p>
+  <ul>
+    <li>Our test function (checkExpectDouble) now takes double values for check and expect, along with a tolerance. This mirrors what we learned about checking floating point numbers for equality in Step 7.</li>
+    <li>The test function also is no longer a void function&mdash;it returns a result that is used in the main program&mdash;0 if the test case passes, and 1 if it fails.</li>
+    <li>The main program keeps track of how many test cases fail, by adding up all the ones. It uses the += operator to take the old value of failures, and add to it the result of the call to checkExpectDouble().</li>
+    <li>We see that the fToC function has two return statements in it&mdash;but the second one is &quot;hidden&quot; by the first one, which is our stub. </li>
+  </ul>
+  <p>Go ahead and compile and run this program, and see that it produces this output&mdash;i.e. all test cases failing:</p>
+  <p>
+    <pre>-bash-3.2$ <strong>make fToCWithTests</strong><br>
+cc fToCWithTests.c -o fToCWithTests<br>
+-bash-3.2$ .<strong>/fToCWithTests </strong><br>
+Test fToC(32.0) failed: expected 0.000000 got -1234.567890 (tolerance=0.000000): <br>
+Test fToC(212.0) failed: expected 100.000000 got -1234.567890 (tolerance=0.000000): <br>
+Test fToC(68.0) failed: expected 20.000000 got -1234.567890 (tolerance=0.000000): <br>
+Test fToC(-40.0) failed: expected -40.000000 got -1234.567890 (tolerance=0.000000): <br>
+4 tests failed<br>
+-bash-3.2$ </pre>
+  </p>
+  <p>Then, if you simply remove the stub line from fToC, it should start passing all its tests:</p>
+  <p>
+    <pre>-bash-3.2$ <strong>make fToCWithTests</strong><br>
+cc fToCWithTests.c -o fToCWithTests<br>
+-bash-3.2$ <strong>./fToCWithTests </strong><br>
+fToC(32.0) passed<br>
+fToC(212.0) passed<br>
+fToC(68.0) passed<br>
+fToC(-40.0) passed<br>
+All tests passed!<br>
+-bash-3.2$ </pre>
+  </p>
+  <p>That was the easy part though. The hard part of this step&mdash;though not too hard&mdash;is to write a C program called cToFWithTests.c that is exactly like fToCWithTests.c&mdash;it contains all the same elements, except that it tests a celsius to fahrenheit function instead of an fToC function.</p>
+  <p>The purpose of this exercise is to make sure that you really understand the ideas of test-driven development&mdash;that's why we are working with a very simple function, and one that you already coded last week. </p>
+  <p>Soon we'll be moving into more difficult and challenging assignments, and when we do, I want to make sure that the basics of working with C programs, and with the ideas of test-driven development are already very comfortable for you.</p>
+  <p>You can start by copying fToCWithTests.c to a new name, cToFWithTests.c, and editing it to add your header comment with your name, CS16 lab02, and the date:</p>
+  <p>cp fToCWithTests.c cToFWithTests.c<br>
+  emacs cToFWithTests.c</p>
+  <p>Then, put the stub back, temporarily, change all the fToC reference to cToF references, and write some new test cases. You can probably just 'invert' the existing test cases&mdash;that is, switch the Fahrenheit and Celsius values&mdash;so it shouldn't be too hard.</p>
+  <p>Then, try to get your program to first compile, then run with all test cases failing, then run with all test cases passing.</p>
+  <p>When you've done that, you are almost finished with the lab&mdash;just the final checks, scripting, and the turn in step left!</p>
+  <h3>Step 10: Scripting your assignment</h3>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.</p>
+ <p>Here are the steps to <em>prepare</em> to make a transcript for lab02</p>
+ <ol>
+   <li>Type <strong>pwd</strong>, and make sure you are in the <strong>~/cs16/lab02</strong> directory.</li>
+   <li>Type <strong>ls</strong>, and make sure that you have  files called thirdCProgram.c, fourthCProgram.c and cToFWithTests.c in your directory. (It is acceptable to also have the fToCWithTests.c program that you copied originally.)</li>
+   <li>Run each of your programs to be sure they run.</li>
+   <li>Use the command grep @@@ filename.c on each of your C programs to be sure you've removed all the @@@ comments from each, that is:<br>
+     <br>
+       <strong>grep @@@ thirdCProgram.c<br>
+      grep @@@ fourthCProgram.c<br>
+      grep @@@ cToFWithTests.c</strong><br>
+      <br>
+      In each case, you should just get back a Unix prompt.<br>
+     <br>
+   </li>
+   <li>Do this next step very carefully.<br>
+     <br>
+     Type <strong>rm ./thirdCProgram</strong> (WITHOUT the .c on the end) to delete ONLY the executable.
+     <ul>
+       <li>Be sure you KEEP the secondCProgram.c file!  Otherwise you'll be starting from scratch! <br>
+         <br>
+       </li>
+      </ul>
+   </li>
+   <li>Do the same thing for the executables for fourthCProgram and cToFWithTests&mdash;use the rm command to delete the executables, but make sure you do NOT but the .c  on the end. The commands you want are:<br>
+       <br>
+          <strong>rm ./fourthCProgram<br>
+        rm ./cToFWithTests</strong><br>
+     <br>
+   </li>
+  </ol>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Type <strong>script lab02.txt</strong><br>
+   You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab02.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. (If you did the preparation correctly, we should see secondCProgram.c, but we should NOT see the executable files for thirdCProgram, fourthCProgram or cToFWithTests.</li>
+   <li>Now do the following steps for<strong> thirdCProgram.c</strong>:
+     <ol style="list-style:lower-alpha">
+       <li>Type <strong>make thirdCProgram</strong> to show that your program compiles with no errors.</li>
+       <li>Type <strong>./thirdCProgram</strong> and run your program to show that all test cases pass.</li>
+       <li>Type <strong>grep @@@ thirdCProgram.c</strong> to show that you've removed all the @@@ comments from your code.</li>
+       <li>Type <strong>head -1 thirdCProgram.c</strong> to show that your header comment is there with your name, date, and CS16 lab02.</li>
+     </ol>
+   </li>
+   <li>Now repeat steps (a)-(d) for <strong>fourthCProgram.c</strong></li>
+   <li>Now repeat steps (a)-(d) for <strong>cToFWithTests.c</strong></li>
+   <li>Type <strong>exit</strong> to stop the recording of commands and responses into lab02.txt</li>
+  </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab02 directory called lab02.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab02.txt</p>
+ <p>You should see your life flashing before your eyes, so to speak&mdash;a feeling of d&eacute;j&agrave; vu should come over you&mdash;because everything in the file will be what you just typed and what came back over the last few minutes.</p>
+ <p>If so, you are ready to submit!</p>
+ <h3>Step 11. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step.</p>
+ <p>You can use the command <strong>cd ..</strong> to put yourself there, or <strong>cd ~/cs16</strong></p>
+ <p>Do a pwd command to make sure that you did land in ~/cs16.</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+<p>Type the following at the prompt:</p>
+<pre>turnin lab02@cs16 lab02</pre>
+<p>You may see a warning like this one about emacs backup files&mdash;those that end in ~, or about binary files. <br>
+For example:</p>
+<pre>
+************** WARNINGS **************
+lab02/thirdCProgram.c~: NOT TURNED IN: temporary file
+...
+<br>*** Do you want to continue? </pre>
+<p>If so, don't worry&mdash;just type y and hit return to indicate you want to continue.</p>
+<p>You'll be asked if you really want to turn in these files&mdash;the message will look just the ones you saw for lab00 and lab01.</p>
+<pre>You are about to turnin ___ files [___KB] for lab02 to cs16
+*** Do you want to continue? </pre>
+<p>The main thing is to be sure that lab02.txt, thirdCProgram.c, fourthCProgram and cToFWithTests.c appear in the list. (If fToCWithTests.c appears, or the executables that go with any of these programs, that's fine.)</p>
+<p>Go ahead and hit y and enter, and you should see a message like this one:</p>
+<pre><p>lab02/thirdCProgram.c<br>
+lab02/fourthCProgram.c<br>
+lab02/lab02.txt<br>
+<em>... etc</em></p><p>*** TURNIN OF lab02 TO cs16 COMPLETE! ***</p></pre>
+<p>Congratulations&mdash;you've completed your third  lab in cs16!</p>
+<p>From now on, I won't give as many detailed instructions about the turnin step&mdash;I'll assume that you have the process down, and just give a high-level description of what you need to turn in. I'll assume you are familiar with the details (or can look back at lab00 through lab02 to review whatever you may have forgotten.)</p>
+<hr>
+ <h2>Evaluation and Grading (250 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+       <li>10 points: successfully submitting the contents of your lab02 directory</li>
+       <li>10 points: lab02 directory contains required C programs and lab02.txt (a transcript file)</li>
+       <li>20 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+       <li>20 points: each file contains a header comment as directed with the names of both (or all three) pair partners, and does not have any stray @@@ comments.</li>
+       <li>30 points: transcript file contains everything asked for in the instructions</li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     (points for correctness and style)
+     <ul>
+       <li>40 points&mdash;Working with thirdCProgram.c to make test cases pass</li>
+       <li>40 points&mdash;Working with fourthCProgram.c to fix test function and make test cases pass</li>
+       <li>80 points&mdash;Writing cToFWithTests.c based on model given.
+         <ul>
+           <li>Be sure that your program does not have any variable names or comments that are 'left over' from the old code, but no longer make sense in the new code.</li>
+           <li>For example,  fToC should not appear in any comments if the program is actually converting cToF.</li>
+         </ul>
+       </li>
+      </ul>
+   </li>
+  </ul>
+ <p><strong>Due Date:</strong> You should try to complete this assignment by the end of the discussion section in which it was assigned.</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.<br>
+   <br>
+  <div class="importantDiv">You are especially encouraged to finish this lab ASAP to help with your studying for the first midterm, which will be given on 04/21/2010.</div>
+    <br>
+ </p>
+ <p>It will be accepted without late penalty until  <strong>5pm on Friday 04/16/2010.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through <strong>5PM on Tuesday 04/20/2010.</strong><br>
+   <br>
+  After that, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

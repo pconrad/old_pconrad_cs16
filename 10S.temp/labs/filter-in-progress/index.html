@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, lab05, Filter programs (code)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" >
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" >
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+ol li ol li {list-style-type: lower-alpha;}
+code {white-space:pre;}
+.thanks {
+	font-size: smaller;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>lab05: <span class="smallerFont">(&quot;lab five&quot;)<br>
+   Filter programs<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Explain what is meant by a "filter" program in Unix, including the concepts of </li>
+     <ul>
+       <li>standard input</li>
+       <li>standard output</li>
+       <li>standard error</li>
+      </ul>
+   </li>
+
+<p>You'll get get practice with various kinds of problems solving as well:</p>
+<ul>
+   <li>Finding the sum, minimum, maximum, average of a sequence of numbers</li>
+   <li>Various kinds of transformations on string input<li>
+   <li>Using the C built-in math functions<li>
+ </ul>
+ <p>&nbsp;</p>
+ <h2>Skills Needed</h2>
+ <p>By now, we expect that you are comfortable with these basic skills from lab00 through lab03, so we will no longer describe them in as much detail as we did previously:</p>
+ <ul>
+   <li>Using a text-editor (we suggest emacs; vi/vim is another good choice) to create and/or edit C programs</li>
+   <li>Running C programs</li>
+   <li>Using the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>Performing basic management of directories and files</li>
+   <li>Submitting assignments in this class with the &quot;turnin program.</li>
+   <li>Using the <code>script</code> program to create a transcript, showing that your program runs successfully.</li>
+ </ul>
+ <h2>Work with the same pair programming partner as last week.</h2>
+ <p>Unless your pair programming partner is absent, or more than 5 minutes late, you'll work with the same pair partner as you did on lab04.</p>
+<p>If, for some reason, that is not feasible, please speak with your TA about being assigned a new pair partner. In that case, please fill out a new copy of worksheet W02, and make a posting to the lab05 revised pair programming partners forum on Gauchospace.</p>
+ <ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional&mdash;see <a href="../lab02">lab02</a> for the reasons why.</li>
+   <li>Keep the evaluation criteria in mind&mdash;you can find those listed in the intro to <a href="../lab02">lab02</a>.</li>
+  </ul>
+
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0: Get together with your assigned lab partner</h3>
+ <p>By now you should know the drill: Choose who will be the first pilot and who will start as navigator, and then remember to switch (at least once) during the lab. But you should probably know the long-term goal too:</p>
+ <p>Each partner should participate in both roles in approximately equal parts over the course of the quarter. We realize it is not possible to equally split time in every lab, but it's worth trying, and it is possible to make up for unequal splits in future labs. We trust you will try to meet this goal. Thanks!</p>
+ <p class="thanks">	(And thanks to Mike Costanzo for the wording of this step).</p>
+ <h3>&nbsp;</h3>
+
+ <h3>Step 1: Do the usual preparation steps</h3>
+<p>First, choose initial roles of driver/navigator.</p>
+ <p>Remember: don't share passwords. Instead, use scp or email to share files with each other at the end of each work session. (See <a href="../lab02#step2">lab02, step 2</a> for details of how to use scp.)</p>
+ <div class="importantDiv">
+   <h4 align="center">Share your work with each other at the end of EVERY work session.</h4>
+   <p>Again for emphasis, I will say it: DO NOT share passwords with each other. </p>
+   <p>Instead, use scp or email to share files with each other after every work session.<br>
+   </p>
+   <p>That way, if your pair partner <a href="http://discuss.fogcreek.com/joelonsoftware/default.asp?cmd=show&ixPost=149219">gets hit by a bus</a>, you can continue working without him/her&mdash;you aren't 'out of luck'.</p>
+ </div>
+ <p>If you've forgotten how to do the steps below, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+</p>
+ <ul>
+   <li>
+     Bring up a terminal window </li>
+   <li>Create a ~/cs16/lab05 directory</li>
+   <li>Copy files from my directory</li>
+ </ul>
+ <p>The files for this week are at this web link:</p>
+ <p><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab05/code">http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab05/code<br>
+   </a></p>
+ <p><strong>The copy command is different this week.</strong></p>
+<p>This week, we are copying and entire directory <em>with its subdirectories</em> into your account.  Therefore, we have an extra option on the <code>cp</code> command, namely the <code>-r</code> option.  The <code>r</code> stands for <em>recursive</em> and it means, in this case, that we copy not only the files from the source directory, but all the subdirectories and their contents as well:</p>
+ <pre>cp -r ~pconrad/public_html/cs16/10S/labs/lab05/code/* ~/cs16/lab05
+
+</pre>
+ <p><strong>Exam hint: </strong>Make sure you pay attention to little details like the bit above about the <code>-r</code> option.  Don't just gloss over it---especially if you are in the navigator role.   Things like this can show up on the next midterm exam.</p>
+
+
+ <h3>Step 2: The idea of a "filter" program</h3>
+ <p>In Unix, there is a special kind of program known as a <em>filter</em>.   A filter program reads input, transforms it in some way, and produces output.    This may sound like a trivial description at first&mdash;after all, doesn't every program do that?   But with filters, its a bit more specific:</p>
+<ul>
+ <li>There are no prompts for input.  Instead, the input comes in one long stream.</li>
+</ul>
+
+<p>Some specific examples may help.</p>
+
+<div class="importantDiv">
+<p>NOT FINISHED YET... continue from here...</p>
+</div>
+ <h3>Step 8: Scripting your assignment</h3>
+
+ 
+ <p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.<br>
+ </p>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Use the proper form of the cd command to put yourself in your ~/cs16/lab05 directory (if you aren't already there)</li>
+   <li>Type <strong>script lab05.txt</strong><br>
+     You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab05.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. </li>
+   <li>Now for each of the programs you worked on this week&mdash;<code>countOddWithTests</code> and <code>countOddInFile</code>&mdash;do the following steps:<br>
+     <ol>
+       <li>Carefully&mdash;type <strong>rm <em>filename</em> </strong>to remove the  executable for each of the programs that you worked on this this week</li>
+       <li>Now, for each of the programs you worked on this week, type <strong>make <em>filename</em></strong> to compile your program. <ul><li>There should be no warnings and no errors&mdash;and since you did the rm command, it should NOT say: <br>
+           <code><em>filename</em> is up to date</code></li>
+           </ul>
+       </li>
+       <li>Next, for each of the programs you worked on this week, program for several command lines to show that it works properly. Include ones that show the &quot;Usage&quot; message, as well as several values that show it works.<br>
+         <br>
+      </li>
+     </ol>
+    </li>
+   <li>Once you've done items 5a,5b,5c for both <code>countOddWithTests</code> and <code>countOddInFile</code>, type <strong>exit</strong> to stop the recording of commands and responses into lab05.txt</li>
+ </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab05 directory called lab05.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab05.txt</p>
+ <p>If it all looks ok, you are ready to submit!</p>
+ <h3>Step 9. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+ <pre>turnin lab05@cs16 lab05</pre>
+ <p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+ <p>&nbsp; </p>
+ <hr>
+ <h2>Evaluation and Grading (250 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab05 directory containing
+           <ul>
+               <li> required:  countOddWithTests.c, countOddInFile.c, lab05.txt (a transcript file) </li>
+               <li>optional: other programs that were part of the files you copied for the lab this week</li>
+           </ul>
+         </li>
+       <li>20 points: submission is on time and follows submission instructions
+         <ul>
+               <li>(i.e. is done via turnin by the Due Date.)</li>
+         </ul>
+       </li>
+       <li>20 points: The .c files submitted  have good header comments
+         <ul>
+               <li>on first line with name &quot;cs16 lab05&quot; and date, and your name, and that of your pair partner(s)</li>
+         </ul>
+       </li>
+       <li>50 points: transcript file contains everything asked for in the instructions
+         <ul>
+               <li>especially important is that the script contains each of the tests required</li>
+         </ul>
+       </li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     for countOddWithTests.c (points for correctness and style)
+     <ul>
+         <li>30 points: correct implementation of isOdd</li>
+         <li>40 points: correct implementation of countOdd
+           <ul>
+             <li>-10 points if you didn't reuse the isOdd function inside your countOdd function</li>
+           </ul>
+         </li>
+        <li>30 points: indentation, variables names, comments, show understanding of good programming style</li>
+      </ul>
+   </li>
+   <li>Programming Tasks for countOddInFile.c
+     <ul>
+       <li>50 points correctly transferring functions from countOddWithTest.s into countOddInFile.c</li>
+      </ul>
+   </li>
+ </ul>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section in which it was assigned (04/23/2010)</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until <strong>5pm on Friday 04/30/2010.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through <strong>5PM on Wednesday 05/05/2010</strong><br>
+     <br>
+  </p>
+ <p>After 5PM Wednesday 05/05/2010, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+ <p>&nbsp;</p>
+ 
+</div>
+<!-- id = "container" -->
+</body>
+</html>

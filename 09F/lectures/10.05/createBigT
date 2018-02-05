@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# run two Unix commands to convert T.pbm to a jpeg file
+#  and to convert it to a great big jpeg file (magnified 10x)
+
+convert T.pbm T.jpg
+convert -scale 1000% T.pbm T.10x.jpg
+convert -scale 10000% T.pbm T.100x.jpg

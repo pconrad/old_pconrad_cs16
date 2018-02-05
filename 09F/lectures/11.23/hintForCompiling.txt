@@ -1,0 +1,32 @@
+
+If you want to just use regular "make" to compile a simple
+program, but you need -g, -lm or you want to use -Wall, 
+you can use the command:
+
+    export CFLAGS="whatever"
+
+This will put extra flags on the compile command generated
+by the "make" program.  For instance:
+
+-bash-3.2$ export CFLAGS="-lm"
+-bash-3.2$ make printList1
+cc -lm    printList1.c   -o printList1
+-bash-3.2$
+
+-bash-3.2$ export CFLAGS="-lm -g"
+-bash-3.2$ make printList1
+cc -lm -g    printList1.c   -o printList1
+-bash-3.2$
+
+-bash-3.2$ export CFLAGS="-lm -Wall -g"
+-bash-3.2$ make printList1
+cc -lm -Wall -g    printList1.c   -o printList1
+-bash-3.2$ 
+
+You can reset this with 
+   unset CFLAGS
+
+-bash-3.2$ unset CFLAGS
+-bash-3.2$ make printList1
+cc     printList1.c   -o printList1
+-bash-3.2$ 

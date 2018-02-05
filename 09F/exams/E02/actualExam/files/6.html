@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>PRACTICE EXAM for CS16 Midterm 2, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="../exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+ul.squareList li {list-style-type: square;}
+.style3 {font-family: Geneva, Arial, Helvetica, sans-serif; font-weight: bold; }
+</style>
+<script type="text/javascript" src="../exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions">Answer to q6, midterm E02 practice questions</h1>
+<hr />
+<ol class="theQuestions">
+
+ <li class="pageBreakBefore" value="6">
+  <p>(25 pts) Together with this exam, there is a program (on a separate <a href="#handout">handout</a>).<br />
+  </p>
+ <p>Assuming each of the expressions below appeared in this program, indicate the type they would have, or write error if the expression is not valid, e.g. <ul>
+     <li>dereferencing something with * or -&gt; that isn't a pointer</li>
+     <li>a reference to a struct member that doesn't exist (e.g. d.foo where there is no foo)</li>
+   </ul>
+   <br />
+     <br />
+  The first few are done for you as an example.</p>
+  <p>Hints--for full credit:</p>
+
+  <ul>
+    <li> don't write<em> pointer to character</em>; instead, write <strong>char *</strong></li>
+    <li>don't write<em> address of int</em>; instead, write <strong>int *</strong></li>
+    <li>don't write <em>address of int *</em> or <em>address of pointer to int</em>, instead write <strong>int **</strong></li>
+  </ul>
+  </blockquote>
+
+  <table border="1" cellpadding="1" cellspacing="1" id="typeExpressions">
+    <tr>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+      <td width="13" bgcolor="#000000">&nbsp;&nbsp; &nbsp; </td>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td><span class="style5 instructions">int</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>f-&gt;radius</td>
+      <td class="style3"> double&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&amp;a</td>
+      <td><span class="style5 instructions">int *</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>f-&gt;center.x</td>
+      <td class="style3">double</td>
+    </tr>
+    <tr>
+      <td>*a</td>
+      <td><span class="style5 instructions">error</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>f-&gt;center-&gt;y</td>
+      <td class="style3">error (f-&gt;center is not a pointer)</td>
+    </tr>
+    <tr>
+      <td>*b</td>
+      <td><span class="style5 instructions">int</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>&amp;g</td>
+      <td class="style3">struct Point *</td>
+    </tr>
+    <tr>
+      <td>e</td>
+      <td><span class="instructions">struct Circle</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>*h</td>
+      <td class="style3">struct Point</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td class="style3"><span class="style3">int *</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>&amp;(h-&gt;x)</td>
+      <td class="style3">double *</td>
+    </tr>
+    <tr>
+      <td>&amp; b</td>
+      <td class="style3"><span class="style3">int **</span></td>
+      <td bgcolor="#000000">d</td>
+      <td>*(h.y)</td>
+      <td class="style3">error (h.y is already an error because h is not a struct)</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td class="style3"><span class="style3">double</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>i.m</td>
+      <td class="style3">int</td>
+    </tr>
+    <tr>
+      <td>*c</td>
+      <td class="style3"><span class="style3">error (c is not a pointer)</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>j.d</td>
+      <td class="style3">error (j is not a struct)</td>
+    </tr>
+    <tr>
+      <td height="24">d</td>
+      <td class="style3"><span class="style3">double *</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>i-&gt;y</td>
+      <td class="style3">error (i is not a pointer)</td>
+    </tr>
+    <tr>
+      <td>&amp;d</td>
+      <td class="style3"><span class="style3">double **</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>j-&gt;m</td>
+      <td class="style3">int</td>
+    </tr>
+    <tr>
+      <td>*e</td>
+      <td class="style3">error (e is not a pointer)</td>
+      <td bgcolor="#000000">er</td>
+      <td>(*j).m</td>
+      <td class="style3">int (means same thing as j-&gt;m)</td>
+    </tr>
+    <tr>
+      <td>e.x</td>
+      <td class="style3">error (circle has no member named x)</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argc</td>
+      <td class="style3">int</td>
+    </tr>
+    <tr>
+      <td>e.radius</td>
+      <td class="style3">double</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argv[0]</td>
+      <td class="style3">char *</td>
+    </tr>
+    <tr>
+      <td>f.y</td>
+      <td class="style3">error (f is not a struct)</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argv[0][0]</td>
+      <td class="style3">char </td>
+    </tr>
+  </table>
+</li>
+</ol>
+</body>
+</html>

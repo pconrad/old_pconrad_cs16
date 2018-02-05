@@ -1,0 +1,25 @@
+ReadMe
+
+Instructor Resources
+Source Code Download
+
+to accompany
+
+Engineering Problem Solving with C, 3rd Edition
+by Delores M. Etter
+
+copyright 2005 Pearson Prentice Hall
+
+ISBN 0-13-142971-X
+
+-------------------------------------------
+
+Please note that there are three folders
+
+C--contains files with the extension .c
+Cpp--contains files with the extension .cpp
+Data--contains data files for use with files in the C or Cpp folders
+
+The files in both the C and Cpp folders are in C code.
+
+The files with the extension .cpp are for use by those using Microsoft C++ compiler, which will also run C code.

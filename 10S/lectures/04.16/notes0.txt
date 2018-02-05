@@ -1,0 +1,52 @@
+Notes Monday 04/14, CS16 (P. Conrad)
+
+(0) Reminder: Midterm exam one week from today
+
+(1) Tip of the day:
+
+emacs +19 file.c
+
+Goes right to line 19  (illustrate with the program that has an error.)
+
+(2) Brief overview of some more details related to 
+   int main(int argc, char *argv[]) { // ...
+
+   i.e., command line arguments.
+
+
+mention 2^3 doesn't do what you expect, neither does 3^2    
+
+mention pow(2,3)    and pow(3,2)
+
+mention #include <math.h>
+
+show 
+  export CFLAGS="-lm"
+
+before running make...
+
+
+
+=====================
+
+An exercise:  can you make a function that would produce any of these:
+
+void boxedNumbers(int width);
+
+boxedNumbers(4); produces
+
++--+--+--+--+
+| 1| 2| 3| 4|
++--+--+--+--+
+
+boxedNumbers(12); produces
++--+--+--+--+--+--+--+--+--+--+--+--+
+| 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12|
++--+--+--+--+--+--+--+--+--+--+--+--+
+
+For purposes of this exercise, it is ok to 
+assume that width will always be <=99.
+
+
+
+  

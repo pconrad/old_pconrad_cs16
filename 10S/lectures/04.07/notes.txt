@@ -1,0 +1,25 @@
+
+Link to the FAQ http://www.cs.ucsb.edu/~pconrad/cs16/topics/C/
+
+remind me to put this on the web
+
+(0) Announcements:
+
+Crashing---still working through the papers... ok NOW come by if you
+haven't heard from me yet.
+
+(1) Pair programming
+
+(a) Pair programming----find a partner
+(b) lab02, lab03... how it will work (and attendance stuff...)
+(c) The pair programming video... we'll watch it today
+ 
+(2) a look ahead at where we are heading... 
+
+proj0 from last quarter...
+
+(3) a look ahead and lab02 and lab03
+
+(4) a better way to test the smaller function
+
+(5) void functions

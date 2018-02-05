@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab05a, Fall 2009 (09F)--Supplement to lab05, debugging segmentation faults with gdb</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.highlightGreen {background-color:#00FF00;}
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+.style2 {background-color: #00FF00; font-weight: bold; }
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Fall 2009</h1>
+ <h1>lab05a: <span class="smallerFont">(&quot;lab five a&quot;)<br>
+ Supplement to lab05&mdash;debugging segmentation faults with gdb<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals</h2>
+ <p>By the time you have completed this supplement to lab05, you should be able to:</p>
+ <ul>
+   
+   <li>Understand one of the common causes of a segmentation fault&mdash;array indexes out of bounds </li>
+   <li>And, use gdb to figure out what is wrong when you have a segmentation fault</li>
+  </ul>
+ <h2>This part of lab05 is optional&mdash;and there is nothing to turn in<br>
+ But you should probably do it anyway</h2>
+ <p>Even if you don't run into a segmentation fault when completing lab05, eventually you will.</p>
+ <p>It is ok to put off doing this part of lab05 until that happens&mdash;or until you are studying for midterm&nbsp;2.</p>
+ <p>But, segmentation faults are a very common problem in C and C++ programming, so the sooner you learn about...</p>
+ <ul>
+   <li>what causes them</li>
+   <li>how to debug them</li>
+  </ul>
+ <p>	...the better off you will be!<br>
+ </p>
+ <p><strong>You may do this individually, or with your pair partner&mdash;but in my opinion, together is better...</strong></p>
+ <p>It's up to you&mdash;but I think you'll learn more if you work together with a partner on this. Each of you can help each other understand what is going on, and each of you may notice different things.</p>
+ <p><strong>There's a lot of reading in this supplemental lab</strong></p>
+ <p>Sorry about that&mdash;it's just that there is a lot to explain here. I realize that may make the whole pair thing more awkward.</p>
+ <p>You may want to do the reading first&mdash;i.e. read over the whole lab before you start, then do all the hands on exercises. </p>
+ <p>The reading probably makes the most sense though when it is connected directly with the experience of trying these commands for yourself.</p>
+ <p>So another option is to go ahead and log in at two computers, near one another. Work the hands-on parts together pair-programming style (driver/navigator), but when you are reading, go back to your separate machines so you can each read at your own pace.</p>
+ <h2>Step by Step Instructions</h2>
+
+ <h3 id="step1">Step 0: Create a ~/cs16/lab05 directory and copy these files:</h3>
+ <p>The files you need  are available here:</p>
+ <p><a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab05a/files">http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab05a/files<br>
+  </a></p>
+ <p>And here on the CSIL computers:</p>
+ <p><code> ~pconrad/public_html/cs16/09F/labs/lab05a/files/* </code></p>
+ <p>You can use the same techniques described in <a href="../lab04">lab04</a> to create a ~/cs16/lab05a directory, and copy those into file into that directory. </p>
+ <h3>Step 2: Read through&mdash;and compile/run&mdash;the program sumArrayCorrect.c</h3>
+ <p>The program <a href="files/sumArrayCorrect.c">sumArrayCorrect.c </a>shows an example of a correct program that uses test-driven development to calculate the sum of an array of integers. It illustrates several points that may be helpful to you in learning C.</p>
+ <p>Run it once to see what it does. No suprises here&mdash;it looks just like every other test-driven development program we've done so far.</p>
+ <p>But look more deeply into the code, and notice the following things:</p>
+ <ul>
+   <li>See how the for loop is used to step through every element of the array, and calculate a sum. </li>
+   <li>More interesting&mdash;look at the test cases in the main program that calculate partial sums of the arrays that are passed in.
+     <ul>
+       <li>Note how we can &quot;lie&quot; about the size of the array&mdash;indicating that it is smaller than it really is</li>
+       <li>See how the sumOfArray function can be used in this way to sum up only part of the array.</li>
+      </ul>
+   </li>
+  </ul>
+ <p>Once you understand this program, try the next one&mdash;because it is a broken version of this same code.</p>
+ <h3>Step 3: Read through the program sumArrayWrong.c&mdash;and try to spot the error.<br>
+ But don't fix it yet!</h3>
+ <p>The program <a href="files/sumArrayWrong.c">sumArrayWrong.c</a> contains&mdash;on purpose&mdash;an error. It is not a syntax error&mdash;the program compiles just fine. </p>
+ <p>In a sense, it isn't a logic error either&mdash;it isn't that the programmer &quot;thought about the program in the wrong way&quot;. </p>
+ <p>Rather, it is, in a real sense, a &quot;typo&quot;&mdash;the programmer typed a character that looks like the one she/he intended, but ended up with a different character instead&mdash;one that, unlucky for him/her, happens to still be a program that will compile and run&mdash;it just won't work.</p>
+ <p>Once you've spotted the error move on to the next step. If you can't find it after a while, just keep going with Step 4&mdash;you'll find it eventually later in this lab.</p>
+ <h3>Step 4: Compile and run the UNMODIFIED program sumArrayWrong.c</h3>
+ <p>Without fixing the error (if you found it), compile and run sumArrayWrong.c</p>
+ <p>If you do, you'll probably see a result like this. I've used a &quot;green highlighter&quot; to make the key result stand out:</p>
+ <p>
+  <pre>-bash-3.2$ <strong>make sumArrayWrong</strong><br>cc     sumArrayWrong.c   -o sumArrayWrong<br>-bash-3.2$ <strong>./sumArrayWrong</strong><br><span class="style2">Segmentation fault</span><br>-bash-3.2$ </pre>
+ </p>
+ <p>These words&mdash;<code>Segmentation fault</code>&mdash;are often associated with fear and dread among C and C++ programmers. But this need not be the case. </p>
+ <p>With the right set of tools at your disposal, a segmentation fault is no more difficult than any other kind of error to debug. In fact, it can be a very convenient kind of error&mdash;because it causes your program to immediately halt. We can use a couple of tools to go in, like doctors using an X-Ray or MRI, and examine exactly what is going on in the program at that moment.</p>
+ <p>The tools we need are:</p>
+ <ul>
+   <li>A special way to compile: <strong>gcc -g <em>program</em>.c -o <em>program</em></strong></li>
+   <li>A special way to run: <strong>gdb <em>program</em></strong></li>
+  </ul>
+ <p>In the next step, we'll use those tools to find which line of code resulted in the segmentation fault.</p>
+ <h3>Step 5: Use the seg fault busting tools: <strong>gcc -g</strong> and <strong>gdb</strong></h3>
+ <p>Let's apply these tools to sumArrayWrong.c&mdash;try these commands for yourself:  </p>
+ <pre>-bash-3.2$ <strong>gcc -g sumArrayWrong.c -o sumArrayWrong</strong><br>-bash-3.2$ <strong>gdb sumArrayWrong</strong><br>GNU gdb Fedora (6.8-32.fc10)<br>Copyright (C) 2008 Free Software Foundation, Inc.<br>License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;<br>This is free software: you are free to change and redistribute it.<br>There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;<br>and &quot;show warranty&quot; for details.<br>This GDB was configured as &quot;i386-redhat-linux-gnu&quot;...<br>(gdb) </pre>
+ </p>
+ <p>You are now at a special prompt called the <em>gdb prompt</em>. The letters gdb stand for &quot;GNU debugger&quot;&mdash;this program is sometimes just called &quot;the debugger&quot;.</p>
+ <p>There are many commands we can type here&mdash;and we'll learn about many of them over the next few weeks. But the only three we'll need for this lab are:</p>
+ <ul>
+   <li><strong>run</strong> &mdash; this command runs our program</li>
+   <li><strong>print </strong><em>expr</em> &mdash; this command prints the value of an expression (e.g. a variable)</li>
+   <li><strong>quit</strong> &mdash; this gets us out of gdb and back to the Unix prompt</li>
+  </ul>
+ <p>Let's start with the <strong>run</strong> command:  </p>
+ <pre>
+(gdb) <strong>run</strong>
+Starting program: /cs/faculty/pconrad/cs16/lab05a/sumArrayWrong 
+
+Program received signal SIGSEGV, Segmentation fault.
+0x08048413 in sumArray (a=0xbffff5e4, n=3) at sumArrayWrong.c:27
+27	    sum += a[i];
+(gdb) 
+</pre>
+ </p>
+ <p>Well, that is informative!   We see exactly what line of code it was that cause the segmentation fault&mdash;namely the line:</p>
+ <p>sum += a[i];</p>
+ <p>In a moment we'll come back to why that line of code caused a problem. But first, lets take a short break to read about what a segmentation fault is:</p>
+ <h3>Step 6: What is a segmentation fault anyway?</h3>
+ <p>It may help at this point to know what a segmentation fault is. This is an oversimplified explanation, but it will do for our purposes:</p>
+ <p><strong>A segmentation fault </strong><strong>occurs when:</strong></p>
+ <ul>
+   <li><strong> you try to access a memory location that you are not supposed to access.</strong></li>
+ </ul>
+ <p>Here's a slightly more detailed explanation:</p>
+ <ul>
+   <li>A segmentation fault has to do access to <strong>memory locations
+     </strong>
+     <ul>
+       <li>By memory locations, we mean  the computer's short-term memory, or <strong>RAM</strong> (Random Access Memory)</li>
+       <li>This is the place where all variables and executable code are stored when a program is running.</li>
+       <li>Members of the  general public sometimes use the word  &quot;memory&quot; to refer to either RAM or disk space&mdash;but if you hear a computer scientist use the word &quot;memory&quot; all by itself, it <em>usually</em> refers to RAM and <em>hardly ever</em> refers to disk space.  </li>
+     </ul>
+   </li>
+   <li>Memory (RAM) is divided into <strong>segments, </strong>each with its own protection level
+     <ul>
+       <li>Some segments are <strong>&quot;read-only&quot;</strong> such as program code, or areas used for constants and string literals.
+         <ul>
+           <li>A running program should not modify these segments in memory.</li>
+          </ul>
+       </li>
+       <li>Some segments are <strong>&quot;read-write&quot;</strong>&mdash;such as the locations set aside for variables
+         <ul>
+           <li>A running program can modify these locations&mdash;with assignment statements, for example</li>
+          </ul>
+       </li>
+       <li>For other segments, our program has <strong>&quot;no-access
+         &quot;
+         </strong>
+         <ul>
+           <li>For example, segments used by the Operating System may be off-limits to the kind of programs we write in CS16.</li>
+          </ul>
+       </li>
+      </ul>
+   </li>
+   <li>A segmentation fault happens if you try to access a segment in the wrong way
+     <ul>
+       <li>If you try to read a no-access segment, or write to a read-only segment, that is a segmentation fault.</li>
+      </ul>
+   </li>
+  </ul>
+ <p>The word <strong>fault</strong> is used here in the same sense that is used in the game of tennis&mdash;a fault is just a fancy word for mistake, or error, or &quot;violation of the rules&quot;.</p>
+ <p>We often call these <strong>seg faults </strong>for short.</p>
+ <h3>What causes a seg fault?</h3>
+ <p>Seg faults don't happen if your code is written properly. So what causes them? The two most common problems are:</p>
+ <ul>
+   <li>An out-of-bounds array index:
+     <ul>
+       <li>For example, If you have an array with 5 elements (e.g. int a[5];), and you try to access a[i] when i is -117 or 45768, then you are accessing some place in memory FAR outside the boundaries of the array a</li>
+      </ul>
+   </li>
+   <li>Pointer problems&mdash;we'll talk about these more in the days and weeks to come...
+     <ul>
+       <li>Dereferencing a pointer that was never initialized or contains a value that isn't really a pointer</li>
+       <li>Dereferencing a null pointer (one that has the value 0)</li>
+      </ul>
+   </li>
+  </ul>
+ <p>(<strong>A side note:</strong> If youv'e begun to penetrate the deep connection between &quot;array indexing&quot; and &quot;pointers&quot; in C&mdash;you'll understand that these &quot;two&quot; kinds of segfaults are actually, at a deep level, really just the same thing. If you don't see that yet, don't worry&mdash;you'll see that by the end of the course, I hope.)</p>
+ <p>Let's return now to our sumArrayWrong.c program, where we'll see that the segmentation fault is in fact caused by an array indexing error..</p>
+ <h3>Step 7: Returning to the gdb session&mdash;printing values</h3>
+ <p>When we left off to read a bit about seg faults, we were here (this is the result of step 5):</p>
+ <p>We had used the  <strong>run</strong> command: </p>
+ <pre>
+(gdb) <strong>run</strong>
+Starting program: /cs/faculty/pconrad/cs16/lab05a/sumArrayWrong 
+
+Program received signal SIGSEGV, Segmentation fault.
+0x08048413 in sumArray (a=0xbffff5e4, n=3) at sumArrayWrong.c:27
+27	    sum += a[i];
+(gdb) 
+ </pre>
+ </p>
+ <p>And we had found that the following line was the one being executed&mdash;executed in the sense of being &quot;done&quot;, not in sense of being killed&mdash;when the seg fault occured.</p>
+ <p>sum += a[i];</p>
+ <p>Because we know that seg faults usually happen because of array indexing, or pointer deferencing, we suspect that the problem may be that either i has the wrong value, or a points to the wrong place. To check these theories, we can use the print command. The print command lets us look at the values of various variables. Let's check the values of a[0] and a[1] to see if they seem reasonable:</p>
+ <p>
+  <pre>(gdb) <strong>print a[0]</strong><br>$1 = 4<br>(gdb) <strong>print a[1]</strong><br>$2 = 8<br>(gdb) </pre>
+ It appears that a[0] is 4, and a[1] is 8. That sounds right, because in the main program of sumArrayWrong.c, we see this:</p>
+ <p>
+  <pre>
+int main()
+{
+  int failures = 0; // this counts the number of failures
+  int a[] = <span class="style2">{4,8,10};</span> // sum 22
+  int b[] = {10,20,30,40}; // sum 100
+  int c[] = {-1,1,2,-2,3,-3}; // sum 0
+  
+  // We use += to add the number of failures each time...<br>
+
+  failures += checkExpectInt(&quot;1: sumArray(a,3)&quot;,sumArray(<span class="style2">a</span>,3),22);
+ ...
+
+ </pre>
+  <p>The array a that contains {4,8,10} is the one that we are passing into the function sumArray as the formal parameter a (this happens to be the name of the array in the main program also). <br>
+    <br>
+  So, that seems to be working&mdash;the values in a[0] and a[1] are what we expect. But if we examine the variable i, we see something truly strange:</p>
+  <p>
+  <pre>(gdb) <strong>print i</strong><br>$4 = 647<br>(gdb) </pre>
+  How can this be? The array a only has three elements&mdash;n is 3, right? So shouldn't i only go from 0 up to 2?</p>
+  <p>So, we look at the for loop that gives i its value, and we see the culprit, here highlighted in green:</p>
+  <p>
+  <pre> for (i=0;<span class="style2">1&lt;n</span>;i++) // @@@ BUG!!!  this line contains an error
+
+
+</pre>
+  <p>Clearly, that is not what we intended to write. The condition (1&lt;n) is always true, so we have an infinite loop, where i keeps getting incremented &quot;forever&quot;&mdash;we'll not <em>exactly</em> forever, because when it hits the value 647, we have  strayed outside the bounds of the segments we are allowed to read&mdash;and  this leads to a segmentation fault.
+  </p>
+  </p>
+  <p>It should be noted that we strayed outside the bounds of the array <em>much</em> earlier&mdash;but we must have still been in segments of memory where we had &quot;read access&quot;&mdash;so we didn't get a seg fault then. This illustrates a basic property of C and C++ which is both a weakness and a strength:</p>
+  <ul>
+    <li> In some languages, including Java and Python, every array access is &quot;checked&quot;, and if you stray outside the bounds of an array, an &quot;exception&quot; occurs. This is good, because it helps the programmer to catch errors sooner. But it can be bad, because it comes at the expense of performance&mdash;the extra checking can slow down the program.</li>
+    <li>C and C++ don't have this protection in place. This is not necessarily a bad thing. One of the key ideas of C and C++ is &quot;trust the programmer&quot;. Because <em><strong>you</strong></em>&mdash;the <em><strong>programmer</strong></em>&mdash;are trusted, there is no nanny looking over your shoulder checking every one of your array references to make sure it is valid. This means  C and C++ can run as fast as possible. But it means that if you mess up, it can be harder to find the problem.</li>
+  </ul>
+  <p>Back to our code: what we intended was (i &lt; n), so that the index variable i stays within the bounds of the array, i.e the values 0 through n-1:</p>
+
+    <pre>for (i=0;<span class="style2">i&lt;n</span>;i++)
+</pre>
+ <p>What may not be obvious, but I hope you can begin to see is this: the <strong>segmentation fault is our friend. </strong>Here's why: </p>
+ <ul>
+   <li>	<strong>Without the segmentation fault</strong>...  we would be accessing memory locations that have nothing to do with our program, and adding them into the sum. If we didn't hit a segmentation fault, our program might just sit there adding up memory locations indefinitely&mdash;and it would be harder to figure out what was wrong. The seg fault throws a flag on the play, blows the whistle, and says&mdash;let's figure out what just happened. It gives you a chance to fix the problem.</li>
+   <li><strong>There are things worse than a segmentation fault</strong>. In particular, in C and C++, if you have a bad array subscript, or a bad pointer that takes you to a segment you <strong>do </strong>have read/write access to&mdash;but just <strong>not</strong> the part of memory you wanted to access! Here, you don't get a seg fault&mdash;just a wrong answer. You might&mdash;or might not&mdash;detect the wrong answer. This is one reasson that incorporating testing into your software development process&mdash;and really making it a habit&mdash;can be very valuable, especially in languages such as C and C++.</li>
+  </ul>
+ <h4>To get out of gdb:</h4>
+ <p>Use the quit command. If the program is still running, you may need to say &quot;y&quot; at the prompt:</p>
+ <p>
+  <pre>(gdb) <strong>quit</strong><br>The program is running.  Exit anyway? (y or n) <strong>y</strong><br>-bash-3.2$ <br></pre>
+ </p>
+ <h3>Step 8: Finishing up&mdash;a full segfault busting session, from start to finish</h3>
+ <p>We've covered a lot of ground in this little &quot;optional&quot; supplement to lab5a. But the information is sort of scattered all over the web page. So to finish up, here's a sample session with using our segfault-busting tools&mdash;all in one place. You can use this as a roadmap  when you have your own segfaults to deal with. Good luck!</p>
+ <ol>
+   <li><p>You encounter a program with a segmentation fault</p>
+<pre>
+-bash-3.2$<strong> make sumArrayWrong</strong><br>cc     sumArrayWrong.c   -o sumArrayWrong<br>-bash-3.2$ <strong>./sumArrayWrong </strong><br>Segmentation fault<br>-bash-3.2$ </pre>
+   </li>
+   <li><p>You recompile the program with gcc -g</p>
+<pre>-bash-3.2$ <strong>gcc -g sumArrayWrong.c -o sumArrayWrong</strong><br>-bash-3.2$ 
+
+</pre>
+   </li>
+   <li><p>You run gdb (the GNU debugger on your program)</p>
+<pre>
+-bash-3.2$<strong> gdb sumArrayWrong </strong><br>GNU gdb Fedora (6.8-32.fc10)<br>Copyright (C) 2008 Free Software Foundation, Inc.<br>License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;<br>This is free software: you are free to change and redistribute it.<br>There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;<br>and &quot;show warranty&quot; for details.<br>This GDB was configured as &quot;i386-redhat-linux-gnu&quot;...<br>(gdb) 
+</pre>
+   </li>
+   <li><p>You type <strong>run</strong> at the gdb prompt to run your program, and see which line caused the segfault</p>
+<pre>
+(gdb) <strong>run</strong>
+Starting program: /cs/faculty/pconrad/cs16/lab05a/sumArrayWrong 
+
+Program received signal SIGSEGV, Segmentation fault.
+0x08048413 in sumArray (a=0xbffff5e4, n=3) at sumArrayWrong.c:27
+27	    sum += a[i];
+(gdb) 
+</pre>
+   </li>
+   <li>
+     <p>You use the print command to look at variable values and other expressions. You can look at the line of code the caused the seg fault (in this case <code>sum&nbsp;+=&nbsp;a[i]</code>) for ideas of what variables and expressions to examine. <br>
+       <br>
+      The values you get back can give you some insight into what might be wrong. In this case, the value of i (647) is especially suspicious:</p>
+     <pre>
+(gdb)<strong> print a</strong><br>$1 = (int *) 0xbffff5e4<br>(gdb) <strong>print a[0]</strong><br>$2 = 4<br>(gdb) <strong>print a[1]</strong><br>$3 = 8<br>(gdb) <strong>print a[i]</strong><br>Cannot access memory at address 0xc0000000<br>(gdb) <strong>print i</strong><br>$4 = 647<br>(gdb) <strong>print sum</strong><br>$5 = 451829096<br>(gdb) 
+</pre>
+   </li>
+   <li>
+     <p>Based on what you see, you form a hypothesis about what is wrong, look for the problem in your code, and then fix your code. (It can help to have another window open&mdash;in that window, you are using the editor&mdash;e.g. emacs or vi&mdash;to look through your program source code.) <br>
+       <br>
+      When you've found the changes you want to make to the code, you quit gdb, and start over again&mdash;with compiling and running your code.</p>
+<pre>
+(gdb) <strong>quit</strong><br>The program is running.  Exit anyway? (y or n) <strong>y</strong><br>-bash-3.2$ </pre>
+   </li>
+ </ol>
+ <p><strong>For further exploration:</strong></p>
+ <p>In the same directory with <a href="files/sumArrayCorrect.c">sumArrayCorrect.c</a> and <a href="files/sumArrayWrong.c">sumArrayWrong.c</a>, you'll also find two other programs:</p>
+ <ul>
+   <li><a href="files/printArrayCorrect.c">printArrayCorrect.c</a></li>
+   <li><a href="files/printArrayWrong.c">printArrayWrong.c</a></li>
+  </ul>
+ <p>You may find it helpful to look at those two programs and run them as well&mdash;repeating all the steps from this lab on those two programs. Because these programs print out the values they are examining, it may be a little bit easier to see what is going on&mdash;this may give you more insight into the conditions that create a segmentation fault.</p>
+ <p>If you are a relatively new programmer, the printArrayCorrect.c program may also be another useful example in at least three ways&mdash;so it is worth looking at:</p>
+ <ul>
+   <li>It is a model of how to print all the values in an array in C.</li>
+   <li>It is a model, in general, of  how to work with arrays values and array indexes in C.</li>
+   <li>It contains some  comments about formal and actual parameters in C that may help to clarify this often misunderstood topic.</li>
+ </ul>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

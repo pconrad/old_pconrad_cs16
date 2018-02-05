@@ -1,0 +1,689 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Handout to go with H15, CS16, 10W  (Dynamic Memory Allocation, Etter 6.7)</title>
+<script type="text/javascript" src="../../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+table.borderTable {border: solid thin black;}
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.smallerFont {font-size: 0.9em;}
+.pageBreakBefore {page-break-before:always;}
+.subtle{color:#666666; font-size: 0.9em;}
+
+#leftColumn {text-align:left;}
+#rightColumn {text-align:left;}
+code {white-space:pre;}
+table.twoColumn tr td {width: 46%; height:auto; vertical-align:top; margin-left: 0.5em; margin-right: 0.5em; padding-left: 0.5em; padding-right: 0.5em;}
+
+table.numberedCodeTable tr td {vertical-align:top; text-align: left; font-size: 0.9em;"}
+
+.instructions {font-size:1.2em; }
+table.arrayTable tr td {font-family:"Courier New", Courier, monospace; font-size: 0.8em; padding: 0px; margin: 0px;}
+
+h2, .instructions { font-family:Geneva, Arial, Helvetica, sans-serif; }
+
+h2 {font-size: 1.2em;}
+
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>HANDOUT to accompany H15:  (Dynamic Memory Allocation, Etter, Section 6.7) CS16, 10W, UCSB<br />
+Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/handout">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/handout</a>  (<a href="../H15.pdf">PDF</a>)</p>
+<p>Goes with homework assignment: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15</a>&nbsp;&nbsp;(<a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/H15.pdf">PDF</a>)<br />
+</p>
+<hr />
+<p align="left" class="instructions">This homework assignment  requires<br />
+  (1) some <strong>reading in your textbook</strong><br />
+ (2) reading some additional notes on this sheet,<br />
+  (3) working through some problems <strong>online, using Ch on CSIL</strong></p>
+<p>To access Ch on CSIL— you can:</p>
+<ul>
+  <li>visit CSIL in person,</li>
+  <li>access the CSIL command line on &quot;csil.cs.ucsb.edu&quot; via <a href="../../../../../topics/CSILviaPutty/index.html">PuTTY on Windows</a></li>
+  <li>or use &quot;ssh username@csil.cs.ucsb.edu&quot; on Mac or Linux</li>
+</ul>
+<h2>(1) The textbook part</h2>
+<p>Read Section 6.7 in your Etter textbook about character strings—but as you do, keep these things in mind.</p>
+<ul>
+  <li>The reading will talk about a <em><strong>cast operator</strong></em>—an operation that converts one type to another.
+    <ul>
+      <li>For example: <code>average = (float) sum / count;</code> <br />
+      where <code>(float) </code>in front of <code>sum</code> converts <code>sum</code> from <code>int</code> to <code>float</code> before the division happens.</li>
+      <li>You may want to review this idea at the top of page 46 in your textbook.</li>
+      <li>In Section 6.7, cast operators are used to convert pointers, e.g. from (void *) to (int *)</li>
+    </ul>
+  </li>
+  <li>The reading also talks about <code>(void *) </code>pointers
+    <ul>
+      <li> Despite the name, a <code>(void *)</code> doesn't mean a &quot;pointer to nothing&quot;</li>
+      <li>Rather it means a pointer to &quot;any old type&quot;—i.e. a &quot;generic pointer&quot;</li>
+      <li>We frequently have to convert <code>(void *)</code> pointers to specific pointers, e.g. <code>(int *) </code>or<code> (char *) </code>before we can use them—that's where the cast operator comes in.</li>
+    </ul>
+  </li>
+  <li>Finally, the reading mentions the  <code>size_t</code> data type.
+    <ul>
+      <li>The book says that <code>size_t</code> &quot;is system dependent, but is usually either  an <code>unsigned int</code>, or an<code> unsigned long</code>.&quot; </li>
+      <li>If you want to review the meaning of <code>unsigned int</code> and <code>unsigned long</code>, check the first paragraph on p. 40.</li>
+    </ul>
+  </li>
+  <li>You are responsible for all of 6.7, except for the part about the <code>realloc()</code> function—we aren't going to cover that in CS16.
+    <ul>
+    <li>Read all of p. 313, and p. 314 almost to the end.</li>
+      <li>Skip all this:<br /> 
+      <strong>&nbsp;from </strong>near the bottom of p. 314, paragraph starting<br />
+       &nbsp;&nbsp;&nbsp;<em>&quot;The <code>realloc</code> function can be used to .... &quot;</em><br />
+        <strong>&nbsp;to</strong> near the top of p. 315, ending with the words:<br />
+&nbsp;&nbsp;<em>&nbsp;&quot;... original space is unchanged and the function returns a value of <code>NULL</code>&quot;.</em></li>
+        <li>Continue reading with the first full paragraph on p. 315, starting with<br />
+&nbsp;&nbsp;&nbsp;<em>&quot;With the use of dynamic memory allocation...&quot;</em></li>
+        <li>Continue reading to the end of the section, at the end of p. 316</li>
+    </ul>
+  </li></ul>
+<h2 class="pageBreakBefore">(2) Some additional notes: heap vs. stack<br />
+</h2>
+<p>Although the textbook never mentions this word explicitly, it is important to know that all of the space allocated via dynamic memory allocation—i.e. the space allocated with malloc() and calloc()—comes from an area of memory known as <em><strong>the heap. </strong></em>The heap is also sometimes called the <em><strong>free store</strong></em>. <br />
+</p>
+<p>The <em><strong>heap</strong></em> stands in constrast to the <em><strong>stack</strong></em>, which is where parameters to functions and local variables inside functions are stored in memory. <br />
+  <br />To summarize: for the final exam, known these facts:</p>
+<ul>
+  <blockquote>
+    <p><em>space for <strong>local variables </strong>is on the <strong>stack</strong></em>, and <em>space allocated with <strong>malloc() and calloc</strong> is on the <strong>heap</strong></em></p>
+  </blockquote>
+</ul>
+<p>The reason this is important to know is that this topic will come up again in CS24 and CS32—in CS16 we are just laying the groundwork.</p>
+<h2>(3) Work with some pointer variables in Ch</h2>
+<p>As you read the next part of this handout, you should be logged into CSIL so you can work with Ch. You may want to start by creating a <strong><code>~/cs16/H15</code></strong> directory and cd'ing into it. Then, create a file in your current director called <strong><code>names.dat</code></strong> (e.g. emacs names.dat) and put the names of the three most recent California governors into it, one per line:</p>
+<pre style="border: thin black solid; width: 40em;">Pete Wilson
+Gray Davis
+Arnold Schwarzenegger<br /></pre>
+<p><strong>Then try the following, using Ch:</strong></p>
+<p>First, start up Ch—and optionally, simplify your Ch prompt—by doing this:</p>
+<pre>
+-bash-3.2$ <strong>ch</strong>
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+/cs/faculty/pconrad/cs16/H15> <strong>_prompt="Ch&gt; "</strong>
+Ch&gt;  
+</pre>
+<p>Next try declaring three character strings, like this:</p>
+<pre>
+Ch&gt; <strong>char s1[5] =&quot;UCSB&quot;;</strong>
+Ch&gt; <strong>char s2[5] =&quot;UCLA&quot;;</strong>
+Ch&gt; <strong>char s3[5] =&quot;UCSD&quot;;</strong></pre>
+<p>Note that each of these has a strlen of 4, but an array size of 5 (because of the null terminating character '\0'). More important to our discussion today, all of three of these character arrays have a <strong>fixed length</strong> of 5. It is not possible, once they are declared to change their length. </p>
+<p>We can change the contents, for example by doing:</p>
+<p><code>Ch&gt;</code><strong><code> strcpy(s2,&quot;UCI&quot;); </code></strong></p>
+<p>to change <code>s2</code> to the abbreviationn for UC Irvine, with the result that<code> strlen(s2) </code>will now return 3 instead of 4—try it!—but the size of the array <code>s2</code> is 5, and will always be 5 for the lifetime of the <code>s2</code> variable.</p>
+<p>Strings like this are referred to as fixed length strings—their size cannot change during their lifetime. However, using pointers and dynamic memory allocation, we have another option—as discussed in Section 6.7 of your textbook.</p>
+<h2>Review: Reading strings from a file</h2>
+
+ 
+
+<p>As review, we can read values from a file using a FILE * variable. (Re-read Section 3.6 in your Etter text if you need a review of this).<br />
+    <br />
+      First, declare a FILE * variable in Ch, like this: <br />
+      (the word FILE must be in all uppercase)<br />
+<pre>
+Ch&gt; <strong>FILE * in;</strong>
+Ch&gt; </pre>
+              You can then open a file for reading with the fopen() function, using the file name and the &quot;r&quot; flag:<br />
+              <br />
+        <pre>Ch&gt; <strong>in = fopen(&quot;names.dat&quot;,&quot;r&quot;);</strong>
+0x863c350 
+Ch&gt;              </pre>
+        <p>The hex value that gets printed reminds us that in is a <code>FILE *</code>, i.e. a pointer, the address of a place in memory where information about the file <code>names.dat</code> is stored. (If you get NULL instead, it means the file didn't open—exit from Ch, check the file and start again.)</p>
+              <p>We have a problem if we want to store names in an efficient way. As you may realize, names can vary greatly in their length. Looking just at the last two governors of California, we see that <br />
+                <code>&quot;Gray Davis&quot;</code> would have a strlen of 10, while <br />
+                  <code>&quot;Arnold Schwarzenegger&quot;</code> would have a strlen of  21.<br />
+                <br />
+        If we want to be <em>sure</em> that a name will fit, we could create a very large field, like this:</p>
+           
+<pre>
+const int NAMELEN=128;
+char name[NAMELEN];
+</pre>
+                   <p>But what value do we choose for <code>NAMELEN</code>? The value 128 gives us a very high probability that the name will fit, but results in lots of wasted space—especially if we declare an array of 1000 names like this.</p>
+              <p>On the other hand, if we choose a smaller value, there is a chance that a name will either overflow the variable, or be chopped off.</p>
+              <p>A more efficient choice is to use variable length strings, which we can do with dynamic memory allocation.</p>
+              <p>In this technique, we might still start with a huge buffer to read the name from the file—but then, we use strlen to determine the actual length of the name, and allocate an array that is exactly the right size for the name (plus the null character.)</p>
+              <p>Type in  these commands to declare an integer constant (const int) for the buffer size, and a char array called buffer that can store a large string value.</p>
+         
+                <pre>
+Ch&gt; <strong>const int BUFSIZE=1024;</strong>
+Ch&gt; <strong>char buffer[BUFSIZE];</strong>
+</pre>
+                Then, use the fgets function to read the first line of the file from the array:
+              </p>
+          
+                <pre>
+Ch&gt; <strong>fgets(buffer, BUFSIZE, in); </strong>
+Pete Wilson
+&nbsp;           
+Ch&gt;
+</pre>
+<p>  Notice that you get an extra blank line after the name <code>Pete Wilson</code>—this is because when you use fgets to read from a file, the \n character at the end of the line comes with the input. We can see that Pete Wilson only has 11 characters, but we get strlen of 12:</p>
+<pre>
+Ch&gt; <strong>strlen(buffer)</strong>
+12
+Ch&gt;</pre>
+<p>In memory, the contents of the first few elements of buffer look like this:</p>
+<table border="1" class="arrayTable">
+                <tr>
+                  <td>[0]</td>
+                  <td>[1]</td>
+                  <td>[2]</td>
+                  <td>[3]</td>
+                  <td>[4]</td>
+                  <td>[5]</td>
+                  <td>[6]</td>
+                  <td>[7]</td>
+                  <td>[8]</td>
+                  <td>[9]</td>
+                  <td>[10]</td>
+                  <td>[11]</td>
+                  <td>[12]</td>
+                  <td>[13]</td>
+                  <td>[14]</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>'P'</td>
+                  <td>'e'</td>
+                  <td>'t'</td>
+                  <td>'e'</td>
+                  <td>' '</td>
+                  <td>'W'</td>
+                  <td>'i'</td>
+                  <td>'l'</td>
+                  <td>'s'</td>
+                  <td>'o'</td>
+                  <td>'n'</td>
+                  <td><strong>'\n'</strong></td>
+                  <td><strong>'\0'</strong></td>
+                  <td>?</td>
+                  <td>?</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+              <p>We can do a simple trick to get rid of the extra newline.</p>
+              <ul>
+                <li>Note that strlen(buffer) returns the number of characters in the buffer, not counting the '\0' (e.g. 12 in this case)</li>
+                <li>Those characters are numbered 0 through strlen(buffer) -1, <br />
+                i.e. 0 through 11 in this case.</li>
+                <li>Thus, buffer[strlen(buffer-1)] refers to the last character in the string buffer (not counting the '\0').</li>
+              </ul>
+              <p>So, we can use this line of code:</p>
+             
+        <pre>Ch&gt; <strong>buffer[strlen(buffer)-1]='\0';</strong></pre>
+              <p>to change the contents of buffer to this:</p>
+        <table border="1" class="arrayTable">
+                <tr>
+                  <td>[0]</td>
+                  <td>[1]</td>
+                  <td>[2]</td>
+                  <td>[3]</td>
+                  <td>[4]</td>
+                  <td>[5]</td>
+                  <td>[6]</td>
+                  <td>[7]</td>
+                  <td>[8]</td>
+                  <td>[9]</td>
+                  <td>[10]</td>
+                  <td>[11]</td>
+                  <td>[12]</td>
+                  <td>[13]</td>
+                  <td>[14]</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>'P'</td>
+                  <td>'e'</td>
+                  <td>'t'</td>
+                  <td>'e'</td>
+                  <td>' '</td>
+                  <td>'W'</td>
+                  <td>'i'</td>
+                  <td>'l'</td>
+                  <td>'s'</td>
+                  <td>'o'</td>
+                  <td>'n'</td>
+                  <td><strong>'\0'</strong></td>
+                  <td><strong>'\0'</strong></td>
+                  <td>?</td>
+                  <td>?</td>
+                  <td>&nbsp;</td>
+                </tr>
+</table>
+              <p>An important fact to recognize is that for a C string, the first '\0' character is the only one that matters—after that, the remaining characters are all generally ignored. So there is no problem with having two '\0' at the end of the string—the first one now terminates the string. So, what do you think strlen(buffer) will return now? Try it and see if you are correct:<br />
+</p>
+  <p><code>Ch&gt; strlen(buffer)</code><br />
+      <span class="subtle">answer omitted—discover it for yourself!</span><br />
+      <code>Ch&gt;</code></p>
+<h2 class="pageBreakBefore">Storing a value using Dynamic Memory Allocation</h2>
+  <p>
+    The variable <code>buffer</code> is only a temporary storage place for the name—our goal is to allocate a permanent storage place that is exactly the right size for this name—using dynamic memory allocation. </p>
+  <p>That is, we want to store the name <code>&quot;Pete Wilson&quot;</code> on the heap, so that we only exactly 12 characters—11 for <code>&quot;Pete Wilson&quot;</code> and 1 for the null terminator. </p>
+  <p>To store something on the heap, there are always three steps:<br />
+  </p>
+  <ol>
+    <li>declare a pointer variable</li>
+    <li>allocate space</li>
+    <li>store something in that space</li>
+  </ol>
+  <p>Here are the three steps in more detail—follow along in Ch with each of these steps:</p>
+  <ol>
+    <li>Set up a char * variable—we'll call it char *namePtr
+      <pre>Ch&gt; <strong>char *namePtr;</strong><br />Ch&gt; </pre>
+        <p>This ONLY ALLOCATES THE POINTER—it doesn't allocate any space for the thing that namePtr points to. That's a <em>separate step</em>, and we'll do it next.</p>
+    </li>
+    <li>
+      <p>Allocate space—exactly the right amount—using this line of code:<br />
+
+      </p>
+      <pre>Ch&gt; <strong>namePtr = (char *) malloc(strlen(buffer) + 1));</strong></pre>
+
+      That line of code is moderately complex, so let's break it down, starting on the right hand side inside the inner-most parens—which is exactly where C will also start to evaluate this line of code:<br />
+      </p>
+      <ul>
+        <li><code>strlen(buffer) </code>returns 11—the length of <code>&quot;Pete Wilson&quot;</code></li>
+        <li>we add one because we need space for the <code>'\0'</code>, giving us 12</li>
+        <li>so the effect is that of malloc(12), allocating space for 12 bytes</li>
+        <li>malloc returns a pointer to 12 bytes as a <code>(void *)</code>, i.e. the address of 12 bytes of memory we can use.</li>
+        <li>we use <code>(char *)</code> to let C know that we are going to use this to store <code>char</code> data, and then we store the address in the<code> char * </code>variable <code>namePtr</code>.<br />
+        </li>
+      </ul>
+    </li>
+
+    <li>Copy the characters into the newly allocated space. For this, we use <code>strcpy</code>:
+        <pre>Ch&gt; <strong>strcpy (namePtr,buffer);</strong>          </pre>
+    </li>
+</ol>
+  <p>Now, we can see the value stored at namePtr, the value of the pointer itself, and the length of the string with these lines of code typed into Ch:</p>
+  <pre>
+Ch&gt;<strong> namePtr</strong>
+Pete Wilson 
+Ch&gt; <strong>(void *) namePtr</strong>
+0x9073730 
+Ch&gt; <strong>strlen(namePtr)</strong>
+11 
+Ch&gt; 
+  </pre>
+  <h2 >Reading a file full of names</h2>
+  <p>As an example of working with dynamically allocated strings, consider a file of names, where we may know in advance that we don't expect more than 10 names, but we don't know in advance how long each name will be. To store the names efficiently, we can allocate an array of <code>(char *)</code> pointers:</p>
+<pre>
+Ch&gt; const int NAMES_CAPACITY=10;
+Ch&gt; char * names[NAMES_CAPACITY] = {0};
+Ch&gt;                          
+</pre>
+  <p>In order to store a name in <code>names[0] </code>or <code>names[1]</code>, etc., we allocate space, using either <code>malloc</code> or <code>calloc</code>. We can each name from the file one at a time, and set names[0], names[1], etc. equal to a piece of memory that is just the right size for each of the names in the file. For example, if the names are the ones in <strong><code><a href="../files/names.dat">names.dat:</a></code></strong></p>
+<pre style="border: thin black solid; width: 40em;">
+Pete Wilson
+Gray Davis
+Arnold Schwarzenegger</pre>
+<p>then we want the names array to be set to pointers like this:</p>
+<table class="borderTable">
+  <tr>
+    <th scope="row">names[0]</th>
+    <td style="font-size: 2.0em;">&rarr;</td>
+    <td style="text-align:left;"><table border="1" class="arrayTable">
+      <tr>
+        <td>[0]</td>
+        <td>[1]</td>
+        <td>[2]</td>
+        <td>[3]</td>
+        <td>[4]</td>
+        <td>[5]</td>
+        <td>[6]</td>
+        <td>[7]</td>
+        <td>[8]</td>
+        <td>[9]</td>
+        <td>[10]</td>
+        <td>[11]</td>
+      </tr>
+      <tr>
+        <td>'P'</td>
+        <td>'e'</td>
+        <td>'t'</td>
+        <td>'e'</td>
+        <td>' '</td>
+        <td>'W'</td>
+        <td>'i'</td>
+        <td>'l'</td>
+        <td>'s'</td>
+        <td>'o'</td>
+        <td>'n'</td>
+        <td><strong>'\0'</strong></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <th scope="row">names[1]</th>
+    <td style="font-size: 2.0em;">&rarr;</td>
+    <td style="text-align:left;"><table border="1" class="arrayTable">
+      <tr>
+        <td>[0]</td>
+        <td>[1]</td>
+        <td>[2]</td>
+        <td>[3]</td>
+        <td>[4]</td>
+        <td>[5]</td>
+        <td>[6]</td>
+        <td>[7]</td>
+        <td>[8]</td>
+        <td>[9]</td>
+        <td>[10]</td>
+      </tr>
+      <tr>
+        <td>'G'</td>
+        <td>'r'</td>
+        <td>'a'</td>
+        <td>'y</td>
+        <td>' '</td>
+        <td>'D'</td>
+        <td>'a'</td>
+        <td>'v'</td>
+        <td>'i'</td>
+        <td>'s'</td>
+        <td><strong>'\0'</strong></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <th scope="row">names[2]</th>
+    <td style="font-size: 2.0em;">&rarr;</td>
+    <td style="text-align:left;"><table border="1" class="arrayTable">
+      <tr>
+        <td>[0]</td>
+        <td>[1]</td>
+        <td>[2]</td>
+        <td>[3]</td>
+        <td>[4]</td>
+        <td>[5]</td>
+        <td>[6]</td>
+        <td>[7]</td>
+        <td>[8]</td>
+        <td>[9]</td>
+        <td>[10]</td>
+        <td>[11]</td>
+        <td>[12]</td>
+        <td>[13]</td>
+        <td>[14]</td>
+        <td>[15]</td>
+        <td>[16]</td>
+        <td>[17]</td>
+        <td>[18]</td>
+        <td>[19]</td>
+        <td>[20]</td>
+      </tr>
+      <tr>
+        <td>'A'</td>
+        <td>'r'</td>
+        <td>'n'</td>
+        <td>'o'</td>
+        <td>'l'</td>
+        <td>'d'</td>
+        <td>' '</td>
+        <td>'S'</td>
+        <td>'c'</td>
+        <td>'w'</td>
+        <td>'a'</td>
+        <td>'r'</td>
+        <td>'z'</td>
+        <td>'e'</td>
+        <td>'n'</td>
+        <td>'e'</td>
+        <td>'g'</td>
+        <td>'g'</td>
+        <td>'e'</td>
+        <td>'r'</td>
+        <td><strong>'\0'</strong></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <th scope="row">names[3]<br /></th>
+    <td style="font-size: 2.0em;">&rarr;<br /></td>
+    <td style="text-align:left; font-size:1.0em;">&nbsp;NULL</td>
+  </tr>
+  <tr>
+    <th scope="row">...</th>
+    <td >&nbsp;</td>
+    <td >&nbsp;</td>
+  </tr>
+</table>
+<p>What is important to see here is that <code>names[10]</code> is NOT a <code>(char *)</code>, but rather an <em>array</em> of <code>(char *)</code> pointers.When we first declare the array<code> names, </code>we are allocated space for 10 pointers, but we have allocated NO SPACE to store the actual names themselves. In fact, at first, these 10 pointer values all point to 0—that is, they don't point anywhere! (We use the address value 0, sometimes called <code>NULL</code> or <em>nil</em> as way to indicate a pointer that doesn't point anywhere yet.) <br />
+</p>
+<p>To get the effect we want—i.e. the picture shown above, where <code>names[0]</code>,<code> names[1]</code>, and <code>names[2]</code> points to an array that is just the right size for each name—we have to call malloc() for each of the elements of names[] that we are going to use. In each case, we pass in the exact amount of space we want:  the <code>strlen()</code> plus one for the null character. </p>
+<p>Meanwhile <code>names[3]</code> and all the rest of the elements of the names array can remain <em> uninitialized pointers</em>—we show this by an arrow pointing to a question mark. We'll have a variable <code>count</code> that counts how many lines we read from the file—this is the occupancy of the <code>names</code> array—and we'll never look at any value outside <code>names[0] </code>through <code>names[count-1]</code>.</p>
+<p>The  code that sets up the names array this way, <a href="../files/mallocNames.c"><code>mallocNames.c</code></a>, is shown on the next page.</p>
+<h2 class="pageBreakBefore">mallocName.c code listing</h2>
+<p>The sample code for this program is shown below, and is also available online at:<br />
+  <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/files/mallocNames.c">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/files/mallocNames.c</a><br />
+  or by copying files from ~pconrad/public_html/cs16/10W/homework/H15/files/*<br />
+</p>
+<p>After opening the file <a href="../files/names.dat"><code>&quot;names.dat&quot;</code></a> for reading, the mallocStrings.c program:</p>
+  <ol>
+  <li> Reads all the names into the array (lines 37-58)</li>
+    <li>Calls a function printNames that prints out each name (lines 70-72, 83-94)</li>
+    <li>Before ending the program, executes a for loop to free each of the blocks of memory allocated (lines 74-77).</li>
+</ol>
+<p>Try copying this code into to your ~/cs16/H15 directory and running it.</p>
+<table class="numberedCodeTable"><tr><td style="width:4em; text-align:right; pardding-right: 0.5em; color: #999999;">
+ <pre>
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre></td><td >
+    <pre>
+// mallocNames.c    P. Conrad for CS16, Winter 2010 UCSB
+// Demonstrate reading names from a file into an array of (char *) variables
+// Each (char *) variable points to space allocated on heap via malloc
+
+#include &lt;assert.h&gt; // for assert function
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt; // for atoi
+#include &lt;string.h&gt; // needed for strlen, strcpy
+
+// function prototype---could also have used char **a instead of char *a[]
+void printStringArray(char * a[], int count);
+
+int main(int argc, char *argv[])
+{
+  // declare variables
+  
+  FILE *in; // input file of integers
+  const int BUFSIZE  = 1024; // how big a line can be---make it nice and big
+  char buffer[BUFSIZE]; // holds each name temporarily as we read it in
+  const int NAMES_CAPACITY = 10; // how many names we can hold
+  char * names[NAMES_CAPACITY]; // holds each name
+  int count = 0; // number of names read from file into array so far
+  int i; // for loop counter
+
+  // open the file
+
+  in = fopen(&quot;names.dat&quot;,&quot;r&quot;); // use cmd line arg to open file
+  
+  if (in==NULL)
+    {
+      perror(&quot;Could not open names.dat&quot;);
+      return 2;
+    }
+
+  // STEP 1: READ ALL NAMES FROM FILE INTO char * ARRAY 
+
+  fgets(buffer,BUFSIZE,in); // try to read a line
+  while (!feof(in) && !ferror(in)) // not end of file, and no error
+    {
+      // We successfully read a line! So store it in the array
+      // First make sure there is room
+      if (count==NAMES_CAPACITY)
+	{
+	  printf(&quot;Error: not enough room in the array\n&quot;);
+	  printf(&quot;Increase NAMES_CAPACITY and recompile\n&quot;);
+	  return 3;
+	}
+      
+      buffer[strlen(buffer)-1] = '\0';       // (1) Remove the newline
+      names[count] = (char *) malloc(strlen(buffer)+1); // (2) Allocate space
+      strcpy(names[count], buffer); // (3) Copy the data
+      
+      // THEN increment count (not the other way around)
+      count++;
+
+      // try to read another line
+      fgets(buffer,BUFSIZE,in); 
+    }
+
+  // See if there is an error
+
+  if (ferror(in))
+    {
+      printf(&quot;An unknown error occurred with names.dat\n&quot;);
+      return 4;
+    }
+
+  assert(feof(in));  // We should be at end of file.
+
+  // STEP 2: PRINT OUT ALL THE NAMES
+
+  printStringArray(names, count);
+
+  // STEP 3: FREE ALL THE MEMORY ALLOCATED WITH malloc() BY CALLING free()
+
+  for (i=0;i&lt;count;i++)
+    free(names[i]); // free each name that was allocated
+
+  return 0; // success!
+
+}
+
+void printStringArray(char * a[], int count)
+{
+  int i;
+  printf(&quot;Here are some strings: \n&quot;);
+  
+  // The notation \&quot; inside a string means &quot;actually print a double quote&quot;
+
+  for (i=0; i&lt;count; i++)
+    printf(&quot;a[%d]=\&quot;%s\&quot;\n&quot;, i, a[i]);
+
+  printf(&quot;\nThat is all.\n&quot;);
+}    
+    </pre></td></tr></table>
+  </p>
+  <p>The third step in this program&mdash;freeing the memory (lines 74-44)&mdash;deserves a whole separate discussion.</p>
+  <h2 class="pageBreakBefore"><a href="http://www.syswear.com/geek/shirt/30/free-the-mallocs-?d=26">T-shirt slogan</a>: free the mallocs!</h2>
+  <p>Some would say that freeing all the memory in this program is not strictly necessary—when a program ends, all the memory allocated with malloc or calloc gets automatically freed. And, strictly speaking, that is absolutely correct.<br />  
+</p>
+  <p><strong>However, learing to free the memory you allocate it is is very good programming habit to develop.</strong> </p>
+  <p>What many students don't realize is that the small programs we write for class assignments are not typical of real world code, in the following sense—most programming assignment code is typically run on small data sets, for only a few seconds or at most minutes.</p>
+  <p>Real world programs often run for hours, days, week, months or years—think of the code for a web server, for example—and run on very large amounts of data, over time. When a program runs for a long time and/or on a large data set, if that program continuously calls <code>malloc()</code>/<code>calloc()</code>, and never calls <code>free()</code> to free up any of the memory used, eventually the heap will run out of space. This condition is sometimes called a <em><strong>memory leak </strong></em>because it is &quot;as if&quot; the amount of free memory is simply leaking out onto the floor. </p>
+  <p>So, wise programmers develop the following habit—anytime you write a line of code that uses <code>malloc()</code> or <code>calloc()</code>—consider also writing a line of code that calls <code>free() </code>as soon as that piece of memory is no longer needed. </p>
+  <p>You don't always need to write the code to free() every malloc()—but you <em><strong>should always consider whether you need to or not, </strong></em> and if you don't, you should have a clear understanding of why it isn't necessary. </p>
+  <p>We'll may talk more about this in lecture, as/when time permits. If we don't get to it, it is likely to be a topic in later courses such as CS24 and CS32—as it turns out, in C++ the operations known as <code>new</code> and <code>delete</code> in C++ have the same role as the functions <code>malloc()</code> and <code>free() </code>have in C, and all the same issues come up.</p>
+  <p>One more note: don't call <code>free()</code> twice on the same piece of memory—this can mess up the heap and cause  strange errors to occur.</p>
+  <hr />
+End of handout for H15
+</body>
+</html>

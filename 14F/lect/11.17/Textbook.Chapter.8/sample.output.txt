@@ -1,0 +1,5 @@
+bash-4.2$ ./p464
+Enter some input:
+Do bedo to you!
+DobedoEND OF OUTPUT
+bash-4.2$

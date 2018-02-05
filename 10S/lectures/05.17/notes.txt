@@ -1,0 +1,40 @@
+
+notes.txt for 05/17/2010, CS16, Spring 2010
+
+(1) How is an int stored in memory?
+
+We know that an int takes up 32 bits on CSIL.
+
+We know that an int * is the address of an int, and also
+takes up 32 bits on CSIL.
+
+We know that a char takes up 4 bits, so an array of 4 chars
+takes up 32 bits.
+
+If we overlay an array of 4 chars over the same spot in
+memory as a 32-bit int what happens?
+
+The result is SYSTEM DEPENDENT--actually HARDWARE DEPENDENT.
+It depends on how the actual CPU is put together.
+There are two ways a machine can represent integers:
+   big-endian and little-endian.
+
+
+NOTES on type casting
+
+if I have a value of a certain type, e.g. int, double, char,
+or int *, char *, etc.
+
+I can "cast" it into another type by putting a type cast expression
+in front of it.
+
+For example:
+
+(double) 4   gives me 4.0 as a double
+
+(char ) 65    give me 'A' as a char
+
+(char *) p   and that would convert whatever value p has,
+             into the address of a char (and it would be treated
+	     as a string in C.)
+

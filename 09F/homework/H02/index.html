@@ -1,0 +1,140 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 09F, H02 (Arrays, Qualifiers, Reading Numbers, Oualline, Chapter 5)</title>
+<script type="text/javascript" src="../exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 09F, H02 (Oualline, Chapter 5, Arrays, and Reading Numbers) <span id="pointCount">Total points: ?</span> (<a href="H02.pdf">printable PDF</a>)</p>
+<p>Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/homework/H02">http://www.cs.ucsb.edu/~pconrad/cs16/09F/homework/H02</a></p>
+<p>Accepted: on paper, in lecture (1pm-1:50pm, Chem 1171) on Friday, October 2<br />
+  See syllabus and Homework assignment <a href="../H00">H00</a> for explanation of &quot;late policy&quot; and &quot;sick day/personal day&quot; policy.<br />
+</p>
+<hr />
+<p>&nbsp;</p>
+<p>Name: (4 pts)___________________________  <span>UMail address (4 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (2 pts) Circle one:         10am                 11am                  noon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unknown<br />
+    <br />
+  (Note: For now, circle the lab section you are registered for on GOLD.<br />
+  If you need to request a different lab section because of an ACTUAL SCHEDULE CONFLICT, please email pconrad@cs.ucsb.edu with details)<br />
+</p>
+<hr />
+<p>Please obtain the official textbook for this course by Delores Etter. <strong>You will start having homework assignments in that book next week.</strong></p>
+<p>For this week, the reading assignments are chapters from an online textbook—Practical C Programming by Steve Oualline. Links to material in this book appear below.<br />
+  <br />
+  Even though this book is a bit &quot;dated&quot;—for example, the advice in section about 5.8 about float vs. double is the opposite of what I told you in class*—there is still lots of good information in this book.  And is has the advantage of being free, and available to you while we wait for everyone to get their textbooks.<br />
+</p>
+<p> (*Regarding float and double—my advice is always use double unless you have a specific reason to prefer float. The reason the conventional wisdom has changed: memory is cheaper and processor speeds are faster than they once were.)</p>
+<p>To link directly to this book, use these links:</p>
+<ul>
+  <li>Chapter 5: Style (<a href="http://search.safaribooksonline.com/1565923065/pcp3-CHP-5">on campus</a>) (<a href="http://search.safaribooksonline.com.proxy.library.ucsb.edu:2048/1565923065/pcp3-CHP-5">off campus</a>)</li>
+</ul>
+<p>Once you've read these chapters, write answers to the questions on the reverse side of this sheet (use the <a href="H01.pdf">PDF link</a> to print a copy of this if you weren't in class).</p>
+<ol>
+  <li>In Chapter 5, the author describes how to declare arrays.<br />
+    <br />
+    <ol>
+
+      <li>(5 pts) How would you write a line of C code that declares an array to hold 10 integers, each representing a students exam score?<br />  
+        <br />  
+          <br />
+          <br />
+          <br />
+        <br />
+      </li>
+      <li>(5 pts) What would be the highest index (subscript) used to access an item in this array—i.e. the highest number you could put in [ ] to pull out a single element of this array?<br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+                  <p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for questions to answer</span><br />
+    </p>
+        <p style="page-break-before:always"><br />
+          <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+        </p>
+      </li>
+    </ol>
+          <li>(10 pts) Let's suppose you've just read through Chapter 5 of the online reading assignment. (If you haven't yet, please go ahead and do so for real, before answering this question.)<br />
+          <br />
+            <em>Your friend has also read through the section, but your friend isn't quite getting it. Your friend says: I'm still not sure what an array is. I know what a variable is, but I'm not clear on this idea of an array.<br />
+              <br />
+        Can you explain it to me in plain english?<br />  
+              </em><br />
+        How do you answer your friend?<br />
+        <br />
+        (By the way, this quesiton would be a very typical &quot;Phill Conrad-style exam question&quot;, so when you are studying for exams in this course, be sure to try to ask yourself questions like this. You might like to get together with a friend and ask each other questions like this to practice.)<br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />  
+        <br />
+      </li>
+  </li>
+  <li>According to the author, strings in C are &quot;just character arrays with a few restrictions.&quot;
+    <br />
+    <br />
+    <ol>
+      <li>(5 pts) What is the restriction that the author mentions about the ends of strings in C?<br />
+        <br />
+        <br />
+        <br />
+      </li>
+      <li>(5 pts) The author mentions that to copy one string to another, we can't use an assignment statement—we have to use a special &quot;string copying function&quot; instead. What is the name of that function?<br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+      </li>
+    </ol>
+  </li>
+  <li>Read what the author has to say about variable length strings in C—including the string that holds the name &quot;Sam&quot; that is mentioned in the reading. (There is something specific about strings in C that is different from string in Java, Python, and many other languages.) <br />
+    <br />
+    Then answer these questions. <br />
+    <br />
+    <ol>
+      <li>(5 pts) Which of the following would be the correct way to declare a string variable for &quot;state&quot; that could hold two letter state abbreviations as a C-string? (Choose one)<br />
+          <br />
+          <br />
+        char [] state;<br />
+          <br />
+        char state [];<br />
+          <br />
+        char state[2];<br />
+          <br />
+        char state[3];<br />
+          <br />
+        char state[4];<br />  
+        <br />  
+        <br />
+      </li>
+      <li>(5 pts) Briefly explain your choice.<br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        </li>
+    </ol>
+    <br />
+    <br />
+  </li>
+  <!--- -->
+</ol>
+<hr />
+End of H00
+</body>
+</html>

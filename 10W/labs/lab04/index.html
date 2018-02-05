@@ -1,0 +1,693 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab04, Winter 2010 (10W)--More practice with material from lab03</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>lab04: <span class="smallerFont">(&quot;lab four&quot;)<br>
+More practice with material from lab03</span><span class="smallerFont"><br>
+   <br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>This lab is a chance for more practice with the material from lab03. <br>
+  The purpose of this lab is to help you prepare for Midterm Exam 1, and for the labs that follow.</p>
+ <p>These include:</p>
+ <ul>
+   <li>Writing programs that use if/else and for loops to make ASCII art</li>
+   <li>Getting integer arguments from the command line
+    via atoi with argc/argv</li>
+  </ul>
+ <p>	You'll also get more practice with:</p>
+ <ul>
+   <li>Using Ch to experiment with basic </li>
+   <li>Using the <code>script</code> program to create a transcript, showing that your program runs successfully.</li>
+ </ul>
+ <h2>Skills Needed</h2>
+ <p>By now, we expect that you are comfortable with these basic skills from lab00-lab03 so we will no longer describe them in as much detail as we did previously:</p>
+ <ul>
+   <li>Using a text-editor (we suggest emacs) to create and/or edit C programs</li>
+   <li>Running C programs</li>
+   <li>Using the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>Performing basic management of directories and files</li>
+   <li>Submitting assignments in this class with the &quot;turnin program.</li>
+</ul>
+ <h2>This is a pair programming lab!</h2>
+ <p>Work with your assigned pair programming partner on this lab&mdash;the same one as for lab02 and lab03 (unless that person is not available). <br>
+   <br>
+  If you do not have a pair partner, or your previously assigned partner is not available, consult the TA for your lab and/or your instructor for advice prior to starting.</p>
+ <ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional&mdash;see <a href="../lab02">lab02</a> for the reasons why.</li>
+   <li>We'll be switching up pair programming partners for lab05&mdash;next week in lab, its a brand new lab with a brand new pair partner.</li>
+   <li>So it is important that you get this lab done <em><strong>before</strong></em> next week's lab session. You have today's lab, plus the next six days to get it done&mdash;don't count on having time next week to continue on lab05 with your same partner.</li>
+   <li>Keep the evaluation criteria in mind&mdash;you can find those listed in the intro to <a href="../lab02">lab02</a> and <a href="../lab02">lab03</a></li>
+ </ul>
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0a: Find your pair partner from lab02/lab03.</h3>
+ <p>If he/she is available, move on to Step 1.</p>
+ <h3>Step 0b: If needed, get a new pair partner</h3>
+ <p>If you are <strong>still unpaired</strong>, or if your pair is <strong>more than 5 minutes late, or is absent from lab</strong> this week,<br> 
+  then get a new pair assignment from your TA.</p>
+ <p>Your TA will tell you who are are assigned to&mdash;or you may get your assignment by email.<br>
+ </p>
+ <p>Please be patient&mdash;depending on who shows up, there may have to be some slight adjustments to pair assignments.</p>
+ <p>We will try to avoid the situation where someone in a group of three, but if may be necessary depending on circumstances.</p>
+ <h3>Step 0c: (Only applies if you are with a new pair partner) </h3>
+ <p>If you are with a <em><strong><u>new</u></strong></em> partner, complete a new version of Worksheet <a href="../../../10W/worksheets/W00/index.html">W00</a> (print a copy from the website) and make a post to the <em>lab04 new pair partner</em> forum on Gauchospace.   <br>
+ </p>
+ <p>You only need to turn in one copy per pair.</p>
+ <h3>Step 1: Decide whose account you are going to work in</h3>
+ <p>Remember: don't share passwords. Instead, use scp or email to share files with each other at the end of each work session. (See <a href="../lab02#step2">lab02, step 2</a> for details of how to use scp.)</p>
+ <div class="importantDiv">
+   <h4 align="center">Share your work with each other at the end of EVERY work session.</h4>
+   <p>Again for emphasis, I will say it: DO NOT share passwords with each other. </p>
+   <p>Instead, use scp or email to share files with each other after every work session.<br>
+   </p>
+   <p>That way, if your pair partner <a href="http://discuss.fogcreek.com/joelonsoftware/default.asp?cmd=show&ixPost=149219">gets hit by a bus</a>, you can continue working without him/her&mdash;you aren't 'out of luck'.</p>
+ </div>
+ <h3>Step 2: Do the usual preparation steps</h3>
+ <p>If you've forgotten how to do the steps below, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+</p>
+ <ul>
+   <li>
+     Bring up a terminal window </li>
+   <li>Create a ~/cs16/lab04 directory</li>
+   <li>Copy files from my directory</li>
+ </ul>
+ <p>The files for this week are at this web link:</p>
+ <p><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab04/files">http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab04/files<br>
+   </a></p>
+ <p>And can be copied with this command:</p>
+ <pre>cp ~pconrad/public_html/cs16/10W/labs/lab04/files/* ~/cs16/lab04
+
+</pre>
+ <p><strong>Exam hint: </strong>Do you remember what each of these parts of this command mean? They were explained in the previous labs&mdash;and questions about this might appear on your next midterm exam:</p>
+ <ul>
+   <li>What does the cp command do?</li>
+   <li>What does the * mean?</li>
+  </ul>
+
+ <h3>Step 3: Review of atoi() and command line arguments</h3>
+ <p>Last week we used Ch to learn about  atoi() that converts from strings to integers&mdash;from type <code>char *</code> to type&nbsp;<code>int</code>.</p>
+ <p>We also learned about command line arguments: using argc and argv to access what a use types on the command line after the name of the program, e.g.</p>
+ <p>./makeBox 3 5</p>
+ <p><em>Are you and your pair partner comfortable with these ideas?</em></p>
+ <ul>
+   <li><em>If yes</em>, and you want to get on with the programming, proceed to step 4.</li>
+   <li><em>If not</em>, <em>or if you are studying for the exam,</em> here are some helpful links:
+     <ul>
+       <li><a href="notes/atoi/index.html">Review of atoi material from lab03</a></li>
+       <li><a href="notes/cmdlineargs">Overview of cmd line arg material from lab03</a></li>
+       <li><a href="../../../10W/homework/H07/handout">Homework handout from H07</a> about command line arguments</li>
+     </ul>
+   </li>
+  </ul>
+ <h3><br>
+   Step 4: Looking over the sample code</h3>
+ <p>This week's directory contains several ASCII art programs, including the <code><a href="files/starL.c">starL.c</a></code> program from the previous lab, and some others from lecture:</p>
+ <p><a href="files/backslash.c">backslash.c</a>&nbsp;&nbsp;&nbsp;  <a href="files/printNStars.c">printNStars.c</a>&nbsp;&nbsp;&nbsp;&nbsp;  <a href="files/starBox.c">starBox.c</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="files/starE.c">starE.c</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="files/starL.c">starL.c</a></p>
+ <p>Take a minute to look over these and see what each of them do, and how they work.<br>
+   <br>
+  Doing this will help you, because you'll recognize techniques you can use to solve the problems you are given below.</p>
+ <p>You may also like to run them for various values.</p>
+ <p>If you find a bug, report it to your TA and send an email to your instructor.</p>
+ <h3>Step 5: Your first job: write forwardSlash.c</h3>
+ <p>Using backslash.c as a model, write a program called forwardSlash.c that makes a forward slash.</p>
+ <p>In addition, add the constraint (not present in backslash.c) that the width (and equivalently the height) should be at least 2. If it isn't, produce no output.</p>
+ <table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+   <tr>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+   </tr>
+   <tr>
+     <td>forwardSlash(0)<br>
+         <br></td>
+     <td><div align="left">
+         <pre>&nbsp;
+       </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>forwardSlash(1)</td>
+     <td><div align="left"></div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>forwardSlash(2)</td>
+     <td><div align="left">
+         <pre>
+ *
+*        </pre>
+     </div></td>
+   </tr>
+   <tr>
+     <td>forwardSlash(3)<br>
+         <br></td>
+     <td><div align="left">
+<pre>
+  *
+ *
+*
+</pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>forwardSlash(4)</td>
+     <td><div align="left">
+<pre>
+   *
+  *
+ *
+*
+</pre>
+
+       </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>forwardSlash(5)</td>
+     <td><div align="left">
+         <pre>
+    *
+   *
+  *
+ *
+*
+</pre>
+     </div></td>
+   </tr>
+ </table>
+ <p>The program should work for larger values of width also, not only for values up to 5.</p>
+ <h3>Step 6: Your next job: write starJ.c</h3>
+ <p>Using starE as a model, write a program called starJ that makes a letter J.</p>
+ <p>The bottom of the J is a full row of stars.</p>
+ <p>The back of the J (the right edge) is a full column of stars.</p>
+ <p>The front of the J (the left edge) is a column of stars that starts half way up, as shown in the examples.<br>
+ </p>
+ <p> The height must be an odd number that is at least 3. We will require that the width be at least three, but it can be odd or even. If the height and width are not legal values, then you should produce no output at all.</p>
+ <table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+   <tr>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+   </tr>
+   <tr>
+     <td>starJ(6,7)<br>
+         <br></td>
+     <td>
+       <div align="left">
+         <pre>
+     *
+     *
+     *
+*    *
+*    *
+*    *
+******
+       </pre>
+      </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starJ(5,6)</td>
+     <td><div align="left"></div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starJ(3,3)</td>
+     <td><div align="left">
+         <pre>
+  *
+* *
+***
+         </pre>
+     </div></td>
+   </tr>
+   <tr>
+     <td>starJ(4,3)</td>
+     <td>
+        <div align="left">
+           <pre>
+   * 
+*  *
+****
+
+         </pre>
+      </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starJ(3,7)<br>
+         <br></td>
+     <td>
+        <div align="left">
+           <pre>
+  *
+  *
+  *
+* *
+* *
+* *
+***
+         </pre>
+      </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starJ(4,5)</td>
+     <td><div align="left">
+         <pre>   *
+   *
+*  *
+*  *
+****
+            </pre>
+     </div></td>
+   </tr>
+   <tr>
+     <td>starJ(4,4)</td>
+     <td>
+        <div align="left">
+           <pre>&nbsp;
+
+         </pre>
+      </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starJ(5,7)<br>
+         <br></td>
+     <td>
+        <div align="left">
+             <pre>
+    *
+    *
+    *
+*   *
+*   *
+*   *
+*****
+         </pre>
+        </div></td><td class="blackColumn">&nbsp;</td>
+     <td>starJ(4,7)</td>
+     <td><div align="left">
+         <pre>
+   *<br>   *
+   *
+*  *
+*  *
+*  *
+****
+            </pre>
+     </div></td>
+   </tr>
+ </table>
+ <p>The program should produce reasonable looking output for larger values of width and height also, provided they meet the constraints given.</p>
+ <h3>Step 7: Scripting your assignment</h3>
+ <p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.<br>
+ </p>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Use the proper form of the cd command to put yourself in your ~/cs16/lab04 directory (if you aren't already there)</li>
+   <li>Type <strong>script lab04.txt</strong><br>
+     You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab04.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. </li>
+   <li>Carefully&mdash;type <strong>rm forwardslash </strong>to remove the  executable.
+     <ul>
+         <li> We do this so that when you use &quot;make <em>programName</em>&quot; to compile these programs during your script, we'll see the compile instead of the message  &quot;make: `<em>programName</em> is up to date.&quot; </li>
+       <li>Don't accidentally remove the .c files or you'll be starting over from scratch!)</li>
+     </ul>
+   </li>
+   <li>Now, type <strong>make forwardslash</strong> to compile your program. There should be no warnings and no errors.</li>
+   <li>Next, run the forwardslash program for several command lines to show that it works properly. Include ones that show the &quot;Usage&quot; message, as well as several values that show it works.</li>
+   <li><strong>Now repeat steps 5-7 for the starJ program.</strong><br>
+     <br>
+   </li>
+   <li>Type <strong>exit</strong> to stop the recording of commands and responses into lab04.txt</li>
+ </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab04 directory called lab04.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab04.txt</p>
+ <p>If it all looks ok, you are ready to submit!</p>
+ <h3>Step 8. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+ <pre>turnin lab04@cs16a lab04</pre>
+ <p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+ <h4>Step 8. If you have more time, as a way of studying for the exam, <br>
+  try the additional challenges listed below.</h4>
+ <p>In lecture, we looked at some of the problems in this file:</p>
+ <p><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/01.28/problems.txt">http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/01.28/problems.txt</a></p>
+ <p>Pick a couple and try them out. </p>
+ <p>Easy challenges include:</p>
+ <ul>
+   <li>Turn the starE program into the starF program (eliminate one of the bars)</li>
+   <li>Using ideas from starJ, try star P</li>
+   <li>Using ideas from starE and forwardslash, try starZ</li>
+ </ul>
+ <p>The starX is perhaps the ultimate challenge. See if you can take it on.</p>
+ <p>There are two variants. In one, we restrict width (which is equal to height) to be odd. Even widths produce no output. </p>
+ <table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+   <tr>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+   </tr>
+   <tr>
+     <td>starX(0)<br>
+         <br></td>
+     <td><div align="left">
+         <pre>&nbsp; </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starX(1)</td>
+     <td><div align="left"></div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starX(2)</td>
+     <td>
+       <div align="left">
+         <pre>&nbsp;
+         </pre>
+      </div></td>
+   </tr>
+   <tr>
+     <td>starX(3)</td>
+     <td><div align="left">
+         <pre>
+ * *
+  *
+ * *
+
+    </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starX(4)</td>
+     <td>
+        <div align="left">
+             <pre>&nbsp; 
+         </pre>
+            </div></td><td class="blackColumn">&nbsp;</td>
+            <td>starX(5)</td>
+            <td><div align="left">
+                <pre>*   *
+ * *
+  *
+ * *
+*   *
+            </pre>
+            </div></td>
+   </tr>
+   <tr>
+     <td>starX(6)</td>
+     <td><div align="left">
+         <pre>&nbsp;
+    </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>star(7)</td>
+     <td><div align="left">
+         <pre>
+*     *
+ *   * 
+  * *
+   *
+  * *
+ *   *
+*     *
+       </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>star(8)</td>
+     <td><div align="left">
+         <pre>&nbsp;
+       </pre>
+     </div></td>
+   </tr>
+ </table>
+ <p>In another, we permit even widths:</p>
+ <table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+   <tr>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>Function call</td>
+     <td><div align="left">Output</div></td>
+   </tr>
+   <tr>
+     <td>starX(0)<br>
+         <br></td>
+     <td><div align="left">
+         <pre>&nbsp; </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starX(1)</td>
+     <td><div align="left"></div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starX(2)</td>
+     <td><div align="left">
+         <pre>&nbsp;
+         </pre>
+     </div></td>
+   </tr>
+   <tr>
+     <td>starX(3)</td>
+     <td><div align="left">
+         <pre>
+ * *
+  *
+ * *
+
+    </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starX(4)</td>
+     <td><div align="left">
+         <pre>*  *
+ **
+ **
+*  *
+         </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>starX(5)</td>
+     <td><div align="left">
+         <pre>*   *
+ * *
+  *
+ * *
+*   *
+            </pre>
+     </div></td>
+   </tr>
+   <tr>
+     <td>starX(6)</td>
+     <td><div align="left">
+         <pre>
+*    *
+ *  *
+  **
+  **
+ *  *
+*    *        </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>star(7)</td>
+     <td><div align="left">
+         <pre>
+*     *
+ *   * 
+  * *
+   *
+  * *
+ *   *
+*     *
+       </pre>
+     </div></td>
+     <td class="blackColumn">&nbsp;</td>
+     <td>star(8)</td>
+     <td><div align="left">
+         <pre>
+*      *
+ *    * 
+  *  *
+   **
+   **
+  *  *
+ *    *
+*      *
+       </pre>
+     </div></td>
+   </tr>
+ </table>
+ <p>Another challenge is to repeat the starT program, but call it thickT, and add a third parameter for the &quot;thickness&quot; of the T as shown in the tables below.</p>
+ <p> A real challenge here is to figure out what the legal relationships are between height, width, and thickness that result in a reasonable looking and symmetric T. It is no longer the case that width always has to be odd, for example&mdash;it is more subtle than that, because even or odd depends on the thickness.<br>
+   <br>
+   The minimum width and height also depend on the thickness.<br>
+ </p>
+ <table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+  <tr>
+    <td>Function call</td>
+    <td><div align="left">Output</div></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td><div align="left">Output</div></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td><div align="left">Output</div></td>
+  </tr>
+  <tr>
+    <td>thickT(3,4,1)<br>
+      <br></td>
+    <td>
+      <div align="left">
+        <pre>
+***
+ *
+ *
+ *  </pre>
+      </div></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>thickT(4,5,2)</td>
+    <td><div align="left">
+      <pre><br>
+****
+****
+ **
+ **
+ **   </pre>
+    </div></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>thickT(6,6,2)</td>
+    <td><div align="left">
+      <pre>
+******
+******
+  **
+  **
+  **
+  **
+    </pre>
+    </div></td>
+  </tr>
+  <tr>
+    <td>thickT(3,2,1)</td>
+    <td><div align="left">
+      <pre>***
+ *
+    </pre>
+    </div></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>thickT(5,2,1)</td>
+    <td><div align="left">
+      <pre>*****
+  *
+    </pre>
+    </div></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>thickT(7,6,3)</td>
+    <td><div align="left">
+      <pre>
+*******
+*******
+*******
+  ***
+  ***
+  ***</pre>
+    </div></td>
+  </tr>
+</table>
+<p>
+  </p>
+ </p>
+ 
+ <hr>
+ <h2>Evaluation and Grading (300 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab04 directory containing
+           <ul>
+               <li> required: forwardslash.c, starJ.c and lab04.txt (a transcript file) </li>
+             <li>optional: other programs that were part of the files you copied for the lab this week</li>
+           </ul>
+         </li>
+       <li>20 points: submission is on time and follows submission instructions
+         <ul>
+               <li>(i.e. is done via turnin by the Due Date.)</li>
+         </ul>
+       </li>
+       <li>20 points: The .c files submitted  have good header comments
+         <ul>
+               <li>on first line with name &quot;cs16 lab04&quot; and date, and your name, and that of your pair partner(s)</li>
+         </ul>
+       </li>
+       <li>50 points: transcript file contains everything asked for in the instructions
+         <ul>
+               <li>especially important is that the script contains each of the tests required</li>
+         </ul>
+       </li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     for forwardslash (points for correctness and style)
+     <ul>
+         <li>20 points: correctly handles command line arguments (i.e. prints a &quot;Usage&quot; message and returns 1 when argc is not the correct value.)</li>
+       <li>20 points: correctly handles situation where backslash function should produce no output (i.e. logic of the if test is correct)</li>
+       <li>30 points: correctly prints backslash with correct shape in all other cases</li>
+       <li>30 points: indentation, variables names, comments, show understanding of good programming style</li>
+      </ul>
+   </li>
+   <li>Programming Tasks for starJ
+     (points for correctness and style)
+     <ul>
+       <li>20 points: correctly handles command line arguments (i.e. prints a &quot;Usage&quot; message and returns 1 when argc is not the correct value.)</li>
+       <li>20 points: correctly handles situation where starJ function should produce no output (i.e. logic of the if test is correct)</li>
+       <li>30 points: correctly prints letter J at correct width and height in all other cases</li>
+       <li>30 points: indentation, variables names, comments, show understanding of good programming style</li>
+     </ul>
+   </li>
+ </ul>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section in which it was assigned.</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until <strong>5pm on Friday Feburary 5.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through <strong>5PM on Wednesday Feb 10th</strong></p>
+ <ul>
+   <li><em>but you are strongly encouraged to finish it <strong>before the midterm exam</strong> on Tuesday Feb 2nd</em>!<br>
+       <br>
+   </li>
+ </ul>
+ <p>After 5PM Wednesday Feb 10rd, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+ <p>&nbsp;</p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

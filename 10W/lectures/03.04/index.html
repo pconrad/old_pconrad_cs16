@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<style>
+ol li ol li {list-style-type: lower-alpha;}
+ol li ol li  ol li {list-style-type:lower-roman;}
+
+</style>
+</head>
+
+<body>
+<h1>Lecture Notes for 03/04, CS16, Winter 2010, UCSB, Conrad</h1>
+<p><a href="files">Files for today</a></p>
+<h2>Some functions you should know how to write that pertain to arrays.</h2>
+<p>If these stump you, read 5.1 through 5.7, and see if that helps to shed some light on the situation.</p>
+<ol>
+  <li>How to find the min or max of an array.
+    <ol>
+      <li>e.g. int maxValue(int a[], int n); or int minValue(int a[], int n);</li>
+      <li>Also be able to do this for an array of doubles</li>
+      <li>Also, be able to do this for an array of structs, e.g. struct Point, where what you are finding is the maximum distance of any point from a given point, or from the origin.      </li>
+    </ol>
+  </li>
+  <li>Finding the index of the maximu element in an array
+    <ol>
+      <li>e.g. int indexOfMax(int a[], int n);</li>
+      <li>When there are ties, be able to return either the highest such index, or the lowest such index.)</li>
+      <li>Same for minimum value</li>
+      <li>Be able to do this for doubles, and also for an array of structs</li>
+    </ol>
+  </li>
+  <li>Finding the count of all values in an array that meet some criterion,
+    <ol>
+      <li>How many numbers in the array are negative? int countNegative(int a[], int n);</li>
+      <li>Be able to do this for even, odd, negative, positive, divisible by k, etc.</li>
+      <li>Should also be able to do this for an array of structs—for example, how many points are at distance more than d from the origin, or from some given point?</li>
+    </ol>
+  </li>
+  <li>Given an empty array (with its capacity and occupancy), an a full array (with its capacity and occupancy), move all, or only some, of the values from the source array into the destination array.
+    <ol>
+      <li>Moving all the values is easy---just use a for loop</li>
+      <li>Moving just some of the values that meet a criterion—e.g. all the odd values, or all the even values—requires a for loop with an if test.</li>
+    </ol>
+  </li>
+  <li>Given an array with some values (and the occupancy and the capacity), remove all the values that meet some criteria (scooting the others down).</li>
+  <li>Given an array, sort the array, ascending or descending using selection sort.</li>
+  <li>Given an array, accumuate a sum of all the values in that array
+    <ol>
+      <li>also all values that meet some criterion</li>
+      <li>also for an array of structs—sum some particular elements of the struct based on some criterion, perhaps of another member in the struct.</li>
+    </ol>
+  </li>
+  <li>Given an array, search for a particular value in that array, and return the index of the first occurence, or -1 if it is not found.</li>
+</ol>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Something about the * operator</h2>
+<p>The following Ch session illustrates that the () are needed with the * operator in C when accessing a member of a struct.</p>
+<pre>
+/cs/faculty/pconrad&gt; struct S {int a;};
+/cs/faculty/pconrad&gt; struct S x;
+/cs/faculty/pconrad&gt; x.a = 5;
+5 
+/cs/faculty/pconrad&gt; struct S *p;
+/cs/faculty/pconrad&gt; p=&x;
+0x8e79e90 
+/cs/faculty/pconrad&gt; p-&gt;a=7;
+7 
+/cs/faculty/pconrad&gt; x.a
+7 
+/cs/faculty/pconrad&gt; (*p).a=3;
+3 
+/cs/faculty/pconrad&gt; x.a
+3 
+/cs/faculty/pconrad&gt; *p.a = 4;
+ERROR: left operand of '.' is not struct/class/union object
+ERROR: cannot recover from previous errors
+
+</pre>
+</body>
+</html>

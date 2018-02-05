@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 2nd Midterm, E02, 10W, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+pre.widePreNoBox {border: none; font-size: 12px; width: auto;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+ul.squareList li {list-style-type: square;}
+table.conversionTable tr td {padding: 0.5em; border: thin solid black;}
+table.conversionTable tr th {padding: 0.5em; border: thin solid black;}
+table.conversionTable {border: thin solid black;}
+code {white-space:pre;}
+.style1 {font-size: 9px}
+
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"><br />
+  CS16 Midterm Exam 2<br />
+  <span class="subhead">E02, 10W, Phill Conrad, UC Santa Barbara<br /> 
+  Tuesday, 03/02/2010 </span></h1>
+<p class="instructions"><strong>Name:</strong> ________________________________________________________</p>
+<p class="instructions"><br />
+<strong>Umail Address: </strong>__________________________________@ umail.ucsb.edu<br />
+<br />
+<br />
+<strong>Circle Lab section:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5PM</p>
+<p class="instructions"><a href="v1.pdf">Link to Printer Friendly PDF Version</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<hr />
+<p class="instructions">Please write your name <strong>only</strong> on this page. That allows me to grade your exams without knowing whose exam I am grading.</p>
+<p class="instructions">This exam is <strong>closed book, closed notes</strong>, <strong>closed mouth, cell phone off</strong>,<br />
+  except for:</p>
+<ul>
+  <li class="instructions">You are permitted <strong>one sheet of paper</strong> (max size 8.5x11&quot;) on which to write notes</li>
+  <li class="instructions">These sheets will be collected with the exam, and might not be returned</li>
+  <li class="instructions">Please write your name on your notes sheet</li>
+</ul>
+<p>There are 100 points worth of questions on the exam, and you have 75 minutes to complete the exam.</p>
+<p>A hint for allocating your time:</p>
+<ul>
+  <li>if a question is worth 10 points, spend no more than 5 minutes on it</li>
+  <li>if a question is worth 20 points, spend no more than 10 minutes on it</li>
+  <li>etc.<br />
+  </li>
+</ul>
+<p>This will leave you 25 minutes to go back and check your paper, and/or finish anything you didn't finish the first time around.</p>
+<hr />
+<ol class="theQuestions">
+ <li class="pageBreakBefore">
+   <p>(10 pts) Write the definition of a C function <code>initTsunamiRpt()</code> according to the  description in the comment below. <br />
+   <br />
+  Assume that the struct definition given is available to you.</p>
+<p><strong>  
+  To get full credit:</strong></p>
+  <ul>
+    <li>
+  FOLLOW THE INSTRUCTIONS IN THE COMMENT BELOW EXACTLY in terms of <strong>choice of variable names.</strong></li>
+    <li>Write <strong>ONLY the function definition</strong>&mdash;for this question, I do NOT want a complete C program, so do NOT include any extraneous stuff such as <code>#include &lt;stdio.h&gt;</code> or a main function.<br />
+    <br /></li>
+  </ul>
+  <pre class="widePreNoBox">struct TsunamiRpt {  
+  int hr; // hour according to 24 hour clock, 0=midnight, 23 = 11pm
+  int min; // minutes between 0-60
+  double waveHt; // wave height in meters
+}; <br /><br />
+
+// The function initTsunamiRpt should take these parameters:
+//   trPtr: a pointer to a struct Tsunami
+//   hour: the hour the Tsunami hit (an integer)
+//   minute: the minute the Tsunami hit (an integer)
+//   height: the weight of the Tsunami wave, in meters (a double)
+//   
+// It should initialize the respective members of the struct 
+//    with the values passed into the function
+// The function doesn't return anything.
+
+
+    </pre>
+    <br />  
+    <br />
+    <br />
+    <br />
+    <br />
+ </li>
+
+ <li class="pageBreakBefore">Here is a portion of a main program that would use the <code>initTsunamiRpt() </code>function you defined in the previous problem.<br />
+   <br />
+ This program takes the hour, minute, and wave height of a tsunami as command line parameters, <br />
+ initializes a <code>struct TsunamiRpt</code> called <code>tr</code>, and then prints out the values in that struct. <br />
+ <br />
+    Your job is  simple: <strong>supply exactly two missing lines of code: </strong><br />
+    <br />
+    <ol>
+        <li>(5 pts) The <strong>function prototype for <code>initTsunamiRpt()</code></strong>, at the place indicated below</li>
+        <li>(5 pts) A <strong>function call to <code>initTsunamiRpt()</code></strong>, as the place indicated below
+      </li>
+    </ol>
+<pre class="widePre">
+// tsunamiRpt.c   Exam problem for CS16 Midterm 2, Winter 2010
+// P. Conrad, CS Dept, UC Santa Barbara
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt; // for atof
+
+struct TsunamiRpt
+{
+  int hr;
+  int min;
+  double waveHt;
+};
+
+<strong>// (a) Add function prototype for initTsunamiRpt here</strong>
+
+
+
+
+
+int main(int argc, char *argv[])
+{
+  // declare variables
+  struct TsunamiRpt tr;
+  int hour, min;
+  double height;
+
+  // check arguments
+  if (argc!=4)
+    {
+      printf(&quot;Usage: ./tsunamiRpt hour min height\n&quot;); return 1;
+    }
+
+  // convert cmd lind args
+  hour=atoi(argv[1]); min=atoi(argv[2]); height=atof(argv[3]);
+
+ <strong> // (b) call initTsunamiRpt to initialize the tr variable
+  // passing in the values that were converted from the command line</strong>
+
+
+
+
+
+  // In a real program, additional code would go here to use the 
+  // struct TsunamiRpt variable tr in some way---sending it over the internet, 
+  // adding it to a database, or doing some calculation on it, for example...
+  
+  printf(&quot;The tsunami arrived at %02i:%02i with height %lf meters\n&quot;,
+	 tr.hr, tr.min, tr.waveHt);
+
+  return 0;
+}
+
+// The function definition from question 1 would go here,
+// or it could be compiled in a separate file---you DON'T need to
+// rewrite it here on this exam though!
+</pre>   
+      
+ </li>
+
+ <li class="pageBreakBefore">(30 pts) For each of the conversions below, give the correct answer.<br />
+    <br />
+    <table class="conversionTable">
+      <tr>
+        <th scope="col"><div align="right">Convert</div></th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Your answer</th>
+      </tr>
+      <tr>
+        <td><div align="right">010 110</div></td>
+        <td>Binary</td>
+        <td>Octal</td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+        <br /></td>
+      </tr>
+      <tr>
+        <td><div align="right">96</div></td>
+        <td>Base 10</td>
+        <td>Base 2</td>
+        <td><br />
+        <br /></td>
+      </tr>
+      <tr>
+        <td><div align="right">75</div></td>
+        <td>Base 8</td>
+        <td>Binary</td>
+        <td><br />
+        <br /></td>
+      </tr>
+      <tr>
+        <td><div align="right">1001 0101 0100 1010</div></td>
+        <td>Hex</td>
+        <td>Binary</td>
+        <td><br />
+        <br /></td>
+      </tr>
+      <tr>
+        <td>0100 0010</td>
+        <td>Binary</td>
+        <td>Decimal</td>
+        <td><br />
+        <br /></td>
+      </tr>
+      <tr>
+        <td>A2D2</td>
+        <td>Hex</td>
+        <td>Base 2</td>
+        <td><br />
+        <br /></td>
+      </tr>
+       </table>
+   <br />
+    <br />  
+   <br />  
+    <br />
+    <br />
+    <br />
+    <br />
+ </li>
+ <li class="pageBreakBefore">(50 pts) Together with this exam, there is a program (on a separate <a href="#handout">handout</a>).<br />
+  <p>Assuming each of the expressions below appeared in this program, indicate the type they would have, <br />
+   <strong> or</strong> write <strong>error</strong> if the expression is not valid, e.g. </p><ul>
+     <li>dereferencing something with <code>*</code> or<code> -&gt;</code> that isn't a pointer</li>
+     <li>a reference to a struct member that doesn't exist (e.g. <code>d.foo</code> where there is no member  <code>foo</code> inside <code>d</code>)</li>
+   </ul>
+   <br />
+     The first one is done for you as an example.<br />
+     <br />
+    Hints--for full credit:
+    <ul>
+    <li> don't write<em> pointer to character</em>; instead, write <strong>char *</strong></li>
+    <li>don't write<em> address of int</em>; instead, write <strong>int *</strong></li>
+    <li>don't write <em>address of int *</em> or <em>address of pointer to int</em>, instead write <strong>int **</strong><br />
+      <br />
+      <table border="1" cellpadding="1" cellspacing="1" id="typeExpressions">
+          <tr>
+            <td width="90">Expression</td>
+            <td width="199">Type</td>
+            <td width="13" bgcolor="#000000">&nbsp;&nbsp; &nbsp; </td>
+            <td width="90">Expression</td>
+            <td width="199">Type</td>
+          </tr>
+          <tr>
+            <td><code>a</code></td>
+            <td><span class="style5 instructions">int</span></td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>i.d</code></td>
+            <td>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>*a</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>i-&gt;y</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>*b</code></td>
+            <td class="instructions">&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>&amp;(j-&gt;y)</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>b</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>*(j-&gt;x)</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>&amp;b</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>(*j).x</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>*c</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>(*j)-&gt;x</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>&amp;d</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>g-&gt;center</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>e</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>g.center</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>*f</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>g.center.x</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>e-&gt;m</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>h-&gt;center</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>&amp;(f-&gt;d)</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>h-&gt;center.x</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>(*f).y</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>h-&gt;center-&gt;y</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td><code>(*f)-&gt;y</code></td>
+            <td>&nbsp;</td>
+            <td bgcolor="#000000">&nbsp;</td>
+            <td><code>&amp;(h-&gt;center.x)</code></td>
+            <td>&nbsp;</td>
+          </tr>
+          </table>
+      <br />
+      <br />
+  </li>
+    </ul>
+</li>
+</ol>
+<p class="pageBreakBefore">&nbsp;</p>
+<hr />
+<p ></p>
+<h2 class="instructions">End of Exam</h2>
+<p class="instructions"><span id="pointCount">Total points: ?</span><br />
+<br />
+</p>
+<table class="versionsTable">
+  <tr>
+    <td>1</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p class="instructions"><br />
+  <br />
+</p>
+<div class="pageBreakBefore">
+<h1 class="instructions"  id="handout">CS16 Midterm Exam 2, Winter 2010<br />
+  Extra Handout</h1>
+<p class="instructions">&nbsp;</p>
+<p class="instructions">Program for question about types</p>
+<pre class="widePre">
+// types.c  Code for exam question, 11/15/2009
+// P. Conrad for CS16, 09F, UCSB
+
+
+#include &lt;stdio.h&gt;
+ 
+struct Point {
+  double x;
+  double y;
+};
+
+struct Date {
+  int d;
+  int m;
+  int y;
+};
+
+struct Circle {
+  struct Point center;
+  double radius;
+};
+
+
+int main(int argc, char *argv[])
+{
+  int a;
+  int *b;
+  double c;
+  double *d;
+  struct Date e;
+  struct Date *f;
+  struct Point i;
+  struct Point *j;
+  struct Circle g;
+  struct Circle *h;
+
+  // Program does no useful work
+  // It is just the basis of a homework assignment about types<br />
+
+  
+  // Pretend there is useful code here, and then 
+  // answer questions about the types of various expressions
+  // as if they appeared right here.
+
+
+  return 0;
+
+
+}
+
+</pre>
+</div>
+</body>
+</html>

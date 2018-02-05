@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CS8, S14, E01, Midterm Exam</title>
+
+
+<script src="jquery-1.5.1.min.js"></script>
+<script src="jquery.shuffle.js"></script>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+
+table.referenceTable  tr td dl * {font-family: sans-serif; }
+table.referenceTable  tr td dl dt { font-weight:bold;}
+table.referenceTable  tr td dl dd { font-size:100%}
+table.referenceTable  tr td { padding-left: 1em; padding-right:1em;}
+
+table.outputTable tr td {text-align:left;}
+
+table.outputTable tr td pre {text-align:left; font-size:110%; width:auto; background-color: #eef; margin-left:1em; margin-right:1em;}
+
+
+ul.examVersion { display: inline; }
+ul.examVersion li { display: inline; padding: 1px; margin: 1px; }
+
+.answer { color: #000099; background-color: #FFFFCC; font-family:"Lucida Handwriting", Chalkboard, "Comic Sans MS", monospace; font-size: 105%;}
+
+.circledAnswer { border: 5px solid #663300; }
+.circledAnswerWithBorder { border: 5px solid #663300; }
+.circledAnswerNoBorder {border: none;}
+
+.shuffle {background-color:#DEF6CB; color: #006600;}
+
+  .grading {font-size: 80%; color: #333; font-family:"Arial Narrow", Arial, "Helvetica Light", Helvetica, sans-serif;}
+
+
+.controls table tr td { 
+     border: solid black 1px;
+     background-color:red;
+     }
+     
+@media print {
+  .controls {display:none;}
+  body { margin-left:0px;  margin-right: 0px; padding-right:0px; padding-left: 0px; 
+       width: 100%; font-size: 14px; } 
+/* body * p { font-size: 16px; }
+  body * li { font-size: 14px; }   */
+  #container { width: 90%; margin-left:auto; margin-right:auto; font-size: 90%;}
+  
+
+}
+  
+/* the padding-right on the container seems to be what affects the margin when
+   printing from safari */
+  
+#container {padding-left:2em; padding-right:8em; margin-right:0em;}
+
+
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+.rot90 {
+
+ /* for firefox, safari, chrome, etc. */
+-webkit-transform: rotate(-90deg);
+-moz-transform: rotate(-90deg);
+/* for ie */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
+
+table.fractionTable { border: none; }
+table.fractionTable tr td { border: none; }
+
+
+code {white-space:pre;}
+
+.nobreak {white-space:nowrap;}
+
+table.preTable1 tr td pre {width:15em; font-size: 110%; border:none;}
+
+table.rotatedTable { border: none;}
+
+table.rotatedTable * th {
+
+ /* for firefox, safari, chrome, etc. */
+-webkit-transform: rotate(-90deg);
+-moz-transform: rotate(-90deg);
+/* for ie */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+ padding: 1em;
+ 
+}
+
+
+table.rotatedTable * td {
+
+ padding-top: 19em;
+ padding-left: 14em;
+ border: thin black solid;
+}
+
+
+table.rotatedTable * td.corner {
+
+ padding-top: 5em;
+ padding-left: 1em;
+ border: none;
+}
+
+
+table.widerCodeListing  tr td {padding-top:0.5em; padding-bottom:0.5em; padding-left:2em; padding-right:4em;}
+
+table#incorrectRecursiveFunction  tr td {padding-top:0.5em; padding-bottom:0.5em; padding-left:0.5em; padding-right:1em;}
+
+table tr td.lineNum {color:#999; font-style:italic; font-size:80%; padding-right: 1em;}
+
+table tr th {padding-top: 1em;}
+
+* ul li { list-style: disc;}
+
+ol li ol li ul li { list-style: disc;}
+
+p.medAns {margin-top:11em;}
+p.shortAns {margin-top:10em;}
+
+
+ol.alphaList li { list-style-type: lower-alpha;}
+
+
+
+table.initialsTable tr th { font-size: 10pt; font-family: Arial Narrow,sans-serif; line-height: 80%; padding: 2px; padding-bottom: 20px;}
+table.initialsTable tr td { font-size: 9pt; font-family: Arial Narrow, sans-serif; line-height: 80%; padding: 2px; padding-bottom: 20px;}
+
+.faintInstructions { font-size: 9pt !important; font-family:Arial Narrow, sans-serif; color:#555;  line-height: 90%; vertical-align:top; padding-top: 1pt; padding-left: 3pt; padding-right: 4pt;}
+
+td.blackRight {border-right: 4px black solid;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+
+<script>
+
+
+    var answerKeyVisible = true;
+    var shuffleColorVisible = true;
+	
+    $(document.body).ready(function () {
+
+          $('.initialsTableDiv').load('initialsTable.html');
+
+          $('#drawOneCodeA').load('code/drawOneA.html');
+          $('#drawOneCodeB').load('code/drawOneB.html');
+
+          $('.whatIsTheOutput').load('whatIsTheOutputBlank.html');
+
+          $('#badPlusVersionA').load('code/BadPlusA.html');
+          $('#badPlusVersionB').load('code/BadPlusB.html');
+          $('#badPlusVersionC').load('code/BadPlusC.html');
+          $('#badPlusVersionD').load('code/BadPlusD.html');
+
+
+          $('#woA1').load('code/woA1.html');
+          $('#woA2').load('code/woA2.html');
+          $('#woA3').load('code/woA3.html');
+          $('#woA4').load('code/woA4.html');
+
+          $('#woB1').load('code/woB1.html');
+          $('#woB2').load('code/woB2.html');
+          $('#woB3').load('code/woB3.html');
+          $('#woB4').load('code/woB4.html');
+
+          $('#woC1').load('code/woC1.html');
+          $('#woC2').load('code/woC2.html');
+          $('#woC3').load('code/woC3.html');
+          $('#woC4').load('code/woC4.html');
+
+
+	  $(".showAnswerKey").click(function(){
+	      if (answerKeyVisible)  {
+                  // Hide all answers
+ 	          $(".answer").each(function (i) {$(this).hide();});
+                  // No border on the circled answers
+	          $(".circledAnswerWithBorder").each(function (i) {
+	             $(this).addClass("circledAnswerNoBorder");
+                     $(this).removeClass("circledAnswerWithBorder");
+		  });
+                  // Not sure why we have this too... is it a duplicate? 
+                  $(".circledAnswer").each(function (i) {
+                    $(this).addClass("circledAnswerNoBorder");
+                    $(this).removeClass("circledAnswer");
+                  });
+                  // toggle the state, and the inner text 
+	          answerKeyVisible = false;
+ 	          $(".showAnswerKey").each(function (i) {$(this).text("show answer key");});
+
+	      } else {
+                // show all answers
+                $(".answer").each(function (i) {$(this).show();});
+                // circle all answers
+                $(".circledAnswerNoBorder").each(function (i) {
+	             $(this).addClass("circledAnswerWithBorder");
+	             $(this).removeClass("circledAnswerNoBorder");
+		});
+    	        answerKeyVisible = true;
+ 	        $(".showAnswerKey").each(function (i) {$(this).text("hide answer key");});
+	      }
+      });
+	
+    $(".shuffleNow").click(function(){
+         $(".shuffle").each(function (i) { $(this).shuffle(); });
+         $(".selectOne").each(function (i) { $(this).selectOne(); });	
+         alert("Shuffled!");
+    });
+	
+     $(".hideShuffleColor").click(function(){
+
+       if (shuffleColorVisible)  {
+          $(".shuffle").each(function (i) {
+   	  this.style.color = "#000";
+          this.style.backgroundColor = "#fff";
+          }); 
+          shuffleColorVisible = false;
+          $(".hideShuffleColor").each(function (i) {$(this).text("show shuffle color");});
+       } else {
+          $(".shuffle").each(function (i) {
+   	  this.style.color = "#000";
+          this.style.backgroundColor = "#efe";
+          }); 
+          shuffleColorVisible = true;
+          $(".hideShuffleColor").each(function (i) {$(this).text("hide shuffle color");});
+       }
+	
+      }); // hideShuffleColor click function
+		
+	
+    }); // document.body ready function
+
+
+
+    </script>
+
+
+</head>
+
+<body>
+
+<div id="container">
+
+<div >
+<h1 class="instructions">Handout to go with CS8&mdash;Midterm Exam<br />
+  <span class="subhead">E01, S14, Phill Conrad, UC Santa Barbara<br />
+  </span></h1>
+
+<div style="font-size:110%">
+<p>In lab02, you worked with Turtle graphics, creating
+letters for your initials.  In this first few problems on this exam,
+you'll work with some code that does something similar.  We will discuss
+these function definitions:</p>
+
+<ul>
+ <li><code>drawZero(t,w,h)</code>&nbsp;Draw a "number 0" symbol (as a simple rectangle)</li>
+ <li><code>drawOne(t,w,h)</code>&nbsp;Draw a "number 1" symbol.</li>
+ <li><code>drawLessThan(t,w,h)</code>&nbsp;Draw the "less than" symbol.</li>
+ <li><code>drawGreaterThan(t,w,h)</code>&nbsp;Draw the "greater than" symbol.</li>
+ <li><code>drawSpace(t,w)</code>&nbsp;Doesn't really draw anything; just moves over to right by distance w</li>
+</ul>
+
+<p>Here are diagrams that were used to plan the characters, similar to those you were encouraged to create in lab02.   Refer to those as you look at the code for the functions you are asked to read or write.</p>
+</div>
+
+<table>
+<tr>
+ <td><img src="png/LessThanInBox.png" width="300" height="250px" />&nbsp;</td> 
+ <td><img src="png/ZeroAsRectangle.png" width="300" height="250px" />&nbsp;</td>
+</tr><tr>
+ <td><img src="png/OneInBox.png" width="300" height="250px" />&nbsp;</td>
+ <td><img src="png/GreaterThanInBox.png" width="300" height="250px" />&nbsp;</td>
+</tr>
+</table>
+
+
+<div class="pageBreakBefore">
+<h2 class="instructions">Continued from previous page...</h2>
+</div>
+
+
+<p style="font-size:120%">The function drawOneGreaterThanZero() is supposed to produce this:</p>
+
+<table>
+<tr>
+<td><img src="png/OneGreaterThanZero.png" width="640px" height="250px" />&nbsp;</td>
+</tr>
+</table>
+
+<p style="font-size:120%">Here's the code:</p>
+
+
+
+<pre>
+def drawOneGreaterThanZero(t,w,h):
+    drawOne(t,w,h)
+    drawSpace(t,w/2)
+    drawGreaterThan(t,w,h)
+    drawSpace(t,w/2)
+    drawZero(t,w,h) 
+</pre>
+
+
+<p  style="font-size:120%">The function drawZeroLessThanOne() is supposed to produce this:</p>
+
+<table>
+<tr>
+<td><img src="png/ZeroLessThanOne.png" width="640px" height="250px" />&nbsp;</td>
+</tr>
+</table>
+
+<p style="font-size:120%">Here's the code:</p>
+
+<pre>
+def drawZeroLessThanOne(t,w,h):
+    drawZero(t,w,h) 
+    drawSpace(t,w/2)
+    drawLessThan(t,w,h)
+    drawSpace(t,w/2)
+    drawOne(t,w,h)
+</pre>
+
+</div>
+
+<div class="pageBreakBefore">
+<h1 class="instructions">Handout to go with CS8&mdash;Midterm Exam<br />
+  <span class="subhead">E01, S14, Phill Conrad, UC Santa Barbara<br />
+  </span></h1>
+</div>
+
+
+<h2>Turtle Graphics Reference</h2>
+
+<table class="referenceTable">
+<tr>
+<td>
+<dl>
+<dt> import turtle</dt><dd> load the turtle module</dd>
+<dt> aTurtle = turtle.Turtle()</dt><dd> create a Turtle name 'aTurtle'</dd>
+<dt> x = aTurtle.xcor()</dt><dd> set x to the x-coordinate of aTurtle's current location</dd>
+<dt> y = aTurtle.ycor()</dt><dd> set y to the y-coordinate of aTurtle's current location</dd>
+<dt> aTurtle.up()</dt><dd> put aTurtle's pen in the up position; <br />aTurtle doesn't draw lines</dd>
+<dt> aTurtle.down()</dt><dd> put aTurtle's pen in the down position;<br />aTurtle will draw lines</dd>
+<dt> aTurtle.forward(dist)</dt><dd> move aTurtle 'dist' in the direction it's facing</dd>
+<dt> aTurtle.backward(dist)</dt><dd> move aTurtle 'dist' in the direction opposite to where it's facing</dd>
+<dt> aTurtle.right(deg)</dt><dd> turn aTurtle 'deg' degrees to the right</dd>
+<dt> aTurtle.left(deg)</dt><dd> turn aTurtle 'deg' degrees to the left</dd>
+<dt> aTurtle.goto(x, y)</dt><dd> move aTurtle to the coordinate (x, y)</dd>
+</dl>
+</td>
+</tr>
+</table>
+
+
+
+
+</body>
+</html>

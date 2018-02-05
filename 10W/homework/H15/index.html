@@ -1,0 +1,195 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, H15 (Dynamic Memory Allocation, Etter 6.7)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.smallerFont {font-size: 0.9em;}
+.style2 {font-size: larger}
+.pageBreakBefore {page-break-before:always;}
+.whatIsPrinted{color:#666666; font-size: 0.9em; font-style:italic;}
+.instructions {font-size: 1.2em; font-family:Verdana, Arial, Helvetica, sans-serif;}
+
+#leftColumn {text-align:left;}
+#rightColumn {text-align:left;}
+code {white-space:pre;}
+table.twoColumn tr td {width: 46%; height:auto; vertical-align:top; margin-left: 0.5em; margin-right: 0.5em; padding-left: 0.5em; padding-right: 0.5em;}
+.style4 {color: #666666; font-size: 0.9em; font-style: italic; }
+table.multiColumn tr td {text-align:left;}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, UCSB—H15:  (Dynamic Memory Allocation, Etter, Section 6.7) <span id="pointCount">Total points: ?</span> (<a href="H15.pdf">printable PDF</a>)<br /> 
+  Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15</a><br />
+  Accepted: <strong>on paper, in Lecture (11am Thursday Mar 4th</strong>)<br />
+</p>
+<p>Name: (3 pts)____________________________________  <span>UMail address (4 pts)</span>  _____________@umail.ucsb.edu </p>
+<p>Lab Section (3 pts) Circle one:         3pm       4pm         5pm           <br />
+    <br />
+  Name of your pair programming partner(s), if you work together:<br />
+<br />
+</p>
+<hr />
+<p align="center" class="style2">This assignment is due <strong>IN Lab on Thursday 03/04. </strong><br />
+<strong>It may ONLY be turned in during Lab on Thursday.</strong><br />
+</p>
+<p><strong>Reading:</strong> First look at the handout that was given with this homework assignment, or made available to you at the link below:<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/handout">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/handout</a> &nbsp;&nbsp;&nbsp;(<a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H15/handout/handout.pdf">printable pdf</a>)</p>
+<p>This handout goes along with section 6.7 of your Etter textbook, and some exercises that you need to complete online using Ch on CSIL.After you have doing the reading and the exercises, answer these questions:</p>
+<hr />
+<ol>
+  <li>This question deals with a session in Ch. Based on what you learned while reading the textbook and the handout, you should be able to predict what Ch would print in each of the cases below where you see <span class="style4"><code>what is printed here?</code></span> in light grey italics.<br />
+    <br />
+  Try to predict the answer in advance and write it down—as if this were an exam question.<br />
+  Then, before turning in your paper, try this session on Ch to verify whether your answers are correct.<br />
+  (If you got the answer wrong, change it to the correct answer—but more importantly, try to figure out why you got it wrong—and if you don't understand, come to office hours to ask your instructor or TA for help before the final exam!)<br />
+  <br />
+  Assume that nothing has been done in the Ch session yet, except perhaps for setting <strong><code>_prompt = &quot;Ch&gt; &quot;;</code></strong><br />
+  <br />
+  Also, assume that each of the parts of this question (a), (b), (c), etc. occur in a single Ch session—<br />
+  i.e. the variables are remembered from part (a), to (b), etc.<br />
+  <br />
+  <table class="multiColumn"><tr><td style="padding-right:5em;">  <ol start="1" >
+    <li>(4 pts)
+      <pre>Ch&gt;<strong> char school[5]=&quot;UCSB&quot;;</strong>
+Ch&gt; <strong>strlen(school)</strong>
+<span class="whatIsPrinted">what is printed here?  </span>    
+Ch &gt;
+</pre>
+      </li>
+    <li>(4 pts)
+      <pre>Ch&gt; <strong>strlen(school+1)</strong>
+<span class="whatIsPrinted">what is printed here?  </span>     
+Ch&gt;
+</pre>
+    </li>
+    <li>(4 pts)
+      <pre>Ch&gt; <strong>strlen(school)+1</strong>
+<span class="whatIsPrinted">what is printed here? </span>
+Ch &gt;
+
+</pre>
+        </li>
+    <li>(4 pts) 
+      
+      <pre>Ch&gt; <strong>school[2] = '\0';</strong>
+Ch&gt; <strong>school</strong>
+<span class="whatIsPrinted">what is printed here? </span>
+Ch&gt;
+
+</pre>
+    </li>
+    </ol>
+</td><td>  <ol start="5" style="list-style:lower-alpha;">
+    <li>(4 pts)
+      Note: remember to consider the effects of what happened in step (d) in the following answers.
+      <pre><strong></strong>
+Ch&gt; <strong>strlen(school)</strong>
+<span class="whatIsPrinted">what is printed here?  </span>    
+Ch &gt;
+
+
+</pre>
+      </li>
+    <li>(5 pts)
+      
+      <pre>Ch&gt; <strong>school[2] = 'S';</strong>
+Ch&gt; <strong>strlen(school)</strong>
+<span class="whatIsPrinted">what is printed here?  </span>     
+Ch&gt;</pre>
+    </li>
+    <li>(5 pts)
+      <pre>Ch&gt; <strong>char team[20];</strong>
+Ch&gt; <strong>strcpy(team,school);</strong>
+Ch&gt; <strong>strlen(team)</strong>
+<span class="whatIsPrinted">what is printed here?  </span>     
+Ch&gt; </pre>
+    </li>
+    </ol>
+</td></tr></table>
+
+  <span class="instructions">Please turn over for more problems  </span>
+  <p class="pageBreakBefore"><span class="instructions">Continued from other side...</span></p>
+  </li>
+  <li>(10 pts) On p. 314 of your textbook, Etter provides two examples of statements for allocating an array called x, of size n, which can hold n double values.<br />
+    <br />
+  Note that in n is a variable (as opposed to a constant or a #define of a constant). we can't just do the following:<br />
+    <br />
+    <code>  double x[n]; </code><br />
+      <br />
+  C won't let us allocate an array that way unless <code>n</code> is a constant. If n is a variable, we have to use <code>malloc</code> or <code>calloc</code>.<br />
+      <br />
+    However, after the call to <code>malloc</code> or <code>calloc</code> shown on p. 314, we can use the array x <em><strong>as if</strong></em> it had been declared as double x[n];—that is, even though the variable x is declared as a <code>double *</code>, once we allocate some memory for x to point to, using malloc or calloc, we can treat it as an array.<br />  
+    <br />
+Following the example on p. 314, here are two ways to initialize an array of ints called scores, with numScores values—one solution using malloc, and the other using calloc. In each case, the right hand side of the malloc or calloc call is missing. Fill it in.<br />
+<br />
+       <table class="multiColumn"><tr><td style="padding-right: 10em;"><p><em><br />
+         Solution 1:</em></p>
+       <pre>
+int numScores
+int *scores;
+
+/* ask how many scores */
+printf("How many scores? ");
+scanf("%i",&amp;numScores);
+
+
+/* Dynamically allocate memory using <strong>malloc</strong> */
+
+scores =        
+
+
+if (scores==NULL)
+{
+  printf(&quot;malloc failed\n&quot;); return 1;
+}
+
+/* Now we can use scores as an array of int,
+   &quot;as if&quot; it were declared this way:  int scores[numScores];  */</pre>    
+      </td>
+           </tr>
+         <tr>
+           <td><p><em><br />
+            Solution 2:</em></p>
+               <pre>
+int numScores
+int *scores;
+
+/* ask how many scores */
+
+printf(&quot;How many scores? &quot;);
+scanf(&quot;%i&quot;,&amp;numScores);
+
+
+/* Dynamically allocate memory using <strong>calloc</strong> */
+
+scores =  
+
+
+if (scores==NULL)
+{
+  printf("calloc failed\n"); return 1;
+}      
+
+/* Now we can use scores as an array of int,<br />   &quot;as if&quot; it were declared this way:  int scores[numScores];  */          </pre>           </td>
+         </tr>
+       </table>
+       <br />
+  </li>
+</ol>
+  </li>
+</ol>
+<hr />
+End of H15
+</body>
+</html>

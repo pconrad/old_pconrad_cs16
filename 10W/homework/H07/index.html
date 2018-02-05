@@ -1,0 +1,125 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, H07 (cmd line arguments) (handout)</title>
+<script type="text/javascript" src="../exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.smallerFont {font-size: 0.9em;}
+.style1 {font-size: smaller}
+.style2 {font-size: larger}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, H07 <span id="pointCount">(command line arguments) Total points: ?</span> (<a href="H07.pdf">printable PDF</a>)</p>
+<p>Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H07">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H07</a><br />
+</p>
+<p>Accepted: <strong>on paper, in Lecture (11am Tuesday Jan 26th</strong>)<br />
+    <br />
+    <span class="smallerFont"><strong>Late Policy:</strong> No email submission allowed—and don't &quot;slip it under my door&quot;. If you need to make it up, you must do so during office hours, or make an appointment to see me, and you must request this appointment within 48 hours of when the assignment was originally due. <br />
+    <br />
+    <strong>Personal Day/Sick Day policy</strong>: Everyone is permitted one &quot;personal day/sick day&quot; when you get to make up a missed homework assignment for free during office hours or via appointment. After that, you may not make up the homework assignment—you can only earn back the points through extra credit opportunities.       </span><span class="smallerFont">(For more details, see  the <a href="../../syllabus/index.html">syllabus</a> and the <a href="../index.php">homework policy</a>)</span><br />
+</p>
+<hr />
+<p>Name: (5 pts)___________________________  <span>UMail address (5 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (5 pts) Circle one:         3pm       4pm         5pm           unknown<br />
+    <br />
+    <span class="style1">(Note: For now, circle the lab section you are registered for on GOLD. If you need to request attendance at a different lab section because of an ACTUAL SCHEDULE CONFLICT, please email pconrad@cs.ucsb.edu with details)</span><br />
+</p>
+<hr />
+<p align="center" class="style2">This assignment is due <strong>IN Lecture on Tuesday. </strong><br />
+    <strong>It may ONLY be turned in during Lecture on Tuesday.</strong><br />
+Do NOT turn it in early to your TA on Thursday in lab.<br />
+</p>
+<hr />
+<p>For this homework, the preparation is the material presented in lecture on 01/21, and the summary of that material on the following handout<br />
+    <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H07/handout">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H07/handout</a><br />
+</p>
+<p>Once you've read that handout, write answers to the questions on this sheet  (use the <a href="H07.pdf">PDF link</a> to print a copy of this if you weren't in class).</p>
+
+<ol>
+  <li>Suppose you are running a main C program with the following first line:<br />
+    <strong>int main(int argc, char *argv[])<br />
+    </strong><br />
+    and that the command line typed to run this program is: ./foo bar fum fiddle<br />
+    <br />
+    <ol>
+      <li>(3 pts) What is the value of argc?<br />
+          <br />
+      </li>
+      <li>(3 pts) What is the value of argv[0]?<br />
+        <br />
+      </li>
+      <li>(3 pts) What is the value of argv[1]?<br />
+        <br />
+      </li>
+      <li>(3 pts) What is the value of argv[2][2]?<br />
+      <br />
+        <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for questions to answer</span><br />
+        <p style="page-break-before:always"><br />
+          <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+        </p>
+        <p><br />
+        </p>
+      </li>
+    </ol>
+  </li>
+  <li>Suppose you are running a main C program with the following first line:<br />
+    <strong>int main(int argc, char *argv[])<br />
+    </strong><br />
+and that the command line typed to run this program is: ./foo 12 4.5 <br />
+<br />
+<ol>
+  <li>(3 pts) What is the value of argc?<br />
+      <br />
+      <br />
+  </li>
+  <li>(3 pts) What is the value of argv[0]?<br />
+      <br />
+      <br />
+  </li>
+  <li>(3 pts) What is the value of argv[1]?<br />
+      <br />
+      <br />
+  </li>
+  <li>(3 pts) What is the value of argv[2]?<br />
+    <br />
+    <br />
+  </li>
+  <li>There is a function you can use to convert the 12 from the form it has when it is a command line argument into a form that can be stored in an <strong>int</strong> variable. <br />
+    <br />
+    <ul>
+    <li>(3 pts) What's the name of that function?<br />
+      <br />
+      <br />
+      </li>
+        <li>(3 pts) What header file do you need to #include to use that function?<br />
+          <br />
+        </li>
+      </ul>
+  </li>
+  <li>There is a function you can use to convert the 4.5 from the form it has when it is a command line argument into a form that can be stored in an <strong>double</strong> variable. <br />
+       <br />
+      <br />
+   <ul>
+     <li>(3 pts) What's the name of that function?<br />
+       <br />
+       <br />
+       </li>
+        <li>(2 pts) What header file do you need to #include to use that function?<br />
+          <br />
+        </li>
+      </ul>
+  </li><!--- -->
+</ol></li></ol>
+<hr />
+End of H07
+</body>
+</html>

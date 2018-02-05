@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 Midterm 1, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+.nobreak {white-space:nowrap;}
+.style1 {font-size: 16px}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions">CS16 Midterm Exam 1<br />
+  <span class="subhead">E01, 09S, Phill Conrad, UC Santa Barbara<br /> 
+ Wednesday, 10/21/2009, 1-1:50pm</span> </h1>
+<p class="instructions"><strong>Name:</strong> ________________________________________________________</p>
+<p class="instructions"><br />
+<strong>Umail Address: </strong>__________________________________@ umail.ucsb.edu<br />
+<br />
+<br />
+<strong>Circle Lab section:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11AM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noon</p>
+<hr />
+<p class="instructions">(Link to <a href="exam.pdf">Printer Friendly-PDF version</a>)<br />
+Please write your name <strong>only</strong> on this page. That allows me to grade your exams without knowing whose exam I am grading.</p>
+<p class="instructions">This exam is <strong>closed book, closed notes</strong>, <strong>closed mouth, cell phone off</strong>,<br />
+  except for:</p>
+<ul>
+  <li class="instructions">You are permitted <strong>one sheet of paper</strong> (max size 8.5x11&quot;) on which to write notes</li>
+  <li class="instructions">These sheets will be collected with the exam, and might not be returned</li>
+  <li class="instructions">Please write your name on your notes sheet</li>
+</ul>
+<p>There are 100 points worth of questions on the exam, and you have 50 minutes to complete the exam.</p>
+<p>A hint for allocating your time:</p>
+<ul>
+  <li>if a question is worth 10 points, spend no more than 5 minutes on it</li>
+  <li>if a question is worth 20 points, spend no more than 10 minutes on it</li>
+  <li>etc.</li>
+</ul>
+<hr />
+<ol class="theQuestions">
+ <li class="pageBreakBefore">(20 pts) Write the definition of a C function that takes two integers as parameters, num1 and num2. The function should return the difference between the two numbers, always subtracting the smaller number from the larger number, so that the difference returned is positive&mdash;unless the numbers are equal, in which case the function should return zero.<br />
+   <br />
+    Write ONLY the function definition&mdash;for this question, I do NOT want a complete C program, so do NOT include any extraneous stuff such as #include &lt;stdio.h&gt; or a main function. <br />
+    <br />  
+     <br />  
+    <br />
+    <br />
+    <br />
+    <br />
+ </li>
+
+ <li class="pageBreakBefore">(20 pts) There is an incomplete program below. It includes: the skelton of a <code>main()</code> function (incomplete), and a function definition for hm2h.<br />
+   <br />
+   The function hm2h  takes two integers, hours and minutes, and returns a decimal number of hours.<br />
+   Example: hm2h(3,15) returns 3.25 because 3 hours and 15 minutes is 3.25 hours.<br />
+   <br />
+    Add the following code to make this an interactive program:
+    <ul>
+     <li>Add code in main that prompts the user for input (using printf/scanf), asking for both hours and minutes.</li>
+     <li>Add code that prints the result of a function call to <code>hm2h()</code> for the user to see the result.</li>
+     <li>Add anything else that is needed above the main() function so that the program will compile.<br />
+       <br />
+     </li>
+   </ul>
+   <table border="2" cellspacing="4" cellpadding="4">
+     <tr>
+       <td><div align="center"><strong>Sample Output</strong></div></td>
+       <td><div align="center"><strong>Hints</strong></div></td>
+     </tr>
+     <tr>
+       <td> <pre style="width:20em;">-bash-2.05b$ ./hm2hInteractive <br />Please enter hours: 2<br />Please enter minutes: 30<br />The answer is: 2.500000 <br />-bash-2.05b$ </pre></td>
+       <td> <ul style="font-size: 0.8em;">
+         <li>Be sure to use the proper % specifiers for various types (%d or %i for int, and %lf for double)</li>
+         <li> Remember the special syntax detail that applies to using scanf.</li>
+         <li>Be sure to include the special line of code that brings in &quot;standard input/output&quot; functions</li>
+         <li>Be sure to include a &quot;function prototype&quot; if necessary.</li>
+         <li>Do what is needed at the end of the output so that the Unix prompt after the program ends appears on a new line<br />  
+         </li>
+       </ul></td>
+     </tr>
+   </table>
+   <br />
+   <pre class="widePre">// hm2hInteractive.c     Answer to a practice exam quesiton
+// P. Conrad, for CS16   10/16/2009<br />
+
+
+<br /><br />
+<br /><br /><span class="style1">int main()
+{
+</span><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><span class="style1"><br />
+}
+</span><br />double hm2h(int hours, int minutes) <br />{<br />  return hours + minutes/60.0;<br />}</pre>
+ </li>
+
+ <li class="pageBreakBefore">(40 pts) For each of the following C expressions, fill in the value, and then circle the type. The first two are done for you as an example.<br />
+   (See <a href="solution3.html">solution</a>)<br />
+     <br />
+      <table border="2">
+        <tr>
+          <th scope="col"><div align="center">expression</div></th>
+          <th scope="col"><div align="center">value</div></th>
+          <th scope="col">type</th>
+        </tr>
+        <tr>
+          <td><div align="center">3</div></td>
+          <td><div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+          <td> &nbsp;&nbsp;<span style="border: thin solid black;">&nbsp;int &nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">0.5 * 0.5</div></td>
+          <td><div align="center"><br />
+            0.25<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="border: thin solid black;">&nbsp;double&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">&quot;3&quot;</div></td>
+          <td><div align="center"><br />
+            <br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">'3'</div></td>
+          <td><div align="center"><br />
+              <br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">3 / 4</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">14 % 3</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">3 % 14</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">5 % 2</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">&quot;5/2.0&quot;</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">2 + 4 * 6</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">1 + 1 / 2.0</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;
+            <div align="center">&nbsp;2.1/10&nbsp;</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+      </table>
+    <br />
+   <br />
+   <br />
+   <br />
+   <br />
+ </li>
+ <li class="pageBreakBefore">(10 pts) Convert each of the following numbers according to the instructions given: <br />
+   (No solution given&mdash;you can practice these types of questions <a href="../../../lectures/numberConversions/index.html">here</a>)<br />
+     <br />
+    <ol>
+     <li>Convert 101 011 110 from base 2 to octal <br />
+         <br />
+         <br />
+          <br />
+        <br />
+     </li>
+     <li> Convert 10101000 from base 2 to base 10 <br />
+       <br />
+       <br />
+       <br />
+       <br />
+       <br />
+       <br />
+     </li>
+     <li>Convert 73 from base 10 to base 2 <br />
+       <br />
+       <br />
+       <br />
+       <br />
+     </li>
+     <li> Convert a2b4 from hexadecimal to binary <br />
+       <br />
+       <br />
+       <br />
+       <br />
+     </li>
+     <li>Convert 750 from octal to binary<br />  
+       <br />  
+       <br />
+      </li>
+    </ol>
+ </li>
+ <li class="pageBreakBefore">(10 pts) In test-driven development, we often write a stub function before writing the real function to &quot;test the test&quot;. <br />
+   What is a stub, and in what way does it &quot;test the test&quot;?<br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+    <br />
+  </li>
+</ol>
+<hr />
+<p ></p>
+<h2 class="instructions">End of Exam</h2>
+<p class="instructions"><span id="pointCount">Total points: ?</span></p>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+(1) For loops
+
+for (init; test; update)
+{
+  // do something
+}
+
+The initialization is always done ONLY ONCE as the first thing done.
+
+The test is done right before entering the body of the loop---
+--and you only enter the body of the loop if the test is true
+
+The update is done when you come back from the bottom, right
+before the test.
+
+http://www.cs.ucsb.edu/~pconrad/images/forLoopPaths.png
+
+
+If you put a semicolon after the for, you get problems...
+The "body" of the for loop is the "empty statement", and
+the braces are just a "block of code".
+
+for (init; test; update);   // PROBABLY NOT WHAT YOU INTENDED
+{
+
+
+}
+
+
+(2) For loop, and finite, infinite, no/output
+
+(3) for loops and if/else
+
+void hugsAndKisses(int width);
+
+
+hugsAndKisses(5);
+
+xoxox
+
+hugsAndKisses(6);
+
+xoxoxo
+
+hugsAndKisses(2);
+
+xo
+
+
+Recall that we can test whether a number is even or odd using the % operator:
+
+if (i%2==0)
+{
+  // do what we do when i is even
+}
+else
+{
+  // do what we do when i is odd
+}
+
+Note: i%2 will produce -1 if/when i is negative, so it is better to check 
+  i%2==0    or i%2!=0
+
+(4) If we have 
+  void printNXs(int n);
+
+How do we make:
+
+  void printTriangle(int height);
+
+printTriangle(3);
+
+x
+xx
+xxx
+
+printTriangle(5);
+
+x
+xx
+xxx
+xxxx
+xxxxx
+
+(5) Relational operators:
+
+< > <= >= == !=
+
+What is the opposite of <   ?     Hint: it isn't  >    !
+
+By opposite of  ___, I mean the thing that:
+   when ___ is true, the opposite of ___ is always false
+   when ___ is false, the opposite of ___ is always true
+
+
+So:
+ x<=5    the opposite of that is x>5 
+ x<5     the opposite of that is x>=5
+ x==5    the opposite of that is x!=5
+
+
+In C, relational operators return either 0 for false or 1 for true,
+i.e. the return a value of type int.
+
+They are also "binary operators", meaning they have one operand.
+
+
+(6) For loops:
+
+for (init; test; update)
+{
+
+}
+
+init: sets up a variable that "controls the loop"
+
+test: if its true, we enter the loop for another round
+
+update: at the end of the loop, we perform this before tesitng again.
+
+There are several possibilities for a for loop:
+
+ * finite: the usual case, it executes a specific number of times, then stops
+ * infinite: typically an error---this means the init;test;update weren't 
+    set up properly
+ * never executed: this means that the init was such that the test was false
+    the first time through the loop---so we never even entered the for loop
+
+Some typical for loops in C:
+
+// when n is 4, this prints 0 1 2 3  
+
+int i;
+for (i=0; i<n; i++)
+{
+  printf("%d ",i);
+}
+
+// when n is 4, this prints 1 2 3 4  
+
+int i;
+for (i=1; i<=n; i++)
+{
+  printf("%d ",i);
+}
+
+// when n is 4, this prints 4 3 2 1
+
+int i;
+for (i=n; i>=1; i--)
+{
+  printf("%d ",i);
+}
+
+
+The for loop in C is more general than this. For example,
+the test can involve things other than the loop variable.
+
+// search an array for a specific value
+
+int i;
+int found=0;
+for (i=0; i<n && !found; i++)
+{
+  if (a[i]==x)
+   found = 1;
+}
+
+========
+
+More notes, if time 
+
+
+
+
+using the "man" page for info about unix commands

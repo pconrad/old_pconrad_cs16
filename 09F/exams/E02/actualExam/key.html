@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+.style1 {font-weight: bold}
+-->
+</style>
+</head>
+
+<body>
+
+
+
+
+
+
+  <p>Answer key for Midterm Exam 2, CS16, Fall 2009&nbsp;    </p>
+  <p><br>
+    1) </p>
+<pre>void initGPAreport(struct GPAreport* gpaRpt, int thePerm, double theGpa){
+
+      (*gpaRpt).perm = thePerm;            
+      (*gpaRpt).gpa = theGpa;
+} 
+   </pre>
+2)
+<pre>int deansListCount(struct GPAreport* gpas, int n)
+{      
+  int count,i;
+  count = 0;
+
+  for(i = 0; i&lt;n;i++)
+  {
+     if(gpas[i].gpa &gt;= 3.5) count++;
+  }
+
+  return count;
+} </pre>
+
+
+3)
+<pre>
+a    double*             i.x   error
+*b    error              i-&gt;y   int
+e     struct Circle*     &amp;(j.y)   int*
+b    double              (*g).x   double
+&amp;b     double*           (*g)-&gt;y    error
+*a     double            h.x   dobule
+*d    error              *(h.x)   error
+e.center  error          &amp;g   <WBR>struct Point**
+e-&gt;x     error           argc   int
+f-&gt;y      error          argv[0]  char*
+e-&gt;center-&gt;x  error      argv[<WBR>0][0]  char <br>
+
+</pre>
+<p>4)</p>
+
+<pre>
+a) No, the owner does not have executable permissions.
+b) chmod 555 foobar
+c) rwxr-xr-x <br>
+</pre>
+
+<p>5) <br>
+                  </p>
+<table border="2" cellpadding="4" cellspacing="4" class="largeBoxes">
+  <tr>
+    <td>&nbsp;</td>
+    <td><div align="center"><span class="style1">a[0]</span></div></td>
+    <td><div align="center"><span class="style1">a[1]</span></div></td>
+    <td><div align="center"><span class="style1">a[2]</span></div></td>
+    <td><div align="center"><span class="style1">a[3]</span></div></td>
+    <td><div align="center"><span class="style1">a[4]</span></div></td>
+  </tr>
+  <tr>
+    <td>initial values</td>
+    <td><div align="center">42</div></td>
+    <td><div align="center">88</div></td>
+    <td><div align="center">13</div></td>
+    <td><div align="center">9</div></td>
+    <td><div align="center">27</div></td>
+  </tr>
+  <tr>
+    <td>after 1st swap</td>
+    <td><div align="center">42</div></td>
+    <td><div align="center"><strong>27</strong></div></td>
+    <td><div align="center">13</div></td>
+    <td><div align="center">9</div></td>
+    <td><div align="center"><strong>88</strong></div></td>
+  </tr>
+  <tr>
+    <td>after 2nd swap</td>
+    <td><div align="center"><strong>9</strong></div></td>
+    <td><div align="center">27</div></td>
+    <td><div align="center">13</div></td>
+    <td><div align="center"><strong>42</strong></div></td>
+    <td><div align="center">88</div></td>
+  </tr>
+  <tr>
+    <td>after 3rd swap</td>
+    <td><div align="center">9</div></td>
+    <td><div align="center"><strong>13</strong></div></td>
+    <td><div align="center"><strong>27</strong></div></td>
+    <td>42</td>
+    <td><div align="center">88</div></td>
+  </tr>
+  <tr>
+    <td>after 4th swap (final array)</td>
+    <td><div align="center">9</div></td>
+    <td><div align="center"><strong>13</strong></div></td>
+    <td><div align="center">27</div></td>
+    <td><div align="center">42</div></td>
+    <td><div align="center">88</div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>6)</p>
+<p>
+                    An example of a file that doesn&#39;t 
+                    contain machine code but does contain executable code, and should therefore 
+                    have executable permissions is a shell script, which is a script of 
+                    unix commands that the unix shell can interpret directly and run as 
+                    a file.
+                    Another example is a C program source file when run under the Ch program.
+</p>
+                    
+</body></html>
+
+</body>
+</html>

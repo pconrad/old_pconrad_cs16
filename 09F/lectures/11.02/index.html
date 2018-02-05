@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+ol li {list-style-type: decimal;}
+ol li ol li {list-style-type:lower-alpha;}
+
+</style>
+</head>
+
+<body>
+<p>Some notes for  CS16, 11/02/2009 </p>
+
+<a href="files">Code files</a>
+<ol>
+  <li>structs---useful for points, rectangles, triangles, circles, lines</li>
+  <li>some functions
+    <ol>
+      <li>distance (discuss sqrt) between two points</li>
+      <li>area (of rectangle, triangle, circle)</li>
+      <li>circle overlap (return true if they touch at all, even at one point, otherwise zero)</li>
+      <li>bounding box of triangle, bounding box of circle</li>
+    </ol>
+  </li>
+  <li>Arrays of structs
+    <ol>
+      <li>For example, for an irregular polygon---can we compute the bounding box of it?</li>
+      <li>For example, a list of points—can we find the closest one to another given point?</li>
+      <li>Sorting a list of points by distance from a given point</li>
+    </ol>
+  </li>
+  <li>How to write strlen from scratch—we'll call it ourStrlen</li>
+</ol>
+<p>Future topics</p>
+<ol>
+  <li>Four ways to swap two values—useful in sorting algorithms
+    <ol>
+      <li>inline code--talk about using an inner scope for the temp variable</li>
+      <li>a swap function (passed by pointer)</li>
+      <li>a macro—the opportunity and the danger</li>
+      <li>the dirty ^ trick</li>
+    </ol>
+  </li>
+  <li>Copying strings—strcpy vs. strncpy and the dangers of indexing outside an array (whether a string, or otherwise)</li>
+  <li>Variable length strings and arrays—using malloc to allocate space on the heap</li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 Midterm 1, 10W, Conrad, UCSB</title>
+<meta http-equiv="Content-Type" content="text /html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+body {width: 7.7in; margin-left:0.4in; margin-right: 0.4in;padding-left:1em;}
+td code {padding-left: 2px;}
+span.circled {border: #000000 solid thick; padding: 2px; margin: 1px; font-size: 0.9em;}
+div.framed { border-style: outset; border-width: 1em; border-color: #666666; padding: 2em; }
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+pre.forLoopPre {width:12em;}
+pre.trianglePre{width:7em;}
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+
+
+pre {width:20em;}
+
+.nobreak {white-space:nowrap;}
+.style2 {font-size: large}
+.pageBreakBefore {padding-top: 2em;}
+.style3 {}
+.style4 {font-size: smaller}
+.pageBreakBefore1 {padding-top: 2em;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions">Answers to for loop questions<span class="subhead"></span> </h1>
+<p class="instructions">For CS16 Midterm1 Practice Questions, Winter 2010</p>
+<hr />
+<ol class="theQuestions">
+ <li class="pageBreakBefore">(24 pts) For each of the for loops below:
+     <ol>
+     <li>Circle <strong>infinite</strong> if it is an infinite loop, or <strong>finite</strong> if it NOT an infinite loop</li>
+     <li>Check the in the<strong> no output column (<span class="style2">&#x2611;</span>)</strong> if the loop has no output</li>
+     <li>If the loop has output, put it in the box.<br />     
+       Note: if the output will be infinite, just write the<strong> output of the first three times through the loop</strong>,  then put three dots like this: ...<br />
+       <br />
+     </li>
+   </ol>
+   <table width="100%" border="2">
+     <tr>
+       <th scope="col" ><div align="left">code</div></th>
+       <th scope="col" >Infinite <br />
+         or finite?</th>
+       <th scope="col" ><div align="center">No <br />
+         output?</div></th>
+       <th scope="col">write the output here (if any)</th>
+     </tr>
+     <tr>
+       <td>
+         
+         <div align="left">
+           <pre class="forLoopPre">
+int i;<br />for (i=1; i&lt;=3; i++)
+  printf(&quot;%d &quot;,i);<br />
+              </pre>
+         </div></td>
+       <td>&nbsp;&nbsp;infinite&nbsp;<span class="circled">finite</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+       <td> <div align="center">&#x2610;</div></td>
+       <td><br />
+          <code>1 2 3</code><br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     </tr>
+     <tr>
+       <td>
+         
+         <div align="left">
+           <pre class="forLoopPre">
+int i;
+for (i=0; i&lt;5; i+=2)
+  printf(&quot;%d &quot;,i);
+                  </pre>
+         </div></td>
+       <td>&nbsp;&nbsp;infinite&nbsp;<span class="circled">finite</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+       <td><div align="center">&#x2610;</div></td>
+       <td><br />
+           <code>0 2 4</code><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     </tr>
+     <tr>
+       <td>
+         
+         <div align="left">
+           <pre class="forLoopPre">
+
+int i;<br />for (i=1; i&lt;5; i--)
+  printf(&quot;%d &quot;,i);
+                  </pre>
+         </div></td>
+       <td>&nbsp;<span class="circled">infinite</span>&nbsp;finite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+       <td><div align="center">&#x2610;</div></td>
+       <td><br />
+           <code>1 0 -1 ...</code><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     </tr>
+     <tr>
+       <td>
+         
+         <div align="left">
+           <pre class="forLoopPre">
+int i;<br />
+for (i=6; i&gt;=0; i-=2)
+  printf(&quot;%d &quot;,i);
+                  </pre>
+         </div></td>
+       <td>&nbsp;&nbsp;infinite&nbsp;<span class="circled">finite</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+       <td><div align="center">&#x2610;</div></td>
+       <td><br />
+           <code>6 4 2 0</code><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     </tr>
+     <tr>
+       <td><div align="left">
+           <pre class="forLoopPre">
+int i;<br />for (i=5; i&gt;0; i++)
+  printf(&quot;%d &quot;,i);<br />
+              </pre>
+       </div></td>
+       <td>&nbsp;<span class="circled">infinite</span>finite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+       <td><div align="center">&#x2610;</div></td>
+       <td><br />
+           <code>5 6 7 ...</code><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     </tr>
+     <tr>
+       <td><div align="left">
+           <pre class="forLoopPre">
+int i;
+for (i=3; i&gt;0; i--)
+  printf(&quot;%d &quot;,i);
+                  </pre>
+       </div></td>
+       <td>&nbsp;&nbsp;infinite&nbsp;<span class="circled">finite</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+       <td><div align="center">&#x2610;</div></td>
+       <td><br />
+       <code>3 2 1</code><br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     </tr>
+     <tr>
+       <td><div align="left">
+           <pre class="forLoopPre">
+int i;<br />
+for (i=1; i&gt;3; i++)
+  printf(&quot;%d &quot;,i);
+                  </pre>
+       </div></td>
+       <td>&nbsp;&nbsp;infinite&nbsp;<span class="circled">finite</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+       <td><div align="center" style="font-size:32px;">&#x2611;</div></td>
+       <td><br />
+           <br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     </tr>
+     </table>
+   <br />
+    <br />  
+    <br />
+ </li>
+</ol>
+</body>
+</html>

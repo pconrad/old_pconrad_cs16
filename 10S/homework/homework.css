@@ -1,0 +1,35 @@
+/* homework.css */
+
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+h1 { font-size: 0.9em; font-weight: normal; margin-bottom:0.1em; padding-bottom:0.1em; padding-top: 1em; }
+
+.nameBlank {border-bottom: solid 2px black; width: 40%; height: 2em; }
+
+.emailBlank {border-bottom: solid 2px black; width: 30%;  height: 2em;}
+
+
+.finePrint {font-size: 0.75em; }
+
+.noMarginNoPad {margin:0; padding:0;}
+
+table.nameTable { width: 100%; }
+
+table.labSectionTable { width: 80%; margin-top: 1em; }
+
+table.nameTable tr td {text-align: left; }
+table.labSectionTable tr td {text-align: left;}
+
+p.pleaseTurnOver {font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 1.2em; font-weight:bold; margin-bottom: 0px; padding-bottom: 0px; }
+
+p.continuedFromPrevPage {page-break-before:always;
+     font-family: Geneva, Arial, Helvetica, sans-serif; font-size: 1.2em; font-weight:bold; margin-top: 0px; padding-top: 1em; }
+	 
+	 
+	 	.closeOnBottom { margin-bottom: 1px; padding-bottom: 1px; }
+				.closeOnTop { margin-top: 1px; padding-top: 1px; }
+				
+				
+div.floatingBox {width: 10em; border-color:#003399; border-size: 4px; border-style: outset; 
+                 float: right; padding:3px; margin-left: 1em;}

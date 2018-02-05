@@ -1,0 +1,14 @@
+Write three programs.
+
+One has a main where we read the command line arg, convert to int,
+ then pass it to a function that returns the value, doubled.
+
+ parameter type is int, return type is int.
+
+Another has a function that doubles the value.
+  
+ parameter type is int &, return type is void.
+
+Third one: parameter type is int *, return type is void.
+  It has same effect as passing by reference, but uses pointers.
+

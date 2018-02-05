@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="/~pconrad/cs16/cs16.css" />
+<title>Information on Ch for CS16, UCSB</title>
+</head>
+
+<body>
+<div id="container">
+<h1>Ch—an interpreter for C</h1>
+
+<p>Back to CS16 <a href="/~pconrad/cs16/topics">topics</a></p>
+<h2>Introduction</h2>
+<p>In CS16, we are using the Ch interpreter rather than standard C.</p>
+<p>We are using Ch because we believe it will make learning C easier.</p>
+<p>Ch was developed by <a href="http://iel.ucdavis.edu/people/cheng.html">Harry H. Cheng</a>, a Professor from UC Davis. Ch is offered as a commerical product by SoftIntegration, Inc., a company founded by Dr. Cheng. </p>
+<p>Although Ch is a commerical product, CS16 students will <strong>not have to purchase anything. </strong><br />
+</p>
+<p>If you are a CS16 student, you'll be given a username and password for a &quot;CSIL account&quot; that you can use to access Ch, either </p>
+<ul>
+  <li>in one of several computer labs on campus, or</li>
+  <li>from your own PC or Mac, using a piece of software called an &quot;ssh client&quot;</li>
+</ul>
+<p>It is also possible to download a version of Ch for your own PC of Mac—however, this is <em><strong>not necessary. </strong></em>As long as your PC or Mac is connected to the Internet, you can use your own computer to access Ch over the network without downloading and installing it. As we explain below, working this way has several advantages.</p>
+<h2>Using Ch</h2>
+<h3>Using Ch on the Computer Science Department Computers (CSIL)</h3>
+<p>Ch should be available on all computers in the Computer Science Instructional Laboratory (CSIL). </p>
+<p>Here's an example of how to access Ch. This example shows:</p>
+<ul>
+  <li>how to type <strong><code>ch</code></strong> to access the ch interpreter</li>
+  <li>how you can type in lines of C code such as <strong><code>printf(&quot;Hello World\n&quot;); </code></strong>and immediately see the result</li>
+  <li>how you can type in expressions such as <strong><code>3 + 4 * 5</code></strong> and see the result</li>
+  <li>how to type the <strong><code>exit</code></strong> command, to exit the Ch interpreter and return to the regular Unix prompt</li>
+</ul>
+<h3>Example Ch session on CSIL computers</h3>
+<p>First, log into one of the  computers in CSIL, or access CSIL via an ssh program over the internet.</p>
+<ul>
+  <li> CSIL is located on the first floor of Harold Frank Hall, just outside the glass doors on the suite of the building facing the ocean.</li>
+  </ul>
+<p>	Then, use the <strong>ch</strong> command to bring up ch. Here is a sample session:</p>
+<pre>
+-bash-3.2$ <strong>ch</strong>
+                                   Ch 
+                Professional edition, version 6.1.0.13701 
+              (C) Copyright 2001-2008 SoftIntegration, Inc.
+                     http://www.softintegration.com                
+/cs/faculty/pconrad&gt; <strong>printf(&quot;Hello World\n&quot;);</strong>
+Hello World
+
+/cs/faculty/pconrad&gt; <strong>3 + 4 * 5 </strong>
+23 
+/cs/faculty/pconrad&gt; <strong>exit</strong>
+-bash-3.2$ 
+</pre>
+<h3>Customizing the Ch prompt</h3>
+<p>One feature of Ch that is sometimes helpful—and sometimes annoying—is that the prompt changes to your current directory plus the &quot;&gt;&quot; by default.</p>
+<p>This is helpful for remembering what your current directory is, but it can be annoying if, for example, your prompt is something like the following, and you are starting to run out of room to type in commands:  </p>
+<pre>/cs/student/giovannaandreeson/cs16/lab00/&gt;</pre><p>In this case, you may want to set your prompt to something shorter. This example shows how. The part you type is indicated in <strong>bold</strong>. Note that the 2+3 isn't part of what's necessary—it is just there to illustrate how the prompt changes. I'm not sure why after the initial command the Ch&gt; prompt appears twice—maybe its a bug?</p>
+<pre><p>-bash-3.2$ <strong>ch</strong><br />
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/faculty/pconrad&gt; <strong>_prompt = &quot;Ch&gt; &quot;</strong><br />
+Ch&gt; <br />
+Ch&gt; <strong>2+3</strong> <br />
+5 <br />
+Ch&gt; <strong>exit</strong><br />
+-bash-3.2$ 
+</p></pre>
+<p>This approach requires you to type the <strong>_prompt&nbsp;=&nbsp;&quot;Ch&gt; &quot;</strong> command each time you enter Ch. If you want the change to be permanent, section 4.1 of the Ch User's guide describes how to accomplish this.</p>
+<h3>Accessing CSIL  from your PC or Mac</h3>
+<p>The preferred computing environment for you to use in CS16 is the CSIL computing environment.</p>
+<p>You can <strong>access the CSIL environment</strong> in the following ways:</p>
+<ul>
+  <li><strong>Directly, in the CSIL lab itself
+    </strong>
+    <ul>
+      <li>CSIL is on the ground floor of Harold Frank Hall. To find it, go to the side of the building that faces the ocean. Stand outside the building, with your back to the ocean, facing the glass double doors. The door to CSIL is now on your right.</li>
+      <li>CSIL is open from early in the morning to late at night, seven days a week, except during university holidays, and just before them. See the door of the room for exact hours.</li>
+    </ul>
+  </li>
+  <li><strong>From  the Cooper Lab (ESB1003)</strong> <strong>during your &quot;discussion sections&quot; </strong>(also known as &quot;lab sections&quot;)
+    via the &quot;ssh&quot; command.
+    <ul>
+      <li>Cooper lab is only available to you during your scheduled lab time—at other times, you can use CSIL to do your work.</li>
+      <li>The details of the &quot;ssh&quot; command will be shared with you in your lab instructions</li>
+    </ul>
+  </li>
+  <li><strong>Using &quot;ssh&quot; software on your Windows or Mac PC (when you are connected to the internet). </strong>
+    <ul>
+      <li>On Windows, the program <a href="http://ftp.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a> is one example of a free &quot;ssh client&quot; that you can  download and install. One you have an &quot;ssh client&quot;, you can use this to connect to CSIL (as well as any other machine on the internet that provides ssh access.) </li>
+      <li>Putty is only one example of an ssh client—any ssh client will do.</li>
+      <li>On Mac OS X, the ssh program is built in—you access it from a Terminal window or an XTerm window. Using it is pretty similar to using the ssh command from the Cooper lab.</li>
+    </ul>
+  </li>
+</ul>
+<h2>Downloading Ch directly to your PC or Mac (not required)</h2>
+<h3>Why you might want to <em>just skip this</em></h3>
+<p>Let us emphasize again: it is NOT REQUIRED for you to download Ch to your PC or Mac.</p>
+<p>In fact, there are many advantages to completing your work on the CSIL machines—either direclty, or remotely from your PC or Mac, instead of downloading Ch to your PC or Mac.</p>
+<table border="1" cellspacing="1" cellpadding="1">
+  <tr>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">&nbsp;</th>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<ul>
+  <li>It is easier for the Instructor and TAs to help you with problems during office hours if all your work is saved on CSIL.
+    <ul>
+      <li>If you work on your own PC or Mac, you'll have to bring your computer with you to office hours to get help, or be sure all your files are transferred to CSIL first.</li>
+    </ul>
+  </li>
+  <li>Work saved on CSIL is backed up nightly so that if there is a hardware failure, we can often recover your work.
+    <ul>
+      <li>That's not the case if your work is on  your laptop or flash drive, and your equipment fails, or gets stolen!</li>
+    </ul>
+  </li>
+  <li>When you work on CSIL, you can directly submit your work for grading with the turnin command.
+    <ul>
+      <li>If you work on your <br />
+        </li>
+    </ul>
+  </li>
+  <li>If  there is some &quot;glitch&quot; with the software on CSIL,  the instructors and TAs have access to investigate this, and get it resolved.
+    <ul>
+      <li>That's not the case with your PC or Mac</li>
+      </ul>
+  </li>
+</ul>
+<p>This last point is perhaps the most significant—although you are welcome to try downloading and installing Ch on your PC or Mac, we <strong>cannot provide technical support </strong>if you run into difficulties with your own personal installation of Ch.</p>
+<p>Why?</p>
+<ul>
+  <li>There are so many different configurations: Windows XP, Windows Vista, Mac OS X Tiger, Mac OS X Leopard, etc. </li>
+  <li>Given limited time, the instructor and TAs need to concentrate their efforts on helping you learn to program, not on tech support.</li>
+  <li>So, we have set up <em><strong>one environment</strong></em>—namely CSIL—that is
+    <ul>
+      <li>available to everyone in the class</li>
+      <li>that we are confident <em><strong>will work, and</strong></em></li>
+      <li>if/when it breaks, we have an entire system staff that can help us fix it.</li>
+    </ul>
+  </li>
+</ul>
+<h3>If you still want to do this, here's how</h3>
+<p>If after all that, you still want to download a student copy of Ch for yourself, here are the download links. <br />
+  <br />
+Note that you will have to register yourself with SoftIntegration in order to download this software (another reason we are not requiring you do to this.)</p>
+<ul>
+  <li>Ch Student Edition: <a href="http://www.softintegration.com/products/chstudent/">http://www.softintegration.com/products/chstudent/</a></li>
+</ul>
+<p>Then, follow the instructions on the website for </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</div> <!-- id="container"-->
+
+</body>
+</html>

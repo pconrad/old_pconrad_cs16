@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab05, Fall 2009 (09F)--Selection Sort on array of ints</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Fall 2009</h1>
+ <h1>lab05: <span class="smallerFont">(&quot;lab five&quot;)<br>
+   Selection sort on array of ints<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Write a function to find the index of the maximum element of an array</li>
+   <li>Use that function to implement selection sort</li>
+  </ul>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>The list of skills needed for this lab is essentially the same as that for lab04, so we won't repeat that list in detail.</p>
+ <p>The only other pre-requisite for this lab is that you should already have introduced to the basic ideas behind how selection sort works. (In Fall 2009, we did this via our field day exercise from 10/28, as well as homework H07.)<br>
+  <br>
+ </p>
+ <h2>This is a pair programming lab!</h2>
+ <p>Work with your assigned pair programming partner on this lab. If you do not have one, consult the TA for your lab and/or your instructor for advice prior to starting.</p>
+ <ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional.</li>
+   <li> Why? pair programming is a real-world skill that is highly valued by employers. </li>
+   <li>Feedback from companies that employ UCSB CS and CE grads. They tell us that they want our graduates to get more experience with working in pairs and in groups.</li>
+   <li>Most students find it helpful and enjoyable
+     <ul>
+
+       <li>UCSB student that used pair programming in Spring 2009 in CS10 were surveyed, to ask what advantages of pair programming they experienced.</li>
+       <li>74% indicated &quot;I was able to make better progress on assignments&quot; </li>
+       <li>64% indicated &quot;It helped me learn more&quot;</li>
+       <li>60% indicated &quot;It was more fun that working alone&quot;</li>
+       <li>85% said yes when asked &quot;Based on your personal experience, would you recommend that Pair Programming be used in future introductory programming courses at UCSB?&quot;<br>
+
+       </li>
+     </ul>
+   </li>
+   <li>There is also <a href="http://www.cs.ucsb.edu/~pconrad/csed/pair-programming">evidence in the scientific literature</a> that it improves student learning, and helps you get better grades.</li>
+  </ul>
+ <h2>Watch the pair programming video from NC State to prepare</h2>
+
+ <p>You can find the video &quot;Fun with Pair Programming&quot; at this link. It takes less than 10 minutes to watch it.</p>
+ <ul>
+   <li><a href="http://agile.csc.ncsu.edu/pairlearning/educators.php">http://agile.csc.ncsu.edu/pairlearning/educators.php</a></li>
+  </ul>
+ <h2>How pair programming will work</h2>
+ <h3>What you'll do</h3>
+
+ <p>Just as the in the video &quot;Fun with Pair Programming&quot;, you and one other person will sit at a single terminal and write code.</p>
+ <ul>
+   <li>The person at the keyboard is the driver</li>
+   <li>The person watching over her/his shoulder is the navigator</li>
+  </ul>
+ <p>From the video, you should be familiar with the roles of &quot;driver&quot; and &quot;navigator&quot;, and the need for switching roles often. If not, then <strong>watch the video</strong>.</p>
+
+ <h3>How you'll be matched with a pair</h3>
+ <ul>
+   <li>If there is someone you want to work with, and who wants to work with you, that is fine. But you must attend the same lab section this week and next.</li>
+   <li> If you haven't already chosen someone to work with, your TA will help to match you up with someone in your lab section.</li>
+   <li> If there ends up being an odd number, there will be one group of three.</li>
+ </ul>
+
+ <h3>How your pair programming will be evaluated</h3>
+ <p>You'll be asked to evaluate your pair partner, and your pair partner will also evaluate you. These are the questions you'll be asked. You may find it helpful to consider those before you begin work&mdash;you certainly want your pair partner to say good things about you. <br>
+   <br>
+  (Previous experience with pair-programming in courses suggests that 95% of students do end up giving their pair good evaluations&mdash;make sure you are part of the 95%!)</p>
+ <p> 1. Did your partner read the lab assignment and preparatory materials before coming to the scheduled lab? [For example, did he/she watch the pair programming video before coming to lab]<br>
+
+   2. Did your partner do their fair share of the work?<br>
+   3. Did your partner cooperatively follow the pair programming model<br>
+   (rotating roles of driver and navigator)?<br>
+   4. Did your partner make contributions to the completion of the lab assignment?<br>
+  5. Did your partner cooperate?</p>
+ <p>Your pair partners evaluation will be counted as part of your grade for the course.</p>
+
+ <p>So please do work with your pair in a constructive way!</p>
+ <p>Also: know that the vast majority of your grade in this course is still based on individual work, not pair work&mdash;so while you do need to try to have the best pair experience possible, in the unlikely event that your experience does not go well, the impact on your grade is limited.</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step1">Step 0: Get your pair assignment from your TA</h3>
+ <p>Your TA will tell you who are are assigned to&mdash;or you may get your assignment by email.<br>
+
+  </p>
+ <p>Please be patient&mdash;depending on who shows up, there may have to be some slight adjustments to pair assignments.</p>
+ <p>We will try to avoid the situation where someone has to work alone, or in a group of three, but if may be necessary depending on circumstances.</p>
+ <h3>Step 1: Together with your pair partner, complete Homework Assignment H06</h3>
+ <p>H06 is a one-page (back and front) homework assignment to make sure that you and your pair partner:</p>
+ <ul>
+
+   <li>understand the basic ideas of pair programming</li>
+   <li>are compatible in terms of schedules</li>
+ </ul>
+ <p>This second item is particularly important. The single biggest obstacle to pair programming&mdash;or for that matter and kind of group work in courses&mdash;is incompatible schedules. So, this will help us detect that situation up front, and try to resolve it.</p>
+ <p>If you don't have a copy of H06, you can find links to it on the main course website under &quot;homework&quot;.</p>
+ <p>Turn this in during your assigned lab section.  You only need to turn in one copy per pair, but it is best if you BOTH fill it out, and BOTH turn it in.</p>
+<h3>Step 2: Decide whose account you are going to work in</h3>
+ <p>Note: DO NOT share passwords with each other. That is a violation of your account agreement, and can result in suspension of your computing privileges at UCSB.</p>
+ <p>Instead, what you should do is:</p>
+ <ul>
+
+   <li>Decide whose account you are going to work in for today's work session</li>
+   <li><strong>At the end of every work session, email your C program  files (finished or not) to both yourself and your pair partner as an attachment (OR use the scp solution below)</strong></li>
+   <li>That way, if your pair partner <a href="http://discuss.fogcreek.com/joelonsoftware/default.asp?cmd=show&ixPost=149219">gets hit by a bus</a>, you can continue working without him/her&mdash;you aren't 'out of luck'.</li>
+  </ul>
+ <p>A better solution is to <em><strong>use scp to copy the work</strong></em> from person1's account into person2's account with the scp command&mdash;here's how:</p>
+ <ol>
+   <li>When you are about to finish working for the day, have person2 log into their CSIL account.</li>
+   <li>Person2 cd's into their ~/cs16 directory</li>
+   <li>Person 2 types this command<br>
+   scp -r <strong><em>person1</em></strong>@csil.cs.ucsb.edu:cs16/lab05 lab05.snapshot.<strong>date</strong><em><strong>.time</strong></em><br>
+       <ul>
+         <li>replace <em><strong>person1</strong></em> with person1's CSIL username (e.g. jsmith)</li>
+         <li>replace <em><strong>date.time</strong></em> with the date and time (e.g. <strong>Oct29.1pm</strong>)</li>
+         <li>don't include any slashes or spaces in the <strong>date.time</strong> string&mdash;it must be a valid part of a filename.</li>
+       </ul>
+    </li>
+   <li>After  you type this command, you'll be prompted for a password. Person1 should type his/her password. Don't <em><strong>share</strong></em> the password, just have person1 <em><strong>type it </strong></em>in person2's window.'</li>
+   <li>If it works, there  will now be a directory called lab05.snapshot.date.time in person2's directory that is a complete copy of the ~/cs16/lab05 directory from person1's account.
+     <ul>
+       <li>Please read the &quot;final thoughts&quot; below so that you understand what the proper use of this process it&mdash;it is a powerful command, but it has the potential to be abused. With great power comes great responsibility.</li>
+     </ul>
+   </li>
+  </ol>
+ <p>Ultimately, you should BOTH submit your work via the turnin program, just to be safe</p>
+
+ <ul>
+   <li>Ideally, it should only be necessary for one of you to submit, provided you put both of your names on the submission.</li>
+   <li>In practice, we've seen this sometimes results in problems where Joe thinks Bob was going to submit and Bob thinks Joe was going to submit.</li>
+   <li>So, it is just better if both Joe AND Bob submit the work for grading! </li>
+  </ul>
+ <p>The TA can match up your submission and avoid grading the work twice.</p>
+ <p><strong>Some final thoughts on this step: </strong></p>
+ <ul>
+   <li>In this class pair programming is permitted on <em><strong>some</strong></em> assignments. </li>
+   <li>The scp command above <em><strong>could</strong></em> be used to copy code from one account to another on assignments where you are <em><strong>not</strong></em> permitted to work together&mdash;but <em><strong>that would be wrong</strong></em>. </li>
+   <li>So don't do that.</li>
+ </ul>
+ <h3>Step 3: Log on to CSIL and create a directory ~/cs16/lab05 on one of your accounts.</h3>
+
+ 
+ <p>If you've forgotten how, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+   <br>
+ </p>
+ <h3>Step 4: Copying some programs from my directory</h3>
+ <p>The files for this weeks lab can be found here:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab05/files">http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab05/files<br>
+   </a></li>
+  </ul>
+ <p>And here:</p>
+ <p><code> ~pconrad/public_html/cs16/09F/labs/lab05/files/* </code></p>
+ <p>You can use the same techniques described in lab04 to copy those into your ~/cs16/lab05 directory. Consult the instructions for lab04 if you don't remember how to do this.</p>
+ <h3>Step 5: Finishing two programs</h3>
+ <p>The object of this lab is finish the programs indexOfMaxWithTests.c and selectionSortWithTests.c, each of which uses the principle of test-driven development that we first worked with in lab02.</p>
+ <p>The basic procedures is the same as the one you did in lab02 and lab04, so I won't described it again in detail&mdash;here's the short explanation.</p>
+ <p>Start with indexOfMaxWithTests.c</p>
+ <ul>
+   <li>compile the program with &quot;make&quot; and run it</li>
+   <li>note that all the tests are failing, because there is stub code for the indexOfMax function</li>
+   <li>replace the code for indexOfMax with some valid code</li>
+   <li>see the tests pass</li>
+  </ul>
+ <p>You also need to look for any lines with @@@ on them and follow the instructions there.</p>
+ <p>For indexOfMaxWithTests.c, this includes </p>
+ <ul>
+   <li>adding your name(s)
+     to the header comment
+       <ul>
+       <li>For pair programming assignments, include both names of the folks in your pair&mdash;or all three names if you are a trio.</li>
+      </ul>
+   </li>
+   <li>adding in some extra tests that are currently commented out&mdash;these are incomplete, so you have to finish them by hand-calculating the expected value.</li>
+ </ul>
+ <p>Then, repeat this for selectionSortWithTests.c
+ <p>You will note that selectionSortWithTests.c also contains the function indexOfMax().    
+ <ul>
+   <li>For now, you'll have to hand copy the code from your indexOfMaxWithTests.c program into your selectionSortWithTests.c program.</li>
+   <li>I hope you find this sort of annoying&mdash;because if you do, it will motivate you do learn a better way of doing this!</li>
+   <li>In a future lab, we'll learn how we can factor this out into its own file, so that we don't have to copy code from one program to another after we've already tested it. That will require a bit of extra learning, but in the long run it will save us work. Doing that extra bit of work this week will help you appreciate that point, I hope!</li>
+  </ul>
+ <p>Once both indexOfMaxWithTests.c and selectionSortWithTests.c pass their tests, you are ready for the final check, and for scripting and submitting.<br>
+ </p>
+ <h4>Step 6: Scripting your assignment</h4>
+ <p>The steps for scripting your assignment are similar to those you did for lab04, so I'm not repeating the instructions in detail here. Consult the lab04 description, and do the same sequence of steps, except do it for the two programs you created this week.</p>
+ <p>If you have any questions about the process, you may consult your TA or instructor&mdash;but my hope is that you will find it straightforward.</p>
+ <p>Your script file should be located in your <strong>~/cs16/lab05</strong> directory and should be called <strong>lab05.txt</strong></p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p><strong>cat lab05.txt</strong></p>
+ <p>If it looks ok, you are ready to submit!</p>
+ <h3>Step 7. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, <strong>you need to be in the ~/cs16 directory</strong>&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+<pre>turnin lab05@cs16 lab05</pre>
+<p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+<hr>
+<h2>Evaluation and Grading (250 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab05 directory</li>
+         <li>20 points: lab05 directory contains required C programs and lab05.txt (a transcript file)</li>
+         <li>20 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+       <li>20 points: each C file contains a header comment on first line with name &quot;cs16 lab05&quot; and date and name(s) of students submitting the work.</li>
+       <li>20 points all @@@ comments are removed.</li>
+       <li>10 points: transcript file contains everything asked for in the instructions</li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     (points for correctness and style)<ul>
+       <li>50 points&mdash;filling in body of indexOfMax function
+         <ul>
+           <li>35 points: filling in the body of indexOfMax (replacing the stub with correct code)</li>
+           <li>15 points: adding in the extra tests for the d array</li>
+          </ul>
+       </li>
+        <li>100 points&mdash;filling in body of selectionSort function
+          <ul>
+              <li>10 points: copying code over from indexOfMaxWithTests.c for indexOfMax function</li>
+              <li>50 points: correctly implementing selectionSort </li>
+              <li>20 points: correctly reusing the indexOfMax function as part of your selectionSort function.</li>
+              <li>20 points: adding in the extra tests for the d array in testSelectionSort().</li>
+          </ul>
+        </li>
+        </ul>
+   </li>
+  </ul>
+ <h2>Due Date</h2>
+ <p>You should <strong>try</strong> to complete this assignment by the  end of your  discussion section in which it was assigned, i.e. before 8:50am on Thursday 10/22/2009 or before 10:50am, 11:50am, or 12:50pm on Friday 10/23/2009 (depending on which section you are enrolled in.)</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week. During homework H06, you and your pair partner(s) worked out times you could get together through the week, so take advantage of those if needed. Please do your best to have it completed and turnin command finished by <strong>10pm on Wednesday November 4. </strong></p>
+ <p>If that is not possible&mdash;e.g. because you need another chance to meet with your pair partner and the TA, then you may finish it during the following lab on Nov 5, and Nov 6. <strong>There is no late penalty for submitting during lab on Nov 5 or 6, but you will be behind, because a new lab will be assigned next week.</strong> <br>
+   <br>
+   <strong>  So do your best to finish before 10pm November 4th.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) up until the time the TA doing the grading is finished with grading and posting a particular assignment.  There is no specific guarantee as to the length of that period of time.<br>
+   <br>
+  After that, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

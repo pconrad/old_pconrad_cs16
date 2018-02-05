@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="../../../../../css/syllabus.css"/>
+<link rel="stylesheet" href="../../../../../cs16.css" />
+<style type="text/css">
+.pageBreakBefore {page-break-before:always;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.style1 {font-size: 16px}
+.style1 {font-size: smaller}
+ol li ol li {list-style-type: lower-alpha;}
+</style>
+<title>Midterm 1 (E01)---CS16, UCSB, Winter  2010  (Conrad)</title>
+</head>
+
+<body>
+<div id="container">
+  <h1><strong><span class="instructions">Followup on Questions 6 and 7 from<br />
+CS16 Midterm Exam 1<br />
+<span class="subhead style1">E01, 10W, Phill Conrad, UC Santa Barbara<br />
+Tuesday, 02/02/2010, 11am-12:15pm</span></span><br />
+    </strong></h1>
+  <h2><strong><br />  
+    </strong></h2>
+  <hr />
+  <p>&nbsp;</p>
+ <ol start="6">
+ <li class="pageBreakBefore">(5 pts) Very briefly: What is the purpose of using int main(int argc, char *argv[]) instead of int main() in a C program?<br />
+  <br />
+  <br />
+  Answer: This allows the user to enter input to the program on the command line, i.e. command line arguments.<br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</li>
+
+</ol>
+  <p>Full credit was given for answers that were clear, and addressed the main point (i.e. command line arguments.) Partial credit was given for answers that reflected partial understanding, or were not as clear.<br />
+    <br />
+  Here are the results: </p>
+  <table  border="1" cellspacing="1" cellpadding="1">
+            <tr>
+              <th scope="col">total papers</th>
+              <th scope="col">perfect </th>
+              <th scope="col">-1</th>
+              <th scope="col">-2</th>
+              <th scope="col">-4</th>
+              <th scope="col">-5</th>
+            </tr>
+            <tr>
+              <td>72</td>
+              <td>60</td>
+              <td>1</td>
+              <td>9</td>
+              <td>1</td>
+              <td>1</td>
+            </tr>
+  </table>
+
+
+<ol start="7">
+   <li> In programs using <code>int main(int argc, char *argv[])</code> we often see lines of code such as the following:<br />  
+  <br />
+  <code>width = atoi(argv[1]);<br />
+  height = atoi(argv[2]);</code><br />
+  <br />
+  <br />
+Before we can use these lines of code, there are three things we must do.<br />  
+  <br />
+  <ol>
+    <li>(3 pts) There is a line of code we need before the main program to be sure we can access <code>atoi</code>. <br />
+      <br />
+      What is that line of code?<br />
+        <br />
+        ANSWER: #include &lt;stdlib.h&gt;<br />
+        <br />
+        <br />
+    </li>
+    <li>(3 pts) We need either one, or two lines of code we need right at the start of the main program to <em>declare</em> <code>width</code> and <code>height</code>. <br />
+      <br />
+      What is that  code?<br />
+        <br />
+        <br />
+        ANSWER: int width, height;<br />
+        <br />
+        OR:<br />
+        <br /> 
+        int width; <br />
+        int height;<br />
+        <br />
+    </li>
+    <li>(3 pts) There is one more thing we must do somewhere before the two calls to the atoi function above&mdash;we need to check if  that something is true, and if so, we have to print an error message and stop the program.  <br />
+      <br />
+      What is it that we have to check?<br />  
+        <br />
+        ANSWER:<br />
+        <br />
+        check argc, e.g. <br />
+        <br />
+        if (argc&lt;3)<br />
+        {<br />
+         // print error message and halt the program ...<br />
+         <br />
+         <br />
+         <br />  
+         <br />
+         <br />
+    </li>
+    </ol>
+</li>
+ 
+ </ol>
+   
+    
+  <p>Question 7 Results:</p>
+<table  border="1" cellspacing="1" cellpadding="1">
+      <tr>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">total<br />
+          papers</th>
+        <th scope="col">perfect</th>
+        <th scope="col">-1</th>
+        <th scope="col">-2</th>
+        <th scope="col">-3</th>
+    </tr>
+      <tr>
+        <th scope="row">7a</th>
+        <td>72</td>
+        <td>68</td>
+        <td>2</td>
+        <td>2</td>
+        <td>&nbsp;</td>
+    </tr>
+      <tr>
+        <th scope="row">7b</th>
+        <td>72</td>
+        <td>64</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>8</td>
+    </tr>
+      <tr>
+        <th scope="row">7c</th>
+        <td>72</td>
+        <td>72</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+  </table>
+</div> 
+<!--id="container"-->
+</body>
+</html>

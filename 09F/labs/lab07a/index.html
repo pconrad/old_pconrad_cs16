@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>lab07a: Various topics  (chmod, ls -l, executable files, Ch for entire programs)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Fall 2009</h1>
+ <h1>lab07a: <span class="smallerFont">(&quot;lab seven a&quot;)<br>
+   <br>
+   Various topics <br>
+   (chmod, ls -l, executable files, Ch for entire programs)<br>
+ </span></h1>
+ <h1>&nbsp;</h1>
+ <hr>
+ <span class="smallerFont"><br>
+  </span><span class="smallerFont"></span>
+  <h2>This lab does not require you to turn anything in<br>
+  but the material in this lab WILL be on the midterm exam<br>
+  <br>
+  So, it is strongly recommended that you complete it!<br>
+  <br>
+  You can do so with your pair partner, <br>
+  or individually&mdash;your choice</h2>
+ <p>By the time you have completed this lab, you should:</p>
+ <ul>
+   <li>Be able to work with file permissions via the the chmod command and the ls -l command (long directory listing) and explain how converting between octal and binary relates to working with these commands:
+     <ul>
+       <li>This includes understanding the concepts of user, group and others, as well as read, write and execute access, and the relationship of these concepts to octal and symbolic settings for chmod.</li>
+     </ul>
+   </li>
+   <li>Be able to differentiate between two senses of the word &quot;executable file&quot;&mdash;that is, to be able to explain that there are two possible meanings, and be able each of those and that for any given file, it may be true, the neither, both, or only one of them is true.
+     <ul>
+       <li>When we say that a file is &quot;executable&quot;, this is ambiguous&mdash;we may mean two different things.</li>
+       <li>A file can be &quot;executable&quot; because the &quot;executable bit&quot; is set for user, group, or others.</li>
+       <li>A file can be &quot;executable&quot; because it contains machine language instructions in binary format</li>
+       <li>In this lab, you'll explore both of these meanings.</li>
+     </ul>
+   </li>
+   <li>Be able to show how the Ch interpreter can be used to run individual small segments of C code, or entire C programs.
+     <ul>
+       <li>Prior to this lab, we've only Ch to explore small segments of code.</li>
+       <li>However, Ch can be used for much more than that&mdash;you can run your entire program under Ch.</li>
+       <li>Doing so has advantages and disadvantages, as we'll see</li>
+      </ul>
+   </li>
+  </ul>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>Before completing this lab, you should:</p>
+ <ul>
+   <li>Know how to convert from octal to binary, and from binary to octal&mdash;numbers up to 3 digits of length octal, or 9 digits in length binary.
+     <ul>
+       <li>In Fall 2009, was covered in lecture and tested on a midterm prior to this lab</li>
+      </ul>
+   </li>
+   <li>Be comfortable with bringing up the Ch interpreter:
+     <ul>
+       <li>In Fall 2009, we covered this in lab02, lab03 and lab04<br>
+         <br>
+ </li>
+      </ul>
+   </li>
+   </ul>
+ <h2>&nbsp;</h2>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step1">&nbsp;</h3>
+ <h3>Step 1: Log on to CSIL, create  ~/cs16/lab07a and copy this lab's files:</h3>
+
+ 
+ <p>If you've forgotten how to create the directory, consult steps 1 and 2 from <a href="../lab01">lab01</a>.</p>
+ <p>The files for this weeks lab can be found here:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab07a/files">http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab07a/files<br>
+   </a></li>
+  </ul>
+ <p>And here:</p>
+ <p><code> ~pconrad/public_html/cs16/09F/labs/lab07a/files/* </code></p>
+ <p>You can use the same techniques described in lab04 to copy those into your ~/cs16/lab06 directory. Consult the instructions for lab04 if you don't remember how to do this.</p>
+ <h3>Step 2: Reviewing what we already know about the word &quot;executable&quot;</h3>
+ <p>So far this quarter, when we've worked with a C program such as the cmdlinedemo.c program in this week's files, we've used the make command to create an &quot;executable file&quot;, like this. (Try each of these commands for yourself as you follow along.)  </p>
+ <pre>-bash-3.2$ <strong>ls</strong><br>cmdlinedemo.c  demoTypes.c<br>-bash-3.2$ <strong>make cmdlinedemo</strong><br>cc     cmdlinedemo.c   -o cmdlinedemo<br>-bash-3.2$
+ </pre> 
+<p>After doing this, as we know, we can use the command ./cmdlinedemo to run the program, with or without command line arguments:</p>
+<pre>
+-bash-3.2$ <strong>./cmdlinedemo </strong><br>argc=1<br>argv[0]=./cmdlinedemo<br>-bash-3.2$ <strong>./cmdlinedemo foo bar</strong><br>argc=3<br>argv[0]=./cmdlinedemo<br>argv[1]=foo<br>argv[2]=bar<br>-bash-3.2$ </pre>
+ </p>
+ <p>This tells the operating system: &quot;look in the current directory (the ./ stands for current directory) for a file called cmdlinedemo and start executing the instructions you find inside.</p>
+ <p>Now we want to look a little more closely at what is happening here.</p>
+ <h3>Step 3: What makes a file &quot;executable&quot;</h3>
+ <p>What you may already realize, but we want to highlight this week, is that the reason this works is because there is an executable file called cmdlinedemo in your current directory, as we can show with the ls command:</p>
+ <p>
+  <pre>-bash-3.2$ ls<br>cmdlinedemo  cmdlinedemo.c  root.c<br>-bash-3.2$ </pre>
+ </p>
+ <p>If we use the <code>ls -l</code> command instead (<code>-l</code> stands for the &quot;long&quot; form of the directory listing), we see more information about the files:</p>
+ <p>
+   <pre>-bash-3.2$ ls -l<br>total 16<br>-rwxr-xr-x 1 pconrad faculty 4955 2009-11-12 07:49 cmdlinedemo<br>-rwxr-xr-x 1 pconrad faculty  459 2009-11-12 07:49 cmdlinedemo.c<br>-rwxr--r-- 1 pconrad faculty  430 2009-11-12 07:49 root.c<br>-bash-3.2$ </pre>
+ </p>
+ <p>What we want to focus on here is the leftmost x that appears in the row for the file cmdlinedemo, namely the one <u><strong>underlined and bold</strong></u> in this listing below:</p>
+ <p>
+  <pre>-bash-3.2$ ls -l<br>total 16<br>-rw<strong><u>x</u></strong>r-xr-x 1 pconrad faculty 4955 2009-11-12 07:49 cmdlinedemo<br>-rwxr-xr-x 1 pconrad faculty  459 2009-11-12 07:49 cmdlinedemo.c<br>-rwxr--r-- 1 pconrad faculty  430 2009-11-12 07:49 root.c<br>-bash-3.2$ </pre>
+ </p>
+ <p>That particular x indicates that the owner of the file &quot;has permission to execute the file&quot;, i.e. to ask the Unix operating system to start carrying out the instructions in the file.</p>
+ <p>In this case, those instructions happen to &quot;machine language instructions in binary&quot;. We can see that if we use the special command file cmdlinedemo, which tells what kind of file cmdlinedemo is:  </p>
+ <pre>-bash-3.2$ <strong>file cmdlinedemo</strong><br>cmdlinedemo: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked <br>(uses shared libs), for GNU/Linux 2.6.9, not stripped<br>-bash-3.2$ </pre>
+ </p>
+ <p>The output is long and detailed, but focus on this part that's underlined and bold in the listing below:  </p>
+ <pre>-bash-3.2$ <strong>file cmdlinedemo</strong><br>cmdlinedemo: ELF 32-bit LSB <u><strong>executable, Intel 80386</strong></u>, version 1 (SYSV), dynamically linked <br>(uses shared libs), for GNU/Linux 2.6.9, not stripped<br>-bash-3.2$ </pre>
+ </p>
+ <p>That part of the output indicates that the file is in machine language that is targeted for the Intel 80386 family of processors. Contrast that with the output of the command file cmdlinedemo.c:  </p>
+ <pre>-bash-3.2$ <strong>file cmdlinedemo.c</strong><br>cmdlinedemo.c: <u><strong>ASCII C++ program text</strong></u><br>-bash-3.2$</pre>
+ <p>Here we see that the file is ASCII text of a C program (which we already knew&mdash;but this shows that the &quot;file&quot; command is able to distinguish between the two.)</p>
+ <h3>Step 4: When is an executable file not  executable?<br> 
+  (When we don't have execute permission...)</h3>
+ <p>Now comes the fun part. </p>
+ <p>We are going to show that even though the file cmdlinedemo contains executable instructions, we can take away our permission to &quot;execute&quot; the file&mdash;i.e. make it non-executable&mdash;by changing the permission modes with the chmod command.</p>
+ <p>Then, we can bring back that permission again.</p>
+ <ul>
+   <li>At this point, you and your pair partner need to understand octal numbers, and their relationship to the codes in strings such as rwxr-xr-w (which corresponds to 755). </li>
+   <li>This was covered in lecture earlier in the course. But if you need a refresher consult the page indicated below where you and your pair partner can practice your conversions:
+     <ul>
+       <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/lectures/chmodQuiz1/">http://www.cs.ucsb.edu/~pconrad/cs16/09F/lectures/chmodQuiz1/</a></li>
+      </ul>
+   </li>
+  </ul>
+ <p>	To proceed, change the permissions on the file cmdlinedemo to rw-r--r--, which corresponds to 644, like this:  </p>
+ <pre>-bash-3.2$ <strong>ls -l cmdlinedemo</strong><br>-rwxr-xr-x 1 pconrad faculty 4955 2009-11-12 07:49 cmdlinedemo<br>-bash-3.2$ <strong>chmod 644 cmdlinedemo</strong><br>-bash-3.2$ <strong>ls -l cmdlinedemo</strong><br>-rw-r--r-- 1 pconrad faculty 4955 2009-11-12 07:49 cmdlinedemo<br>-bash-3.2$</pre>
+ <p>Then, try to execute the file. Notice that you get an error:  </p>
+ <pre>-bash-3.2$ <strong>./cmdlinedemo</strong><br>-bash: ./cmdlinedemo: Permission denied<br>-bash-3.2$ </pre>
+ </p>
+ <p>Then, try to change it back to rwxr-xr-x (i.e. 755) as shown here:  </p>
+ <pre>-bash-3.2$ <strong>chmod 755 cmdlinedemo</strong><br>-bash-3.2$</pre>
+ <p>Try running it  again. Success!</p>
+ <p>
+   <pre>-bash-3.2$ <strong>./cmdlinedemo</strong><br>argc=1<br>argv[0]=./cmdlinedemo<br>-bash-3.2$ </pre>
+ </p>
+ <p>Now, you see that even though a file might be in the executable <em>format</em>&mdash;that's not enough for us to be able to run the file:</p>
+ <ul>
+   <li>We also have to have the right permissions set on the file (via the chmod command.)</li>
+   <li>The ls -l command shows us what those permissions are.</li>
+  </ul>
+ <h3>Step 5: When is something executable not an executable file? <br>
+   (Introducing shell scripts...)</h3>
+ <p>As it turns out, we can set the execute permission on certain files other than those that contain binary machine language instructions. One example is something called a shell script.</p>
+ <p>As an example of when we might use a shell script: suppose we have a file that uses the sqrt function&mdash;this weeks file contain a little example program called root.c that prints the square root of its command line argument.</p>
+ <ul>
+   <li>Take a moment to look through the source code for root.c</li>
+ </ul>
+ <p>As you may recall, if we try to compile a program that uses math functions such as sqrt, sin, cos, etc. with our usual trick of just typing &quot;make progname&quot;, we run into a problem, demonstrated here with trying that on root.c:  </p>
+ <pre>-bash-3.2$ <strong>make root</strong><br>cc     root.c   -o root<br>/tmp/ccwG7MLC.o: In function `main':<br>root.c:(.text+0x6e): undefined reference to `sqrt'<br>collect2: ld returned 1 exit status<br>make: *** [root] Error 1<br>-bash-3.2$ </pre>
+ </p>
+ <p>The problem is that the math library has to be specifically requested, so there is a long version of the compile step:  </p>
+ <pre>-bash-3.2$ <strong>gcc -lm root.c -o root</strong><br>-bash-3.2$ <strong>./root</strong><br>Usage: ./root floating-pt-number<br>-bash-3.2$ <strong>./root 4.0</strong><br>2.000000<br>-bash-3.2$ </pre>
+ </p>
+ <p>Suppose we want to avoid typing this every time. We can create a special file called a shell script.</p>
+ <ul>
+   <li>A shell script is like a program, in that it is a file that contains a sequence of instructions</li>
+   <li>But instead of those instructions being written in C, they are a sequence of unix commands</li>
+ </ul>
+ <p>Type the following command to start a new file in emacs called makeroot  </p>
+ <pre>-bash-3.2$ emacs makeroot</pre>
+ <p>Inside the file makeroot, put the following:  </p>
+ <pre>#!/bin/sh -v<br>cc -lm root.c -o root</pre>
+ The first line, <code>#!/bin/sh -v</code> is a special line that indicates &quot;this file is a shell script&quot;. The -v part indicates that you want each line in the script to be echoed as it is executed.</p>
+ <p>The remaining lines in the file are unix commands&mdash;just like the ones you type in at the command line. In this case, we have just one more line&mdash;the command we want to run.</p>
+ <p>So, now, all that remains is to try to run our shell script. We don't have to compile it&mdash;shell scripts are a kind of file that can be executed by Unix without having to be turned into machine languages instructions first. We run them just like programs&mdash;by typing, for example  </p>
+ <pre>./makeroot</pre>
+ <p>There is just one catch, as we find out when we try this:  </p>
+ <pre>-bash-3.2$ ./makeroot<br>-bash: ./makeroot: Permission denied<br>-bash-3.2$ </pre>
+ </p>
+ <p>The problem is that makeroot must have the execute permission set! If we do an ls -l, we can see that it doesn't have that set yet:  </p>
+ <pre>-bash-3.2$ ls -l makeroot <br>-rw-r--r-- 1 pconrad faculty 35 2009-11-12 08:00 makeroot<br>-bash-3.2$ </pre>
+ </p>
+ <p>So, all that is needed is to use the chmod command to set that&mdash;a permission mode of 700 should do the trick:  </p>
+ <pre>-bash-3.2$ <strong>chmod 700 makeroot</strong><br>-bash-3.2$ <strong>ls -l</strong><br>total 28<br>-rwxr-xr-x 1 pconrad faculty 4955 2009-11-12 07:49 cmdlinedemo<br>-rwxr-xr-x 1 pconrad faculty  459 2009-11-12 07:49 cmdlinedemo.c<br>-rwx------ 1 pconrad faculty   35 2009-11-12 08:00 makeroot<br>-rwxr-xr-x 1 pconrad faculty 5232 2009-11-12 07:58 root<br>-rwxr--r-- 1 pconrad faculty  430 2009-11-12 07:49 root.c<br>-bash-3.2$ <strong>./makeroot </strong><br>#!/bin/sh -v<br>cc -lm root.c -o root<br>-bash-3.2$ </pre>
+ <p>So, we now see that a file that isn't an &quot;executable file&quot;&mdash;in the sense that it doesn't contain machine language instructions&mdash;can still be executable&mdash;in the sense that it can have the execute permission set.</p>
+ <p>Of course, it isn't as simple as just setting the execute permission. Some files, like C program files, can't be directly executed by the Unix operating system. For example, if we try to run a C program directly, we'll get an error:  </p>
+ <pre>-bash-3.2$ ./root.c<br>-bash: ./root.c: Permission denied<br>-bash-3.2$ </pre>
+ <p>We can try to get around this by setting the execute permission, but that doesn't seem to help. Try it:  </p>
+ <pre>-bash-3.2$ <strong>chmod 755 root.c</strong><br>-bash-3.2$ <strong>./root.c</strong><br>./root.c: line 1: //: is a directory<br>./root.c: line 2: //: is a directory<br>./root.c: line 8: syntax error near unexpected token `('<br>./root.c: line 8: `int main(int argc, char *argv[])'<br>-bash-3.2$</pre>
+ </p>
+ <p>What is wrong here is that Unix is trying to interpret the C program language file as if it were a shell script&mdash;i.e. a sequence of Unix commands. That obviously is not going to get us very far.</p>
+ <p>If only there were a way to run a .c file directly, without having to compile.</p>
+ <p>Ah, but there is! Ch to the rescue...</p>
+ <h3>Step 6: Using Ch to run entire C programs</h3>
+ <p>It turns out that we can use the Ch program to execute C programs directly&mdash;as long as the execute permission is set on that file. </p>
+ <p>Try this:  </p>
+ <pre>-bash-3.2$ <strong>ch</strong><br>                                   Ch <br>                Professional edition, version 6.1.0.13751 <br>              (C) Copyright 2001-2009 SoftIntegration, Inc.<br>                     http://www.softintegration.com<br>/cs/faculty/pconrad/cs16/lab07a&gt; _prompt=&quot;Ch&gt; &quot;<br>Ch&gt;  <br>Ch&gt; <strong>ls -l root.c</strong><br>-rw-r--r-- 1 pconrad faculty 430 2009-11-12 07:49 root.c<br>Ch&gt; <strong>chmod 755 root.c</strong><br>Ch&gt; <strong>ls -l root.c</strong><br>-rwxr-xr-x 1 pconrad faculty 430 2009-11-12 07:49 root.c<br>Ch&gt; <strong>./root.c</strong><br>Usage: /cs/faculty/pconrad/cs16/lab07a/root.c floating-pt-number<br>Ch&gt; <strong>./root.c 4.0</strong><br>2.000000<br>Ch&gt; <strong>./root.c 0.25</strong><br>0.500000<br>Ch&gt; <strong>./root.c -9.0</strong><br>nan<br>Ch&gt; <strong>./root.c 9.0</strong><br>3.000000<br>Ch&gt; <strong>exit</strong><br>-bash-3.2$</pre>
+ </p>
+ <p>As you can see, we can use Unix commands such as <code>ls -l </code>and <code>chmod</code> from inside Ch. And, if we set the execute permission on our C source files (e.g. cmdlinedemo.c and root.c) we can execute them directly inside of Ch, as if they were executable files.</p>
+ <p>This is because the Ch program is a special kind of &quot;Unix Shell&quot;&mdash;one that understands the C programming language directly. Hence, </p>
+ <ul>
+   <li>C commands can be typed in interactively, and </li>
+   <li>&quot;shell scripts&quot; can be written directly in the C programming language.</li>
+ </ul>
+ <h4>Why would I want to do this?</h4>
+ <p>There are several reasons you might want to run C programs directly inside of Ch instead of compiling them:</p>
+ <ul>
+   <li>Convenience
+     <ul>
+       <li>You don't have to bother with the separate step of compiling</li>
+       <li>This is extra true when using the math library, for instance&mdash;Ch doesn't require anything extra for using sqrt, sin, cos, etc.&mdash;so no inconvenient &quot;long form&quot; compile step with <code>-lm</code></li>
+     </ul>
+   </li>
+   <li>Alternative error messages
+     <ul>
+       <li>If you are getting strange syntax errors with the regular compiler, you can try Ch, and maybe its error messages will be easier to understand.</li>
+       <li>This isn't always true, but sometimes it is.</li>
+     </ul>
+   </li>
+   <li>Checking array boundaries
+     <ul>
+       <li>Unlike traditional C, Ch checks array references to make sure you don't go outside the bounds of an array&mdash;if you do, the program continues, but a warning is printed, and one of the values from inside the array is used (the one closest to the bogus subscript)</li>
+       <li> Going outside the bounds of an array is common cause of the dreaded &quot;segmentation fault&quot; in traditional C, and it can be challenging to debug.<br>
+           </li>
+     </ul>
+   </li>
+  </ul>
+ <p>What are the downsides of doing this?</p>
+ <p>The main drawback of using Ch for running complete programs&mdash;rather than the traditional compiler&mdash;is the possibility of getting confused about what is legal in C, and what is not.</p>
+ <ul><li>The version of C used by Ch is <em>close</em> to traditional C, but is not <em>exactly</em> the same. </li>
+   <li>Ch will allow you to write a lot of things that would not be acceptable in traditional C. </li>
+   <li>So if you only check your program against Ch, and not a traditional C compiler, you may have written code that isn't really legal C.</li>
+   <li>If you do this a lot, you may start to become confused about what is legal in C, and what is a feature of Ch.</li>
+   <li>You can avoid this by using Ch while first working on your program, and then when it seems to be working, checking your result against the traditional C compiler.</li>
+  </ul>
+ <p>Another drawback is that it is cumbersome to share pieces of code among different C programs when using Ch. So, this way of using Ch is mainly useful for small standalone programs, like the ones we've written up until now in the course.</p>
+ <h4>Do I need to know how to use Ch?</h4>
+ <p>We think you may find it helpful to know that Ch can be used for running complete programs&mdash;not just for little bits of code. But, whether or not you use it for that purpose is entirely up to you.</p>
+ <h4>One thing you should know for the next midterm exam:</h4>
+ <p>This lab has  highlighted the point that when we speak of an executable file, there are two things we might mean:</p>
+ <ul>
+   <li>an executable file (one that contains binary instructions for a particular machine&mdash;i.e. machine language)</li>
+   <li>a file that happens to be executable, because the execute permission is set.</li>
+  </ul>
+ <p>As we've seen these two are independent of each other:</p>
+ <ul>
+   <li>a file can contain executable instructions, but may or may not have the execute permission set.</li>
+   <li>a file with the execute permission set might or might not contain binary instructions</li>
+   <li>some files neither contain binary instructions, nor have the execute permission set.</li>
+  </ul>
+ <p>Before the next midterm go back over these steps and be prepared to give an example of each of these situations, drawing on your experiences from this lab.</p>
+ <hr>
+<h2>There is no evaluation or grading for this lab<br>
+  Completing it is on the &quot;honor system&quot;.<br>
+But there may be midterm exam questions about its contents.</h2>
+<h2>So the due date is: before midterm 2!</h2>
+ <p>&nbsp;</p>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

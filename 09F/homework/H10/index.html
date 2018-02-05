@@ -1,0 +1,177 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 09F,H10: (Type Expressions)</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.style1 {
+	font-size: x-large;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.style3 {font-family: Geneva, Arial, Helvetica, sans-serif}
+.style4 {font-weight: bold; background-color: yellow;}
+.style5 {font-family: Verdana, Arial, Helvetica, sans-serif}
+
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 09F, UCSB</p>
+<p>H10:  (Type Expressions) <span id="pointCount">Total points: ?</span> (<a href="H10.pdf">printable PDF</a>)</p>
+<p><span class="style3">Accepted: on paper, <strong>IN LECTURE</strong> on 11/16<span class="style4"></span></span><span class="style1"><br />
+</span><br />
+You may do this individually, or together with your pair programming partner—but be sure that you each hand this one in separately.</p>
+<p>Name : (2 pts)______________________________   <span>Umail address  (2 pts)</span>  _____________________ </p>
+<p><strong>Section (2 pts) Circle one:         </strong>Thu 8am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fri 10am       Fri 11am        Fri noon</p>
+<p>Name of your pair programming partner(s), if you work together:</p>
+<p>The lectures of Monday 11/09 and Friday 11/13 covered &quot;type expressions&quot; in C.   </p>
+<p>These are an important things to understand, because they are the language in which messages from the compiler are written—you may be told, for example that &quot;argument char doesn't match parameter char *&quot;, and you need to understand what that means. </p>
+<p>Also, a mismatch in types is a common error in C/C++ programming, for example:</p>
+<ul>
+  <li>mismatch of  argument and parameter</li>
+  <li>mismatch of right hand side and left hand side of an assignment statement</li>
+</ul>
+<p>Together with this homework assignment, there is a program (on a separate handout).</p>
+<ul>
+  <li>If you didn't get one, you can find the program at:<br />
+    http://www.cs.ucsb.edu/~pconrad/cs16/09F/homework/H10/files/types.c<br />
+  </li>
+</ul>
+<p>Assuming each of the expressions below appeared in this program, indicate the type they would have.<br />
+  <br />
+The first few are done for you as an example.</p>
+<p>Hints--for full credit:</p>
+<ul>
+  <li> don't write<em> pointer to character</em>; instead, write <strong>char *</strong></li>
+  <li>don't write<em> address of int</em>; instead, write <strong>int *</strong></li>
+</ul>
+<p>(44 pts) (2 points each for the ones not already filled in)<br />
+</p>
+<table border="1" cellspacing="1" cellpadding="1">
+  <tr>
+    <td width="90">Expression</td>
+    <td width="199">Type</td>
+    <td width="13" bgcolor="#000000">&nbsp;&nbsp; &nbsp;  </td>
+    <td width="90">Expression</td>
+    <td width="199">Type</td>
+  </tr>
+  <tr>
+    <td>x</td>
+    <td><span class="style5">int</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>end</td>
+    <td>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;x</td>
+    <td><span class="style5">int *</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>end.hrs</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>*x</td>
+    <td><span class="style5">error</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>end-&gt;min</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>c.center</td>
+    <td><span class="style5">struct Point</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;(end-&gt;min)</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;(c.center.x)</td>
+    <td><span class="style5">double *</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>pt</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>*val</td>
+    <td><span class="style5">double</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>argc</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>c.x</td>
+    <td><span class="style5">error</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;argc</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;end</td>
+    <td><span class="style5">struct Time **</span></td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>*argc</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>(*cir).x</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>argv[0]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>(*cir).radius</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>argv[0][0]</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>cir-&gt;center</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;num</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>cir-&gt;center.y</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;y</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>cir-&gt;center-&gt;y</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>&amp;val</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>start</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>*num</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>*end</td>
+    <td>&nbsp;</td>
+    <td bgcolor="#000000">&nbsp;</td>
+    <td>*cir</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<hr />
+End of H08
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab07, Winter 2010 (10W)--Working with structs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>lab07: <span class="smallerFont">(&quot;lab seven&quot;)<br>
+   Working with structs, and pointers to structs<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Understand how to define a struct, and access the members of a struct
+     <ul>
+       <li>You should be able to access these members, directly, and through a pointer</li>
+      </ul>
+   </li>
+   <li>Understand how to pass a struct to a function
+     <ul>
+       <li>You should be able to pass either the struct itself (so that the function gets a copy of the original), or a pointer to the struct (so that the function can modify the original struct)&mdash;and understand the difference.</li>
+     </ul>
+   </li>
+  </ul>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>The list of skills needed for this lab is essentially the same as that for lab04, so we won't repeat that list in detail.</p>
+ <p>The only other pre-requisite for this lab is that you should already have introduced to the basic ideas of structs&mdash;in Winter 2010 we did this in lecture on 02.16 and 02.18.<br>
+  <br>
+ </p>
+ 
+ <h2>Continue with your same pair partner from lab05 and lab06&mdash;<br>
+  unless there is some reason not to...</h2>
+ <p>At the start of lab05, you were supposed to switch to a new pair partner. If you did so, and your partner is available again this week, please continue working with the same person.</p>
+<ul>
+  <li><strong>If you didn't switch partners for lab05 or lab06</strong>, your TA will try to help you do so this week. </li>
+  <li><strong>If your pair from lab05/lab06 isn't available</strong>, your TA may pair you with a new partner.</li>
+  <li><strong>If (and only if) you have a new partner for lab07&mdash;</strong>one you didn't work with previously&mdash;complete a new version of <a href="../../../10W/worksheets/W01/W01.pdf">W01</a>, and post to the lab05 pair partner forum on Gauchospace. Indicate that this is a new pairing for lab07.</li>
+</ul>
+<p>Also keep in mind:<br>
+</p>
+<ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional&mdash;see <a href="../lab02">lab02</a> for the reasons why.</li>
+   <li>Keep the evaluation criteria in mind&mdash;you can find those listed in the intro to <a href="../lab02">lab02</a> and <a href="../lab02">lab03</a></li>
+  </ul>
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0: Get together with your assigned lab partner and do the set up steps.</h3>
+ <p>Choose a pilot and a navigator, and remember to switch often.</p>
+ <p>Check your PC&mdash;if you are in Cooper, there might be two mice attached. The navigator might be able to use the second mouse to help point things out, and feel a bit more connected to what is going on.</p>
+ <p>The driver should:</p>
+ <ul>
+   <li> Bring up a terminal window and create a ~/cs16/lab07 directory</li>
+   <li>Copy files from my directory at  <code><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab07/files">~pconrad/public_html/cs16/10W/labs/lab07/files/</a></code></li>
+ </ul>
+ <p>&nbsp;</p>
+ 
+ 
+ <h3>Step 1: Understanding what we are going to do:<br>
+  Finishing three programs&mdash;and writing a fourth from scratch</h3>
+ <p>The object of this lab is finish three incomplete programs that are in the test-driven development (TDD) style&mdash;and then to write a fourth one (completely from scratch.) Each of these works with the idea of structs. </p>
+ <p>Since this is our first time working with structs, the first program is very easy. The next two get  progressively more challenging.</p>
+ <p>The fourth one is about the same level of difficulty as the third, but it is more challenging because you need to write the entire program from scratch (although you can borrow lots of code from the third program.)</p>
+ <p>By now, you are very familiar with the outline of what we do with a TDD style program&mdash;i.e. see the tests fail, then replace the stub with working code so the tests pass. So, I'll skip right to an explanation of the three programs:</p>
+ <h3>Step 2: Working with <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab07/files/areaBoxWithTests.c">areaBoxWithTests.c</a></h3>
+ <p>This one is super easy&mdash;you just need to fill in the stub for areaOfBox.</p>
+ <p>This involves understanding how to access the members of a struct&mdash;in this case, the height and width of a <code>struct Box</code>.</p>
+ <p>Do look over the entire program though, even though this is easy. The next few get progressively longer and more complex, and understanding this easy program completely <em><strong>first</strong></em> may really help.</p>
+ <h3>Step 3: Working with <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab07/files/initPointWithTests.c">initPointsWithTests.c</a></h3>
+ <p>This program is a bit more challenging. There's also something special here: when we replace the stub for distance with the formula for distance, we have to use a square root.</p>
+ <p>This requires a special way of compiling. If you use &quot;make&quot; with the stub in place, everything works fine:  </p>
+ <pre>-bash-3.2$ <strong>make initPointWithTests</strong><br>
+cc     initPointWithTests.c   -o initPointWithTests<br>-bash-3.2$ </pre>
+ </p>
+ <p>But, once we are actually calling the sqrt function, that no longer works:</p>
+ <pre>
+ -bash-3.2$<strong> make initPointWithTests</strong><br>
+ cc     initPointWithTests.c   -o initPointWithTests<br>
+ /tmp/ccAdgf3G.o: In function `distanceBetween':<br>
+ initPointWithTests.c:(.text+0x3a): undefined reference to `sqrt'<br>
+ collect2: ld returned 1 exit status<br>
+ make: *** [initPointWithTests] Error 1<br>
+ -bash-3.2$</pre>
+   <p>To compile properly, we have to compile the 'long way' and include the <strong>-lm</strong> option </p>
+   <ul>
+     <li>	<strong>-lm</strong> is a hyphen, followed by the letters <strong>l</strong> as in <strong>l</strong>ibrary, and <strong>m</strong> as in <strong>m</strong>ath</li>
+   </ul>
+   <p>
+     <pre>-bash-3.2$ <strong>gcc -lm initPointWithTests.c -o initPointWithTests</strong><br>
+-bash-3.2$</pre>
+   </p><div class="sideNoteDiv">Note: <strong><code>gcc</code></strong> stands for &quot;gnu C compiler&quot;&mdash;on the CSlL and Cooper computers, it actually refers to the same program as the <strong><code>cc</code></strong> command.   So the commands <strong><code>gcc</code></strong> and <strong><code>cc</code></strong> are essentially interchangable, at least on our local systems. 
+   </div>
+  <p>Your job on this program is to fill in three stubs:</p>
+   <ul>
+     <li><strong>distanceBetween</strong>
+       &mdash; distance between two points
+         <ul>
+         <li>since we already covered this in lecture, the correct answer is provided in a comment </li>
+         <li>this answer is also provided as an example of how to access members of a struct</li>
+         <li>so don't just blindly uncomment the correct answer&mdash;try to understand how it works</li>
+       </ul>
+     </li>
+     <li><strong>pointsApproxEqual</strong>&mdash;whether two points are equal (within some tolerance)
+       <ul>
+         <li>the correct answer is provided in a comment here also is also provided for you as an example of how to reuse the distance formula </li>
+         <li>You'll get a chance to apply this idea yourself when you write boxApproxEqual and circleApproxEqual in a later step of this lab</li>
+       </ul>
+     </li>
+     <li><strong>initPoint</strong>&mdash;initialize a point
+       <ul>
+         <li>Here there are two possible correct answers, both provided. Try to understand how they work.</li>
+         <li>Again, you'll be required in later steps to provide answers like this on your own, so take some time with each of these&mdash;and come back to them later if you are stumped on the corresponding functions for initBox and initCircle</li>
+       </ul>
+     </li>
+   </ul>
+   <p>You should also take a look at the definition of the assertTrue function, and the places it is used in the program. You'll need to understand this function to write the later steps of this lab.</p>
+   <p>When your tests pass, move on to the next program</p>
+  <p></p>
+ <h3>Step 4: Working with <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab07/files/initBoxWithTests.c">initBoxWithTests.c</a></h3>
+ <p>This program is similar to initPointWithTests.c, but here, you are filling in stubs and the answers are NOT provided. </p>
+ <p>For some of the stubs, you can copy/paste your answers from initPointWithTests.c.</p>
+ <p>But there are some new ones, where you and your pair partner need to come up with the code yourself.</p>
+ <p>Have fun!</p>
+ <p>Once you've gotten all the test cases to pass, you are ready to write a program from scratch.</p>
+ <p></p>
+ <h3>Step 5: Writing initCircleWithTests.c from scratch</h3>
+ <p>Now, write a program from scratch called initCircleWithTests.c</p>
+ <p>You are strongly encouraged to follow the TDD process: i.e. write tests and stubs first, get all the tests to fail, then fill in the stubs to make the tests pass.</p>
+ <ul>
+   <li>We aren't going to ask for a transcript to prove you did it this way&mdash;this is on the honor system.</li>
+   <li>But,  if you are asking the TA or the instructor for help, we'll give you frowny faces if you aren't following the TDD process, and big smiles if you are.</li>
+ </ul>
+ <p>To receive full credit, your program should have the following elements. </p>
+ <ol><li><strong>A definition for <code>st</code></strong><code></code><strong><code>ruct Circle</code></strong> that has a <code>struct Point</code> member called <code>center</code>, and a double member called <code>radius</code>.
+   <ul>
+       <li>You may reuse the <code>struct Point</code> definition from the example programs above&mdash;in fact, not only may you do this, you should do this.</li>
+       <li>You may also&mdash;nay, should also&mdash;reuse the functions that go along with <code>struct Point,</code> such as <code>pointsApproxEqual(),</code><code> testPointsApproxEqual()</code>, and all the functions those depend on such as <code>distanceBetween()</code>, <code>checkExpectDouble()</code>, <code>assertTrue()</code>, etc.</li>
+       <li>If/when you reuse any functions, be sure that the tests come along with those functions and are called from your main.</li>
+     </ul>
+   </li>
+   <li><strong>A function called <code>circleApproxEquals()</code></strong> that takes three parameters: two <code>struct Circle</code>s, and double value for <code>tolerance</code>. It should return true if the circles are approximately equal, i.e. the center points are approximately equal, and the radii are approximately equal.</li>
+   <li><strong>A function <code>testCircleApproxEquals()</code></strong> that tests the <code>circleApproxEquals()</code>. Include at least three tests. This function should be called from your <code>main()</code>.</li>
+   <li><strong>A function called <code>initCircle()</code> </strong>that initializes a circle. For parameters, it should take a <code>struct Circle *</code>, and doubles for the values of <code>centerX</code>, <code>centerY</code> and <code>radius</code>.</li>
+   <li><strong>A function called <code>testInitCircle()</code> </strong>that tests initCircle. Include at least three tests. Call it from your main.</li>
+   <li><strong>A function called areaCircle()</strong> that takes a struct Circle as its parameter, and returns the area of that circle.    
+     <ul>
+       <li>For the value &pi;, you can use #include&lt;math.h&gt;, and then use the predefined constant M_PI.        </li>
+      </ul>
+   </li>
+   <li><strong>A function called testAreaCircle()</strong> that tests the areaCircle function. Include at least three tests.</li>
+ </ol>
+ <p>Good luck!</p>
+ <p></p>
+ <h3>Step 6: Script and submit</h3>
+ <p>Script your assignment just as in previous weeks. This week, instead of walking you through it step-by-step, I'm providing only the basic outline. </p>
+ <ul>
+   <li>By the time the course is over, you should be able to script properly without detailed instructions (that will be the expectation in future CS courses.)</li>
+ </ul>
+ <p>So here's a basic outline. (You can always refer back to <a href="lab06">lab06</a> if you want to see the detailed step-by-step version).</p>
+ <ul>
+   <li>You always start by doing a <strong>pwd</strong> and and <strong>ls</strong> to show what directory you are in, and what files you have.</li>
+   <li>The idea then is to take each of your programs one at a time, i.e. <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab07/files/areaBoxWithTests.c"><code>areaBoxWithTests.c</code></a>, <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab07/files/initPointWithTests.c"><code>initPointsWithTests.c</code></a>, <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab07/files/initBoxWithTests.c"><code>initBoxWithTests.c</code></a>, and <code>initCircleWithTests.c</code> and for each one:
+     <ul>
+       <li>Show that it compiles cleanly (you may need to remove the executable first if you are using make)</li>
+       <li>Show that it works properly by running it at least once</li>
+       <li>If needed, run it a few more times if needed, on different inputs, to show that it works properly.
+         <ul>
+           <li>This only applies if the program reads input from a file, the user, or the command line.</li>
+          </ul>
+       </li>
+      </ul>
+   </li>
+   <li>When finished, type <code>exit</code> to end the script, and check the contents of the script file with <code>cat</code> or <code>more</code>.</li>
+ </ul>
+ <p>&nbsp;</p>
+ <p>Your script file should be located in your <strong>~/cs16/lab07</strong> directory and should be called <strong>lab07.txt</strong></p>
+ <p>To submit use the turnin command: <strong>turnin lab07@cs16a lab07</strong></p>
+ <ul>
+   <li>As a reminder: to submit your assignment, <strong>you need to be in the ~/cs16 directory</strong>&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</li>
+  </ul>
+ <p>&nbsp;</p>
+ <hr>
+<h2>Evaluation and Grading (300 pts total) </h2>
+ <ul>
+   <li>Mechanics 80 pts:
+     <ul>
+         <li>5 points: successfully submitting the contents of your lab07 directory</li>
+         <li>5 points: lab07 directory contains required C programs and lab07.txt (a transcript file)</li>
+         <li>30 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+       <li>5 points: each C file contains a header comment on first line with name &quot;cs16 lab07&quot; and date and name(s) of students submitting the work.</li>
+       <li>10 points: all @@@ comments are removed in all four files</li>
+       <li>10 points: extraneous irrelevant comments are removed&mdash;i.e. you shouldn't have comments about a &quot;box&quot; in a routine that process a &quot;circle&quot;, leftover from copying/pasting </li>
+       <li>15 points: transcript file contains everything asked for in the instructions</li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     (points for correctness and style)<ul>
+       <li>10 points&mdash;areaBoxWithTests.c
+         <ul>
+           <li>Replace stub for areaBox with correct code</li>
+          </ul>
+       </li>
+        <li>10 points&mdash;initPointWithTests.c
+          <ul>
+              <li>Replace three stubs with correct code </li>
+          </ul>
+        </li>
+        <li>60 points&mdash;initBoxWithTests.c</li>
+        <ul>
+          <li>20 points: replace three stubs that are same as those in initPointWithTests.c</li>
+          <li>20 points: replace stub of boxesApproxEqual with correct code</li>
+          <li>20 points: replace stub of initBox  with correct code</li>
+        </ul>
+        <li>140 points&mdash;initCircleWithTests.c
+          <ul>
+            <li>20 points for each of the items 1-7 listed in Step 5</li>
+          </ul>
+        </li>
+        </ul>
+   </li>
+  </ul>
+ <h2>Due Date</h2>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section in which it was assigned.</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until 5pm on Friday February 26.</p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through 5PM on Wednesday Mar 3&mdash;however you are strongly encouraged to complete it before the Midterm Exam E02 on Tuesday March 2nd, as part of your studying and preparation for the exam.</p>
+ <p>After 5PM Wednesday Mar 3rd, a zero will be recorded, and the only option is to make up the points via extra credit.<br>
+   <br>
+ </p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

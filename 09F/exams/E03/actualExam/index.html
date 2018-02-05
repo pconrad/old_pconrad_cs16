@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 Final Exam E03, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+pre.widePreNoBox {border: none; font-size: 12px; width: auto;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+ul.squareList li {list-style-type: square;}
+.style1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"><br />
+  CS16 Final Exam<br />
+  <span class="subhead">E03, 09F, Phill Conrad, UC Santa Barbara<br /> 
+  Thursday, 12/10/2009</span></h1>
+<p class="instructions"><strong>Name:</strong> ________________________________________________________</p>
+<p class="instructions"><br />
+<strong>Umail Address: </strong>__________________________________@ umail.ucsb.edu<br />
+<br />
+<br />
+<strong>Circle Lab section:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11AM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noon</p>
+<p class="instructions"><a href="exam.pdf">Link to Printer Friendly PDF Version</a> &nbsp;&nbsp;<a href="solution3.html">Link to Sample Solutions</a></p>
+<hr />
+<p class="instructions">Please write your name <strong>only</strong> on this page. That allows me to grade your exams without knowing whose exam I am grading.</p>
+<p class="instructions">This exam is <strong>closed book, closed notes</strong>, <strong>closed mouth, cell phone off</strong>,<br />
+  except for:</p>
+<ul>
+  <li class="instructions">You are permitted <strong>one sheet of paper</strong> (max size 8.5x11&quot;) on which to write notes</li>
+  <li class="instructions">These sheets will be collected with the exam, and might not be returned</li>
+  <li class="instructions">Please write your name on your notes sheet</li>
+</ul>
+<p>There are 100 points worth of questions on the exam, and you have 3 hours (180 minutes) to complete the exam.</p>
+<p>A hint for allocating your time:</p>
+<ul>
+  <li>if a question is worth 10 points, spend no more than 10 minutes on it</li>
+  <li>if a question is worth 20 points, spend no more than 20 minutes on it</li>
+  <li>etc.</li>
+</ul>
+<p>That will leave you with 80 extra minutes to check your work, or come to problems that gave you trouble.</p>
+<hr />
+<ol class="theQuestions">
+ 
+<li class="pageBreakBefore">(5 pts) Write the definition of a C struct called Complex&mdash;a struct that represents a complex number such as (1.2 + 3.4i) with an &quot;real part&quot; and a &quot;imaginary part&quot;. The struct should include two fields of type <code>double</code>: one called <code>a</code> for the real part, and another called b for the imaginary part. <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</li>
+
+ <li class="pageBreakBefore">Assume that you are continuing with the same program in which you defined <code>struct Complex</code> (from the previous question).
+   <ol>
+     <li>(5 pts) Write the function prototype&mdash;for this quesiton <strong>only</strong> <strong>the prototype</strong>&mdash;for a <code>void</code> function called initComplex that takes three parameters:<br />
+        <br />
+         <ul>
+            <li>A parameter called <code>cPtr</code> that is a pointer to a <code>struct Complex</code></li>
+            <li>A parameter called <code>aVal</code> of type <code>double</code></li>
+           <li>A parameter called <code>bVal</code> of type <code>double</code><br />  
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+           </li>
+        </ul>
+      </li>
+      <li>(10 pts) Now write the full function definition for initComplex. The function should initialize the values in the struct pointed to by cPtr with the values passed in in the two parameters, aVal and bVal.<br />
+        <br />
+        <br />
+      </li>
+    </ol>
+ </li>
+ <li class="pageBreakBefore">(10 pts) First a math refresher:<ul><li> Start with  a complex number a + bi</li>
+ <li> If we take (a+bi)<sup>2</sup>, we get (a + bi)(a + bi) = a<sup>2</sup> + 2abi + b<sup>2</sup>i<sup>2</sup>. </li>
+ <li>But since i<sup>2</sup> = -1, the result is really just (a<sup>2</sup> - b<sup>2</sup> + 2abi).</li>
+ </ul>
+ 
+ <p>With this in mind, we can write a function that takes a struct Complex as a parameter, and returns a new struct Complex that is the square of the one passed in.<br />
+ <br />
+ Here is an incomplete definition for this function. Fill in the missing details.<br />
+   <br />
+   For full credit: do this by 
+   <strong>using a function call to your initComplex function defined in the previous problem </strong>to set the values in the variable <code>ans</code>.   <br />
+   It is possible to write the answer to this problem with <strong>just one line of code.</strong><br />
+   <br />
+   (Or, for partial credit, do it some other way.)<br />
+   <br />
+   <pre class="widePre">
+struct Complex squareComplex(struct Complex c)
+{
+  struct Complex ans;
+
+
+
+  // You may declare additional variables and do
+  // additional steps here if your answer requires them,
+  // but there is a way to solve this that doesn't require that.  
+
+
+
+
+
+
+  // a function call to initComplex should come after this comment
+  // that results in setting ans to the square of c
+
+
+
+
+
+
+
+
+
+  return ans;
+}
+</pre>
+   <br />
+   <br />
+   <br />
+ </p>
+ </li>
+
+ <li class="pageBreakBefore">(5 pts) Suppose you are given a function definition in C.<br />
+     <br />
+    How can you tell whether that function is recursive or not&mdash;that is, what are you looking for?<br />
+      <br />
+    Be very precise in your use of terminology&mdash;be clear about the difference, for example, between function &quot;definition&quot;, function &quot;call&quot;, and function &quot;prototype&quot;.<br />
+      <br />
+      <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+ </li>
+ 
+  <li class="pageBreakBefore">(15 pts) Write a C function definition for a function called <code>iStar</code> that takes two parameters, both integers, called <code>w</code> and <code>h</code> (standing for width and height), and returns an <code>int</code>.<br />
+    <br />
+  The purpose of the function is to print the letter I via <code>printf</code> calls, using stars (*), whenever the parameters for width and height have legal values. <br />
+  <br />
+  The parameters have legal values when the width is an odd number &gt;= 3, and when height is &gt;=3. <br />
+  <br />
+  When the parameters are NOT legal, your function should NOT print any error messages&mdash;in fact, it should not print ANYTHING. It should just return 1, indicating an error.<br />
+    <br />
+  Otherwise, print the I asked for, and return 0. Here is sample output for various function calls.<br />
+  <br />
+  <table border="2" cellspacing="4" cellpadding="4">
+    <tr>
+      <td><code>iStar(3,4)</code></td>
+      <td><pre class="widePre">
+***
+ *
+ *
+***         </pre></td>
+    </tr>
+    <tr>
+      <td><code>iStar(3,3)</code></td>
+      <td><pre class="widePre">
+***
+ *
+***         </pre></td>
+    </tr>
+    <tr>
+      <td><code>iStar(5,4)</code></td>
+      <td><pre class="widePre">
+*****
+  *
+  *
+*****         </pre></td>
+    </tr>
+  </table>
+  <br />
+    Assume that the following function is available to use, and make use of calls to it wherever possible.<br />
+    <br />
+    <pre>void printNChars(int n, char c)<br />
+{<br />
+  int i;<br />
+  for (i=0; i&lt;n; i++)<br />
+    printf(&quot;%c&quot;,c);<br />
+}</pre>
+    <br />
+   <p>Reminder: a <strong>function definition</strong>, NOT a main program!<br />
+     <span class="style1"><br />
+    If you need extra room, <br />
+    use the space after the questions on the next page</span></p>
+  </li>
+  <li class="pageBreakBefore">Suppose you are the owner of a Unix file called <code>blah</code>.<br />
+    <br />
+    <ol>
+      <li>(2 pts) What Unix command could you have typed to  see that the permissions on that file are, for example, <code>rw-r--r--</code>? <br />
+          <br />
+          <br />
+        <br />
+        </li>
+      <li>(2 pts) What octal number corresponds to the permissions <code>rw-r--r--</code>?<br />
+            <br />
+          <br />
+        <br />
+      </li>
+      <li>(2 pts) Suppose you want to type ./blah to execute the file blah as a program. Given the current permissions, that won't work. What is a unix command you can type to change the situation so that you can type ./blah to execute the program?<br />
+          <br />
+        <br />
+      </li>
+      <li>(2 pts) What is the new permission string after you type that command?<br /> (Write your answer in the same format as rw-r--r--)<br />
+        <br />
+        <br />
+        <br />
+      </li>
+    </ol>
+  </li>
+  <br />  <li class="pageBreakBefore">(15 pts) On lab08, you were provided several definitions and function prototypes to work with. Here are a few of them:<br />
+      <pre class="widePre"><br />
+struct Point {  
+  double x;<br />
+  double y;<br />
+};<br /><br />
+void initPoint(struct Point *p, double xVal, double yVal);<br />
+struct Point makePoint(double xVal, double yVal);<br />void drawLine(struct Drawing *d, struct Point p1, struct Point p2, int color);</pre>
+    <br />
+   <p>Using these, write the definition for a function drawI that draws the letter I (with bars on top and bottom, just like in the previous problem.)<br />
+     <br />
+     Here is the function prototype for the drawI function you should define:<br />
+          <pre class="widePre">void drawI(struct Drawing *d, <br />	   struct Point ul, // upper left corner<br />	   double w, // width<br />	   double h, // height<br />	   int color);</pre>
+  And here is a sample main, and its output<br />
+    <br />
+ <table>
+ <tr>
+ <td>   
+ <pre class="widePre">
+int main()
+{
+  struct Drawing d;
+
+  initDrawing(&d, DRAWINGTYPE_COLOR, 200, 100, COLOR_WHITE);
+<br /> 
+  drawI(&d,makePoint(10,10),20,50,COLOR_RED);
+  drawI(&d,makePoint(100,10),50,20,COLOR_BLUE);
+<br />
+
+  writeFile(&d, FILENAME);
+
+  return 0;
+}
+</pre></td><td><img src="files/ourDrawing.gif" alt="Letter I examples" width="200" height="100" /></td>
+ </tr></table>
+    <br />
+    <p class="style1">If you need extra room, use the space on the next page</p>
+        <p class="style1" style="page-break-before:always">Extra space for your answer to question 7</p>
+
+    <br />
+  </li>
+  <li class="pageBreakBefore">
+  <p>(12 pts) Together with this exam, there is a program (on a separate <a href="#handout">handout</a>).<br />
+  </p>
+ <p>Assuming each of the expressions below appeared in this program, indicate the type they would have, or write error if the expression is not valid, e.g. </p><ul>
+     <li>dereferencing something with * or -&gt; that isn't a pointer</li>
+     <li>a reference to a struct member that doesn't exist (e.g. d.foo where there is no foo)</li>
+   </ul>
+   <br />
+     <br />
+<p>  The first few are done for you as an example.</p>
+  <p>Hints--for full credit:</p>
+
+  <ul>
+    <li> don't write<em> pointer to character</em>; instead, write <strong>char *</strong></li>
+    <li>don't write<em> address of int</em>; instead, write <strong>int *</strong></li>
+    <li>don't write <em>address of int *</em> or <em>address of pointer to int</em>, instead write <strong>int **</strong><br />
+    </li>
+    </ul>
+ 
+<p>See <a href="files/6.html">solution</a></p>
+  <table border="1" cellpadding="1" cellspacing="1" id="typeExpressions">
+    <tr>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+      </tr>
+    <tr>
+      <td>a</td>
+      <td><span class="style5 instructions">double *</span></td>
+      </tr>
+    <tr>
+      <td>*b</td>
+      <td><span class="instructions">error</span></td>
+      </tr>
+    <tr>
+      <td>*e</td>
+      <td class="instructions">&nbsp;</td>
+      </tr>
+    <tr>
+      <td>&amp;f</td>
+      <td>&nbsp;</td>
+      </tr>
+    <tr>
+      <td>*g</td>
+      <td>&nbsp;</td>
+      </tr>
+    <tr>
+      <td>f</td>
+      <td>&nbsp;</td>
+      </tr>
+    <tr>
+      <td>e-&gt;center.x</td>
+      <td>&nbsp;</td>
+      </tr>
+    <tr>
+      <td>&amp;argc</td>
+      <td>&nbsp;</td>
+      </tr>
+  </table>
+</li>
+
+ <li class="pageBreakBefore">Here is a recursive function with the name <code>mysteryFunction</code>. As parameters, it takes an array of integers <code>a</code>, and the length of that array <code>n</code> as parameters, and returns an integer. What it actually computes is a mystery for you to solve.<br />
+
+     <br />
+   <pre>
+int mysteryFunction(int *a, int n)
+{
+  if (n==0)<br />    return 0;<br />  <br />  if (a[0]%2!=0)<br />    return 1 + mysteryFunction(a+1, n-1);<br />  else<br />    return mysteryFunction(a+1, n-1);
+}
+</pre>
+    <ol>
+      <li>(5 pts) Solve the mystery by figuring out what the mystery function computes, then come up with a more reasonable name for the function. <br />
+        <br />
+       Hint: Among these possible function names, one (and only one) of them would be a reasonable answer to this question: <code>average, countEven, countMax, countMin, countNeg, countOdd, countPos, countSevens, indexFirstEven, indexFirstOdd, indexOfMax, indexOfMin, isSorted, maxValue, minValue, noDups, sum</code>.<br />
+       <br />
+       <br />
+
+       <br />
+      </li>
+      <li>(10 pts) Rewrite the function so that it computes the same result for every input, but using iteration (a <code>for</code> loop or <code>while</code> loop) instead of recursion.</li>
+     </ol>
+ </li>
+</ol>
+
+<p class="pageBreakBefore"></p>
+<hr />
+<h2 class="instructions">End of Exam</h2>
+<p class="instructions"><span id="pointCount">Total points: ?</span></p>
+<div class="pageBreakBefore">
+<h1 class="instructions"  id="handout">CS16 Final Exam<br />
+  Extra Handout</h1>
+<p class="instructions">&nbsp;</p>
+<p class="instructions">Program for question about types</p>
+<pre class="widePre">
+// types.c  Code for exam question, 11/15/2009
+// P. Conrad for CS16, 09F, UCSB
+
+
+#include &lt;stdio.h&gt;
+ 
+
+struct Point {
+  double x;
+  double y;
+};
+
+
+struct Date {
+  int d;
+  int m;
+  int y;
+};
+
+
+struct Circle {
+  struct Point center;
+  double radius;
+};
+
+
+int main(int argc, char *argv[])
+{
+  double *a;
+  double b;
+  int *c;
+  int d;
+  struct Circle *e;
+  struct Circle f;
+  struct Date *i;
+  struct Date j;
+  struct Point *g;
+  struct Point h;
+
+  // Program does no useful work
+  // It is just the basis of a homework assignment about types<br />
+
+  
+  // Pretend there is useful code here, and then 
+  // answer questions about the types of various expressions
+  // as if they appeared right here.
+
+
+  return 0;
+
+
+}
+
+</pre>
+</div>
+</body>
+</html>

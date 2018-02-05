@@ -1,0 +1,477 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, Project 0, Winter 2010 (10W)--Simple graphics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+table tr td, table tr th {border: 1px #999999 solid;}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>proj0: <span class="smallerFont">(&quot;project 0&quot;)<br>
+ Simple graphics<br>
+ </span></h1>
+ <hr>
+ <span class="smallerFont"><br>
+  </span><span class="smallerFont"></span>
+  <h2>Introduction</h2>
+  <p>In this project, you'll learn how to write C code that can make drawings like these (made by the instructor):</p>
+  <p><img src="images/house.gif" alt="BW House" width="200" height="150"><img src="images/filledHouse.gif" alt="Color House" width="200" height="150"><img src="images/snowman.gif" alt="Snowman" width="200" height="150"><img src="images/manySnowmen.gif" alt="Many Snowmen" width="400" height="150"><img src="images/flags.gif" alt="Flags" width="400" height="150"></p>
+  <p>And drawings like these (the following are actual student drawings from CS16 Fall 2009):</p>
+<table>
+<tr><td><img src="../../../images/09F.StudentDrawings/achou.gif" alt="student drawing"/></td></tr>
+<tr>
+  <td><img src="../../../images/09F.StudentDrawings/agoyette.gif" alt="student drawing"/></td>
+</tr>
+<tr>
+  <td><img src="../../../images/09F.StudentDrawings/aki-ya.gif" alt="student drawing"/></td>
+</tr>
+<tr>
+  <td><img src="../../../images/09F.StudentDrawings/jordandyer09.gif" alt="student drawing"/></td>
+</tr>
+<tr>
+  <td><img src="../../../images/09F.StudentDrawings/kevincollins.gif" alt="student drawing"/></td>
+</tr>
+<tr>
+  <td><img src="../../../images/09F.StudentDrawings/kevinmeraz.gif" alt="student drawing"/></td>
+</tr>
+<tr>
+  <td><img src="../../../images/09F.StudentDrawings/michellelauren.gif" alt="student drawing"/></td>
+</tr>
+</table>
+  <p>What all of these drawings have in common is that they include some kind of parameterization&mdash;that is, the same drawing (e.g. the awesome face), can be drawing at:</p>
+  <ul>
+    <li>different locations on the screen</li>
+    <li>with different sizes (in this case, the size is probably the radius of the face</li>
+    <li>with different face and mouth colors.</li>
+  </ul>
+  <p>This is essentially an exercise in designing functions. You need to:</p>
+  <ul>
+    <li> decide what you want to draw</li>
+    <li>decide what will be parameterized:
+      <ul>
+        <li>at a minimum, this should be location in the drawing, and some aspect of size</li>
+        <li>you might include other parameters at your discretion.</li>
+      </ul>
+    </li>
+    <li>create a drawing function with those parameters</li>
+    <li>invoke it several times in a main program to create your drawing</li>
+  </ul>
+  <p>You'll be given some basic tools to draw in either black and white, or color:</p>
+  <ul>
+    <li>lines</li>
+    <li>boxes (outline or filled)</li>
+    <li>polygons (outline or filled)</li>
+    <li>circles (outline or filled)</li>
+  </ul>
+  <p>We can also discuss, as student interests dictate, how to extend those routine to do other interesting things like</p>
+  <ul>
+    <li>drawing stars with any number of points, in various styles</li>
+    <li>drawing arcs and curves of various kinds</li>
+  </ul>
+  <p>There's a program called ourDrawing.c&mdash;that's where you'll put your code for this project. All the other files&mdash;you pretty much shouldn't have to make any changes to those. </p>
+  <p>In ourDrawing.c, you'll use the functions provided in the other files to make your drawing.</p>
+  <p>What you draw is up to you&mdash;as we'll explain in lecture.</p>
+  <p>The code that does the basic underlying drawing of lines, boxes, etc. is provided for you, as well as code that copies your file to the web. However, what is good is that the vast majority of that code is code that you <strong>already have the capacity to understand</strong> at this point in your journey with the C programming language. There isn't time in a 10 week course to guide you the process of developing all that code, but we can go through some of it in lecture to explain how it works&mdash;and as time permits, we will.</p>
+  <h2>Goals for this project</h2>
+  <p>By the time you have completed this project, you should:</p>
+ <ul>
+   <li>Have some comfort with working with larger software projects</li>
+   <li>Have an appreciation of how computing can be fun and expressive</li>
+ </ul>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>Before starting this project, you should have completed the labs up through lab07. In particular, you should be comfortable working with arrays, structs, arrays of structs, and passing structs and arrays of structs to functions.<br>
+ </p>
+ <h2>This is a pair programming project</h2>
+ <p>Work with the same partner you had in lab07/lab08&mdash;or if he/she is not available for some reason, see your TA and/or instructor about getting a new pair partner assigned. </p>
+ <p>If you do work with a <strong>new</strong> partner, please complete a new version of W01, and post your new assignment to the forum on Gauchospace.</p>
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step1">Step 0: Get together with your pair partner, and decide whose account you'll work in</h3>
+ <p>If he/she is not available, and you are assigned a new partner, then complete a new version of worksheet W01 (<a href="../../worksheets/W01/index.html">html</a>, <a href="../../worksheets/W01/W01.pdf">pdf</a>), including posting to the &quot;Updated pair partners for proj0 forum&quot; on Gauchospace.</p>
+ <p>Remember: don't share passwords. Instead, use scp or email to share files with each other at the end of each work session. (See previous labs for details.)</p>
+ <p>It is only necessary for one member of the pair to submit&mdash;but you are BOTH responsible for seeing that this HAS been done and that both of your names are in the ourDrawing.c file.</p>
+ <h3>Step 1: Log on to CSIL, create  ~/cs16/proj0 and copy the files for this project</h3>
+
+ 
+ <p>Log on to CSIL, create  <code>~/cs16/proj0 </code></p>
+ <p>The files for this project can be found here:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/projects/proj0/files">http://www.cs.ucsb.edu/~pconrad/cs16/10W/projects/proj0/files<br>
+   </a></li>
+  </ul>
+ <p>And here:</p>
+ <p><code> ~pconrad/public_html/cs16/10W/projects/proj0/files/* </code></p>
+ <p>You can use the same techniques described in earlier labs to copy those into your ~/cs16/proj0 directory. </p>
+ <h3>Step 2: Listen to the presentation  in lecture.</h3>
+ <p>The following material will be covered in lecture either before, or just this project is being assigned.</p>
+ <p>What you are given is a collection of code containing three libraries:</p>
+ <ul>
+   <li><strong>shapeFunctions.c:</strong> a library of C functions for manipulating shapes, called shapeFunctions.c
+     <ul>
+       <li>many of these come from  lab07</li>
+     </ul>
+   </li>
+   <li><strong>tdd.c:</strong> a library of functions for test-driven development
+     <ul>
+       <li>these are all functions we've seen in previous labs</li>
+     </ul>
+   </li>
+   <li><strong>drawingFunctions.c</strong>: a library of functions for drawing simple graphics
+     <ul>
+       <li>these mostly rely on concepts we've seen before</li>
+       <li>there are a couple of new items, which we'll briefly review
+         <ul>
+           <li>use of enum</li>
+           <li>use of the switch statement</li>
+           <li>writing files to disk (which is very similar to reading files)</li>
+         </ul>
+       </li>
+     </ul>
+   </li>
+  </ul>
+ <p>You'll also see header files that support these C files:</p>
+ <ul>
+   <li><strong>shapes.h </strong>contains struct definitions for struct Point, struct Circle, struct Polygon, etc.</li>
+   <li><strong>drawing.h</strong> contains struct definitions for making drawings</li>
+   <li><strong>tdd.h</strong> contains function prototypes for the tdd.c functions</li>
+   <li><strong>shapeFunctions.h</strong> contains function prototypes for the functions in shapeFunctions.c</li>
+   <li><strong>drawingFunctions.h </strong>contains function prototypes for the functions in drawingFunctions.c</li>
+  </ul>
+ <p>You'll also see some programs that contain main programs that use these libraries:</p>
+ <table border="2" cellspacing="4" cellpadding="4">
+   <tr>
+     <th scope="col">file</th>
+     <th scope="col">what it does</th>
+     <th scope="col">sample image</th>
+   </tr>
+   <tr>
+     <td>testMain.c </td>
+     <td>contains only test cases, mostly for the functions in shapeFunctions.c</td>
+     <td>n/a</td>
+   </tr>
+   <tr>
+     <td>drawHouse.c</td>
+     <td>draws a black and white house, using simple lines</td>
+     <td><img src="images/house.gif" alt="BW House" width="200" height="150"></td>
+   </tr>
+   <tr>
+     <td>drawFilledColorHouse.c</td>
+     <td>draws a filled house in color</td>
+     <td><img src="images/filledHouse.gif" alt="Filled color house" width="200" height="150"></td>
+   </tr>
+   <tr>
+     <td>drawSnowman.c</td>
+     <td>draws a single snowman in black and white</td>
+     <td><img src="images/snowman.gif" alt="Single snowman" width="200" height="150"></td>
+   </tr>
+   <tr>
+     <td>drawManySnowmen.c</td>
+     <td>shows how to make drawing a snowman be a function, so you can draw several snowmen of different sizes</td>
+     <td><img src="images/manySnowmen.gif" alt="Many Snowmen" width="400" height="150"></td>
+   </tr>
+   <tr>
+     <td>drawFlags.c</td>
+     <td>shows how to draw a simple tri-color flag (in this case the GermanFlag) using filledBoxes. Another example of abstracting a drawing into a function</td>
+     <td><img src="images/flags.gif" alt="Flags" width="400" height="150"></td>
+   </tr>
+   <tr>
+     <td>ourDrawing.c</td>
+     <td>draws whatever you want (at the moment, it's blank!)</td>
+     <td><img src="images/ourDrawing.gif" alt="A blank drawing" width="400" height="150"></td>
+   </tr>
+ </table>
+ <p>We'll also go over what happens when you type &quot;make&quot;. This week there is a Makefile that controls what happens.</p>
+ <p>You'll need to understand just two things:</p>
+ <ul>
+   <li>typing &quot;make&quot;</li>
+   <li>typing &quot;make clean&quot;</li>
+ </ul>
+ <h4><strong>How to use the code:</strong></h4>
+ <p>To start off, type &quot;make&quot; (all by itself) at the Unix command prompt. <br>
+   When you do you'll see output indicating that</p>
+ <ul>
+   <li> several C files are being compiled into programs</li>
+   <li>some of these files are being run to produce images with .pbm extensions</li>
+   <li>some commands are being run to convert those .pbm files into .gif files</li>
+   <li>those .gif files are being copied to a web page</li>
+   <li>some test code is being run.</li>
+  </ul>
+ <p>Here's an example:  </p>
+ <pre>-bash-3.2$ make<br>gcc -c testMain.c<br>gcc -c drawingFunctions.c<br>gcc -c shapeFunctions.c<br>gcc -c tdd.c<br>gcc -lm -Wall -g  drawingFunctions.o shapeFunctions.o tdd.o testMain.o -o testMain<br>gcc -c drawHouse.c<br>...<br></pre><p><em>(many lines of output deleted... full transcript available in <a href="make.output.txt">make.output.txt</a>)</em></p>
+   <pre>All tests passed!<br>-bash-3.2$.</pre>
+   <p>The key line of output to look for is this one&mdash;except it will have your username, not jsmith&mdash;unless your username happens to be jsmith:<br>
+     <br>
+  <pre>Visit http://www.cs.ucsb.edu/~jsmith/cs16/proj0 to see your pics</pre>
+   Go to that website, and you'll see something like this:</p>
+   <p><img style="border: thin solid black;" src="proj0.web.page.png" alt="proj0 web page" width="524" height="274"></p>
+  <p>The drawings in that directory are the ones created by the code in the files below:</p>
+  <table style="border:solid thin black;" cellspacing="4" cellpadding="4">
+    <tr>
+      <th scope="col">GIF file</th>
+      <th scope="col">C file</th>
+    </tr>
+    <tr>
+      <td>filledHouse.gif</td>
+      <td>drawFilledColorHouse.c</td>
+    </tr>
+    <tr>
+      <td>flags.gif</td>
+      <td>drawFlags.c</td>
+    </tr>
+    <tr>
+      <td>house.gif</td>
+      <td>drawHouse.c</td>
+    </tr>
+    <tr>
+      <td>manySnowmen.gif</td>
+      <td>drawManySnowmen.c</td>
+    </tr>
+    <tr>
+      <td>ourDrawing.gif<br>
+      <em>This is where your drawing will appear!</em></td>
+      <td>ourDrawing.c<br>
+        <em>This is where you put your code!</em></td>
+    </tr>
+    <tr>
+      <td>snowman.gif</td>
+      <td>drawSnowman.gif</td>
+    </tr>
+  </table>
+  <h4>The &quot;make clean&quot; command:</h4>
+  <p>If your files get messed up and you want to start over, the &quot;make clean&quot; command will get rid of all the extra files is your current directory so that you can type &quot;make&quot; again from scratch.</p>
+  <h4>What you need to do:</h4>
+  <ol>
+    <li>Look at the code in the C files shown above for examples of how to make drawings.
+      <ul>
+        <li>Compare the code to the pictures</li>
+        <li>Notice how the code draws using lines, polygons and circles</li>
+      </ul>
+    </li>
+    <li>Together with your lab partner, decide what you want to draw<ul>
+        <li>It should be something you can draw using lines, polygons, boxes and circles.</li>
+        <li>Plan out your drawing on paper.</li>
+      </ul>
+</li>
+    <li>Register your drawing on Gauchospace (see further instructions below in Step 5)</li>
+    <li>Work on the code for your drawing (see further instructions below in Step 6)</li>
+  </ol>
+  <p>&nbsp;</p>
+  <h3>Step 5: Registering your drawing on Gauchospace</h3>
+ <p>You need to log into Gauchospace and go to the discussion form near the top of the main page labeled 'register your proj0 drawings here'.</p>
+ <p>Look to see if anyone else has already registered the same item that you want to draw. You need to draw something that has not already been chosen in order to get full credit.</p>
+ <p>You may make your item unique by adding a unique &quot;twist&quot;&mdash;e.g. if they are drawing a &quot;car&quot;, you can't just draw a &quot;car&quot;, but you can draw:</p>
+ <ul>
+   <li> a car with  a banana for a hood ornament</li>
+   <li>a police car with red and blue lights</li>
+   <li>a car with its hood up and steam rising from the engine.</li>
+ </ul>
+ <h3>Step 6: Working on your drawing</h3>
+ <p>To make your drawing, you put code into the file <a href="files/ourDrawing.c">ourDrawing.c</a>.</p>
+ <p>The first step is to set up the function call to initDrawing with the correct parameters:</p>
+ <p><strong>initDrawing(&amp;d, <em>drawing_type</em>, <em>width</em>, <em>height</em>, <em>background_color</em>);</strong></p>
+ <p>The  choices you'll need to make here are:</p>
+ <ol>
+   <li>A black and white, or color drawing?<br>
+     <br>
+   If you choose black and white, then you'll use DRAWINGTYPE_BW as your drawing_type, and either BW_WHITE or BW_BLACK as the background color.<br>
+     <br>
+   If you choose color, you'll use DRAWINGTYPE_COLOR as your drawing_type, and either COLOR_WHITE, COLOR_BLACK, or one of the other choices in <a href="files/drawing.h">drawing.h</a> such as COLOR_BLUE, COLOR_YELLOW, etc. as your background color. <br>
+   <br>
+   You can also use any six digit hexadecimal <a href="http://en.wikipedia.org/wiki/Web_colors">web color code</a>, preceded by 0x, for example: 0xBDB76B is a shade of khaki.<br>
+   <br>
+   </li>
+   <li>The size of your drawing?<br>
+     <br>
+   The maximum width and height are currently 512 and 512, defined in drawing.h. You may experiment with modifying the values in drawing.h if you want to make a larger drawing&mdash;but keep in mind that you may run into disk space issues if the drawing gets too big.
+     </p>
+ </li>
+ </ol>
+ <p>The next step is to add code into one of the two functions called drawShape1 and drawShape2. In each case, you should rename the function to a more sensible name such as:<br>
+   <br>
+  </p>
+ <ul>
+   <li>drawCar</li>
+   <li>drawAppleTree</li>
+   <li>drawSkateboard</li>
+   <li>etc.</li>
+  </ul>
+ <p><strong>Decide what parameters the drawing functions will take. </strong></p>
+ <p>At a minimum, it should take a 'reference point', and at least one dimension&mdash;a width, height, or radius&mdash;something that allows you to draw your picture at different scales.</p>
+ <ul>
+   <li>The reference point is some point that everything else in the drawing is calculated from.
+     <ul>
+       <li>It could be the center of the drawing, or the upper left corner, or the lower right corner, or the center bottom, for example </li>
+       <li>What you choose as your reference point depends on the nature of what you are drawing</li>
+       <li>For an ice cream cone, it might be the bottom of the cone.</li>
+       <li>For a sword, it might be the place where the handle meets the blade.</li>
+      </ul>
+   </li>
+   <li>You should allow the user to specify at least one dimension for the picture so that you can draw it at different sizes.
+     <ul>
+       <li>Depending on the nature of the drawing, this might be height in pixels (e.g. for Storke Tower), or radius in pixels (e.g. for a Pizza), or width in pixels (for a flag).</li>
+       <li>For some things, it may be more sensible to calculate additional dimensions from those already given, e.g.
+         <ul>
+           <li>calculate width automatically from the height (e.g. the width of Storke Tower might be 1/8 or 1/10 of the height, </li>
+           <li>calculate height automatically from width: (e.g. the height of the US flag is the width/1.9)</li>
+           <li>the length of the minute hand on a clock is 90% of the radius</li>
+          </ul>
+       </li>
+       <li>For other things, it may be useful to specify both width and height
+         <ul>
+           <li>That allows you to make, for example, tall skinny houses and short fat houses.</li>
+          </ul>
+       </li>
+      </ul>
+   </li>
+  </ul>
+ <p><strong>What if my drawing has hard coded points?</strong></p>
+ <p>That's ok as a starting point.</p>
+ <p>Hard coded points can easily be converted into a formula with a little extra work&mdash;once you get the hang of it, it isn't that tough.</p>
+ <p>A drawing with hard coded points is also ok for partial credit.</p>
+ <p><strong>What if I don't <em>want</em> my drawing to have &quot;two&quot; of something on it at different sizes?</strong><br>
+  <strong>Or what if my converting my complex drawing from hard coded points is going to be a major pain!</strong></p>
+ <p>If you already have a drawing that you are very proud of, and you don't want to mess up the artistry, but you still want full credit, here's a work around for you. </p>
+ <p>This is also a way out if you are not feeling very creative and just want to get this assignment done.</p>
+ <p>Make a drawing function to draw a drawing consisting of just the initials of your first name, and that of your pair partner. For example, if Ian Smith were to partner with Frieda Jones, their drawing might be IF, and might have points like this: <br>
+     <br>
+  <img src="IFtag.gif" alt="IF tag" width="200" height="100"></p>
+ <p>We can label these points like this:</p>
+ <p><img src="IFtagPlan.png" alt="IF tag plan" width="500" height="250"></p>
+ <p>And then draw this with code like the following:</p>
+<pre>void drawIF(struct Drawing *d, 
+	    struct Point ul, // upper left, or center bottom, or whatever
+	    double width,
+	    double height, 
+	    int color)
+{
+  double letWidth = width * 0.45; // width of each letter
+  double spaceBetween = width * 0.1; // space between letters
+  struct Point ulI, umI, urI, llI, lmI, lrI; // I upper left, middle, right, etc.
+  struct Point ulF, mlF, llF, urF, mrF;// F upper, middle, and lower left, etc.
+
+
+  // set points of I across the top
+  initPoint(&ulI, ul.x, ul.y);
+  initPoint(&umI, ul.x + letWidth/2.0, ul.y);
+  initPoint(&urI, ul.x + letWidth, ul.y);
+
+
+<br>  // set points of I across the bottom
+  initPoint(&llI, ul.x, ul.y + height);
+  initPoint(&lmI, ul.x + letWidth/2.0, ul.y + height);
+  initPoint(&lrI, ul.x + letWidth, ul.y + height);
+
+
+<br>  // draw the I
+  drawLine(d, ulI, urI, color); // across the top
+  drawLine(d, llI, lrI, color); // across the bottom
+  drawLine(d, umI, lmI, color); // down the middle
+
+<br>  // set points of F down the left hand side, top to bottom
+  initPoint(&ulF, ul.x + letWidth + spaceBetween, ul.y);
+<br>etc...<br><br>}
+</pre>
+ <p>With this in place, you can now &quot;tag&quot; your drawing with two tags of different sizes and colors, to create an effect something like this:</p>
+ <p><img src="taggedDrawing.gif" alt="Tagged Snowmen" width="300" height="150"></p>
+ <p>With function calls like these:</p>
+ <p>
+   <pre>drawIF(&amp;d,makePoint(10,20),20,80, COLOR_RED);<br>
+drawIF(&amp;d,makePoint(265,120),30,20, COLOR_GREEN)</pre>
+ </p>
+ <p>If you do this, then even if your main drawing is hard coded and can't be scaled, you'll get full credit for having created at least one drawing that can be scaled and relocated (i.e. your tag), and you wont have to mess up the artistic integrity of your main drawing.</p>
+ <p><strong>Why having a drawing in two places at different sizes is so important</strong></p>
+ <p>The reason it is so important to have a drawing element that appears at different places and with different sizes is that this shows you really understand how to apply the idea of <strong>abstraction</strong>&mdash;which is one of the central ideas in Computer Science.</p>
+ <p><strong>Finishing up</strong></p>
+ <p>You are ready to move on to scripting and submitting when:</p>
+ <ul>
+   <li>Your drawing appears on your web page at <strong>http://www.cs.ucsb.edu/~yourusername/cs16/proj0/ourDrawing.gif</strong></li>
+   <li>Your drawing has at least one element  that
+     <ul>
+       <li> appears at two different places </li>
+       <li>at two different sizes, </li>
+       <li>as a result of two calls to the same function with different parameters</li>
+      </ul>
+   </li>
+  </ul>
+ <p>&nbsp;</p>
+ <h3>Step 7: Script and submit</h3>
+ <p>To script and submit, create a script proj0.txt in which you:</p>
+ <ul>
+   <li>cd into your ~/cs16/proj0 directory and type pwd to show you are there</li>
+   <li>type <strong>make clean</strong></li>
+   <li>type <strong>make</strong></li>
+   <li>type<strong> make clean </strong>again</li>
+   <li>exit the script</li>
+ </ul>
+ <p>Check the web site one last time to make sure that your drawing appears there under the name <strong>http://www.cs.ucsb.edu/~yourusername/cs16/proj0/ourDrawing.gif</strong>.</p>
+ <p>Then, submit the contents of your proj0 directory via:</p>
+ <p>turnin proj0@cs16a proj0</p>
+ <p>&nbsp;</p>
+ <hr>
+<h2>Evaluation and Grading (300 pts total&mdash;but counts double, i.e. 600pts) </h2>
+<p>* Note that since Gauchospace currently has a maximum point value of 300, we'll compute a grade out of 300 points, and then enter it in Gauchospace twice.</p>
+<ul>
+  <li>(30 pts) Registering drawing on Gauchospace
+    so that it does not duplicate another drawing.</li>
+  <li>(30 pts) Scripting and submitting according to instructions</li>
+  <li>(40 pts) Submitting on time (note: after midnight 3/12, NO CREDIT FOR THIS PROJECT)</li>
+  <li>(100 pts) Drawing something interesting with code.
+    <ul>
+      <li>50 pts is at risk here for style issues, e.g. choice of variables names, commenting, etc.</li>
+      <li>50 pts is for code that works&mdash;i.e. that draws something.</li>
+    </ul>
+  </li>
+  <li>(50 pts) Drawing appears on web site (this should come for free)</li>
+  <li>(50 pts) Code and drawing contains at least one item that appears at different positions and sizes.</li>
+  </ul>
+<h2>Due Date</h2>
+ <ul>
+   <li>Midnight Thursday 03/11</li>
+   <li>Accepted until midnight Friday 03/12 with -40 deduction.</li>
+   <li>NOT ACCEPTED after midnight Friday 03/12
+     <ul>
+       <li>If you aren't done by 11pm, go ahead and SUBMIT WHAT YOU HAVE&mdash;even if it isn't perfect yet. </li>
+       <li>Getting some points (partial credit) is better than getting a zero.</li>
+     </ul>
+   </li>
+  </ul>
+ <hr>
+ <h3>Advanced stuff:</h3>
+ <p>For students that really want to go &quot;beyond the call of duty&quot;: here are some extra things you may like to experiment with.</p>
+ <ul>
+   <li>Recursive Fill: <a href="files/recFill.c">recFill.c</a>
+     <ul>
+       <li>Note: if you work with recFill, you may need to increase the available stack space by typing:<br>
+             <strong><code>ulimit -s 1000000</code> </strong>at the shell prompt before running your program. </li>
+      </ul>
+   </li>
+   <li>Color gradients: <a href="files/colorFunc.c">colorFunc.c</a>, 
+                        <a href="files/gradientExample.c">gradientExample.c</a>, 
+                        <a href="files/testColor.c">testColor.c</a>,
+			<a href="/~pconrad/cs16/proj0/gradientExample.gif">example image</a></li>
+ </ul>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

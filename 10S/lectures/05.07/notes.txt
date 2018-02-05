@@ -1,0 +1,5 @@
+Nested loops need different index variables---non overlapping loops
+can "reuse" index variables.
+
+(Show an example)
+

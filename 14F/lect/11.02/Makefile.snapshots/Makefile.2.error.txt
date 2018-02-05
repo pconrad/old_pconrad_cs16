@@ -1,0 +1,9 @@
+-bash-4.2$ make 
+clang++     ptrDemo.cpp   -o ptrDemo
+/tmp/ptrDemo-016d60.o: In function `main':
+ptrDemo.cpp:(.text+0x61): undefined reference to `demo1()'
+ptrDemo.cpp:(.text+0x86): undefined reference to `demo2()'
+ptrDemo.cpp:(.text+0xab): undefined reference to `demo3()'
+ptrDemo.cpp:(.text+0xd0): undefined reference to `demo4()'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [ptrDemo] Error 1

@@ -1,0 +1,113 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10S, H06 Handout (Simple function definitions)</title>
+<script type="text/javascript" src="../../exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10S, Handout to go with H06 (Operators, Operands) (<a href="handout.pdf">printable PDF</a>)</p>
+<p>Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H06/handout">http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H06/handout</a></p>
+<p>The assignment is available at <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H06">http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H06</a><br />
+</p>
+<hr />
+<p>Please read Section 2.3 from your Etter text along with this handout.</p>
+<hr />
+<p>Homework H06  is about the following terminology:</p>
+<ul>
+  <li>operator
+    <ul>
+      <li>unary operator</li>
+      <li>binary operator</li>
+    </ul>
+  </li>
+  <li>operand
+    <ul>
+      <li>left operand</li>
+      <li>right operand</li>
+    </ul>
+  </li>
+</ul>
+<p>It is also a check on whether you understand the concept of operator prededence, and the notion of type.</p>
+<p>Here are several sample questions and answers, and an explanation of each. From those, and the material in lecture, you should be able to answer the homework problems.</p>
+<p><strong>Question: </strong>Given the expression 2 + 3 * 5</p>
+<ol>
+  <li>What is the value of the expression?</li>
+  <li>What is the type of the expression?</li>
+  <li>How many binary operators are in this expression?</li>
+  <li>What is the left operand of the * operator?</li>
+  <li>What is the right operand of the + operator?</li>
+</ol>
+<p><strong>Answer</strong>s:</p>
+<ol>
+  <li>The value is 17. This is because the first operation performed is the 3 * 5, which results in an int value 15. The next operation performed is 2 + 15, resulting in 17, which is an int.</li>
+  <li>The expression is of type int (see above)</li>
+  <li>There are two binary operators, + and *. A binary operator is an operator that takes two operands. Operands are the things the operator operates on to produce a result.</li>
+  <li>The left operand of the * operator is 3. (The right operator would be 5)</li>
+  <li>The right operand is actually <em>the result of (3 * 5)</em>. I would also accept the answer &quot;15&quot;.<br />
+  Note that 3 is not a correct answer, because we do not add 2 and 3.<br />
+  (The left operand of the + is of course 2).</li>
+</ol>
+<p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for more</span><br />
+</p>
+<p style="page-break-before:always"><br />
+    <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span></p>
+<p>Here's another example:</p>
+<p><strong>Question</strong>: Given the expression 5 == (2 + 2)</p>
+<ol>
+  <li>What is the value of the expression?</li>
+  <li>What is the type of the expression?</li>
+  <li>How many binary operators are in this expression?</li>
+  <li>What are the operands of the == operator?</li>
+</ol>
+<p><strong>Answer</strong>:</p>
+<ol>
+  <li>The value is 0. The first operation performed is the 2 + 2 which results in an int value 4. The next operation performed is 5 == 4, which results in the int value 0 (boolean values are treated as int values in C, with 0 representing false, and 1 representing true.)</li>
+  <li>The expression is technically of type int, although I might also accept &quot;boolean&quot; as an answer.</li>
+  <li>There are two binary operators, == and +. A binary operator is an operator that takes two operands. Operands are the things the operator operates on to produce a result.</li>
+  <li>The operands of the == operator are 5 (which is the left operand) and &quot;the result of (2+2)&quot; (which is the right operand).</li>
+  </ol>
+<p>Here's another example:</p>
+<p><strong>Question</strong>: Suppose that x is a variable of type int, with the value 6, and y is variable of type int with the value 4.</p>
+<p>In the expression x = -y</p>
+<ol>
+  <li>What is the value of the expression?</li>
+  <li>What is the type of the expression?</li>
+  <li>How many binary operators are in this expression?</li>
+  <li>How many unary operators are in this expression?</li>
+  <li>What is the operand of the unary operator?</li>
+  <li>What are the operands of the binary operator</li>
+</ol>
+<p>Note: that I have left out the ; deliberately here—this is an expression, not necessarily a statement. This expression could be turned into an assignment statement, by adding a semicolon, like this:</p>
+<p>
+  <pre> x = -y;
+
+</pre>
+But this expression could also appears in other contexts such as these. These are both a little strange, but they are legal C syntax. They help to illustrate the idea of an expression vs. the idea of a statement.</p>
+<pre><p>if (<strong>x = -y</strong>)<br />
+...</p><p>printf(&quot;%d\n&quot;, <strong>x = -y</strong>);</p></pre>
+<p><strong>Answer</strong>:</p>
+<ol>
+  <li>The value is -4. Here's how that happens. We have an assignment, so we first evaluate the right hand side. The right hand side contains the unary operator minus, i.e. - (that is, an operator with only one operand). That is applied to the operand y, which results in the value -4 (we fetch the value of y, namely 4, out of memory and then apply the - sign to negate the value.). <br />
+    <br />
+  Then, the expression x = -4 is evaluated. The assignment operator = is treated as a binary operator with left operand x, and right operand -4 (the result of applying the unary operator - to the value of y). The = operator results in the left operand being assigned the value of the right operand, and then returns the value assigned as the result of the expression. So the value is -4</li>
+  <li>The type is int</li>
+  <li>There is one binary operator, namely =</li>
+  <li>There is one unary operator, namely -</li>
+  <li>The unary operator is -, and its operand is y</li>
+  <li>The binary operator is =, and its operands  are x (left operand), and the result of -y (right operand)</li>
+</ol>
+<p>With those examples, you should be able to complete homework H06.</p>
+<hr />
+End of H06 handout
+</body>
+</html>

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# run two Unix commands to convert J.pbm to a jpeg file
+#  and to convert it to a great big jpeg file (magnified 10x)
+
+convert J.pbm J.jpg
+convert -scale 1000% J.pbm J.10x.jpg
+convert -scale 10000% J.pbm J.100x.jpg

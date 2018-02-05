@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, lab05, Reusing functions, while loops on strings (code)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" >
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" >
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+ol li ol li {list-style-type: lower-alpha;}
+code {white-space:pre;}
+.thanks {
+	font-size: smaller;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body>
+<div id="linksBox"><a href="code">code</a></div>
+
+<div style="background-color: yellow; padding: 1em; margin: 1em; border: red 2em inset; font-size: 150%;">
+<p>THIS IS NOT THE LAB FOR THE CURRENT QUARTER!!!!</p> 
+<p>If you are in one of Conrad's CS16 sections,  please visit <a href="https://foo.cs.ucsb.edu/16wiki">foo.cs.ucsb.edu/16wiki</a> for information on the current quarter of CS16.</p>
+</div>
+
+
+<div id="container">
+ <h1>CS16, Spring 2010</h1>
+ <h1>lab05: <span class="smallerFont">(&quot;lab five&quot;)<br>
+   Reusing functions, while loops on strings<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <div class="importantDiv">
+ <h2>Special note</h2>
+ <p>You must attend lab this week, even if you finish the lab05 programming assignment in advance.</p>
+ <p>Here's why: in addition to the lab05 assignment below, there will be an additional activity&mdash;everyone will have an opportunity to play the &quot;routing and deadlock&quot; game (the game with the colored pieces of foam), and then there will be a worksheet with some problem solving exercises related to that game. <br>
+   <br>
+   Playing the game, and completing the worksheet are both preparation for a later programming project.</p>
+ </div>
+ <hr>
+ <h2>&nbsp;</h2>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Understand how to reuse functions between programs</li>
+   <li>Understand how to find the minimum and maximum value in an array</li>
+   <li>Understand how to find the index of the first occurence of a value in an array</li>
+  </ul>
+ <h2>This lab builds on lab04</h2>
+ <p>This lab is an extension of lab04&mdash;so if you run into anything unfamiliar, review the material from lab04.</p>
+ <h2>Continue with your same pair partner&mdash;<br>
+  unless he/she is unavailable, or you failed to switch last week.</h2>
+<p>At the start of lab04, you were supposed to switch to a new pair partner. If you did so, and your partner is available again this week, please continue working with the same person.</p>
+<ul>
+  <li><strong>If you didn't switch partners last week</strong>, your TA will try to help you do so this week. </li>
+  <li><strong>If your pair from last week isn't available</strong>, your TA may pair you with a new partner.</li>
+  <li><strong>If (and only if) you have a new partner for lab05&mdash;</strong>one you didn't work with on lab05&mdash;complete a new version of <a href="../../../10S/worksheets/W02/W02.pdf">W02</a>, and post to the lab04/05/06 pair partner forum on Gauchospace. Indicate that this is a new pairing for lab05.</li>
+</ul>
+<p>Also keep in mind:<br>
+</p>
+<ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional</li>
+  </ul>
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0: Get together with your assigned lab partner and do the set up steps.</h3>
+ <p>Choose a pilot and a navigator, and remember to switch often.</p>
+ <p>Check your PC&mdash;if you are in Cooper, there might be two mice attached. The navigator might be able to use the second mouse to help point things out, and feel a bit more connected to what is going on.</p>
+ <p>The driver should:</p>
+ <ul>
+   <li> Bring up a terminal window and create a ~/cs16/lab05 directory</li>
+   <li>Copy files from my directory at  <code><a href="code">~pconrad/public_html/cs16/10S/labs/lab05/code/</a></code></li>
+ </ul>
+ <p><strong>Refer back to previous labs </strong>for clues about how to turn that directory name into a Unix command that will copy the files in to your lab05 directory.</p>
+ <h3>Step 1: Reviewing what we did in lab04&mdash;and what we are going to do next</h3>
+ <p>Assuming you successfully completed lab04, you did the following steps:</p>
+ <ul>
+   <li>You started with the program <a href="../../../10S/labs/lab04/code/countOddWithTests.c">countOddWithTests.c</a>, and used test-driven development to develop two functions: 
+     <ul>
+       <li><code>int isOdd(int x)</code>; <code>// return true if x is odd </code></li>
+       <li><code>int countOdd(int *a, int n)</code>; <code>// return the number of odd integers in a data file</code></li>
+      </ul>
+   </li>
+   <li>Once both of the functions passed the tests, you then implemented <em>exactly the same functions</em> in the program <a href="../../../10S/labs/lab04/code/countOddInFile.c">countOddInFile.c</a>.</li>
+ </ul>
+ <p>Did you have the sense that you were working too hard&mdash;that it was inefficient to have to write the same function twice? I hope so&mdash;because if that thought occured to you, then you have what Larry Wall (author of Perl) calls one of the <a href="http://en.wikipedia.org/wiki/Larry_Wall#Virtues_of_a_programmer">Three Virtues of a Programmer</a>:<em> Laziness.</em> </p>
+ <p>Wall writes that Laziness is &quot;the quality that makes you go to great effort to reduce overall energy expenditure.&quot;</p>
+ <p>Wouldn't it be better if the functions that we wrote and tested in the <code>countOddWithTests.c</code> program could be directly used in the <code>countOddInFile.c</code> program?</p>
+ <p>Well it turns out that we CAN do this.</p>
+ <p>Your first step this week will be to illustrate that by re-doing a step from lab04&mdash;yes, we are going to implement <code>isOdd</code> and <code>countOdd</code> <em>one more time</em>&mdash;but this time, we'll see that its the <em>last</em> time. From here on out, we'll be able to just write a function once, and then  reuse it in <em>as many programs as we want.</em></p>
+ <h3>Step 2: Reviewing the files  testOddFunctions.c, countOddInFile.c, oddFunctions.c</h3>
+ <p>Three of this weeks files are a re-mix of the files we saw in lab04. Together with your lab partner, take a look at each one of them:</p>
+ <ul>
+   <li><code>testOddFunctions.c </code>contains almost everything from last week's countOddWithTests.c file
+     <ul>
+       <li>except we left out the definitions of <code>isOdd()</code> and<code> countOdd() </code></li>
+     </ul>
+   </li>
+   <li><code>countOddInFile.c </code>is almost the same as last week's <code>countOddInFile.c </code>
+     <ul>
+       
+       <li>except we left out the definitions of <code>isOdd()</code> and <code>countOdd() </code></li>
+      </ul>
+   </li>
+   <li><code>oddFunctions.c</code> contains ONLY the stub function definitions for the <code>isOdd()</code> and <code>countOdd() </code>functions.
+     <ul>
+       <li>Note that this file does not <code>#include &lt;stdio.h&gt;</code> because it contains no I/O&mdash;no <code>printf</code>, and no <code>scanf</code></li>
+      </ul>
+   </li>
+  </ul>
+ <p>Since <code>testOddFunctions.c</code> does NOT contain the function definitions for <code>isOdd</code> and <code>countOdd</code>, if we try to compile it the way we've compiled programs so far, it doesn't work. Try this yourself&mdash;you should see output like the following:</p>
+ <p>
+  <pre>-bash-3.2$ <strong>make testOddFunctions</strong><br>cc     testOddFunctions.c   -o testOddFunctions<br>/tmp/ccOzuKZF.o: In function `main':<br>testOddFunctions.c:(.text+0xc4): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0xeb): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0x112): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0x139): undefined reference to `isOdd'<br>testOddFunctions.c:(.text+0x160): undefined reference to `isOdd'<br>/tmp/ccOzuKZF.o:testOddFunctions.c:(.text+0x187): more undefined references to `isOdd' follow<br>/tmp/ccOzuKZF.o: In function `main':<br>testOddFunctions.c:(.text+0x1b5): undefined reference to `countOdd'<br>testOddFunctions.c:(.text+0x1e3): undefined reference to `countOdd'<br>testOddFunctions.c:(.text+0x211): undefined reference to `countOdd'<br>collect2: ld returned 1 exit status<br>make: *** [testOddFunctions] Error 1<br>-bash-3.2$ </pre>
+ But if instead, we take the compile command that make generates for us, namely:<br>
+ <code>cc     testOddFunctions.c   -o testOddFunctions</code><br>
+ <br>
+ and add to it the file <code>oddFunctions.c</code>, like this, it works!<br>
+ <pre>-bash-3.2$ <strong>cc oddFunctions.c testOddFunctions.c -o testOddFunctions</strong><br>
+-bash-3.2$ 
+</pre>
+  We can then run the program with <code>./testOddFunctions
+  </p>
+  </code>
+  <p>We can also compile the <code>countOddInFile.c</code> program the same way:  </p>
+ <pre>-bash-3.2$ <strong>cc oddFunctions.c countOddInFile.c -o countOddInFile</strong></p>
+ </pre>
+ <p>We can then run the program with <code><br>
+   ./countOddInFile
+       <br>
+ </code>or with <br>
+ <code>./countOddInFile</code><code> TEST</code> <br>
+ to run the tests <br>
+ <br>
+ Try compiling each of these programs using the command lines shown above, and running it.</p>
+ <p>What you should see is that the programs run but the tests fail. In the next step, we'll make the tests pass.</p>
+ <h3>Step 3: Adding the <code>isOdd</code> and <code>countOdd</code> functions one last time</h3>
+ <p>Now, one last time, enter the correct code for <code>isOdd</code> and <code>countOdd</code> in the file <code>oddFunctions.c</code> in place of the stubs.</p>
+ <p>Change the code at the top of the file too, to have your name(s) (you and your pair partner(s)) and the date.</p>
+ <p>Compile and run again, using the commands from Step 2 above. Now all the tests should pass!</p>
+ <p>And, also you should be able to run the <code>countOddInFile</code> program on a data file, e.g.:</p>
+ <pre>-bash-3.2$ <strong>./countOddInFile nums.dat </strong><br>
+<span style="font-family: sans-serif"><em>(number of odd numbers in file appears here)</em></span><br>
+-bash-3.2$ </pre>
+<p>When that works, you are ready to move on to the next step.</p>
+<h3>Step 4: Working with arrays of characters&mdash;C strings</h3>
+<p>In this step, we'll develop some functions that work with C strings.</p>
+<p>
+  <h4>Step 4a: Review of C Strings</h4>
+</p>
+<p>You may remember from our reading in the first week a few things about C strings:</p>
+<ul>
+  <li>Literal strings are written with double quotes, e.g. <code>&quot;Gauchos&quot;</code></li>
+  <li>In C, string variables are stored as arrays of char, e.g. <code>char name[10];</code></li>
+  <li>They have one extra character at the end, <code>'\0</code> ', which is not printed&mdash;it just marks the end of the string</li>
+  <li>Therefore, in memory, a string takes up one extra character:
+    <ul>
+      <li> <code>&quot;Gauchos&quot; </code>        consumes eight bytes of memory</li>
+      <li>That's one each for <code>'G'</code>, <code>'a'</code>, <code>'u'</code>, <code>'c'</code>, <code>'h',</code> <code>'o'</code>, <code>'s'</code>, and <code>'\0'</code></li>
+    </ul>
+  </li>
+  </ul>
+<p>In Spring 2010: </p>
+<ul>
+  <li> This was part of homework <a href="../../../10S/homework/H02/">H02</a>, which referenced the online textbook, Oualline Chapter 5</li>
+  <li>If you want to review that now, it might be a good idea. </li>
+  </ul>
+<h4>Step 4b: Understanding the code for this step</h4>
+<p>In your lab05 directory, you should find that you copied these files:</p>
+<ul>
+  <li><code>howManyEs.c</code></li>
+  <li><code>tdd.c</code></li>
+  <li><code>tdd.h</code></li>
+</ul>
+<p>Each of those will be used in this step.</p>
+<p>First, look at howManyEs.c. This file contains two functions:</p>
+<ul>
+  <li> the stub of a function <code>int howManyEs(char *s)</code>; that counts the number of Es in a string (i.e. a char *)</li>
+  <li>a function <code>int testCountEs();</code> that runs several tests on howManyEs.</li>
+  </ul>
+<p>From here on out, we'll often follow this pattern&mdash;developing a stub along with its test function.</p>
+<p>You may also see that inside howManyEs, there is a line:</p>
+<p><code>#include &quot;tdd.h&quot;</code></p>
+<p>This looks different from <code>#include</code> directives we've seen in the past&mdash;it uses <code>&quot;&quot;</code> instead of <code>&lt;&gt;</code>. This tells the compiler to look for the <code>tdd.h</code> file in the current directory instead of looking for it in the location of the standard C library functions.</p>
+<p>So, look next at the <code>tdd.h</code> file. We see that it contains mainly function prototypes for lots of functions related to test-driven development. By putting the function prototypes for test-driven development functions into a header file, we don't have to keep copying those functions into every file where we want to work with them&mdash;we just do the #include, and then we can use those functions.</p>
+<p>After the funciton prototypes, there are four unusual looking lines at the end of <code>tdd.h</code> that look like this:</p>
+<pre><p>#define ASSERT_TRUE(assertion)  \
+   assertTrueWithFileLine(__FILE__,__LINE__,#assertion,assertion)
+   
+#define CHECK_EXPECT_INT(check,expect) \
+  checkExpectIntWithFileAndLine(__FILE__,__LINE__,#check,check,expect)</pre>
+<p>These are called <em>macro definitions</em>&mdash;they are used to allow us to automatically put include the filename and line number of our tests in the messages that are printed when a test fails. This gives us much nicer error messages!</p>
+<p>For example, when we want to do a test, we can just write lines like these:</p>
+
+  <pre>
+failures += CHECK_EXPECT_INT(howManyEs("Santa"),0);
+failures += CHECK_EXPECT_INT(howManyEs("Barbara"),0);
+</pre>
+<p>and what we get back is this nice error message when a test fails that tells us exactly where to look for the failed test!</p>
+<pre>TEST FAILED: howManyEs.c line 35 howManyEs("Santa") got -42 expected 0
+TEST FAILED: howManyEs.c line 36 howManyEs("Barbara") got -42 expected 0<br>
+...</pre>
+<p>The name of the file, line number, and the label for the tests gets generated automatically. </p>
+<p>We will not have any questions on the exams in this course about macro definitions&mdash;but if you want to know what is going on with those lines of code, see the details in the box below.</p>
+<div class="sideNoteDiv">
+<h4>If you are curious to learm more about Macros (optional):</h4>
+<ul>
+  <li>CHECK_EXPECT_INT (all capitals) can be used in place of checkExpectInt (camel case). </li>
+  <li>It looks like a function call when we use it, but in fact, what happens is that when we compile, right at the beginning of the compilation process, CHECK_EXPECT_INT(check, expect) is replaced with the code on the next line&mdash;a function call that has five parameters.</li>
+  <li>Three of those parameters are __FILE__, __LINE__, and #check. These get replaced as follows:
+    <ul>
+      <li>__FILE__ is the the filename of the C source file (e.g. &quot;howManyEs.c&quot;), as a string.</li>
+      <li>__LINE__ is the line number where the CHECK_EXPECT_INT call occurs</li>
+      <li>#check is the check expression as a string, e.g. &quot;howManyEs(\&quot;Goleta\&quot;)&quot; </li>
+      </ul>
+  </li>
+  <li>Passing those into the function checkExpectIntWithFileAndLine(__FILE__,__LINE__,#check,check,expect) allows that function to print much more helpful error messages&mdash;and we no longer have to put labels on our test cases&mdash;they get generated for us automatically.</li>
+  </ul>
+<p>If you want to learn more about macros, you may read Section&nbsp;4.8 in the Etter textbook, as well as reading the comments in the <code>tdd.h</code> file, or researching on your own (do an internet search on &quot;C Macros&quot; or &quot;C Preprocessor&quot;.</p>
+<p>Again: Macros will NOT be covered on the exams in this course&mdash;we are using them here only to make testing a bit easier and nicer.</p>
+</div>
+<p>The function definitions are placed into the file <code>tdd.c</code>. Look at that file now, and you'll see that there is a function definition for each of the function prototypes in<code> tdd.h</code>.<br>
+  </p>
+<p>Finally, there is one more file: <code>testHowManyEsDriver.c</code>. which contains a very short main program. This file is just the &quot;driver&quot; (see p. 152 in your textbook) that calls the <code>testHowManyEs() </code>function from <code>howManyEs.c</code>. Every program has to have exactly one main, and this is the main we'll be using. </p>
+<p>Many programmers consider it  good style to have a main program that is very short. In such programs, the interesting detailed work is mostly done in functions, each of which has been tested separately. By building a short main from smaller functions, we can be more productive&mdash;for at least two reasons:</p>
+<ul>
+  <li>	 software reuse&mdash;we don't have to keep re-coding the same thing over and over</li>
+  <li>software testing&mdash;if the small components we are putting together have already been tested separtely, they are less likely to fail when we put them together.</li>
+  </ul>
+<p>Now we are ready to get on with the coding:</p>
+<h4>Step 4c: Compiling the stub, and seeing the tests fail</h4>
+<p>To compile, use this command:</p>
+<p><code>cc howManyEs.c tdd.c testHowManyEsDriver.c -o testHowManyEsDriver</code></p>
+<p>This combines </p>
+<ul>
+  <li>the code we want to test (<code>howManyEs.c</code>) with </li>
+  <li>the test-driven development functions (such as <code>checkExpectInt()</code>, etc. which come from <code>tdd.c</code>) and</li>
+  <li>the file that contains our main (testHowManyEsDriver.c). </li>
+  </ul>
+<p>The executable is output into the file testHowManyEsDriver&mdash;that's what the <code>-o testHowManyEsDriver</code> part does.</p>
+<p>We can then run the program with ./testHowManyEsDriver, and we see this:</p>
+
+  <pre>
+-bash-4.1$ ./testHowManyEsDriver
+TEST FAILED: howManyEs.c line 35 howManyEs("Santa") got -42 expected 0
+TEST FAILED: howManyEs.c line 36 howManyEs("Barbara") got -42 expected 0
+TEST FAILED: howManyEs.c line 37 howManyEs("Goleta") got -42 expected 1
+TEST FAILED: howManyEs.c line 38 howManyEs("Reseda") got -42 expected 2
+TEST FAILED: howManyEs.c line 39 howManyEs("El Centro") got -42 expected 2
+TEST FAILED: howManyEs.c line 40 howManyEs("Eureka") got -42 expected 2
+TEST FAILED: howManyEs.c line 41 howManyEs("Emeryville") got -42 expected 3
+ :-(  7 tests FAILED! 
+-bash-4.1$ 
+</pre>
+<p>Notice the nice labels on the failed tests!</p>
+<p>Next, replace the stub with this code. Note that we can use a while loop to check every element of a string, since a string always ends with a <code>'\0'</code> character.  </p>
+<pre>
+  int i=0;
+  int count=0;
+  
+  // we don't know how long the string is
+  // but we do know it ends with '\0'
+  while (s[i]!='\0')
+    {
+      // count the e's
+      if (s[i]=='e')
+        count++;
+
+      i++; // if you don't have this line, infinite loop!
+    }
+
+  return count;
+</pre>
+<p>After putting this code into the howManyEs function, you should get this:  </p>
+<pre>
+-bash-4.1$ ./testHowManyEsDriver 
+ test passed: howManyEs.c line 35 howManyEs("Santa") got 0
+ test passed: howManyEs.c line 36 howManyEs("Barbara") got 0
+ test passed: howManyEs.c line 37 howManyEs("Goleta") got 1
+ test passed: howManyEs.c line 38 howManyEs("Reseda") got 2
+TEST FAILED: howManyEs.c line 39 howManyEs("El Centro") got 1 expected 2
+TEST FAILED: howManyEs.c line 40 howManyEs("Eureka") got 1 expected 2
+TEST FAILED: howManyEs.c line 41 howManyEs("Emeryville") got 2 expected 3
+ :-(  3 tests FAILED! 
+-bash-4.1$   
+ </pre>
+<p>That shows that some of the tests are passing, but others are not. Your job now is to fix this so that all the tests pass&mdash;when that happens, the output will look like this. From the tests, we can infer something about how upper and lower case are supposed to be handled. </p>
+<ul>
+  <li>This highlights another important function of test cases</li>
+  <li>Not only do they test our code but they also can be used to <em>infer the intended semantics of our code</em></li>
+  <li>That's a fancy way of saying that we can look at the test cases to figure out what the code is supposed to do.</li>
+</ul>
+<pre>
+-bash-4.1$ ./testHowManyEsDriver 
+ test passed: howManyEs.c line 35 howManyEs("Santa") got 0
+ test passed: howManyEs.c line 36 howManyEs("Barbara") got 0
+ test passed: howManyEs.c line 37 howManyEs("Goleta") got 1
+ test passed: howManyEs.c line 38 howManyEs("Reseda") got 2
+ test passed: howManyEs.c line 39 howManyEs("El Centro") got 2
+ test passed: howManyEs.c line 40 howManyEs("Eureka") got 2
+ test passed: howManyEs.c line 41 howManyEs("Emeryville") got 3
+ :-)  All tests passed! 
+-bash-4.1$   </p>
+</pre>
+<p><strong>Hints:</strong></p>
+<ul>
+  <li>If you	want to check whether an int variable x is equal to 3 or equal to 5, you can write:<br>
+    <code>if (x==3 || x==5)</code></li>
+  <li>Note that all of the following  will compile, but are INCORRECT
+    <ul>
+      <li><code> if (x==3 || 5)</code></li>
+      <li><code>if (x==3, 5)</code></li>
+      </ul>
+  </li>
+  <li>Also watch out for the = vs == bug&mdash;the following is also INCORRECT
+    <ul>
+      <li><code>if (x=3 || x=5)</code></li>
+      </ul>
+  </li>
+  </ul>
+<p>Of course, this exercise has nothing to do with x, 3 or 5&mdash;you are counting Es. Neverthless, I think these hints will come in handy.</p>
+<p>When all your tests pass, move on to step 5</p>
+<h3>Step 5: Generalizing the function</h3>
+<p>Your job in this step is to add two more files to your lab05 directory.</p>
+<p>The first file will be similar to the <code>howManyEs.c</code> file, but will be called <code>charOccurs.c</code></p>
+<p>Instead of counting the number of times the letter 'e' appears (upper or lowercase), you will be generalizing the function so that you can pass in any character (even a space, or a digit, or a punctuation mark) and the function will return how many times that character occurs.</p>
+<p>charOccurs.c should<code> #include &quot;tdd.h&quot;</code>, and then have function defintions for:</p>
+<ul>
+  <li><code>int charOccurs(char *s, char c); // return how many times c occurs in s</code></li>
+  <li><code>int testCharOccurs(); // test cases for charOccurs</code></li>
+</ul>
+<p>You should include the following test cases&mdash;as well as at least 5 more of your own choosing:</p>
+
+<pre>
+failures += CHECK_EXPECT_INT(charOccurs("Santa",'a'),2);
+failures += CHECK_EXPECT_INT(charOccurs("Barbara",'b'),1); // case sensitive
+failures += CHECK_EXPECT_INT(charOccurs("Barbara",'B'),1); // case sensitive
+failures += CHECK_EXPECT_INT(charOccurs("Barbara",'x'),0); 
+failures += CHECK_EXPECT_INT(charOccurs("Santa Barbara",' '),1); 
+failures += CHECK_EXPECT_INT(charOccurs("San Luis Obispo",' '),2); 
+failures += CHECK_EXPECT_INT(charOccurs("rrooyyggbbp ",' '),1); 
+failures += CHECK_EXPECT_INT(charOccurs("rrooyyggbbp ",'r'),2); 
+failures += CHECK_EXPECT_INT(charOccurs("rrooyyggbbp ",'g'),2); 
+failures += CHECK_EXPECT_INT(charOccurs("rrooyyggbbp ",'p'),1); 
+</pre>
+
+<p></p>
+<p>The second file will be similar to <code>testHowManyEsDriver.c</code>, but will be called <code>testCharOccursDriver.c</code>&mdash;it will have the same function as <code>testHowManyEsDriver.c</code> but will call on <code>testCharOccurs() </code>instead of <code>testHowManyEs.c</code></p>
+<p>You should compile an executable program <code>./testCharOccursDriver</code> using a compile command similar to the one from the previous step for <code>./testHowManyEsDriver</code>&mdash;this time you want to combine <code>charOccurs.c</code>, <code>tdd.c</code>, and <code>testCharOccursDriver.c</code>.</p>
+<p>When your <code>./testCharOccursDriver</code> program passes all of the tests I've specified above, plus those of your own making&mdash;and could conceivably pass any other reasonable tests I could throw at it&mdash;then you are ready to script this week's assignment.</p>
+<h3>Step 6: Scripting your assignment</h3>
+  <p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.<br>
+ </p>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Use the proper form of the cd command to put yourself in your <code>~/cs16/lab05</code> directory (if you aren't already there)</li>
+   <li>Type <strong>script lab05.txt</strong><br>
+     (By now you know what that does.)</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. </li>
+   <li>Now for each of the executable programs you worked on this week&mdash;<code>testOddFunctions, </code><code>countOddInFile, testHowManyEsDriver, and testCharOccursDriver</code>&mdash;do the following steps:<br>
+     <ol>
+       <li>Carefully&mdash;type <strong>rm <em>filename</em> </strong>to remove that executable.</li>
+       <li>Type the command needed to compile your program. (This may be a "make" command, or it may be something more complex if your program is split across multiple files.) 
+         <ul><li>There should be no warnings and no errors&mdash;and since you did the rm command, it should NOT say: <br>
+           <code><em>filename</em> is up to date</code></li>
+           </ul>
+       </li>
+       <li>Now, run the program to show that it works properly. <br>
+         <br>
+         In some cases, you can do that with a single run&mdash;e.g. programs that just run test cases and have no input. In other cases&mdash;e.g. if the program is interactive (printf/scanf), or has command line parameters, or reads input from a file&mdash;you may need to run it several times.<br>
+         <br>
+         I will expect you to use good judgement in deciding how many times to run the program to demonstrate that it works properly. If you are unsure, ask your TA or instructor for guidance.<br>
+         <br>
+      </li>
+     </ol>
+    </li>
+   <li>Once you've done items 5a,5b,5c in the list above for each of this week's executable programs, type <strong>exit</strong> to stop the recording of commands and responses into lab05.txt</li>
+ </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab05 directory called lab05.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p><code>more lab05.txt</code></p>
+ <p>If it all looks ok, you are ready to submit!</p>
+ <h3>Step 7. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+ <pre>turnin lab05@cs16 lab05</pre>
+ <p>If you need detailed information about how turnin works, consult the instructions in <a href="../../../10S/labs/lab00">lab00</a> through <a href="../../../10S/labs/lab00">lab02</a>.</p>
+ <p>&nbsp; </p>
+ <hr>
+ <h2>Evaluation and Grading (300 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul><li>30 points: submission is on time and follows submission instructions
+         <ul>
+           <li>(i.e. is done via turnin by the Due Date, and contains the required files)</li>
+         </ul>
+     </li>
+        <li>20 points: The .c files submitted  have good header comments
+         <ul>
+               <li>On first line with name &quot;cs16 lab05&quot; and date, and your name, and that of your pair partner(s)</li>
+               <li>This is only necessary in files that you and your partner modified or created</li>
+               <li>Unmodified files (e.g. tdd.h, tdd.c) do not need to have your name/date/etc.</li>
+         </ul>
+       </li>
+       <li>50 points: transcript file contains everything asked for in the instructions
+         <ul>
+               <li>especially important is that the script contains each of the tests required</li>
+         </ul>
+       </li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     for oddFunctions.c (points for correctness and style)
+     <ul>
+         <li>15 points: correct implementation of isOdd</li>
+         <li>20 points: correct implementation of countOdd
+           <ul>
+             <li>-10 points if you didn't reuse the isOdd function inside your countOdd function</li>
+           </ul>
+         </li>
+        <li>15 points: indentation, variables names, comments, show understanding of good programming style</li>
+      </ul>
+   </li>
+   <li>Programming Tasks for howManyEs.c
+     <ul>
+       <ul>
+         <li>30 points: correct implementation</li>
+         <li>20 points: indentation, variables names, comments, show understanding of good programming style</li>
+        </ul>
+      </ul>
+   </li>
+   <li>Programming Tasks for charOccurs.c
+     and testCharOccursDriver.c
+     <ul>
+       <ul>
+         <li>30 points: correct implementation of charOccurs() function</li>
+         <li>30 points: correct implementation of testcharOccurs()
+           <ul>
+             <li>15 points of these are for the 5 additional tests of your own making, 3 points each</li>
+            </ul>
+         </li>
+         <li>20 points for the testCharOccursDriver.c file (a driver main())</li>
+         <li>20 points: indentation, variables names, comments, show understanding of good programming style</li>
+        </ul>
+     </ul>
+   </li>
+ </ul>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section for which it was assigned (04/30/2010)</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until <strong>5pm on Friday 05/07/2010.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through <strong>5PM on Wednesday 05/12/2010</strong><br>
+     <br>
+ </p>
+ <p>After 5PM Wednesday 05/12/2010, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+ <p></p>
+ <p>&nbsp;</p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

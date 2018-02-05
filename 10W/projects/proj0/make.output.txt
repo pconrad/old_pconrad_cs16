@@ -1,0 +1,54 @@
+-bash-3.2$ make
+gcc -c testMain.c
+gcc -c drawingFunctions.c
+gcc -c shapeFunctions.c
+gcc -c tdd.c
+gcc -lm -Wall -g  drawingFunctions.o shapeFunctions.o tdd.o testMain.o -o testMain
+gcc -c drawHouse.c
+gcc -lm drawingFunctions.o shapeFunctions.o tdd.o drawHouse.o -o drawHouse
+gcc -c drawFilledColorHouse.c
+gcc -lm drawingFunctions.o shapeFunctions.o tdd.o drawFilledColorHouse.o -o drawFilledColorHouse
+gcc -c drawSnowman.c
+gcc -lm drawingFunctions.o shapeFunctions.o tdd.o drawSnowman.o -o drawSnowman
+gcc -c drawManySnowmen.c
+gcc -lm drawingFunctions.o shapeFunctions.o tdd.o drawManySnowmen.o -o drawManySnowmen
+gcc -c drawFlags.c
+gcc -lm drawingFunctions.o shapeFunctions.o tdd.o drawFlags.o -o drawFlags
+gcc -c ourDrawing.c
+gcc -lm drawingFunctions.o shapeFunctions.o tdd.o ourDrawing.o -o ourDrawing
+./drawHouse house.pbm
+/usr/bin/convert  house.pbm house.gif
+./drawFilledColorHouse filledHouse.pbm
+/usr/bin/convert  filledHouse.pbm filledHouse.gif
+./drawSnowman
+/usr/bin/convert  snowman.pbm snowman.gif
+./drawManySnowmen
+/usr/bin/convert  manySnowmen.pbm manySnowmen.gif
+./drawFlags
+/usr/bin/convert  flags.pbm flags.gif
+./ourDrawing
+/usr/bin/convert  ourDrawing.pbm ourDrawing.gif
+/bin/mkdir -p /cs/faculty/pconrad/public_html/cs16/lab08
+/bin/cp house.gif filledHouse.gif snowman.gif manySnowmen.gif flags.gif ourDrawing.gif /cs/faculty/pconrad/public_html/cs16/lab08
+echo "Visit http://www.cs.ucsb.edu/~pconrad/cs16/lab08 to see your pics"
+Visit http://www.cs.ucsb.edu/~pconrad/cs16/lab08 to see your pics
+./testMain
+Test distanceBetween(p1,p2) passed
+Test distanceBetween(p2,p1) passed
+Test distanceBetween(p3,p4) passed
+Test distanceBetween(p4,p5) passed
+Test distanceBetween(p5,p3) passed
+Test pointsApproxEqual(p1,p1,tol) passed
+Test !pointsApproxEqual(p1,p2,tol) passed
+Test !pointsApproxEqual(p2,p1,tol) passed
+Test testInitPoint p1 passed
+Test testInitPoint p2 passed
+Test testInitPoint p3 passed
+Test testInitPoint p4 passed
+Test testMakePoint p1 passed
+Test testMakePoint p2 passed
+Test testMakePoint p3 passed
+Test testInitBox b1 passed
+Test testInitBox b2 passed
+All tests passed!
+-bash-3.2$ 

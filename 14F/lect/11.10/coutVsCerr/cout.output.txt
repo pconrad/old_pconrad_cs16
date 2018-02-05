@@ -1,0 +1,2 @@
+Hello My lovely cout stream
+So long!

@@ -1,0 +1,702 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 Midterm 1, 10S, Conrad, UCSB</title>
+<meta http-equiv="Content-Type" content="text /html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+
+ .pageBreakBefore {padding-top: 2em;} /* this is where we make extra room at top of pages */
+
+table.outputTable tr td {text-align:left;}
+
+td.blackColumn {background-color: black;}
+
+table.outputTable tr td pre {width:auto;}
+
+body {width: 7.0in; margin-left:0.4in; margin-right: 0.4in;padding-left:1em; padding-right: 4em;}
+div.framed { border-style: outset; border-width: 1em; border-color: #666666; padding: 2em; }
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+pre.forLoopPre {width:15em;}
+pre.trianglePre{width:7em;}
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+table.formAlignTable {border:none;}
+table.formAlignTable tr td {border:none; vertical-align: center;}
+
+
+pre {width:20em;}
+
+.nobreak {white-space:nowrap;}
+.style2 {font-size: large}
+.style4 {color: #999999}
+.style6 {color: #666666}
+.pageBreakBefore1 {padding-top: 2em;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"><br />
+  <br />
+  CS16 Midterm Exam 1<br />
+  <span class="subhead">E01, 10S, Phill Conrad, UC Santa Barbara<br /> 
+ Wednesday, 04/21/2010, 1pm-1:50pm</span> </h1>
+<p class="instructions"><strong>Name:</strong> ________________________________________________________</p>
+<p class="instructions"><br />
+<strong>Umail Address: </strong>__________________________________@ umail.ucsb.edu<br />
+<br />
+<br />
+<strong>Circle Lab section:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10am &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11am &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noon</p>
+<hr />
+<p class="instructions">(Link to <a href="exam.pdf">Printer Friendly-PDF version</a>)<br />
+Please write your name <strong>only</strong> on this page. That allows me to grade your exams without knowing whose exam I am grading.</p>
+<p class="instructions">This exam is <strong>closed book, closed notes</strong>, <strong>closed mouth, cell phone off</strong>,<br />
+  except for:</p>
+<ul>
+  <li class="instructions">You are permitted <strong>one sheet of paper</strong> (max size 8.5x11&quot;) <br />
+  on which to write notes</li>
+  <li class="instructions">These sheets will be collected with the exam, and might not be returned</li>
+  <li class="instructions">Please write your name on your notes sheet</li>
+</ul>
+<p>There are 100 points worth of questions on the exam, and you have 75 minutes to complete the exam.</p>
+<p>A hint for allocating your time:</p>
+<ul>
+  <li>if a question is worth 10 points, spend no more than 5 minutes on it</li>
+  <li>if a question is worth 20 points, spend no more than 10 minutes on it</li>
+  <li>etc.</li>
+</ul>
+<p>You will then complete the exam in 50 minutes, and have 25 minutes remaining to check your answers, <br />
+or go back and work on problems you were unable to complete the first time through.</p>
+<hr />
+<ol class="theQuestions">
+
+<li class="pageBreakBefore">(20 pts) In lab03, you were given an example of a function <code>starL </code><br />
+  that produced ASCII art like this:<br />
+  <br />
+<table border="1" cellspacing="1" cellpadding="1" class="outputTable">
+  <tr>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+  </tr>
+  <tr>
+    <td>starL(3,4)</td>
+    <td><pre>
+*
+*
+*
+***
+</pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(3,5)</td>
+    <td><pre>*
+*
+*
+*
+***</pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starL(5,3)</td>
+    <td><pre>
+*
+*
+*****</pre></td>
+  </tr>
+</table>
+<br />
+<br />
+And you had an assignment to write a function starT that produced output like this:<br />
+<br />
+<table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+  <tr>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>Function call</td>
+    <td>Output</td>
+  </tr>
+  <tr>
+    <td>starT(3,4)<br>    </td>
+    <td>
+      <pre>***
+ *
+ *
+ *  </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(3,5)</td>
+    <td><pre>***
+ *
+ *
+ *
+ *   </pre></td>
+    <td class="blackColumn">&nbsp;</td>
+    <td>starT(5,3)</td>
+    <td><pre>
+*****
+  *
+  *
+      </pre></td>
+  </tr>
+</table>
+<br />
+   Your job now is to write a function that produces output like this:<br />
+    <br />
+   
+    <table border="1" cellpadding="1" cellspacing="1" class="outputTable">
+      <tr>
+        <td>Function call</td>
+        <td>Output</td>
+        <td class="blackColumn">&nbsp;</td>
+        <td>Function call</td>
+        <td>Output</td>
+        <td class="blackColumn">&nbsp;</td>
+        <td>Function call</td>
+        <td>Output</td>
+      </tr>
+      <tr>
+        <td>starC(3,4)<br>    </td>
+        <td>
+                <pre>
+***
+*
+*
+***  </pre></td>
+        <td class="blackColumn">&nbsp;</td>
+        <td>starC(3,5)</td>
+        <td><pre>
+***
+*
+*
+*
+***   </pre></td>
+        <td class="blackColumn">&nbsp;</td>
+        <td>starC(5,3)</td>
+        <td><pre>
+*****
+*
+***** </pre></td>
+      </tr>
+    </table>
+    <br />
+    <br />
+   On the next page, you'll find the entire source code for the starC.c program, except for the body of the function definition of starC. Please fill in that body.<br />
+   <br />
+   Be sure to read the comments (in <strong><code>bold</code></strong>) immediately before the function definition.<br />
+   <br />
+   To help you, along with this exam, you should have recieved a handout with the entire source code of the <code>starL.c </code> program.<br />
+   <br />
+   <br />
+   <p class="instructions">Put your answer on the next page</p>
+   <p class="instructions pageBreakBefore">Your answer to the starC.c problem goes here—fill in the function body</p>
+   <pre class="widePre" style="font-size: 11px; border: none;">
+// starC.c   A demonstration of ASCII Art printing C characters
+// Exam question for CS16, Spring 2010, UCSB
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+void starC(int width, int height); // function prototype
+
+int main(int argc, char *argv[])
+{
+  int width, height;
+  
+  if (argc!=3)
+    {
+      printf(&quot;Usage: ./starC width height\n&quot;);
+      return 1;
+    }
+
+  // get command line params
+  width = atoi(argv[1]);
+  height = atoi(argv[2]);
+
+  starC(width,height);   // call the function
+
+  return 0;
+}
+
+<strong>// A C function that prints the letter C with stars, 
+// at any width or height, provided both width and height are &gt;= 3
+// If either is less than 3, the function should print nothing.)</strong><br /><br />
+
+
+
+<strong style="font-size: 14px;"><br />
+void starC(int width, int height)
+{<br />
+ <br />  // your answer goes here<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />}</strong>
+    </pre>
+</li>
+
+ <li class="pageBreakBefore">(15 pts) Write the definition of a C function <code>divSquares</code> that takes two  parameters with the names<em><br />
+ e </em>and <em>f</em>, both of type double.<br />
+     <br />
+    <table class="formAlignTable">
+        <tr>
+          <td>The function should return the value of: </td>
+          <td>  <img src="e_squared_over_f_squared.png" alt="e squared divided by f squared" width="58" height="74" /></td>
+        </tr>
+    </table>
+  <p>
+   Write ONLY the function definition&mdash;for this question, I do NOT want a complete C program, so do NOT include any extraneous stuff such as <code>#include &lt;stdio.h&gt;</code> or a main function. <br />
+    <br />
+    Be sure that you write your answer using only valid C—not in math notation.</p>
+    <br />  
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />  
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+     <br />
+    <br />
+    <br />
+      <br />
+      <hr />
+    <p class="instructions">The following information goes the question on the<strong> next page (question 3)</strong><br />
+    </p>
+    <p  class="instructions"><strong><code>bold</code></strong> indicates what the user types; <span class="style6"><code>grey</code></span> indicates the Unix prompt.<br />
+<code>Everything else</code> is  output from the program.</p>
+    <table width="100%" border="2" cellspacing="4" cellpadding="4">
+      <tr>
+        <td><div align="center"><strong>Sample Output</strong> (printf and scanf method)</div></td>
+        <td><div align="center"><strong>Sample Output</strong> (argc, argv method)</div></td>
+      </tr>
+      <tr>
+        <td><pre style="width:15em;"><span class="style4">-bash-2.05b$</span> <strong>./calcSR</strong>
+Enter e: <strong>2.0</strong>
+Enter f: <strong>4.0</strong>
+Answer is 0.25
+<span class="style4">-bash-2.05b$
+</span></pre></td>
+        <td><pre style="width:25em;"><span class="style4">-bash-2.05b$</span><strong> ./calcSR 2.0 4.0</strong>
+Answer is 0.25
+<span class="style4">-bash-2.05b$
+</span></pre></td>
+      </tr>
+    </table>
+    <p  class="instructions" style="font-size:0.9em;"><strong>Hints for full credit</strong></p>
+<ul style="font-size:0.9em;">
+  <li>Use correct  % specifiers (%d or %i for int, and %lf for double)</li>
+  <li> Remember the special syntax detail that applies to using scanf.</li>
+  <li>Remember your #includes </li>
+  <li>Use &quot;function prototypes&quot; when function calls precede function definitions </li>
+  </ul>
+  </li>
+
+ <li class="pageBreakBefore">   <p>(15 pts) <em><strong>(Continued from previous question...) </strong></em>Write a complete main program that calls the <code>divSquares</code> function you wrote the previous question, allowing the person running the program to specify values  for<em> e </em>and<em> f</em>.<br />
+     <br />
+   You have two choices:</p>
+   <ul>
+  <li>Use <code>printf</code> and <code>scanf</code> to ask the user to input values for <code>e</code> and <code>f</code>—<em><strong>OR</strong></em></li>
+  <li>Get the values of<code> e</code> and<code> f </code>from the command line (using <code>argc</code>, <code>argv</code>)</li>
+</ul>
+<p>Either method is ok, but choose one and stick with it—don't mix the two.<br />
+  <br />
+  Your program should then pass the values of <code>e</code> and <code>f</code> to a function call to <code>divSquares</code><br />
+  Store the value returned in a variable of type double called <code>answer</code>.<br />
+  Then print the value of <code>answer</code> with this line of code:<br />
+    <code><br />
+      printf(&quot;Answer is %lf\n&quot;, answer);</code><br />
+      <br />
+      <strong>See handout that comes with this exam for sample output and additional hints.<br />  
+        </strong></p>
+     
+
+  
+ <p>You do not need to recopy your entire function definition from the previous question&mdash;pretend it appears in the box at the bottom. Note this means you'll need a function prototype, since the main where your function call will appear comes before the function definition.<br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+ </p>
+<pre style="border:none;">
+// function definition for divSquares</pre>
+<div style="border: solid 4px color:#999999; background-color:#eee; font-family:Verdana, Arial, Helvetica, sans-serif; font-size: 1.1em;"> Pretend your function definition for <code>divSquares</code> from the previous problem appears right here.  You don't need to recopy it.</div>
+</li>
+
+ <li class="pageBreakBefore">(16 pts) For each of the following C expressions, fill in the value, and then circle the type. <br />
+   The first two are done for you as an example.<br />
+   <br />
+   Don't forget to fill in BOTH the value AND circle the type.<br />
+   <br />
+      <table border="2">
+        <tr>
+          <th scope="col"><div align="center">expression</div></th>
+          <th scope="col"><div align="center">value</div></th>
+          <th scope="col">type</th>
+        </tr>
+        <tr>
+          <td><div align="center">3</div></td>
+          <td><div align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></td>
+          <td> &nbsp;&nbsp;<span style="border: thin solid black;">&nbsp;int &nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">0.5 * 0.5</div></td>
+          <td><div align="center"><br />
+            0.25<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="border: thin solid black;">&nbsp;double&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">19 % 4</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">37 % 100</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">3 + 7 * 2</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">1 + 1 / 5.0</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">'3'</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">5/4</div></td>
+          <td><div align="center"><br />
+                  <br />
+                  <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">4/5</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+        <tr>
+          <td><div align="center">&quot;5 % 2&quot;</div></td>
+          <td><div align="center"><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <br />
+          </div></td>
+          <td>&nbsp;&nbsp;&nbsp;int &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+      </table>
+    <br />  
+    <br />
+  </li>
+<li>(3 pts) Convert from binary to octal:<br />
+    <br />
+  100 001 110<br />
+    <br />
+  <br />
+  <br />
+</li>
+<li>(3 pts) Convert from decimal to binary<br />
+    <br />
+      62<br />
+      <br />
+    <br />
+</li>
+<li>(3 pts) Convert from base 16 to base 2<br />
+    <br />
+    af72<br />
+  <br />
+  <br />
+  <br />
+</li>
+
+ <li class="pageBreakBefore">(16 pts) For each of the for loops below:
+   <ol>
+     <li>Circle <strong>infinite</strong> if it is an infinite loop, or <strong>finite</strong> if it NOT an infinite loop</li>
+     <li>Check the in the<strong> no output column (<span class="style2">&#x2611;</span>)</strong> if the loop has no output</li>
+     <li>If the loop has output, put it in the box.<br />     
+       Note: if the output will be infinite, just write the<strong> output of the first three times through the loop</strong>,  then put three dots like this: ...<br />
+       <br />
+     </li>
+    </ol>
+ 
+
+ <table width="100%" border="2">
+   <tr>
+     <th scope="col" width="15%"><div align="left">code</div></th>
+     <th scope="col" width="8%">Infinite <br />
+      or finite?</th>
+     <th scope="col" width="8%"><div align="center">No <br />
+      output?</div></th>
+     <th scope="col">write the output here (if any)</th>
+   </tr>
+   <tr>
+     <td>
+       
+       <div align="left">
+                  <pre class="forLoopPre">
+int i;
+for (i=4; i&gt;1; i--)
+  printf(&quot;%d &quot;,i);
+              </pre>
+       </div></td>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;infinite&nbsp;&nbsp;&nbsp;&nbsp;finite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     <td><div align="center">&#x2610;</div></td>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+       <br />
+       <br />
+       <br />       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+   <tr>
+     <td>
+       
+       <div align="left">
+                  <pre class="forLoopPre">
+int i;<br />
+for (i=1; i&lt;=4; i++)
+  printf(&quot;%d &quot;,i);
+              </pre>
+       </div></td>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;infinite&nbsp;&nbsp;&nbsp;&nbsp;finite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     <td><div align="center">&#x2610;</div></td>
+     <td><br />
+       <br />
+       <br />
+       <br />
+       <br />
+       <br /></td>
+   </tr>
+   <tr>
+     <td><div align="left">
+         <pre class="forLoopPre">
+
+int i;<br />for (i=1; i&gt;=4; i++)
+  printf(&quot;%d &quot;,i);
+              </pre>
+     </div></td>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;infinite&nbsp;&nbsp;&nbsp;&nbsp;finite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     <td><div align="center">&#x2610;</div></td>
+     <td><br />
+         <br />
+         <br />
+         <br />
+         <br /></td>
+   </tr>
+   <tr>
+     <td><div align="left">
+         <pre class="forLoopPre">
+int i;<br />for (i=0; i&lt;4; i--)
+  printf(&quot;%d &quot;,i);<br />
+              </pre>
+     </div></td>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;infinite&nbsp;&nbsp;&nbsp;&nbsp;finite&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+     <td><div align="center">&#x2610;</div></td>
+     <td>&nbsp;&nbsp;&nbsp;&nbsp;<br />
+         <br />
+         <br />
+         <br />
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+   </tr>
+ </table>
+ </li>
+<li class="pageBreakBefore"> Suppose we have a program where the main starts with the line:<br />
+  <code><br />
+  int main(int argc, char *argv[]) </code> <br />
+  <br />
+  and the program is run with the following command line:<br />
+  <br />
+  <code>./myprog 4 ever</code><br />
+  <br />
+  <ol>
+    <li>(3 pts) What is the value of <code>argc</code>?<br />
+          <br />
+          <br />
+        <br />
+      </li>
+    <li>(3 pts) What is the value of <code>argv[2][2]</code><br />
+          <br />
+        <br />
+        <br />
+    </li>
+    </ol>
+</li>
+<li >(3 pts) Suppose you have <span class="pageBreakBefore1">a different program that starts like this:<br />
+    <code><br />
+<pre class="widePre" style="border: none;">
+// reserveIt.c Seat reservation system, P. Conrad, 4/21/2010
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char *argv[])
+{
+   int numSeats;
+
+   if (argc != 2)
+   {
+       printf("Usage: ./reserveIt numSeats\n");
+       return 1;
+   }
+
+// now assign the variable numSeats from the command line
+</pre>
+    </code></span><br />
+   <br />
+Given the comment, and what you know about how command line arguments work, <br />
+
+what should the next line of code be?<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </li>
+</ol>
+<hr />
+
+<h2 class="instructions">End of Exam</h2>
+<p class="instructions"><span id="pointCount">Total points: ?</span></p>
+
+<h1 class="instructions pageBreakBefore">CS16 Midterm Exam 1<br />
+  <span class="subhead">E01, 10S, Phill Conrad, UC Santa Barbara<br />
+  </span></h1>
+<h2 align="center" class="instructions">Handout with starL.c</h2>
+    <pre class="widePre" style="font-size: 11px;">// starL.c   A demonstration of ASCII Art printing L characters
+// P. Conrad for CS16, Winter 2010, UCSB
+<br />#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+<span class="widePre" style="font-size: 11px;">void starL(int width, int height)</span>;
+
+
+<br />
+int main(int argc, char *argv[])
+{
+  int width, height;
+  
+  if (argc!=3)
+    {
+      printf(&quot;Usage: ./starL width height\n&quot;);
+      return 1;
+    }
+
+  // remember argv[0] is the name of the program
+  width = atoi(argv[1]);
+  height = atoi(argv[2]);
+
+  // call the function
+  starL(width,height);
+
+  return 0;
+}<br /><br /><span class="widePre" style="font-size: 11px;">// A C function that prints the letter L with stars, 
+// at any width or height, provided both width and height are &gt;= 2
+// If either is less than 2, the function should print nothing.)
+</span><br />
+<span class="widePre" style="font-size: 11px;">void starL(int width, int height)
+{
+  int i;
+
+  // check if parameters are valid
+  if ((width&lt;2) || (height &lt; 2))
+    return;  // return without printing anything
+  
+  // print height-1 rows of *\n
+  for (i=0; i&lt;height-1; i++)
+    printf(&quot;*\n&quot;);
+  
+  // print width stars, followed by a final \n
+  for (i=0; i&lt;width; i++)
+    printf(&quot;*&quot;);
+  
+  printf(&quot;\n&quot;);
+  
+  return;   //  we are finished
+}</span>    
+    
+    </pre>
+    
+</body>
+</html>

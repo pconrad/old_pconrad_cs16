@@ -1,0 +1,66 @@
+
+Explain about h01----the int division vs. float
+
+Explain what happens when you type a "y" into firstCProgram.c
+
+  (and perhaps how you get around it...)
+
+Mention CTRL/C for when you need to stop a program in an infinite loop.
+
+
+Go over void printNXs(int n); again... show a demo
+
+Go over 
+   void printNChars(int n, char c);
+
+Go over how to turn printNXs into 
+   void printXBox(int width, int height);
+
+Go over 
+  void printXSpacePattern(int w, int h);
+
+x x x x
+ x x x
+x x x x
+ x x x
+
+How about 
+
+x
+xx
+xxx
+xxxx
+xxxxx
+
+How about
+
+xxxxx
+xxxx
+xxx
+xx
+x
+
+Mention: http://en.wikipedia.org/wiki/Netpbm_format
+
+Instead of 
+
+*****
+  *
+  *
+  *
+
+We could have:
+
+P1
+# This is an example bitmap of the letter "T"
+5 4
+1 1 1 1 1
+0 0 1 0 0
+0 0 1 0 0
+0 0 1 0 0
+
+
+-bash-4.1$ convert T.pbm T.jpg
+-bash-4.1$ convert -scale 1000% T.pbm T_1000pct.jpg
+
+

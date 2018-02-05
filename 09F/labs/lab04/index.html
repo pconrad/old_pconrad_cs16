@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab04, Fall 2009 (09F)--Working with arrays of ints</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Fall 2009</h1>
+ <h1>lab04: <span class="smallerFont">(&quot;lab four&quot;)<br>
+   Working with arrays of ints<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Explain that the symbol &amp; means &quot;address of&quot;, and:
+     <ul>
+       <li>That if you prefix an int variable with &amp;, you get an int *, i.e. &quot;pointer to int</li>
+      </ul>
+   </li>
+   <li>Demonstrate that the name of an array of ints is an int *&mdash;a &quot;pointer to int&quot;&mdash;i.e. the address of some location in memory:
+     <ul>
+       <li>We'll use Ch to show this</li>
+      </ul>
+   </li>
+   <li>Write a function that uses the % operator to differentiate even and odd numbers</li>
+   <li>Fill in the body of a function that takes an array of ints and the length of that array as parameters</li>
+   <li>Use a for loop to step through every value in an array of ints, accumulating a count</li>
+ </ul>
+ <p>&nbsp;</p>
+ <h2>Skills Needed</h2>
+ <p>By now, we expect that you are comfortable with these basic skills from lab00 through lab03, so we will no longer describe them in as much detail as we did previously:</p>
+ <ul>
+   <li>Using a text-editor (we suggest emacs) to create and/or edit C programs</li>
+   <li>Running C programs</li>
+   <li>Using the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>Performing basic management of directories and files</li>
+   <li>Submitting assignments in this class with the &quot;turnin program.</li>
+   <li>Using the <code>script</code> program to create a transcript, showing that your program runs successfully.</li>
+ </ul>
+ <h2>Step by Step Instructions</h2>
+ <h2 id="step1">&nbsp;</h2>
+ <h3>Step 0: If you haven't completed lab00 through lab03, please do so now.</h3>
+ <p>You'll need some of the skills from lab00 through lab03 in order to complete this lab.<br>
+    <br>
+  We will not accept your lab04 submission until lab00 through lab03 are complete. So please finish these first if you haven't submitted them yet, via the turnin program.</p>
+ <h3>Step 1: Log on to CSIL, bring up a terminal window, and create a ~/cs16/lab04 directory.</h3>
+ <p>If you've forgotten how, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+   <br>
+ </p>
+ <h3>Step 2: Copying some programs from my directory</h3>
+ <p>Visit the following web link&mdash;you may want to use &quot;right click&quot; (or &quot;control-click&quot; on Mac) to bring up a window where you can open this in a new window or tab:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab04/files">http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab04/files<br>
+   </a></li>
+  </ul>
+  <p>You should see a listing with one C program. We are going to copy that into your ~/cs16/lab04 directory  with the following command:</p>
+ <pre><p>cp ~pconrad/public_html/cs16/09F/labs/lab04/files/* ~/cs16/lab04</p></pre>
+ <ul>
+   <li>Note: If you get the error message:<br>  
+     <code><br>
+     cp: target `/cs/student/youruserid/cs16/lab04' is not a directory</code><br>
+     <br>
+     then it probably means you didn't create a ~/cs16/lab04 directory in step 1, so go back to step 1 and do that first.</li>
+ </ul>
+  <p>After doing this command, if you cd into ~/cs16/lab04 and use the ls command, you should see one file in your ~/cs16/lab04 directory:  </p>
+
+<pre>
+-bash-3.2$ <strong>ls</strong>
+countOddWithTests.c
+-bash-3.2$ 
+</pre>
+ If so, you are ready for step 3.</p>
+ <h3>Step 3: Experimenting with int, int *, and arrays of ints in Ch</h3>
+ <p>We won't be working with the C file we copied until Step 4. </p>
+ <p>For this step, we are going to use the Ch program to experiment with several aspects of C that we'll be using later in the lab.</p>
+ <ul>
+   <li>understanding int vs. int *  variables</li>
+   <li>understanding arrays of ints</li>
+   <li>understanding that &amp; prefixing an <code>int</code> variable with &amp; turns that variable in to an <code>int *</code></li>
+  </ul>
+ <h4>Step 3a: Bringing up Ch</h4>
+ <p>When logged in at a terminal session in the Cooper lab or on CSIL, type <code>ch</code> at the Unix prompt.</p>
+ <p>You should see something like this (except the directory will be different) </p>
+ <pre>-bash-3.2$ <strong>ch</strong><br>
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/student/jsample/cs16/lab04&gt; </pre>
+As we did in lab03, we can type the following to give us a more convenient prompt&mdash;do this now:
+<p><code>/cs/faculty/jsample/cs16/lab04&gt; <strong>_prompt = &quot;Ch&gt; &quot;<br>
+</strong> Ch&gt;</code></p>
+ 
+ <p>Now, your prompt is <code>Ch&gt; </code>(with a space after it).</p>
+ <p><strong>Step 3b: Basics of working with variables in Ch</strong></p>
+ <p>At the Ch&gt; prompt, we can define an int variable like this. Follow along with the instructions, typing the commands in at the Ch&gt; prompt at each step:</p>
+ <pre>Ch&gt; <strong>int x=3;</strong><br>Ch&gt; </pre>
+<p>
+Once we do this, we can type x at the Ch prompt to see the value of x:
+<p>
+  <pre>Ch&gt; <strong>x</strong><br>3 <br>Ch&gt; </pre>
+<p>We can redefine the value of x with an assignment statement:
+<p>
+  <pre>Ch&gt; x=5;<br>5 <br>Ch&gt; x<br>5 <br>Ch&gt;   </pre>
+<p>So we can assign x a new value. But we cannot declare x again&mdash;that is, once you say &quot;int x&quot; once, x is declared&mdash;and just like in a C prompt, you can't redeclare it within the same <em>scope</em> (In C, <em>scope</em> means, roughly speaking, inside the same set of curly braces. We'll learn a more precise definition later in the course.) 
+  <p>Here's what happens if you try to declare x again:  
+  <p>
+  <pre>Ch&gt; <strong>int x=7;</strong><br>ERROR: identifier 'x' redeclared<br>Ch&gt; <strong>x</strong><br>5 <br>Ch&gt; </pre>
+    You can see what variables are currently defined in Ch with the special command <code>stackvar</code>&mdash;try that now:<br>
+  <p>
+  <pre>Ch&gt; <strong>stackvar</strong><br>    x                   5<br>Ch&gt; 
+    </pre>Let's declare a few more variables, and type stackvar again:
+  <p>
+  <pre>Ch&gt; <strong>int y=9;</strong><br>Ch&gt; <strong>int z=-42</strong><br>Ch&gt; <strong>stackvar</strong><br>    x                   5<br>    y                   9<br>    z                   -42<br>Ch&gt; 
+    </pre>
+  <p>In a regular C program, once you declare a variable, you can't redeclare it in the same scope to give it a different type&mdash;i.e. once you say int&nbsp;x; you can't turn around and say double x; to change x from an int into a double.
+  <p>	Some of you may know about type casting, for example:</p>
+
+    <pre>int x = 5;<br>double d;<br><br>d = (double) x;</pre>
+    <p>to convert the value of <code><code>x</code></code> from an <code>int</code> to a <code>double</code>. That's allowed, but that's different&mdash;in the example just given, you are just <em>converting the value</em> of <code><code>x</code></code> from <code>int</code> to <code>double</code> before assigning it to the variable d. The type of the original variable <code>x</code> doesn't change though&mdash;it is still an <code>int</code> after you do this.</p>
+    <p>In Ch, the same thing is true&mdash;if we previously declared int x=5; then we can't redeclare x as a double:</p>
+    <p>
+  <pre>Ch&gt; double x=3.4;<br>ERROR: identifier 'x' redeclared<br>Ch&gt; x<br>5 <br>Ch&gt;</pre>
+    There is a loophole in Ch though&mdash;if we find that we declared x as an int by accident when what we really wanted was to declare it as a double, we can type <code>remvar x</code> and the declaration of x will be removed. Check out this example, where we remove the variable x and then redeclare it as a double.</p>
+    <p>
+  <pre>Ch&gt; <strong>stackvar</strong><br>    x                   5<br>    y                   9<br>    z                   -42<br>Ch&gt; <strong>remvar x</strong><br>Ch&gt; <strong>stackvar</strong><br>    y                   9<br>    z                   -42<br>Ch&gt; <strong>double x=3.5;</strong><br>Ch&gt; <strong>stackvar</strong><br>    y                   9<br>    z                   -42<br>    x                   3.5000<br>Ch&gt; <strong>x</strong><br>3.5000 <br>Ch&gt; </pre>
+    You can only do this inside Ch&mdash;not in a regular C program. The only reason I'm showing you this is in case you make a mistake while declaring a variable&mdash;using remvar gives you a way to fix your mistake without having to redo the entire Ch session up to that point.</p>
+    <p>Now that we understand how to declare variables in Ch, let's move on to working with arrays of integers.</p>
+  <p><strong>Step 3c: Experimenting with arrays of integers, and int * in Ch</strong></p>
+ <p>In C, we can declare an array of integers and give it some initial values all in one step like this:</p>
+ <p>
+  <pre>Ch&gt; int a[] = {2,7,14,26,31,33};<br>Ch&gt;</pre>
+  <p>(Those happen to be the jersey numbers of all the players on the <a href="http://ucsbgauchos.cstv.com/sports/m-soccer/mtt/ucsb-m-soccer-mtt.html">2009 UCSB Men's Soccer team</a> that have &quot;defender&quot; listed on their position in the roster.) </p>
+   <p>We can then index individual elements of this array as follows:</p>
+   <p>
+  <pre>Ch&gt; <strong>a[0]</strong><br>2 <br>Ch&gt; <strong>a[5]</strong><br>33 <br>Ch&gt; <strong>a[3]</strong><br>26 <br>Ch&gt; </pre>
+   If we type only the name of the array, we get something sort of curious:</p>
+   <p>
+  <pre>Ch&gt; <strong>a</strong><br>0x91b4e48 <br>Ch&gt; </pre>
+   What comes up is an address in hexadecimal. The <code>0x</code> part is just a prefix to indicate that the number is in hexadecimal format. The number <code>91b4e48</code> refers to the address in memory of the first number in the array (which happens to be 2.</p>
+   <p>If we declare a regular <code>int</code> variable, say <code>b</code>, and type <code>b</code> at the prompt, we don't get an address&mdash;we get its value:</p>
+  <p>
+  <pre>Ch&gt; <strong>int b=8;</strong><br>Ch&gt; <strong>b</strong><br>8 <br>Ch&gt; </pre>
+   But with an array such as <code>a</code>, the situation is different:</p>
+   <p>
+  <pre>Ch&gt; <strong>a</strong><br>0x91b4e48 <br>Ch&gt; <strong>b</strong><br>8 <br>Ch&gt;</pre>
+   We can get the address of b though, by preceeding it with the address of operator, which is the &amp; symbol:</p>
+   <p>
+  <pre>Ch&gt; <strong>&amp;b</strong><br>0x91b58d4 <br>Ch&gt; </pre>
+   (As an aside&mdash;when we pass int variables to the scanf function, this is exactly what we do&mdash;we pass the address of the int variable. That's why the variable has to be preceeded with a &amp; symbol.)</p>
+   <p>Here's one  reason that it is important to understand that the <em>name</em> of an array is a <em>pointer</em> to the array:</p>
+   <ul>
+     <li>When we pass an array to a function, the name of the array becomes an int * &mdash; that is a pointer to int.</li>
+     <li>In the header of the function, and in the function prototype, we declare it as an int *</li>
+   </ul>
+   <h4>Step 3d: Exiting Ch</h4>
+  <p>We are now ready for some programming. Use the exit command get out of Ch and return to the regular Unix prompt. </p>
+ <pre>Ch&gt; <strong>exit</strong><br>-bash-3.2$ </pre>
+ </p>
+ <h3>Step 4: Finishing the countOddWithTests program</h3>
+ <p>The object of this lab is finish the program countOddWithTests.c, which uses the principle of test-driven development that we first worked with in lab02.</p>
+ <p>In Step 2, you copied the program countOddWithTests.c into your directory. Compile it and run it now, and you should see the following output:</p>
+ <p>
+  <pre>-bash-3.2$ <strong>make countOddWithTests</strong><br>cc     countOddWithTests.c   -o countOddWithTests<br>-bash-3.2$ <strong>./countOddWithTests</strong><br>Test 1: isOdd(1) failed: got -42 expected 1<br>Test 2: isOdd(2) failed: got -42 expected 0<br>Test 3: isOdd(33) failed: got -42 expected 1<br>Test 4: isOdd(44) failed: got -42 expected 0<br>Test 5: isOdd(-7) failed: got -42 expected 1<br>Test 6: isOdd(-8) failed: got -42 expected 0<br>Test 7: countOdd(a,3) failed: got -42 expected 2<br>Test 8: countOdd(b,5) failed: got -42 expected 3<br>Test 9: countOdd(c,3) failed: got -42 expected 0<br>9 tests failed<br>-bash-3.2$ 
+
+
+</pre>
+ As we can see, all of the tests are failing. Your job is to make them all pass.</p>
+ <h4>Step 4a: Fix the header comment at the top of the file</h4>
+ <p>Where it says &quot;your name here&quot;, put in your name, and take out the @@@ symbols.</p>
+ <h4>Step 4b: Make the tests of the isOdd function pass.</h4>
+  <p>This part is pretty easy. You need to replace the stub of the isOdd function with some code that correctly returns <span class="highlightedBold">1</span> when x is odd, and <span class="highlightedBold">0</span> when x is even.</p>
+ <p>Remember that the % operator can be used here.</p>
+ <p>Once you have the tests of isOdd working, proceed to step 4b</p>
+ <h4>Step 4c: Make the tests of the countOdd function pass</h4>
+ <p>This is also not too hard&mdash;we can hope that in your previous programming course, you learned how to accumulate a sum.</p>
+ <p>But in case you need some hints, here are some reminders:</p>
+ <ul>
+   <li>Inside the body of your countOdd function, you'll probably want to declare an int variable like count to accumulate the count.</li>
+   <li>You'll need a loop counter variable like i also.</li>
+   <li>You'll want a for loop that steps through every element of the array&mdash;the indices going from 0 to n-1, of course.</li>
+   <li>You'll need to check every element of the array, i.e. a[i], and see if it is odd or not.
+     <ul>
+       <li>One of the key principles of good software design is to reuse code that has already been well-tested.</li>
+       <li>So, for full credit, don't repeat use the % operation inside your countOdd function. Instead, use a call to your isOdd function&mdash;i.e. use <code>if ( isOdd(a[i]) ) </code>&mdash;to check whether </li>
+       <li>Each time you find an odd number, add one to count. You can use <code>count = count + 1; </code>but in C, we typically use <code>count++;</code> instead. </li>
+      </ul>
+   </li>
+  </ul>
+ <p>Notice that the first parameter of the countOdd function is an int *, meaning, in this case, an array of integers. The second parameter, n, is necessary because in C, we don't have a way to check the size of an array (as we do with Java arrays, or Python lists.) We have to pass the size of the array as a separate parameter.</p>
+ <ul>
+   <li>Later, we'll see that this can actually turn this inconvenience into an advantage. We can sometimes &quot;lie&quot; about the size of the array, indicating it is shorter than it really is, and in this way, we make functions that work on just part of an array.</li>
+   <li>Of course, if you &quot;lie&quot; and say that the array is bigger than it really is, then your function is liable to start &quot;trespassing&quot; on other areas in memory where it has no business being&mdash;this is likely to result in an error.</li>
+ </ul>
+ <p>Once the countOddWithTests program is working&mdash;i.e. all the tests are passing, you are ready to script your assignment.<br>
+ </p>
+ <h4>Step 5: Scripting your assignment</h4>
+ <p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.</p>
+ <p>Here are the steps to <em>prepare</em> to make a transcript for lab04</p>
+ <ol>
+   <li>Type <strong>pwd</strong>, and make sure you are in the <strong>~/cs16/lab04</strong> directory.</li>
+   <li>Type <strong>ls</strong>, and make sure that you have a file called <strong>countOddWithTests.c </strong><strong></strong>in your directory.</li>
+   <li>Make sure that all the tests pass when you run <strong>./countOddWithTests </strong><br>
+   </li>
+   <li>Now, remove the executable  for countOddWithTests&mdash;do this  step very carefully.<br>
+     <br>
+     Type <strong>rm ./countOddWithTests</strong> (WITHOUT the .c on the end) to delete ONLY the executable.
+     <br>
+     <br>
+     <ul>
+       <li>Be sure you KEEP the countOddWithTests.c file</li>
+       <li> Otherwise you'll be starting from scratch! <br>
+       </li>
+     </ul>
+   </li>
+  </ol>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Type <strong>script lab04.txt</strong><br>
+   You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab04.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. (If you did the preparation correctly,  NOT see the executable files for your programs.)</li>
+   <li>Now do the following steps:<br>
+     <br>
+     <ol style="list-style:lower-alpha">
+       <li>Type <strong>make countOddWithTests</strong> to show that your program compiles with no errors.</li>
+       <li>Type <strong>./countOddWIthTests</strong> to run your program, showing that it works properly.<br></li>
+       <li>Type <strong>head -1 countOddWithTests.c</strong> to show that your header comment is there with your name, date, and CS16 lab04.<br>
+         <br>
+       </li>
+     </ol>
+   </li>
+   <li>Type <strong>exit</strong> to stop the recording of commands and responses into lab04.txt</li>
+  </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab04 directory called lab04.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p><strong>cat lab04.txt</strong></p>
+ <p>If it looks ok, you are ready to submit!</p>
+ <h3>Step 9. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, <strong>you need to be in the ~/cs16 directory</strong>&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+<pre>turnin lab04@cs16 lab04</pre>
+<p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+<hr>
+ <h2>Evaluation and Grading (150 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab04 directory</li>
+         <li>10 points: lab04 directory contains required C program and lab04.txt (a transcript file)</li>
+         <li>20 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+       <li>10 points: each file contains a header comment on first line with name &quot;cs16 lab04&quot; and date.</li>
+       <li>10 points: transcript file contains everything asked for in the instructions</li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     (points for correctness and style)
+     <ul>
+        <li>30 points&mdash;filling in body of isOdd function</li>
+        <li>60 points&mdash;filling in body of countOdd function
+          <ul>
+             <li>20 of these points are for correctly reusing the isOdd function in checking whether individual numbers are odd. Deduct these points if this was not done as a function call to isOdd, but instead as &quot;repeat&quot; of the same code that's already inside isOdd</li>
+           </ul>
+         </li>
+      </ul>
+   </li>
+  </ul>
+ <p>Due Date: You should try to complete this assignment by the  end of your  discussion section in which it was assigned, i.e. before 8:50am on Thursday 10/22/2009 or before 10:50am, 11:50am, or 12:50pm on Friday 10/23/2009 (depending on which section you are enrolled in.)</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week. Please have it completed and turnin command finished by <strong>10pm on Wednesday October 28.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) up until the time the TA doing the grading is finished with grading and posting a particular assignment.  There is no specific guarantee as to the length of that period of time.<br>
+   <br>
+  After that, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

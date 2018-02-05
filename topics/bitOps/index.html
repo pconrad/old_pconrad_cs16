@@ -1,0 +1,321 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<!-- quiz.html, P. Conrad   11/17/05
+     An online multiple choice quiz
+     for CISC103 Fall 2005  -->
+
+
+  <head>
+    <title>Practice with bit operators (|,&amp;,^,&lt;&lt;,&gt;&gt;)</title>
+    <link rel="stylesheet" type="text/css" href="/~pconrad/cs16/cs16.css" />
+    <link rel="stylesheet" type="text/css" href="quiz.css" />
+    <script type="text/javascript" src="octalChmod.js"></script>
+    
+  <script type="text/javascript">
+      <!--
+
+      var debug = false;
+      unicodeHeavyCheckMark = String.fromCharCode(0x2714);
+      unicodeHeavyBallotX = String.fromCharCode(0x2718);
+
+function randomIndex(n) // returns random index between 0 and n-1
+{
+   return Math.floor(Math.random()*n);
+}
+
+function radixDesc(radix)
+{
+   var whichWay = randomIndex(2); // returns either 0 or 1
+
+   if (whichWay == 0)
+      return "base " + radix;
+	  
+   switch(radix)
+   {
+      case 8: return "octal";
+	  case 16: return "hexadecimal";
+	  case 2: return "binary";
+	  case 10: return "decimal";
+	  default: return "base " + radix;
+   }
+
+
+}
+
+
+function randomIntBetween(minVal,maxVal) // returns number from min to max inclusive
+{	
+   if (minVal > maxVal)
+      {
+		alert("problem in randomIntBetween function");
+	  }
+   var numIntsInRange = maxVal - minVal + 1;
+   return Math.floor(Math.random()*numIntsInRange) + minVal;
+}
+
+// return a name to use for a form for question i
+function formForQuestion(i)
+ {
+   return("formForQuestion" + i);
+ }
+
+// TODO: make tests for computeAnswer (tdd style)
+
+function computeAnswer(thisExpression,whichBinOp)
+{
+          var answer = eval(thisExpression);
+	  if (whichBinOp == "&&" || whichBinOp == "||")
+	  {
+	    if (parseInt(answer)!=0)
+	    {
+	      answer = "1";
+	    }
+	    else
+	    {
+	      answer = "0";
+	    }
+	     
+	  }
+  return answer;
+}
+
+ 
+ function buildQuiz(numQuestions)
+ {      
+ 
+ 
+	
+   var theQuizQuestionsDivElement = 
+              document.getElementById("theQuizQuestions");
+			  
+   // the exclamation point means "not".. if I didn't find it, print an error and stop
+
+   if (!theQuizQuestionsDivElement)
+   {
+     window.alert("Could not find an element with id: " + "theQuizQuestions");
+     return;
+   }
+
+   var theQuizQuestions = "";
+
+   var i;
+   
+   theQuizQuestions += "<table>\n"
+   for (i = 1; i<=numQuestions; i++) // index counts up 0,1,2, etc through the array
+   {
+	  var whichConversion =  randomIndex(2); // octal to rwx or vice-versa?
+	  
+	  var binOps = ["&","|","&&","||","^","<<",">>"];
+	  var whichBinOp = binOps[randomIndex(binOps.length)];
+
+	  var leftOperand = randomIntBetween(0,32);
+	  var rightOperand = randomIntBetween(0,32);
+
+	  if (whichBinOp=="<<")
+	  {
+	    leftOperand = randomIntBetween(1,16);
+	    rightOperand = randomIntBetween(1,4);
+	  } else if (whichBinOp==">>") {
+	    rightOperand = randomIntBetween(1,4);
+	    powerOfTwo = rightOperand + randomIntBetween(1,4);
+	    leftOperand = Math.pow(2,powerOfTwo);
+	  } else if (whichBinOp=="&&" || whichBinOp=="||") {
+	    var whichChoice = randomIntBetween(1,4);
+	    // with .25 proability force left operand or 
+	    // right operand to be zero.
+	    if (whichChoice==1)
+	      leftOperand = 0;
+	    if (whichChoice==2)
+	      rightOperand = 0;
+	  }
+
+	  thisExpression = 
+	     leftOperand + " " + whichBinOp + " " + rightOperand; 
+
+	  var answer=computeAnswer(thisExpression, whichBinOp);
+
+
+      theQuizQuestions += "<tr>\n"
+
+      // the question number (add one to index)
+      theQuizQuestions += "<td style='vertical-align:top'>\n"
+      var questionNumber = i;
+      theQuizQuestions += questionNumber + ".&nbsp;";
+      theQuizQuestions += "</td>\n"
+	
+      // the question text and code
+
+      theQuizQuestions += "<td style='vertical-align: top'><code>\n";
+      theQuizQuestions += thisExpression;
+      theQuizQuestions += "</td>\n"
+	   
+      theQuizQuestions += "<td>" + turnAnswerIntoFormElement(formForQuestion(i),answer) + "</td>";
+
+      theQuizQuestions += "</tr>\n"
+ 
+   }
+
+   theQuizQuestions += "</table>\n"
+
+   // when you add the text to the innerHTML, it must
+   // ALREADY BE well-formed HTML with properly nested
+   // tags; otherwise, the browser may not process it properly.
+   
+   if (debug) { window.alert(theQuizQuestions); }
+
+   theQuizQuestionsDivElement.innerHTML = theQuizQuestions;
+
+}
+
+function turnAnswerIntoFormElement(formName,correct)
+{
+ // form all the HTML in a variable called
+ // formElement then add it all at once.
+
+ var formElement = "";
+
+ formElement += "<form name='" + formName + "' action=''>\n";
+
+ // cellpadding leaves room for the border 
+ // that we put around correct answer to not interfere with the
+ // answer text itself
+
+ var idOfQuestionControl = questionControlID(formName);
+
+ formElement += "<div id='" + idOfQuestionControl + "'>";
+ formElement += makeResponseInputTextElement(formName);
+ formElement += makeCheckAnswerButton(formName,correct);
+
+ formElement += "</div>\n"; // end of question control div element
+
+ formElement += "</form>\n";
+ return formElement;
+}
+
+function questionControlID(formName)
+{
+  return formName + "questionControl";
+}
+
+
+function responseFieldName (formName)
+{
+   return formName + "Response";
+}
+
+function makeResponseInputTextElement(formName)
+{
+  return ( "<input type='text' name='" + responseFieldName(formName) + "' id='" + responseFieldName(formName)+ "' value='' size = '16' />"); 
+}
+
+function makeCheckAnswerButton(formName,correct)
+{
+  return ( "<input type='button' name='" + formName + "button' " +
+                 " value='press to check' " +
+		 "onclick='checkAnswer(\"" + correct + 
+					"\", \"" + formName + "\");' />"); 
+}
+
+
+function checkAnswer(answer, formName)
+{
+   var answerElem = 
+      window.document.getElementById(responseFieldName(formName));
+
+   var questionControlDivElement =
+       window.document.getElementById(questionControlID(formName));
+
+   var usersAnswer = answerElem.value;
+
+   var userGotItRight = (usersAnswer == answer);
+
+   if (debug)  window.alert("The correct answer is " + answer +
+                "\nThe user's answer is " + usersAnswer);
+		
+   questionControlDivElement.innerHTML   = 
+             "Your answer: " + usersAnswer +
+             "&nbsp;&nbsp; Correct answer: " + answer;
+   
+}
+
+function showAnswer(answerElemId,answer)
+ {
+    var answerElem = document.getElementById(answerElemId);
+	answerElem.innerHTML = answer;
+ }
+
+      -->
+    </script>
+</head>
+<body onload="buildQuiz(10);">
+<div id="container">
+<h1>Practice with bit operations</h1>
+
+<p>Back to CS16 <a href="/~pconrad/cs16/topics">topics</a></p>
+<hr />
+    
+<p>This quiz provides practice with bit operations (see &quot;<a href="#background">background</a>&quot; below the quiz for more info).
+
+
+ <h2>Quiz yourself!</h2>
+    <p>This web page gives you an opportunity to practice with applying these
+operators to positive integers.  In some cases, you'll need to convert the integers to binary first before applying the operation.</p>
+
+<p>Each time you click the &quot;make new quiz&quot; button, you'll get a different randomly generated quiz.<br />
+  <br>
+</p>
+<form id="theForm" action="">
+      <table>
+
+		<tr>
+		   <td style="text-align:center">
+		    <input type="button" value="Make new quiz!" onClick="buildQuiz(10);" />		   </td>
+		</tr>
+	   </table>
+	</form>
+
+    <div id="theQuizQuestions">[If you are seeing this message, then either JavaScript is  not enabled in your browser, or there is a problem with the coding of this web page.<br />
+    Try a different browser, or try enabling JavaScript, and if the page still doesn't work, contact your instructor for assistance.]</div>
+
+
+<h3 id="background">Background</h3>
+<p>This quiz provide practice with the following bit operations:
+<table cellpadding="2" cellspacing="3" border="1">
+  <tr><td><code>&amp;</code></td><td>Bitwise and</td></tr>
+  <tr><td><code>|</code></td><td>Bitwise or</td></tr>
+  <tr><td><code>^</code></td><td>Bitwise exclusive or</td></tr>
+  <tr><td><code>&lt;&lt;</code></td><td>Bit shift left (multiply by power of two)/dd>
+  <tr><td><code>&gt;&gt;</code></td><td>Bit shift right (divide by power of two)</td></tr>
+</table>
+
+
+<p>It also provides practice with two logical operators, which in C always return either 0 or 1&mdash;these are included to help you remember the difference between the bitwise operations and the logical operations.</p>
+<table cellpadding="2" cellspacing="3" border="1">
+  <tr><td><code>&amp;&amp;</code></td><td>Logical and</td></tr>
+  <tr><td><code>||</code></td><td>Logical or</td></tr>
+</table>
+
+
+<p>Chapter 11 in "Practical C Programming" by Steve Oualline (available online to UCSB students at the links below through the campus &quot;O'Reilly&quot; subscription) describes these operators.</p>
+
+<ul>
+ <li>from <a href="http://proquest.safaribooksonline.com/1-56592-306-5/pcp3-CHP-11">on campus</a>,</li>
+<li>from <a href="https://login.proxy.library.ucsb.edu:9443/login?qurl=http%3a%2f%2fproquest.safaribooksonline.com%2f1-56592-306-5%2fpcp3-CHP-11">off campus</a></li>
+</ul>
+
+</div><!-- id="container" -->
+</body>
+</html>
+
+
+
+
+
+
+
+
+

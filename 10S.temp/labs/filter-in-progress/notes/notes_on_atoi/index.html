@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, notes about atoi</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../../../cs16.css"/>
+<link rel="stylesheet" type="text/css" href="../../../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+.style2 {font-family: "Times New Roman", Times, serif; font-style: italic; }
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Spring 2010</h1>
+ <h1>Appendix to lab04&mdash;notes on atoi()<span class="smallerFont"><br>
+   <br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <p>Back to <a href="../../../lab04/">lab04</a><br>
+    <br>
+   Here's a review of some of what we learned in lab03 about atoi()</p>
+ <ul>
+   <li>atoi() can be used to convert strings such as <code>&quot;30&quot;</code> which are strings in C (i.e. <code>char *</code> values) into integer values like <code>30</code> that can be stored in an <code>int</code> variable.</li>
+   <li>As an example, we might write:<br>
+     <pre>int x;<br>x = atoi(&quot;30&quot;);</pre>
+      <br>
+   </li>
+   <li>One common use of atoi is access numbers typed on the command line. For example, if we run a program with the command<code><br>
+     <br>
+     ./barOfStars 10<br>
+     </code><br>
+     then we can access the value <code>&quot;10&quot;</code> as <code>argv[1]</code>, and use atoi to convert this from <code>char&nbsp;*</code> to <code>int</code><br>
+     <br>
+     <pre>int width;<br>
+if (argc &gt;= 2) <br>
+  width = atoi(argv[1]);<br>
+     </pre>
+     </li>
+   <li>We should put <code>#include&nbsp;&lt;stdlib.h&gt;</code> in our program before calling atoi().</li>
+   <li>The name <code>atoi() </code>comes from &quot;ASCII to integer&quot;</li>
+   <li>ASCII is the code that is used to convert individual characters are converted into binary and stored in the computers memory. In this code, the digit 0 is represented as 48, 1 as 49, 2 as 50, etc. </li>
+   <li>If we pass in something that isn't numeric at all to <code>atoi</code>, e.g. <code>atoi(&quot;foo&quot;)</code>, we get back the value 0.</li>
+   <li>If we pass in something that starts with a valid integer, that number is returned, and the rest is ignored&mdash;for example <code>atoi(&quot;4evah&quot;)</code> returns 4, and <code>atoi(&quot;4.9999&quot;)</code> returns 4.<br>
+     <br>
+   </li>
+  </ul>
+ <p>If you need some more refreshers on how atoi works, go back to <a href="../../../lab03/index.html">lab03</a> and go through the Ch session again. </p>
+ <h3>Back to <a href="../../../lab04/">lab04</a></h3>
+ <h4>&nbsp;</h4>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

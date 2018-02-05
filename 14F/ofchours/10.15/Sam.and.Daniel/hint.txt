@@ -1,0 +1,21 @@
+To filter out output without having to change your code,
+try just using grep.
+
+This runs the code and you see everything:
+
+./lab02  
+
+This runs the code, and you only see output lines that have the word "white"
+in them:
+
+./lab02 | grep white
+
+etc.
+
+Example:
+
+bash-4.2$ ./lab02 | grep white
+test.txt has -1 white space characters
+Fox-In-Socks.txt has -1 white space characters
+The-Fox.txt has -1 white space characters
+bash-4.2$ 

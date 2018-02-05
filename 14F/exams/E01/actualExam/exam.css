@@ -1,0 +1,22 @@
+/* exam.css  P. Conrad, UD 03/08/2007 */
+
+
+
+
+h1 {text-align:center;}
+h1 span.subhead {font-size: 0.8em;}
+
+
+  #pointCount {font-weight: bold;}
+  .pageBreakBefore {page-break-before:always; padding-top: 30px;}
+  ol li ol li {list-style-type:lower-alpha;}
+   ol li ol li ol li {list-style-type: lower-roman;}
+  pre, span.lightBorder {border-style:solid; border-width: 1px; border-color: #999999; }
+  pre.inputPre, span.inputPre {border-style:ridge; border-width: 3px; border-color: #999999;}
+  
+  pre.widePre {width:auto;}
+  table {border-width:thin; border-style:solid; border-color:#333333;}
+  
+  tr.odd {background-color:#CCCCCC;}
+  
+  pre.smallerPre {font-size: 0.8em; width:auto;}

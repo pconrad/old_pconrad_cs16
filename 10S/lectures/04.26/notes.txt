@@ -1,0 +1,51 @@
+
+Today is a preview of some material from lab05, which I'll be putting
+up later today.
+
+lab05 introduces the idea that we can reuse functions rather than
+having to type them over and over in every single file where we want
+to use them.
+
+To compile:
+
+   cc howManySpaces.c runTests.c tdd.c -o howManySpaces
+
+To run:
+   ./howManySpaces
+
+The -o comes just before the name of what you want the executable to be.
+It is traditional to make that be the name of the .c file that contains
+the main() (without the .c on the end.)
+
+If you just do:
+
+   cc howManySpaces.c runTests.c tdd.c
+
+The executable goes into a file called a.out---you run this with ./a.out
+
+
+We talked about the difference between 
+
+#include <something.h>
+
+and 
+
+#include "something.h"
+
+With the #include <something.h> the compiler looks in the system include files
+(often /usr/include) for the .h file (.h stands for "header")
+
+With the #include "something.h" the compiler looks in the current directory.
+This is typically a file that is written by the programmer herself/himself.
+
+For now .h files usually consist mainly of function prototypes,
+while the .c files contain the function definitions.
+
+(We'll learn about other things that can go in .h files in the coming
+weeks, and you'll see even more things that can do in there in CS24
+and CS32---C++ also uses .h files.)
+
+
+
+
+

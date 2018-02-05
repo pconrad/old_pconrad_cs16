@@ -1,0 +1,26 @@
+
+$ quota -v
+
+Disk quotas for user josmith (uid 12345): 
+     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
+frigga:/local/home/student
+                 109940* 100000  110000   5days     327    4000    5000        
+odin:/local/home/faculty
+                      0       0       0               0       0       0        
+hal1.engr.ucsb.edu:/fs.real/hal1a/home
+                      0       0       0               0       0       0        
+frigga:/silo/archive
+                      0       0       0               0       0       0 
+
+$ du -sh *
+
+$ du -sh .[A-z]*
+
+Example of what we do NOT want to see:
+
+101M	.xsession-errors.old
+
+
+$ rm -rf .xsession-errors.old 
+
+$ quota -v

@@ -1,0 +1,441 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, lab04, Working with arrays of ints, input data files (code) (notes)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" >
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" >
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+ol li ol li {list-style-type: lower-alpha;}
+code {white-space:pre;}
+.thanks {
+	font-size: smaller;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Winter 2010</h1>
+ <h1>lab04: <span class="smallerFont">(&quot;lab five&quot;)<br>
+   Working with arrays of ints, input data files<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Explain that the symbol &amp; means &quot;address of&quot;, and:
+     <ul>
+       <li>That if you prefix an int variable with &amp;, you get an int *, i.e. &quot;pointer to int</li>
+      </ul>
+   </li>
+   <li>Demonstrate that the name of an array of ints is an int *&mdash;a &quot;pointer to int&quot;&mdash;i.e. the address of some location in memory:
+     <ul>
+       <li>We'll use Ch to show this</li>
+      </ul>
+   </li>
+   <li>Write a function that uses the % operator to differentiate even and odd numbers</li>
+   <li>Fill in the body of a function that takes an array of ints and the length of that array as parameters</li>
+   <li>Use a for loop to step through every value in an array of ints, accumulating a count</li>
+   <li>Read a file of ints into an array</li>
+ </ul>
+ <p>&nbsp;</p>
+ <h2>Skills Needed</h2>
+ <p>By now, we expect that you are comfortable with these basic skills from lab00 through lab03, so we will no longer describe them in as much detail as we did previously:</p>
+ <ul>
+   <li>Using a text-editor (we suggest emacs) to create and/or edit C programs</li>
+   <li>Running C programs</li>
+   <li>Using the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>Performing basic management of directories and files</li>
+   <li>Submitting assignments in this class with the &quot;turnin program.</li>
+   <li>Using the <code>script</code> program to create a transcript, showing that your program runs successfully.</li>
+ </ul>
+ <h2>Change pair programming partners this week.</h2>
+ <p>This week you will be assigned a new pair programming partner&mdash;someone that you did not work with on either lab02 or lab03.<br>
+     <br>
+    You may choose your own partner if both of you agree to work together. Otherwise, a partner will be assigned by the TA.<br>
+     <br>
+ </p>
+ <ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional&mdash;see <a href="../lab02">lab02</a> for the reasons why.</li>
+   <li>Keep the evaluation criteria in mind&mdash;you can find those listed in the intro to <a href="../lab02">lab02</a>.</li>
+  </ul>
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0: Get together with your assigned lab partner</h3>
+ <p>By now you should know the drill: Choose who will be the first pilot and who will start as navigator, and then remember to switch (at least once) during the lab. But you should probably know the long-term goal too:</p>
+ <p>Each partner should participate in both roles in approximately equal parts over the course of the quarter. We realize it is not possible to equally split time in every lab, but it's worth trying, and it is possible to make up for unequal splits in future labs. We trust you will try to meet this goal. Thanks!</p>
+ <p class="thanks">	(And thanks to Mike Costanzo for the wording of this step).</p>
+ <h3>&nbsp;</h3>
+ <h3>Step 1: Complete Worksheet W02</h3>
+ <p>Worksheet <a href="../../worksheets/W02">W02</a> (<a href="../../worksheets/W02/W02.pdf">pdf</a> version) is similar to the worksheet you completed when paired with your earlier pair programmgin partner.  It requires you to review some things about pair programming with your new partner, and also requires you to make sure your schedules are compatible.</p>
+ <p>Complete  worksheet  W02 and make a post to the <em>lab04  pair partner</em> forum on Gauchospace. <br>
+ </p>
+ <p>You only need to turn in one copy per pair.</p>
+
+
+ <h3>Step 2: Do the usual preparation steps</h3>
+<p>First, choose initial roles of driver/navigator.</p>
+ <p>Remember: don't share passwords. Instead, use scp or email to share files with each other at the end of each work session. (See <a href="../lab02#step2">lab02, step 2</a> for details of how to use scp.)</p>
+ <div class="importantDiv">
+   <h4 align="center">Share your work with each other at the end of EVERY work session.</h4>
+   <p>Again for emphasis, I will say it: DO NOT share passwords with each other. </p>
+   <p>Instead, use scp or email to share files with each other after every work session.<br>
+   </p>
+   <p>That way, if your pair partner <a href="http://discuss.fogcreek.com/joelonsoftware/default.asp?cmd=show&ixPost=149219">gets hit by a bus</a>, you can continue working without him/her&mdash;you aren't 'out of luck'.</p>
+ </div>
+ <p>If you've forgotten how to do the steps below, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+</p>
+ <ul>
+   <li>
+     Bring up a terminal window </li>
+   <li>Create a ~/cs16/lab04 directory</li>
+   <li>Copy files from my directory</li>
+ </ul>
+ <p>The files for this week are at this web link:</p>
+ <p><a href="http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab04/code">http://www.cs.ucsb.edu/~pconrad/cs16/10S/labs/lab04/code<br>
+   </a></p>
+ <p>And can be copied with this command:</p>
+ <pre>cp ~pconrad/public_html/cs16/10S/labs/lab04/code/* ~/cs16/lab04
+
+</pre>
+ <p><strong>Exam hint: </strong>Do you remember what each of these parts of this command mean? They were explained in the previous labs&mdash;and questions about this might appear on your next midterm exam:</p>
+ <ul>
+   <li>What does the cp command do?</li>
+   <li>What does the * mean?</li>
+  </ul>
+
+ <h3>Step 3: Review of atoi() and command line arguments</h3>
+ <p>Last week we used Ch to learn about  atoi() that converts from strings to integers&mdash;from type <code>char *</code> to type&nbsp;<code>int</code>.</p>
+ <p>We also learned about command line arguments: using argc and argv to access what a use types on the command line after the name of the program, e.g.</p>
+ <p>./makeBox 3 5</p>
+ <p><em>Are you and your pair partner comfortable with these ideas?</em></p>
+ <ul>
+   <li><em>If yes</em>, and you want to get on with the programming, proceed to the next step.</li>
+   <li><em>If not</em>, here are some helpful links:
+     <ul>
+       <li><a href="notes/notes_on_atoi">Review of atoi</a></li>
+       <li><a href="notes/cmdlineargs">Review of cmd line args</a></li>
+     </ul>
+   </li>
+  </ul>
+
+ <h3>Step 4: Experimenting with int, int *, and arrays of ints in Ch</h3>
+ <p>We won't be working with the  files we copied until later. </p>
+ <p>For this step, we are going to use the Ch program to experiment with several aspects of C that we'll be using later in the lab.</p>
+ <ul>
+   <li>understanding int vs. int *  variables</li>
+   <li>understanding arrays of ints</li>
+   <li>understanding that &amp; prefixing an <code>int</code> variable with &amp; turns that variable in to an <code>int *</code></li>
+  </ul>
+ <h4>Step 4a: Bringing up Ch</h4>
+ <p>When logged in at a terminal session in the Cooper lab or on CSIL, type <code>ch</code> at the Unix prompt.</p>
+ <p>You should see something like this (except the directory will be different) </p>
+ <pre>-bash-3.2$ <strong>ch</strong><br>
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/student/jsample/cs16/lab04&gt; </pre>
+As we did in lab03, we can type the following to give us a more convenient prompt&mdash;do this now:
+<p><code>/cs/faculty/jsample/cs16/lab04&gt; <strong>_prompt = &quot;Ch&gt; &quot;<br>
+</strong> Ch&gt;</code></p>
+ 
+ <p>Now, your prompt is <code>Ch&gt; </code>(with a space after it).</p>
+ <p><strong>Step 4b: Basics of working with variables in Ch</strong></p>
+ <p>At the Ch&gt; prompt, we can define an int variable like this. Follow along with the instructions, typing the commands in at the Ch&gt; prompt at each step:</p>
+ <pre>Ch&gt; <strong>int x=3;</strong><br>Ch&gt; </pre>
+<p>
+Once we do this, we can type x at the Ch prompt to see the value of x:
+</p>
+  <pre>Ch&gt; <strong>x</strong><br>3 <br>Ch&gt; </pre>
+<p>We can redefine the value of x with an assignment statement:
+</p>
+  <pre>Ch&gt; x=5;<br>5 <br>Ch&gt; x<br>5 <br>Ch&gt;   </pre>
+<p>So we can assign x a new value. But we cannot declare x again&mdash;that is, once you say &quot;int x&quot; once, x is declared&mdash;and just like in a C prompt, you can't redeclare it within the same <em>scope</em> (In C, <em>scope</em> means, roughly speaking, inside the same set of curly braces. We'll learn a more precise definition later in the course.) </p>
+  <p>Here's what happens if you try to declare x again:  
+  </p>
+  <pre>Ch&gt; <strong>int x=7;</strong><br>ERROR: identifier 'x' redeclared<br>Ch&gt; <strong>x</strong><br>5 <br>Ch&gt; </pre>
+  <p>  You can see what variables are currently defined in Ch with the special command <code>stackvar</code>&mdash;try that now:<br>
+  </p>
+  <pre>Ch&gt; <strong>stackvar</strong><br>    x                   5<br>Ch&gt; 
+    </pre><p>Let's declare a few more variables, and type stackvar again:
+  </p>
+  <pre>Ch&gt; <strong>int y=9;</strong><br>Ch&gt; <strong>int z=-42</strong><br>Ch&gt; <strong>stackvar</strong><br>    x                   5<br>    y                   9<br>    z                   -42<br>Ch&gt; 
+    </pre>
+  <p>In a regular C program, once you declare a variable, you can't redeclare it in the same scope to give it a different type&mdash;i.e. once you say int&nbsp;x; you can't turn around and say double x; to change x from an int into a double.</p>
+  <p>	Some of you may know about type casting, for example:</p>
+
+    <pre>int x = 5;<br>double d;<br><br>d = (double) x;</pre>
+    <p>to convert the value of <code><code>x</code></code> from an <code>int</code> to a <code>double</code>. That's allowed, but that's different&mdash;in the example just given, you are just <em>converting the value</em> of <code><code>x</code></code> from <code>int</code> to <code>double</code> before assigning it to the variable d. The type of the original variable <code>x</code> doesn't change though&mdash;it is still an <code>int</code> after you do this.</p>
+    <p>In Ch, the same thing is true&mdash;if we previously declared int x=5; then we can't redeclare x as a double:</p>
+    
+  <pre>Ch&gt; double x=3.4;<br>ERROR: identifier 'x' redeclared<br>Ch&gt; x<br>5 <br>Ch&gt;</pre>
+  <p>There is a loophole in Ch though&mdash;if we find that we declared x as an int by accident when what we really wanted was to declare it as a double, we can type <code>remvar x</code> and the declaration of x will be removed. Check out this example, where we remove the variable x and then redeclare it as a double.</p>
+    
+  <pre>Ch&gt; <strong>stackvar</strong><br>    x                   5<br>    y                   9<br>    z                   -42<br>Ch&gt; <strong>remvar x</strong><br>Ch&gt; <strong>stackvar</strong><br>    y                   9<br>    z                   -42<br>Ch&gt; <strong>double x=3.5;</strong><br>Ch&gt; <strong>stackvar</strong><br>    y                   9<br>    z                   -42<br>    x                   3.5000<br>Ch&gt; <strong>x</strong><br>3.5000 <br>Ch&gt; </pre>
+   <p> You can only do this inside Ch&mdash;not in a regular C program. The only reason I'm showing you this is in case you make a mistake while declaring a variable&mdash;using remvar gives you a way to fix your mistake without having to redo the entire Ch session up to that point.</p>
+  <p>Now that we understand how to declare variables in Ch, let's move on to working with arrays of integers.</p>
+  <p><strong>Step 4c: Experimenting with arrays of integers, and int * in Ch</strong></p>
+ <p>In C, we can declare an array of integers and give it some initial values all in one step like this:</p>
+ 
+  <pre>Ch&gt; int a[] = {2,7,14,26,31,33};<br>Ch&gt;</pre>
+  <p>(Those happen to be the jersey numbers of all the players on the <a href="http://ucsbgauchos.cstv.com/sports/m-soccer/mtt/ucsb-m-soccer-mtt.html">2009 UCSB Men's Soccer team</a> that have &quot;defender&quot; listed on their position in the roster.) </p>
+   <p>We can then index individual elements of this array as follows:</p>
+   
+  <pre>Ch&gt; <strong>a[0]</strong><br>2 <br>Ch&gt; <strong>a[5]</strong><br>33 <br>Ch&gt; <strong>a[3]</strong><br>26 <br>Ch&gt; </pre>
+<p>   If we type only the name of the array, we get something sort of curious:</p>
+
+  <pre>Ch&gt; <strong>a</strong><br>0x91b4e48 <br>Ch&gt; </pre>
+  <p> What comes up is an address in hexadecimal. The <code>0x</code> part is just a prefix to indicate that the number is in hexadecimal format. The number <code>91b4e48</code> refers to the address in memory of the first number in the array (which happens to be 2.</p>
+  <p>If we declare a regular <code>int</code> variable, say <code>b</code>, and type <code>b</code> at the prompt, we don't get an address&mdash;we get its value:</p>
+ 
+  <pre>Ch&gt; <strong>int b=8;</strong><br>Ch&gt; <strong>b</strong><br>8 <br>Ch&gt; </pre>
+ <p>  But with an array such as <code>a</code>, the situation is different:</p>
+  
+  <pre>Ch&gt; <strong>a</strong><br>0x91b4e48 <br>Ch&gt; <strong>b</strong><br>8 <br>Ch&gt;</pre>
+  <p> We can get the address of b though, by preceeding it with the address of operator, which is the &amp; symbol:</p>
+  
+  <pre>Ch&gt; <strong>&amp;b</strong><br>0x91b58d4 <br>Ch&gt; </pre>
+  <p> (As an aside&mdash;when we pass int variables to the scanf function, this is exactly what we do&mdash;we pass the address of the int variable. That's why the variable has to be preceeded with a &amp; symbol.)</p>
+  <p>Here's one  reason that it is important to understand that the <em>name</em> of an array is a <em>pointer</em> to the array:</p>
+   <ul>
+     <li>When we pass an array to a function, the name of the array becomes an int * &mdash; that is a pointer to int.</li>
+     <li>In the header of the function, and in the function prototype, we declare it as an int *</li>
+   </ul>
+   <h4>Step 4d: Exiting Ch</h4>
+  <p>We are now ready for some programming. Use the exit command get out of Ch and return to the regular Unix prompt. </p>
+ <pre>Ch&gt; <strong>exit</strong><br>-bash-3.2$ </pre>
+
+ <h3>Step 5: Finishing the countOddWithTests program</h3>
+ <p>The object of this lab is finish the program countOddWithTests.c, which uses the principle of test-driven development that we first worked with in lab02.</p>
+ <p>In an earlier step, you copied the program countOddWithTests.c into your directory. Compile it and run it now, and you should see the following output:</p>
+
+  <pre>-bash-3.2$ <strong>make countOddWithTests</strong><br>cc     countOddWithTests.c   -o countOddWithTests<br>-bash-3.2$ <strong>./countOddWithTests</strong><br>Test 1: isOdd(1) failed: got -42 expected 1<br>Test 2: isOdd(2) failed: got -42 expected 0<br>Test 3: isOdd(33) failed: got -42 expected 1<br>Test 4: isOdd(44) failed: got -42 expected 0<br>Test 5: isOdd(-7) failed: got -42 expected 1<br>Test 6: isOdd(-8) failed: got -42 expected 0<br>Test 7: countOdd(a,3) failed: got -42 expected 2<br>Test 8: countOdd(b,5) failed: got -42 expected 3<br>Test 9: countOdd(c,3) failed: got -42 expected 0<br>9 tests failed<br>-bash-3.2$ 
+</pre>
+<p> As we can see, all of the tests are failing. Your job is to make them all pass.</p>
+ <h4>Step 5a: Fix the header comment at the top of the file</h4>
+ <p>Where it says &quot;your name here&quot;, put in your name, and take out the @@@ symbols.</p>
+ <h4>Step 5b: Make the tests of the isOdd function pass.</h4>
+  <p>This part is pretty easy. You need to replace the stub of the isOdd function with some code that correctly returns 1 when x is odd, and 0 when x is even.</p>
+ <p>Remember that the % operator can be used here.</p>
+ <p>Once you have the tests of isOdd working, proceed to step 4c</p>
+ <h4>Step 5c: Make the tests of the countOdd function pass</h4>
+ <p>This is also not too hard&mdash;we can hope that in your previous programming course, you learned how to accumulate a sum.</p>
+ <p>But in case you need some hints, here are some reminders:</p>
+ <ul>
+   <li>Inside the body of your countOdd function, you'll probably want to declare an int variable like count to accumulate the count.</li>
+   <li>You'll need a loop counter variable like i also.</li>
+   <li>You'll want a for loop that steps through every element of the array&mdash;the indices going from 0 to n-1, of course.</li>
+   <li>You'll need to check every element of the array, i.e. a[i], and see if it is odd or not.
+     <ul>
+       <li>One of the key principles of good software design is to reuse code that has already been well-tested.</li>
+       <li>So, for full credit, don't repeat use the % operation inside your countOdd function. Instead, use a call to your isOdd function&mdash;i.e. use <code>if ( isOdd(a[i]) ) </code>&mdash;to check whether </li>
+       <li>Each time you find an odd number, add one to count. You can use <code>count = count + 1; </code>but in C, we typically use <code>count++;</code> instead. </li>
+      </ul>
+   </li>
+  </ul>
+ <p>Notice that the first parameter of the countOdd function is an int *, meaning, in this case, an array of integers. The second parameter, n, is necessary because in C, we don't have a way to check the size of an array (as we do with Java arrays, or Python lists.) We have to pass the size of the array as a separate parameter.</p>
+ <ul>
+   <li>Later, we'll see that this can actually turn this inconvenience into an advantage. We can sometimes &quot;lie&quot; about the size of the array, indicating it is shorter than it really is, and in this way, we make functions that work on just part of an array.</li>
+   <li>Of course, if you &quot;lie&quot; and say that the array is bigger than it really is, then your function is liable to start &quot;trespassing&quot; on other areas in memory where it has no business being&mdash;this is likely to result in an error.</li>
+ </ul>
+ <p>Once the countOddWithTests program is working&mdash;i.e. all the tests are passing, you are ready for the next step.</p>
+ <h3>Step 6: Learning about a program that reads data from a file</h3>
+ <p>In the files you copied this week, you'll also find a file called <a href="files/readFileIntoArray.c">readFileIntoArray.c</a></p>
+ <p>This file illustrates one technique for reading data into an array. Look over the code together with your pair partner, and try to find each of the following things in the code.</p>
+ <ul>
+   <li>This program uses an FILE * variable and the fopen command, both of which you read about in the preparation for todays lab (homework H10).</li>
+   <li>The program uses argv[1] inside the fopen&mdash;this allows us to pass the name of the file we want to read data from in on the command line.</li>
+   <li>So, for example, to read data from <code>nums.dat</code>, we use<code> ./readFileIntoArray nums.dat</code> and to read from <code>data.txt</code> we use <code>./readFileIntoArray data.txt</code></li>
+   <li>This program then
+     uses something we have not yet seen&mdash;the <code>fgets()</code> function&mdash;which reads an entire line of a file into an array of characters called <code>thisline</code>.</li>
+   <li>The program then uses a while loop to read every line of a file, one at at time, into an array of characters called thisline. </li>
+   <li>The while loop condition is:<br>  
+      <br>
+      <code>while (!feof(infile) &amp;&amp; !ferror(infile))</code><br>  
+     <br>
+     which means: while we haven't yet reached the end of the file and we haven't yet had an error.
+     <ul>
+       <li>feof means: &quot;file-end-of-file&quot;</li>
+       <li>ferror means: &quot;file-error&quot;</li>
+     </ul>
+   </li>
+   <li>Inside the loop, the program converts <code>thisline</code> into an integer called <code>thisnum</code>, using the <code>atoi</code> function that we learned about in lab03 and lab04.</li>
+   <li>We then store the number into the array, using <code>count</code> as our index.
+     <ul>
+       <li>The first time we do this, <code>count</code> is 0, so we put the first value into <code>nums[0].</code></li>
+       <li>Then and only then, we increment <code>count</code> to 1 by doing <code>count++</code>.</li>
+       <li>This means the next time through the loop, we'll store data into <code>nums[1]</code>, and then increment <code>count</code> to be&nbsp;2.</li>
+       <li>So, you always use <code>count</code> as an index of the new value <em>first</em> and<em> then</em> increment <code>count</code>.</li>
+       <li>This means that the <code>count</code> values are stored in positions 0 through <code>count-1</code></li>
+     </ul>
+   </li>
+   <li>Note that the code to <em>process</em> the data we read is at the top of the loop&mdash;this means we always check for feof and ferror <em>immediately before</em> we process the data we read. </li>
+   <li>Note that the code to <em>read</em> the data&mdash;the fgets function call&mdash;is immediately<em> before the testing of feof  and ferror in the while loop</em>&mdash;just outside the loop at the top, and just inside the loop at the bottom.</li>
+   <li> Note that we call <code>fclose</code> when we are finished with the file.</li>
+   <li>Note that we have different error messages and non-zero return values for each of the error conditions that can occur.</li>
+   <li>Note that once we've finished reading the file into the array, we call the printArray function to print out all the values.</li>
+ </ul>
+ <p>&nbsp;</p>
+ <p>Once you've looked over the code, compile it. </p>
+ <p>To run it, you'll need a data file. A data file called nums.dat is located in your directory.</p>
+ <p>Run the program with:</p>
+ <p><code>./readFileIntoArray nums.dat</code><br>
+ </p>
+ <p>You should see the values in nums.dat printed out.</p>
+ <p>Now, use emacs to create a file called <code>data.txt</code>&mdash;just type <code>emacs data.txt</code> and start typing in numbers, one per line like this:<br>
+   <br>
+   <code>32<br>
+   47<br>
+   -2<br>
+   999</code><br>
+   <br>
+  Choose any numbers you like.<br>
+  <br>
+  Run the program again with:</p>
+ <p><code>./readFileIntoArray data.txt<br>  
+   </code><br>
+  You'll see that the numbers printed out are now the new ones from the file.</p>
+ <p>Now that we've worked with a program that works on arrays, and we've looked at a program that reads data from a file, its time to bring these two ideas together.</p>
+ <h3>Step 7: countOddInFile.c&mdash;combining the two programs we've seen so far</h3>
+ <p>The program countOddWithTests.c allowed us to do test-driven development of the isOdd function and the countOdd function.</p>
+ <p>The program countOddInFile.c will allow us to use those functions to count the number of odd integers in a data file.</p>
+ <p>We want to be able to type:</p>
+ <p><code> ./countOddInFile nums.dat</code></p>
+ <p>and have the program tell us how many of the integers in the file nums.dat are odd numbers. We'll do this by reading those numbers into an array, and then using the countOdd function that we tested earlier to see </p>
+ <p>Look at the file countOddInFile.c with your pair programming partner. You may want to bring up two other windows with the files readFileIntoArray.c and countOddWithTests.c, so you can compare.</p>
+ <p>Notice the following things:</p>
+ <ul>
+   <li>The main() program from countOddWithTests.c has become the function runTests() inside the new program.</li>
+   <li>Inside the main() of countOddInFile.c, we have a new check after the check of <code>if (argc!=2)</code>&mdash;this new test uses strcmp to check whether argv[1] is equal to the word TEST.
+     <ul>
+       <li>If it is equal to TEST, then instead of continuing with the program, we call the function runTests&mdash;which is the main() program from countOddWithTests.</li>
+       <li>This means to test our functions, we can just run ./countOddInFile TEST&mdash;we put the word TEST in place of the file name.</li>
+       <li>The strcmp function is a little strange&mdash;we compare the result to 0 to see if the two strings are equal.</li>
+      </ul>
+   </li>
+   <li>The main of countOddInFile.c is very similar to readFileIntoArray.c, except at the end, instead of printing out all the values, we make a function call to countOdd, passing in our array of <code>nums</code> and <code>count</code>. The result is that we get the number of odd numbers in the array (which should be the same as the number of odd numbers in the file.)</li>
+  </ul>
+ <p>Now try compiling countOddInFile.c and running it with </p>
+ <p><code>./countOddInFile TEST</code></p>
+ <p>You should see the same output that you saw when you ran countOddWithTests before you fixed the code.</p>
+ <p>Then run it on </p>
+ <p><code>./countOddInFile nums.dat</code></p>
+ <p>The answer that is printed is the stub answer, -42.</p>
+ <p>Now put the same code into countOddInFile.c that you put into countOddWithTests.c&mdash;and try running both of thos commands again. You should see that the tests pass, and that the number printed is the correct number of odd numbers in nums.dat.</p>
+ <p>Try running this on your data.txt file as well, and check that you get the correct result.</p>
+ <p>If you do, you are ready to script!</p>
+ <h3>Step 8: Scripting your assignment</h3>
+
+ 
+ <p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.<br>
+ </p>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Use the proper form of the cd command to put yourself in your ~/cs16/lab04 directory (if you aren't already there)</li>
+   <li>Type <strong>script lab04.txt</strong><br>
+     You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab04.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. </li>
+   <li>Now for each of the programs you worked on this week&mdash;<code>countOddWithTests</code> and <code>countOddInFile</code>&mdash;do the following steps:<br>
+     <ol>
+       <li>Carefully&mdash;type <strong>rm <em>filename</em> </strong>to remove the  executable for each of the programs that you worked on this this week</li>
+       <li>Now, for each of the programs you worked on this week, type <strong>make <em>filename</em></strong> to compile your program. <ul><li>There should be no warnings and no errors&mdash;and since you did the rm command, it should NOT say: <br>
+           <code><em>filename</em> is up to date</code></li>
+           </ul>
+       </li>
+       <li>Next, for each of the programs you worked on this week, program for several command lines to show that it works properly. Include ones that show the &quot;Usage&quot; message, as well as several values that show it works.<br>
+         <br>
+      </li>
+     </ol>
+    </li>
+   <li>Once you've done items 5a,5b,5c for both <code>countOddWithTests</code> and <code>countOddInFile</code>, type <strong>exit</strong> to stop the recording of commands and responses into lab04.txt</li>
+ </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab04 directory called lab04.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab04.txt</p>
+ <p>If it all looks ok, you are ready to submit!</p>
+ <h3>Step 9. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+ <pre>turnin lab04@cs16 lab04</pre>
+ <p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+ <p>&nbsp; </p>
+ <hr>
+ <h2>Evaluation and Grading (250 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab04 directory containing
+           <ul>
+               <li> required:  countOddWithTests.c, countOddInFile.c, lab04.txt (a transcript file) </li>
+               <li>optional: other programs that were part of the files you copied for the lab this week</li>
+           </ul>
+         </li>
+       <li>20 points: submission is on time and follows submission instructions
+         <ul>
+               <li>(i.e. is done via turnin by the Due Date.)</li>
+         </ul>
+       </li>
+       <li>20 points: The .c files submitted  have good header comments
+         <ul>
+               <li>on first line with name &quot;cs16 lab04&quot; and date, and your name, and that of your pair partner(s)</li>
+         </ul>
+       </li>
+       <li>50 points: transcript file contains everything asked for in the instructions
+         <ul>
+               <li>especially important is that the script contains each of the tests required</li>
+         </ul>
+       </li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     for countOddWithTests.c (points for correctness and style)
+     <ul>
+         <li>30 points: correct implementation of isOdd</li>
+         <li>40 points: correct implementation of countOdd
+           <ul>
+             <li>-10 points if you didn't reuse the isOdd function inside your countOdd function</li>
+           </ul>
+         </li>
+        <li>30 points: indentation, variables names, comments, show understanding of good programming style</li>
+      </ul>
+   </li>
+   <li>Programming Tasks for countOddInFile.c
+     <ul>
+       <li>50 points correctly transferring functions from countOddWithTest.s into countOddInFile.c</li>
+      </ul>
+   </li>
+ </ul>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section in which it was assigned (04/23/2010)</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until <strong>5pm on Friday 04/30/2010.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through <strong>5PM on Wednesday 05/05/2010</strong><br>
+     <br>
+  </p>
+ <p>After 5PM Wednesday 05/05/2010, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+ <p>&nbsp;</p>
+ 
+</div>
+<!-- id = "container" -->
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 Final Exam E03, 10W, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+pre.widePreNoBox {border: none; font-size: 14px; width: auto;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+ul.squareList li {list-style-type: square;}
+.style1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;
+}
+.pageBreakBefore {margin-top: 1em; padding-top: 3em;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"><br />
+  CS16 Final Exam<br />
+  <span class="subhead">E03, 10W, Phill Conrad, UC Santa Barbara<br /> 
+  Thursday, 03/18/2010</span></h1>
+<p class="instructions"><strong>Name:</strong> ________________________________________________________</p>
+<p class="instructions"><br />
+<strong>Umail Address: </strong>__________________________________@ umail.ucsb.edu<br />
+<br />
+<br />
+<strong>Circle Lab section:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4PM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5PM</p>
+<p class="instructions"><a href="exam.pdf">Link to Printer Friendly PDF Version</a> &nbsp;&nbsp;</p>
+<hr />
+<p class="instructions">Please write your name <strong>only</strong> on this page. That allows me to grade your exams without knowing whose exam I am grading.</p>
+<p class="instructions">This exam is <strong>closed book, closed notes</strong>, <strong>closed mouth, cell phone off</strong>,<br />
+  except for:</p>
+<ul>
+  <li class="instructions">You are permitted <strong>one sheet of paper</strong> (max size 8.5x11&quot;) on which to write notes</li>
+  <li class="instructions">These sheets will be collected with the exam, and might not be returned</li>
+  <li class="instructions">Please write your name on your notes sheet</li>
+</ul>
+<p>There are 100 points worth of questions on the exam, and you have 3 hours (180 minutes) to complete the exam.</p>
+<p>A hint for allocating your time:</p>
+<ul>
+  <li>if a question is worth 10 points, spend no more than 10 minutes on it</li>
+  <li>if a question is worth 20 points, spend no more than 20 minutes on it</li>
+  <li>etc.</li>
+</ul>
+<p>That will leave you with 80 extra minutes to check your work, or come to problems that gave you trouble.</p>
+<hr />
+<ol class="theQuestions">
+ 
+<li class="pageBreakBefore">(5 pts) Write the definition of a C struct called LatLng&mdash;a struct that represents a latitude and longitude. <br />
+  <br />
+  The struct should contain two members, both of type <code>double</code>: one called  <code>lat</code>  , and another called <code>lng</code> (note that you can't use the name long since long is a C language keyword.) <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</li>
+
+ <li>Assume that you are continuing with the same program in which you defined <code>struct LatLng</code> (from the previous question).
+   <br />
+   <br />
+   <ol>
+     <li>(5 pts) Write the function prototype&mdash;for this question <strong>only</strong> <strong>the prototype</strong>&mdash;for a <code>void</code> function called <code>initLatLng</code> that takes three parameters:<br />
+        <br />
+         <ul>
+            <li>A parameter called <code>lPtr</code> that is a pointer to a <code>struct latLng</code></li>
+            <li>A parameter called <code>theLat</code> of type <code>double</code></li>
+           <li>A parameter called <code>theLng</code> of type <code>double</code><br />  
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+             <br />
+           </li>
+        </ul>
+      </li></ol>
+      </li>
+      
+   <li class="pageBreakBefore">Still continuing with the same problem from questions 1 and 2:
+     <ol>
+       <li>(10 pts) Now write the full function definition for <code>initLatLng</code>. The function should initialize the values in the struct pointed to by <code>lPtr</code> with the values passed in in the two parameters, <code>theLat</code> and <code>theLng</code>.<br />
+           <br />
+         Hint: I didn't leave much room for your answer, because the correct function definition is pretty short.<br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+       </li>
+       <li>(10 pts) Now, write a very short main program that does only three things inside the main:<br />
+          <br />
+        (1) Declares a variable of type <code>struct LatLng</code> with the name <code>sbaAirport</code><br />
+          (2) Calls the <code>initLatLng()</code> function to initialize the variable  <code>sbaAirport</code> to latitude 34.43, longitude -119.84<br />
+          (3) Returns a value to the operating system indicating &quot;success&quot;.<br />
+          <br />
+        Your program should have <code>#include &quot;latLng.h&quot;</code> before the main&mdash;you can assume that your definition of struct LatLng from question 1 and the function prototype for initLatLng both appear inside that header file.<br />
+        <br />
+        (Note: Clearly, this program does no useful work&mdash;it would be only the starting point for a more useful program.)<br />
+        <br />
+        <br />
+        <br />
+        </p>
+       </li>
+     </ol>
+   </li>
+ 
+ </li>
+ 
+ <li class="pageBreakBefore">(2 pts) When memory is allocated in a C program for a local variable in a function, is that memory allocated on the stack, or on the heap?<br />
+      <br />
+  Circle one:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heap<br />
+      <br />
+      <br />
+    <br />
+  </li>
+  <li>(2 pts) When memory is allocated in a C program by using malloc or calloc, is that memory allocated on the stack or on the heap?<br />
+    <br />
+    Circle one:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heap<br />
+    <br />
+    <br />
+  </li>
+  <li>(2 pts) As we discussed in lecture, recursive functions typically operate by calling themselves repeatedly until a base case is reached&mdash;with each call, a new copy of the function is created in memory.<br />
+    <br />
+Where are these copies placed in memory&mdash;on the stack, or the heap?<br />
+<br />
+Circle one:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stack&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heap<br />
+<br />
+<br />
+  <br />
+  <br />
+  </li>
+  
+   <li>(3 pts) Suppose I have the variables:<br />  
+    <code><br />
+    char thisCity[20] = &quot;Santa Barbara&quot;;<br />
+    char thatCity[20] = &quot;Los Angeles&quot;;</code><br />
+    <br />
+    If I want to set the contents of thatCity to be the same as the contents of thisCity, in C I can't just use:<br />
+    <br />
+    <code>thatCity = thisCity;</code><br />
+    <br />
+    because that would change where <code>thatCity</code> points, and you can't change where the name of an array points in C.<br />
+    <br />
+    What line of code do I write instead? <br />
+    (Hint: you may assume that <code> #include &lt;string.h&gt;</code> appears at the top of the program.)<br />
+    <br />
+  </li>
+ 
+ <li class="pageBreakBefore"> Below are two functions that find the sum of an array. 
+   <br />
+   <br />
+   <ol>
+     <li>(3 pts) Is <code>sumArray1() </code>a recursive function? Why or why not? (Be specific)<br />
+        <br />
+        <br />
+        <br />
+     </li>
+     <li>(3 pts) Is <code>sumArray2()</code> a recursive function? Why or why not? (Be specific)<br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <pre>
+int sumArray1(int *a, int n)
+{
+  if (n&lt;=0)
+    return 0;
+  else
+    return a[0] + sumArray1(a + 1, n-1);
+}
+
+
+
+int sumArray2(int *a, int n)
+{
+  int sum=0;
+  int i;
+  for (i=0;i&lt;n;i++)
+    sum += a[i];
+  return sum;
+}
+
+
+        </pre>
+      
+     </li>
+   </ol>
+ </li>
+ 
+  
+  <li>When I print out a pointer variable in the Ch interpreter or using the &quot;%p&quot; format specifier in printf, the output contains values such as these: <code>094b1e2c</code> <br />
+    <br />
+      <ol>
+        <li>(2 pts) What kind of value is this that contains both digits and letters such as&mdash;in this case&mdash;b, e and c?<br />
+          <br />
+          <br />
+        </li>
+        <li>(4 pts) Convert <code>094b1e2c</code> to an equivalent representation in ones and zeros.<br />
+        <br />
+          <br />
+        </li>
+        <li>(2 pts) What does the numerical value of a pointer&mdash;a number such as <code>094b1e2c</code>&mdash;actually mean?<br />
+          Or to put it another way, how would you explain what a pointer really is&mdash;in plain english?<br />
+          <br />
+          (I'm not looking for a long answer&mdash;it is possible to answer with only 1 or 2 words, or a very short phrase and get full credit&mdash;if your answer is accurate and to the point.)<br />
+           
+        </li>
+      </ol>
+  </li>
+ 
+  <li class="pageBreakBefore">Here is the definition for a C function called <code>copyPos()</code>&mdash;with a few parts missing that you need to supply.<br />
+    <br />
+    The function copyPos should take an input array src, the length of the input array src, and an output array dest&mdash;the function copies only the positive numbers from src into dest, and returns the number of values copied into dest.<br />
+      <br />
+      <br />
+    Fill in the missing lines of code in the places where you see comments with the <strong><code>@@@</code></strong> symbol<br />
+    <br />
+ <pre class="widePreNoBox">
+// Copy all strictly positive numbers---those greater than zero---<br />// from array src into array dest. 
+// n is the occupancy of array src.
+// Destination array should have capacity at least of size n.
+// Return the number of positive values copied into dest
+
+
+int copyPos(int *src, int *dest, int n)
+{
+   int i;
+   int count=0;
+
+
+   for (i=0;i&lt;n;i++)
+   { 
+
+      if ( ______________________  &gt; 0)  <strong>// @@@ (4 pts) </strong>
+      {
+
+         _____________________ = src[i]; <strong>// @@@ (4 pts)</strong>
+         count++;
+      }
+
+   }
+
+   return count;
+}
+
+</pre>
+    <br />
+  </li>
+  
+  <li class="pageBreakBefore">(5 pts) Here is a recursive function with the name <code>mysteryFunction</code>. As parameters, it takes an array of integers <code>a</code>, and the length of that array <code>n</code> as parameters, and returns an integer. What it actually computes is a mystery for you to solve.<br />
+
+    <br />
+    <pre>
+int mysteryFunction(int *a, int n)
+{
+  if (n==0)<br />    return 0;<br />  <br />  if (a[0]%2==0)<br />    return a[0] + mysteryFunction(a+1, n-1);<br />  else<br />    return mysteryFunction(a+1, n-1);
+}
+      </pre>
+    <p>Solve the mystery by figuring out what the mystery function computes, then decide which of the following is a more reasonable name for the function. <br />
+      <br />
+      Among these possible function names, one (and only one) of them would be a reasonable answer to this question.<br />
+      <br />
+      <code>average, countEven, countMax, countMin, countNeg, countOdd, countPos, countSevens, indexFirstEven, indexFirstOdd, indexOfMax, indexOfMin, isSorted, maxValue, minValue, noDups, sum, sumEven, sumNeg, sumOdd, sumPos. </code><br />
+      <br />
+      <br />
+          
+      <br />
+    </p>
+</li>
+  
+  <li class="pageBreakBefore">
+      <p>(12 pts) Together with this exam, there is a program (on a separate <a href="#handout">handout</a>).<br />
+      </p>
+    <p>Assuming each of the expressions below appeared in this program, indicate the type they would have, or write error if the expression is not valid, e.g. </p>
+    <ul>
+      <li>dereferencing something with * or -&gt; that isn't a pointer</li>
+      <li>a reference to a struct member that doesn't exist (e.g. d.foo where there is no foo)</li>
+    </ul>
+    <br />
+    <br />
+    <p>  The first few are done for you as an example.</p>
+    <p>Hints--for full credit:</p>
+    <ul>
+       <li> don't write<em> pointer to character</em>; instead, write <strong>char *</strong></li>
+      <li>don't write<em> address of int</em>; instead, write <strong>int *</strong></li>
+      <li>don't write <em>address of int *</em> or <em>address of pointer to int</em>, instead write <strong>int **</strong><br />
+      </li>
+    </ul>
+    <p>See <a href="../files/6.html">solution</a></p>
+    <table border="1" cellpadding="1" cellspacing="1" id="typeExpressions">
+       <tr>
+         <td width="90">Expression</td>
+         <td width="199">Type</td>
+       </tr>
+       <tr>
+         <td>a</td>
+         <td><span class="style5 instructions">double *</span></td>
+       </tr>
+       <tr>
+         <td>*b</td>
+         <td><span class="instructions">error</span></td>
+       </tr>
+       <tr>
+         <td>&amp;e</td>
+         <td class="instructions">&nbsp;</td>
+       </tr>
+       <tr>
+         <td>*f</td>
+         <td>&nbsp;</td>
+       </tr>
+       <tr>
+         <td>(*g).x</td>
+         <td>&nbsp;</td>
+       </tr>
+       <tr>
+         <td>h-&gt;y</td>
+         <td>&nbsp;</td>
+       </tr>
+       <tr>
+         <td>e-&gt;center</td>
+         <td>&nbsp;</td>
+       </tr>
+       <tr>
+         <td>j-&gt;m</td>
+         <td>&nbsp;</td>
+       </tr>
+    </table>
+</li>
+  <li class="pageBreakBefore">(12 pts) On one of the homework assignments, you were given short sections of code involving pointers, and asked to make diagrams showing what the memory locations referred to look like after the code has executed.<br />
+      <br />
+  On a separate handout given with this exam, there are a few examples of these problems, along with their solutions to remind you of how to make these diagrams.<br />
+    <br />
+    Draw similar pictures to illustrate the variables,  their values, and where the pointers point, for each of the following.<br />
+    Give only the final values  of the variables and pointers (at the point marked <code>//snapshot of memory taken here</code>)<br />
+    <br />
+    <strong>Hint:</strong> Draw an initial diagram on scratch paper, or in the margin, then change the values and pointer arrows as the statements are executed. Then copy just the &quot;final&quot; version into the answer boxes.<br />
+    <br />
+    Its ok if you go outside the boxes, as long as your answer is clear and legible.<br />
+    <br />
+    <table border="2" cellpadding="1" cellspacing="1">
+      <tr>
+        <th scope="col">code</th>
+        <th scope="col">picture</th>
+      </tr>
+      <tr>
+        <td><pre><br />int a=2, b=1, *ptr=&amp;a;<br />
+b = *ptr;
+// snapshot of memory taken here<br /><br />
+        </pre></td>
+        <td><img src="files/emptyPicture.png" alt="empty picture" /></td>
+      </tr>
+      <tr>
+        <td><pre>int a=3, b=5, c=7, *ptr=&amp;c;<br />
+(*ptr) = a;<br />a = b;<br />b = (*ptr);<br />
+// snapshot of memory taken here</pre></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><pre>int a=3, b=5, c=7, *ptr1=&amp;a, *ptr2=&amp;b, *ptr3;<br />
+ptr3 = ptr1;<br />
+ptr1 = ptr2;<br />
+ptr2 = ptr3;<br />
+// snapshot of memory taken here</pre></td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+   
+  </li>
+
+  <li class="pageBreakBefore">(10 pts) On lab08, you were provided several definitions and function prototypes to work with. Here are a few of them:<br />
+    <pre class="widePre"><br />
+struct Point {  
+  double x;<br />
+  double y;<br />
+};<br /><br />
+void initPoint(struct Point *p, double xVal, double yVal);<br />
+struct Point makePoint(double xVal, double yVal);<br />void drawLine(struct Drawing *d, struct Point p1, struct Point p2, int color);</pre>
+    <br />
+    <p>Using these, write the definition for a function drawH that draws the letter H (as shown below).<br />
+      <br />
+     Here is the function prototype for the drawH function you should define:<br />
+    <pre class="widePre">void drawH(struct Drawing *d, <br />	   struct Point ul, // upper left corner<br />	   double w, // width<br />	   double h, // height<br />	   int color);</pre>
+    And here is a sample main, and its output<br />
+    <br />
+    <table>
+      <tr>
+        <td>   
+          <pre class="widePre">
+int main()
+{
+  struct Drawing d;
+
+  initDrawing(&d, DRAWINGTYPE_COLOR, 200, 100, COLOR_WHITE);
+<br /> 
+  drawH(&d,makePoint(10,10),20,50,COLOR_RED);
+  drawH(&d,makePoint(100,10),50,20,COLOR_BLUE);
+<br />
+
+  writeFile(&d, FILENAME);
+
+  return 0;
+}
+                   </pre></td>
+         <td><img src="files/ourDrawing.gif" alt="Letter H examples" width="200" height="100" /></td>
+      </tr>
+    </table>
+    <br />
+    <p class="style1">If you need extra room, use the space on the next page</p>
+     <p class="style1" style="page-break-before:always">Extra space for your answer to question 14</p>
+    <br />
+  </li>
+
+  
+</ol>
+
+<p class="pageBreakBefore"></p>
+<hr />
+<h2 class="instructions">End of Exam</h2>
+<p class="instructions"><span id="pointCount">Total points: ?</span></p>
+<div class="pageBreakBefore">
+<h2 class="instructions"  id="handout" align="center">CS16 Final Exam<br />
+  Extra Handout<br />
+Side 1&mdash;for question 12</h2>
+<p class="instructions">Program for question about types</p>
+<pre class="widePre">
+// types.c  Code for exam question, 11/15/2009
+// P. Conrad for CS16, 09F, UCSB
+
+
+#include &lt;stdio.h&gt;
+ 
+
+struct Point {
+  double x;
+  double y;
+};
+
+
+struct Date {
+  int d;
+  int m;
+  int y;
+};
+
+
+struct Circle {
+  struct Point center;
+  double radius;
+};
+
+
+int main(int argc, char *argv[])
+{
+  double *a;
+  double b;
+  int *c;
+  int d;
+  struct Circle *e;
+  struct Circle f;
+  struct Date *i;
+  struct Date j;
+  struct Point *g;
+  struct Point h;
+
+  // Program does no useful work
+  // It is just the basis of a homework assignment about types<br />
+
+  
+  // Pretend there is useful code here, and then 
+  // answer questions about the types of various expressions
+  // as if they appeared right here.
+
+
+  return 0;
+
+
+}
+</pre>
+
+
+<h2 class="pageBreakBefore" align="center"><span class="instructions">CS16 Final Exam<br />
+  Extra Handout<br />
+  Side 2&mdash;for question 13</span></h2>
+<h3>Example diagrams to illustrate how to answer question 13</h3>
+<p>
+  Note that in the second example, the value 1 shown in the picture for <code>c </code>is<em> not a typo.</em><br />
+  This is because the line of code <code>(*ptr)&nbsp;=&nbsp;a; </code>changed that value from 5 to 1.<br />
+  <br />
+</p>
+<table border="2" cellspacing="1" cellpadding="1">
+  <tr>
+    <th scope="col">code</th>
+    <th scope="col">picture</th>
+  </tr>
+  <tr>
+    <td><pre><br />int a=1, b=2, *ptr;<br />
+ptr = &amp;b;
+// snapshot of memory taken here<br /><br />
+          </pre></td>
+    <td><img src="files/examplePicture1.png" alt="picture of memory locations"  /></td>
+  </tr>
+  <tr>
+    <td><pre><br />int a=1, b=2, c=5, *ptr=&amp;c;<br />
+*ptr = a;
+// snapshot of memory taken here<br /><br />
+          </pre></td>
+    <td><img src="files/examplePicture2.png" alt="example picture 2" /></td>
+  </tr>
+</table>
+</div>
+</body>
+</html>

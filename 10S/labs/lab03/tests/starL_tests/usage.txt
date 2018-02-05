@@ -1,0 +1,1 @@
+Usage: ./starL width height

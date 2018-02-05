@@ -1,0 +1,11 @@
+Q1) Write the definition of a C function that takes two integers as
+parameters, namely: pts and totalPts.  pts is the number of points
+that a student got on an exam, and totalPts is the total number of
+points the exam is worth.
+
+The function should be called passingScore, and it should return 1 if
+the students score on the exam is at least 70% (i.e. 0.7), otherwise
+it should return 0.
+
+Don't worry about totalPts being zero. But, do watch out for integer
+division!

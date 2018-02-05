@@ -1,0 +1,88 @@
+
+(0)  Announcements:   crashers done!
+
+  AFAIK, everyone who wanted an add code and stuck around to do the
+  homeworks got an add code.  (It was close though).
+
+(1) Quick tricks:
+
+Exponents:
+
+   2^3 and 3^2 don't do what you expect in C.  (they are bitwise-xor)
+  
+   Use pow(2,3) or pow(3,2) instead, or just x*x  or x*x*x
+
+   Note that pow() returns a double, and requires #include <math.h>
+   as well as:
+      export CFLAGS="-lm"
+   Before you make a program that does #include <math.h>
+
+The annoying make completion thingy:
+
+  To get completion to work with make (for now):
+
+     complete -r make
+   
+(2) firstCProgram.c
+
+what happens when you enter y
+
+(3) review of printNXs and printNXsCmd
+
+Note what happens when you type printNXsCmd without anything on the
+command line.
+
+See how annoying this is...   the whole "segmentation fault" thing.
+
+A future lab will cover how to debug seg faults.
+
+(4) Talk about how to use
+
+ void printNXs(int n);
+
+to implement:
+
+ void printXBox(int width, int height;)
+
+
+(5) Compare that with the alternative---a nested loop
+
+  Talk about how with nested loops you need different variables, i, j
+
+  Show what happens if you don't do that...
+
+
+(6) How would you make 
+
+void triangleBox(int n);
+
+where for n=5 the output is:
+
+x
+xx
+xxx
+xxxx
+xxxxx
+
+where for n=3 the output is?
+
+x
+xx
+xxx
+
+How about the "love and kisses function":
+
+void loveAndKisses(int n);
+
+n=5:
+
+xoxox
+
+n=6:
+
+xoxoxo
+
+
+
+
+

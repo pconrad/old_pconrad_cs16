@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, lab03, Fall 2009 (09F)--Input Options: scanf and command line args</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+.style2 {font-family: "Times New Roman", Times, serif; font-style: italic; }
+</style>
+</head>
+
+<body>
+<div id="container">
+ <h1>CS16, Fall 2009</h1>
+ <h1>lab03: <span class="smallerFont">(&quot;lab three&quot;)<br>
+   Input Options: scanf and command&nbsp;line&nbsp;arguments<br>
+     <br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Customize the prompt in Ch using <code>_prompt = &quot;Ch&gt; &quot;</code></li>
+   <li>Use Ch to experiment with the atoi() and atof functions()</li>
+   <li>Show how to use  atoi and atof to convert from strings to int and double, respectively</li>
+   <li>Use printf/scanf to get input for both int and double values</li>
+   <li>Use command line arguments (int argc, char *argv[]) to get int and double values</li>
+  </ul>
+ <p>	You'll also get more practice with:</p>
+ <ul>
+   <li>Using the <code>script</code> program to create a transcript, showing that your program runs successfully.</li>
+ </ul>
+ <h2>Skills Needed</h2>
+ <p>By now, we expect that you are comfortable with these basic skills from lab00, lab01, lab02, so we will no longer describe them in as much detail as we did previously:</p>
+ <ul>
+   <li>Using a text-editor (we suggest emacs) to create and/or edit C programs</li>
+   <li>Running C programs</li>
+   <li>Using the computers in both the CSIL and the Cooper labs to do basic things</li>
+   <li>Performing basic management of directories and files</li>
+   <li>Submitting assignments in this class with the &quot;turnin program.</li>
+</ul>
+ <h2>Step by Step Instructions</h2>
+ <h2 id="step1">&nbsp;</h2>
+ <h3>Step 0: If you haven't completed lab00, lab01, and lab02, please do so now.</h3>
+ <p>You'll need some of the skills from lab00, lab01 and lab02 in order to complete this lab.<br>
+    <br>
+  We will not accept your lab03 submission until lab00, lab01 and lab02 are complete. So please finish these first if you haven't submitted them yet, via the turnin program.</p>
+ <h3>Step 1: Log on to CSIL, bring up a terminal window, and create a ~/cs16/lab03 directory.</h3>
+ <p>If you've forgotten how, consult steps 1 and 2 from <a href="../lab01">lab01</a>.<br>
+   <br>
+ </p>
+ <h3>Step 2: Copying some programs from my directory</h3>
+ <p>Visit the following web link&mdash;you may want to use &quot;right click&quot; (or &quot;control-click&quot; on Mac) to bring up a window where you can open this in a new window or tab:</p>
+ <ul>
+   <li><a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab03/files">http://www.cs.ucsb.edu/~pconrad/cs16/09F/labs/lab03/files<br>
+   </a></li>
+  </ul>
+ <p>You should see a listing of several C programs. We are going to copy those into your ~/cs16/lab03 directory all at once with the following command:</p>
+ <pre><p>cp ~pconrad/public_html/cs16/09F/labs/lab03/files/* ~/cs16/lab03</p></pre>
+ <ul>
+   <li>Note: If you get the error message:<br>  
+     <code><br>
+     cp: target `/cs/student/youruserid/cs16/lab03' is not a directory</code><br>
+     <br>
+     then it probably means you didn't create a ~/cs16/lab03 directory in step 1, so go back to step 1 and do that first.</li>
+ </ul>
+ <p>The * symbol in this command is a &quot;wildcard&quot;&mdash;it means that we want all of the files from the source directory copy be copied into the destination directory namely ~/cs16/lab03. </p>
+ <p>After doing this command, if you cd into ~/cs16/lab03 and use the ls command, you should see four files in your ~/cs16/lab03 directory:  </p>
+ <pre>-bash-3.2$ <strong>ls</strong><br>
+multiply.c  multiplyInteractive.c  rectPrism.c  rectPrismInteractive.c<br>-bash-3.2$ </pre>
+ If so, you are ready for step 3.</p>
+ <h3>Step 3: Experimenting with atoi() and atof() in Ch</h3>
+ <p>We won't be working with the C files we copied until Step 4. </p>
+ <p>For this step, we are going to use the Ch program to experiment with two functions that are part of the standard library, <code>stdlib.h</code>. These functions are:</p>
+ <ul>
+   <li>atoi() for converting strings to integer values</li>
+   <li>atof() for converting strings to double values</li>
+  </ul>
+ <p>In a regular C program, if you want to use these functions, you need to use</p>
+ <pre>#include &lt;stdlib.h&gt;</pre>
+ <p>to pull in the definitions of these functions. In Ch, though, we can just type in some sample function calls and see what happens.</p>
+ <h4>Step 3a: Bringing up Ch</h4>
+ <p>When logged in at a terminal session in the Cooper lab or on CSIL, type <code>ch</code> at the Unix prompt.</p>
+ <p>You should see something like this (except the directory will be different) </p>
+ <pre>-bash-3.2$ <strong>ch</strong><br>
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+
+/cs/faculty/pconrad/cs16/lab03&gt; </pre>
+The very long prompt is an indication of what directory you are in. In lab02, we just used cd to  go back to our home directory, shortening the prompt:
+<pre>/cs/faculty/pconrad/cs16/lab03&gt; <strong>cd</strong><br>
+/cs/faculty/pconrad&gt;</pre>
+<p>But there is an even better way, which we'll discuss next:</p>
+ <h4>Step 3b: Customizing the Ch prompt</h4>
+ <p>While in Ch, type the following command:<code> _prompt = &quot;Ch&gt; &quot;</code><br>
+  </p>
+ <p>This will change your prompt to <code>Ch&gt;</code></p>
+ <p>Note  the following important details:</p>
+ <ul>
+   <li>the underscore _ at the beginning of  <code>_prompt</code></li>
+   <li>the space after the &gt; and before the &quot; inside <code>"Ch> "</code></li>
+  </ul>
+ <p>Here's what doing that may look like:</p>
+ <pre>/cs/faculty/pconrad&gt; <strong>_prompt = &quot;Ch&gt; &quot;</strong>
+Ch&gt;</pre>
+ <p>Now, your prompt is <code>Ch&gt; </code>(with a space after it).</p>
+ <p><strong>Step 3c: Experimenting with atoi() </strong></p>
+ <p>The atoi function converts from a string such as &quot;3&quot; into an int value like 3. We can see how this works at the Ch prompt:</p>
+ <pre>Ch&gt; <strong>atoi(&quot;3&quot;)</strong><br>3 <br>Ch&gt; <strong>atoi(&quot;5&quot;)</strong><br>5 <br>Ch&gt; <strong>atoi(&quot;-42&quot;)</strong><br>-42 <br>Ch&gt; </pre>
+ <p>Note that the argument to atoi must be a string&mdash;something in &quot;&quot; such as &quot;3&quot; or &quot;-42&quot;. If we use a single character, in single quotes such as '3', we will get an error:</p>
+ <pre>Ch&gt; <strong>atoi('4')</strong>
+WARNING: found char where pointer to char is expected
+Ch&gt; </pre>
+ <p>The error message is saying the atoi found a char ('4') but what it expected was a &quot;pointer to char&quot; such as &quot;4&quot;. Here's what &quot;pointer to char&quot; means in this context:</p>
+ <ul>
+   <li>The type associated with string values in C (such as &quot;4&quot;) is <code>char&nbsp;*</code></li>
+   <li>We read <code>char *</code> as  &quot;char star&quot;</li>
+   <li>What <code>char *</code> <em>means</em> is  &quot;pointer to char&quot;.</li>
+   <li>We'll learn more about pointers in coming days/weeks, but for now just know that a string value such<code> &quot;4&quot;,</code> <code>&quot;Pam&quot;</code>, or <code>&quot;Michael&nbsp;Scott&quot; </code>is represented in C as a <code>char&nbsp;*</code>, which means &quot;pointer to char&quot;.</li>
+  </ul>
+ <p>Here's another thing we cannot do with atoi()&mdash;we can't pass in an int or a double. Try both of these and see what you get:</p>
+ <p>atoi(4)<br>
+ atoi(4.5)</p>
+ <p>Read the error messages and see if they make sense to you.</p>
+ <p>Here's a couple of other things to try. These will not result in error messages&mdash;instead, you'll get to see what atoi() does when the argument is a string, but does not contain an int&mdash;at least not an int all by itself:</p>
+ <p><code>atoi(&quot;six&quot;)<br>
+   atoi(&quot;Go Gauchos&quot;)<br>
+   atoi(&quot;4ever&quot;)<br>
+   atoi(&quot;d4&quot;)<br>
+   atoi(&quot;3.14&quot;)<br>
+   atoi(&quot;7.99&quot;)<br>
+  atoi(&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5&quot;)</code></p>
+ <p>Based on what you see here, see if you can discover answers to the following questions. Type in more examples if you need to, in order to find the general rules:</p>
+ <ul>
+   <li>What does atoi() do when its input starts with a letter?</li>
+   <li>What does atoi() do with real numbers such as 3.14 or 7.99?</li>
+   <li>What does atoi() do when its input starts with a valid integer, but then contains letters after it?</li>
+   <li>What does atoi() do when it encounters input that starts with lots of spaces?</li>
+  </ul>
+ <p>In case you are wondering, the name atoi() comes from &quot;ASCII to integer&quot;. ASCII is the code that is used to convert individual characters are converted into binary and stored in the computers memory. In this code, the digit 0 is represented as 48, 1 as 49, 2 as 50, etc. </p>
+ <p>So, this function converts, for example, </p>
+ <ul>
+   <li>From '3' which is represented as 51 in ASCII, or 00110011 binary,</li>
+   <li>Into the actual int value 3 which is 00000011 in binary.</li>
+ </ul>
+ <p><strong>Step 3c: Experimenting with atof() </strong></p>
+ <p>Next, consider the function atof(). This function converts ascii to floating point&mdash;except, as we discussed in lecture, most folks don't use float anymore, but use double instead.</p>
+ <p>So, go figure&mdash;atof() converts not from ASCII to float, but from ASCII to double. You might think that the function would be called atod() but it isn't. Such is life.</p>
+ <p>Try typing in each of these for atof() to see what happens. Some of these will work, and others will result in error messages. Try to predict, based on your experience with atoi() what will happen in each case:</p>
+ <p>atof(&quot;3.5&quot;)<br>
+ atof(&quot;3&quot;)<br>
+ atof('3')<br>
+ atof(3.5)<br>
+ atof(3)<br>
+ atof(&quot;pi&quot;)<br>
+ atof(&quot;1E2&quot;)<br>
+   atof(&quot;1F2&quot;)<br>
+    atof(&quot;F12&quot;)<br>
+  atof(&quot;-4.5E-2&quot;)</p>
+ <p>Once you are satisfied that you understand how atoi and atof work, you are ready for some programming. Use the exit command get out of Ch and return to the regular Unix prompt.</p>
+ <p>
+   <pre>Ch&gt; <strong>exit</strong><br>-bash-3.2$ </pre>
+ </p>
+ <h3>Step 4: Writing two programs</h3>
+ <p>The object of this lab is to write two programs, called:</p>
+ <ol>
+   <li>evalquadInteractive.c</li>
+   <li>evalquad.c</li>
+  </ol>
+ <p>These two programs are both designed to evaluate a quadratic function such as:</p>
+ <p class="doubleSizeMath"><em>f</em>(<em>x</em>) = <em>ax</em><sup>2</sup> + <em>bx</em> + c</p>
+ <p>The programs will take as input the values for <span class="style2">a</span>, <span class="style2">b, c </span> and <span class="style2">x</span>, and provide as output the value of <span class="singleSizeMath"><em>f</em>(<em>x</em>)</span> for the given values.</p>
+ <p>(Hint for later: note that in C, there is no exponentiation operator, so to compute ax<sup>2</sup>, it is easiest to just multiply a*x*x; In particular, x^2 <strong>will compile</strong> in C, but it <strong>won't</strong> give you the value of x squared!)</p>
+ <p>The difference between the two programs will be in how they take their input.</p>
+ <p><strong>evalquadInteractive.c</strong> will take its input through a conversation with the user:</p>
+ <p>
+  <pre>-bash-3.2$ make evalquadInteractive<br>cc     evalquadInteractive.c   -o evalquadInteractive<br>-bash-3.2$ ./evalquadInteractive <br>This program calculates the value of f(x) for a quadratic equation.<br>Please enter value for a: 1<br>Please enter value for b: 2<br>Please enter value for c: 3<br>Please enter value for x: 4<br>The value of f(x) is 27.000000<br>-bash-3.2$ ./evalquadInteractive <br>This program calculates the value of f(x) for a quadratic equation.<br>Please enter value for a: 4<br>Please enter value for b: 3<br>Please enter value for c: 2<br>Please enter value for x: 1<br>The value of f(x) is 9.000000<br>-bash-3.2$ ./evalquadInteractive <br>This program calculates the value of f(x) for a quadratic equation.<br>Please enter value for a: 1<br>Please enter value for b: 0<br>Please enter value for c: 1<br>Please enter value for x: 0.5<br>The value of f(x) is 1.250000<br>-bash-3.2$ </pre>
+ </p>
+ <p>By contrast, <strong>evalquad.c </strong>will take its input through command line parameters, those being the values for a,b,c and x, in that order:</p>
+ <p>
+  <pre>-bash-3.2$ make evalquad<br>cc     evalquad.c   -o evalquad<br>-bash-3.2$ ./evalquad<br>Usage: ./evalquad a b c x<br> Calculates value of a quadratic equation f(x) for given values<br> of a,b,c and x<br>-bash-3.2$ ./evalquad 1 2 3 4<br>The value of f(x) is 27.000000<br>-bash-3.2$ ./evalquad 4 3 2 1<br>The value of f(x) is 9.000000<br>-bash-3.2$ ./evalquad 1 0 1 0.5<br>The value of f(x) is 1.250000<br>-bash-3.2$ ./evalquad 0.5 1 1 0.5<br>The value of f(x) is 1.625000<br>-bash-3.2$ </pre>
+ </p>
+ <p>To help you understand how to write these two programs, I've provided four sample programs&mdash;these are the ones you copied into your directory in an earlier step:</p>
+ <ul>
+   <li>The programs <code>multiplyInteractive.c </code>and <code>rectPrismInteractive.c</code> are good models for the program <code>evalquadInteractive.c</code></li>
+   <li>The programs <code>multiply.c</code> and <code>rectPrism.c</code> are good models for the program <code>evalquad.c</code><br>
+    </li>
+  </ul>
+ <p>So, to get started, look over those four programs. You might want to start by looking over only <code>multiplyInteractive.c </code>and <code>rectPrismInteractive.c</code>, and focusing on how to write <code>evalquadInteractive.c</code></p>
+ <p>Then, once your evalquadInteractive.c program is working properly, turn your attention to evalquad.c (the command line version.) </p>
+ <p>Once your programs both work as in the examples above, you are ready to script your assignment.<br>
+ </p>
+ <h4><strong>Extra Hints</strong></h4>
+ <p>Here are some hints for working with the sample programs.</p>
+ <p>Look first at multiplyInteractive.c</p>
+ <p>Here is a sample session of working with multiplyInteractive.c. Notice what happens in various circumstances. The really interesting ones are towards the end!</p>
+ <p>
+  <pre>-bash-3.2$ <strong>make multiplyInteractive</strong><br>cc     multiplyInteractive.c   -o multiplyInteractive<br>-bash-3.2$ <strong>./multiplyInteractive </strong><br>This program calculates the product of two integers.<br>Please enter first integer: <strong>3</strong><br>Please enter height: <strong>2</strong><br>The product is 6<br>-bash-3.2$ <strong>./multiplyInteractive </strong><br>This program calculates the product of two integers.<br>Please enter first integer: <strong>5</strong><br>Please enter height: <strong>2</strong><br>The product is 10<br>-bash-3.2$ <strong>./multiplyInteractive </strong><br>This program calculates the product of two integers.<br>Please enter first integer: <strong>2</strong><br>Please enter height: <strong>5</strong><br>The product is 10<br>-bash-3.2$ <strong>./multiplyInteractive </strong><br>This program calculates the product of two integers.<br>Please enter first integer: <strong>4.5</strong><br>Please enter height: The product is 538055588<br>-bash-3.2$ <strong>./multiplyInteractive </strong><br>This program calculates the product of two integers.<br>Please enter first integer: <strong>Oprah</strong><br>Please enter height: The product is -986594480<br>-bash-3.2$ df</pre>
+ </p>
+ <p>Next try running the rectPrismInteractive program. Note that it takes doubles rather than integers as its inputs: </p>
+ <p>
+  <pre>bash-3.2$ <strong>make rectPrismInteractive</strong><br>cc     rectPrismInteractive.c   -o rectPrismInteractive<br>-bash-3.2$ <strong>./rectPrismInteractive </strong><br>This program calculates the volume of a rectangular prism.<br>Please enter width: <strong>2</strong><br>Please enter height: <strong>3</strong><br>Please enter length: <strong>4</strong><br>The volume is 24.000000<br>-bash-3.2$ <strong>./rectPrismInteractive </strong><br>This program calculates the volume of a rectangular prism.<br>Please enter width: <strong>3</strong><br>Please enter height: <strong>4</strong><br>Please enter length: <strong>5</strong><br>The volume is 60.000000<br>-bash-3.2$ <strong>./rectPrismInteractive</strong> <br>This program calculates the volume of a rectangular prism.<br>Please enter width: <strong>1.5</strong><br>Please enter height: <strong>2.0</strong><br>Please enter length:<strong> 2.5</strong><br>The volume is 7.500000<br>-bash-3.2$</pre>
+ </p>
+ <p>Then ask yourself: given the sample inputs shown for evalquadInteractive, which program should I use as a model for my printf/scanf? </p>
+ <p>Next, look at both multiplyInteractive.c and rectPrismInteractive.c and look at the printf/scanf pairs that prompt for, and read input. </p>
+ <p>Notice that:</p>
+ <ul>
+   <li>for integer input we use scanf(&quot;%i&quot;,&amp;variable); or scanf(&quot;%d&quot;,&amp;variable);</li>
+   <li>for double input we use scanf(&quot;%lf&quot;,&amp;variable);</li>
+ </ul>
+ <p>Next, notice that in both programs, even though it may seem silly for such a small calculation, we have a separate function for calculating the result. We are doing this for practice&mdash;and to begin to develop good habits. Later on, we will begin to see the value of this more and more.</p>
+ <p>So, in your evalquadInteractive.c program, you should do likewise: come up with a good name for a function that takes the values of a,b,c and x as parameters, and calculates the value of f(x) (i.e. evaluates the function at that value of x.)</p>
+ <p>Look over the rest of multiplyInteractive.c and rectPrismInteractive.c and you should be ready to write evalquadInteractive.c</p>
+ <p>Next, look at  multiply.c and rectPrism.c and notice how they work with command line arguments&mdash;what value do they compare argc to? What value do you need to compare argc to in your program?</p>
+ <p>Then, compare how multiply.c converts the values of argv[1] and argv[2], versus the way that rectPrism.c approaches this problem. Which technique is relevant to you for evalquad.c?</p>
+ <p>With that, you should be ready to write evalquad.c</p>
+ <h4>Step 5: Scripting your assignment</h4>
+ <p>Before doing the transcript&mdash;look over the grading rubric at the bottom of this page. Make sure you've done everything properly to maximize your grade.</p>
+ <p>In this step, we create a &quot;transcript&quot; of your work. We only do this after everything else is finished, and you are sure you have a good working product.</p>
+ <p>Here are the steps to <em>prepare</em> to make a transcript for lab03</p>
+ <ol>
+   <li>Type <strong>pwd</strong>, and make sure you are in the <strong>~/cs16/lab03</strong> directory.</li>
+   <li>Type <strong>ls</strong>, and make sure that you have files called <strong>evalquadInteractive.c</strong> and <strong>evalquad.c </strong>in your directory.
+     <ul>
+       <li>It is acceptable to also have the other C programs you copied from my directory as well as the executable versions.</li>
+     </ul>
+   </li>
+   <li>Run each of your programs to be sure they run.<br>
+   </li>
+   <li>Do this next step very carefully.<br>
+     <br>
+     Type <strong>rm ./evalquadInteractive</strong> (WITHOUT the .c on the end) to delete ONLY the executable.
+     <ul>
+       <li>Be sure you KEEP the evalquadInteractive.c file!  Otherwise you'll be starting from scratch! <br>
+         <br>
+       </li>
+      </ul>
+   </li>
+   <li>Do the same thing for the executable for evalquad&mdash;use the rm command to delete the executables, but make sure you do NOT but the .c  on the end. The command you want is the one below. (Note that starting next week, I'll just say &quot;remove the executables name1 and name2&quot;&mdash;and expect that you'll know what to do.)<br>
+       <br>
+          <strong>rm ./evalquad<br>
+        </strong><br>
+   </li>
+  </ol>
+ <p>Now, to create your script:</p>
+ <ol>
+   <li>Type <strong>script lab03.txt</strong><br>
+   You'll get back a regular looking unix prompt, but something is different now&mdash;everything you type, and everything that comes back from the computer is being recorded into a file called lab03.txt. It's like turning on the video camera.</li>
+   <li>Type <strong>pwd</strong> to show what directory you are in.</li>
+   <li>Type <strong>ls</strong> to show what files you have. (If you did the preparation correctly, we should see secondCProgram.c, but we should NOT see the executable files for thirdCProgram, fourthCProgram or cToFWithTests.</li>
+   <li>Now do the following steps for<strong> evalquadInteractive.c</strong>:
+     <ol style="list-style:lower-alpha">
+       <li>Type <strong>make evalquadInteractive</strong> to show that your program compiles with no errors.</li>
+       <li>Type <strong>./evalquadInteractive</strong> and run your program, showing that it works properly.</li>
+       <li>Now run it again, three more times, with different input each time, to show that it works.</li>
+       <li>Type <strong>head -1 evalquadInteractive.c</strong> to show that your header comment is there with your name, date, and CS16 lab03.</li>
+     </ol>
+   </li>
+   <li>Now repeat steps (a)-(d) for <strong>evalquad.c </strong>(In this case, you'll put different input on the command line each time you run the program.)</li>
+   <li>Type <strong>exit</strong> to stop the recording of commands and responses into lab03.txt</li>
+  </ol>
+ <p>When finished, type ls one more time, and you should see a new file in your lab03 directory called lab03.txt.</p>
+ <p>Use this command to list out the contents of that file:</p>
+ <p>cat lab03.txt</p>
+ <p>You should see your life flashing before your eyes, so to speak&mdash;a feeling of d&eacute;j&agrave; vu should come over you&mdash;because everything in the file will be what you just typed and what came back over the last few minutes.</p>
+ <p>If so, you are ready to submit!</p>
+ <h3>Step 9. Submit your assignment using the turnin program on CSIL</h3>
+ <p>To submit your assignment, you need to be in the ~/cs16 directory&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</p>
+ <p>When you are in inside your cs16 directory, you are ready for the turnin step. </p>
+ <p>Type the following at the prompt:</p>
+<pre>turnin lab03@cs16 lab03</pre>
+<p>If you need detailed information about how turnin works, consult the instructions in <a href="../lab00">lab00</a> through <a href="../lab02">lab02</a>.</p>
+<hr>
+ <h2>Evaluation and Grading (250 pts total) </h2>
+ <ul>
+   <li>Mechanics:
+     <ul>
+         <li>10 points: successfully submitting the contents of your lab03 directory</li>
+         <li>10 points: lab03 directory contains required C programs and lab03.txt (a transcript file)</li>
+         <li>20 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+       <li>20 points: each file contains a header comment on first line with name &quot;cs16 lab03&quot; and date.</li>
+       <li>30 points: transcript file contains everything asked for in the instructions</li>
+     </ul>
+   </li>
+   <li>Programming Tasks
+     (points for correctness and style)
+     <ul>
+         <li>80 points&mdash;Writing evalquadInteractive.c
+           <ul>
+             <li>20 points are for correctly writing a function that takes double parameters for a,b,c abd x and returns the value of <span class="singleSizeMath"><em>f</em>(<em>x</em>) = <em>ax</em><sup>2</sup> + <em>bx</em> + c</span>. Deduct these points if this was not done as a function, but instead as an inline expression in the main program.</li>
+             <li>10 points are for choosing a good name for that function</li>
+             <li>30 points are for the correct operation of the rest of that program, i.e. the printf/scanf pairs</li>
+             <li>20 points are for style, e.g. reasonable commenting, variable names, formatting, etc.</li>
+           </ul>
+        </li>
+         <li>80 points&mdash;Writing evalquad.c
+           <ul>
+             <li>10 points are for correctly writing a function that takes double parameters for a,b,c abd x and returns the value of <span class="singleSizeMath"><em>f</em>(<em>x</em>) = <em>ax</em><sup>2</sup> + <em>bx</em> + c</span>. Deduct these points if this was not done as a function, but instead as an inline expression in the main program.</li>
+             <li>5 points are for choosing a good name for that function</li>
+             <li>15 points are for good error handling of the case where argc is not the correct value, e.g. checking the correct value, a good error message, and good commenting of this part of the program.</li>
+             <li>30 points are for the correct operation of the rest of that program, i.e. the cmd line argument processing.</li>
+             <li>20 points are for style, e.g. reasonable commenting, variable names, formatting, etc.</li>
+           </ul>
+         </li>
+      </ul>
+   </li>
+  </ul>
+ <p>Due Date: You should try to complete this assignment by the end of end of your third discussion section, i.e. before 8:50am on Thursday 10/15/2009 or before 10:50am, 11:50am, or 12:50pm on Friday 10/16/2009 (depending on which section you are enrolled in.)</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week. <strong>You are strongly encouraged to finish it before the midterm exam </strong>at 1pm on Wednesday October 21st&mdash;finishing this lab is a very important way to study for the midterm.</p>
+ <p>In any case, please have it completed and turnin command finished by <strong>10pm on Wednesday October 21.</strong></p>
+ <p>Late assignments will only be accepted (with 20 point penalty) up until the time the TA doing the grading is finished with grading and posting a particular assignment.  There is no specific guarantee as to the length of that period of time.<br>
+   <br>
+  After that, a zero will be recorded, and the only option is to make up the points via extra credit.</p>
+ <hr>
+ <p>Copyright 2009, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

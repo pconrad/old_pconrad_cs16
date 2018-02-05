@@ -1,0 +1,17 @@
+04/14---we went over some code from the midterm exam E01 from
+Winter quarter...
+
+We talked about the difference between return and printf
+in a simple function
+
+We also talked about   the meaning of 2^3   3^2 
+which is NOT exponent, but rather "bitwise exclusive or"
+
+Bitwise exclusive or will not be on midterm E01, but it
+will be on the following one---not because it is that
+important for you to know, per se, but because:
+
+(1) It is good practice with binary
+
+(2) It is helpful in knowing that x^y does NOT mean exponent in C.
+

@@ -1,0 +1,24 @@
+Q2) The function you write for Q1 takes two integers as parameters
+called pts and totalPts, and returns either 1 or 0.
+
+Write a main program that asks the user to input values for these pts
+and totalPts, calls your function, and then uses the result to determine
+what message to print, either:
+
+"Pass"
+
+or
+
+"No Pass"
+
+For example, you might run your program like this:
+
+bash% ./checkScore
+Please enter pts: 10
+Please enter totalPts: 15
+No Pass
+bash% ./checkScore
+Please enter pts: 12
+Please enter totalPts: 15
+Pass
+bash% 

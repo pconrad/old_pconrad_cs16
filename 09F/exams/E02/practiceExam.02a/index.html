@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>PRACTICE EXAM for CS16 Midterm 2, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+	table.smallPres tr td pre {font-size: 0.8em;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+pre span.codeRomanBoldItalicComments {font-family:"Times New Roman", Times, serif; font-style:italic; font-weight:bold; font-size:2.0em;} 
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+table.largeBoxes tr td {height: 2.0em; padding: 10px;}
+ul.squareList li {list-style-type: square;}
+.style1 {font-family: "Courier New", Courier, monospace}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"> <span class="subhead">***MORE PRACTICE QUESTIONS FOR***</span><br />
+  CS16 Midterm Exam 2<br />
+  <br />
+  <span class="subhead">(Practice Exam 02a&mdash;<a href="exam.pdf">printer friendly version</a>)<br />
+E02, 09F, Phill Conrad, UC Santa Barbara<br /> 
+  Actual exam scheduled for: 11/18/2009<br />
+  </span></h1>
+<hr />
+<ol class="theQuestions">
+ <li>(15 pts) Suppose that you are performing the selection sort algorithm&mdash;as explained in lecture, in our &quot;field day&quot; exercise, and in the code for lab06, i.e.<br />
+    <br />  
+     <br />
+   <ul>
+     <li>After the entire sort, elements will be in order from smallest to largest<br />
+     </li>
+     <li>Each pass through the array &quot;selects&quot; the largest element from the smaller array, and swaps it into place (sometimes &quot;swapping with itself&quot; if it is already in place)<br />
+        <br />
+     </li>
+    </ul>
+<p>With that in mind, indicate the values of each element of the array after the 1st, 2nd and 3rd swap. <br />
+  <br />
+  Keeping in mind that some of these swaps may be cases of an element being swapped with itself&mdash;<em>those still &quot;count&quot; as swaps!</em></p>
+    <table border="2" cellspacing="4" cellpadding="4" class="largeBoxes">
+      <tr>
+        <td>&nbsp;</td>
+        <td><div align="center"><span class="style1">a[0]</span></div></td>
+        <td><div align="center"><span class="style1">a[1]</span></div></td>
+        <td><div align="center"><span class="style1">a[2]</span></div></td>
+        <td><div align="center"><span class="style1">a[3]</span></div></td>
+        <td><div align="center"><span class="style1">a[4]</span></div></td>
+      </tr>
+      <tr>
+        <td>initial values</td>
+        <td><div align="center">27</div></td>
+        <td><div align="center">6</div></td>
+        <td><div align="center">42</div></td>
+        <td><div align="center">9</div></td>
+        <td><div align="center">17</div></td>
+      </tr>
+      <tr>
+        <td>after 1st swap</td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+      </tr>
+      <tr>
+        <td>after 2nd swap</td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+      </tr>
+      <tr>
+        <td>after 3rd swap</td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+        <td><div align="center"></div></td>
+      </tr>
+      <tr>
+        <td>after 4th swap (final array)</td>
+        <td><div align="center">6</div></td>
+        <td><div align="center">9</div></td>
+        <td><div align="center">17</div></td>
+        <td><div align="center">27</div></td>
+        <td><div align="center">42</div></td>
+      </tr>
+    </table>
+    <br />
+    <br />
+    <br />
+ </li>
+
+ <li class="pageBreakBefore">Suppose there is an array of integers a, and we want to swap element a[i] with element a[j], as in the following contrived example:<br />
+   <br />
+<pre class="widePre">
+int main()
+{
+   int a[5]={15,35,25,30,20};
+   int i, j;<br />   int temp = 0; // iniialized to zero for no good reason.<br />
+   
+   <br />   // initialize i and j
+   i = 1; 
+   j = 4;
+   
+   printf("Before: a[i] = %d  a[j]=%d \n",a[i],a[j]);
+   
+   // Now swap a[i] with a[j]
+<br />
+
+   <span class="codeRomanBoldItalicComments"> some code goes here...</span>
+<br />
+
+
+   // a[i] and a[j] are now swapped!<br /><br />
+
+
+   printf("After:  a[i] = %d  a[j]=%d \n",a[i],a[j]);
+
+
+}
+</pre>
+If the swap is correct, the output will be:<br />
+    <br />
+    <pre>
+Before: a[i]=35 a[j]=20
+After:  a[i]=20 a[j]=35   </pre>
+  Below and on the next page are several attempts at writing this swap. In some cases, there is a function definition that goes along with the code.<br />
+  <br />
+  In each case, is the swap is correct, simply circle &quot;CORRECT&quot;. If it is incorrect, fill in what will be printed &quot;after&quot; the incorrect swap is run.<br />
+  <br />
+   <br />
+    <ol>
+            <li>(4 pts) Circle CORRECT, or fill in the values: <code>After: a[i] = _____ a[j] = ______</code><br />
+                <br />
+                  <table  class="smallPres">
+                      <tr>
+                        <th scope="col"><strong>function definition goes earlier in file</strong></th>
+                        <th scope="col">put this at <em>some code goes here</em></th>
+                      </tr>
+                      <tr>
+                        <td> <pre>void swap(int a, int b)<br />{<br />   int temp;<br />   temp = a;<br />   a = b;<br />   b = temp;<br />}<br />         
+              </pre></td>
+                        <td> <pre>swap(a[i],a[j]);       
+              </pre></td>
+                      </tr>
+                    </table><p class="pageBreakBefore"><br />
+                    </p>
+      </li>
+      
+      <!-- one of the options for this question -->
+            <li>(4 pts)  Circle CORRECT, or fill in the values: <code>After: a[i] = _____ a[j] = ______</code><br />
+                <br />
+                  <table class="smallPres">
+                      <tr>
+                        <th scope="col"><strong>function definition goes earlier in file</strong></th>
+                        <th scope="col">put this at <em>some code goes here</em></th>
+                      </tr>
+                      <tr>
+                        <td> <pre>void swap(int *a, int *b)<br />{<br />   int temp = 0;<br />   temp = (*a);<br />   (*a) = (*b);<br />   (*b) = temp;<br />}</pre></td>
+                        <td> <pre>swap(&amp;a[i],&amp;a[j]);       
+              </pre></td>
+                      </tr>
+                      </table><p>&nbsp;</p>
+            </li>
+      <!-- one of the options for this question -->
+            <li>(4 pts)   Circle CORRECT, or fill in the values: <code>After: a[i] = _____ a[j] = ______</code><br />
+                <br />
+                  <table class="smallPres">
+                      <tr>
+                        <th scope="col"><strong>function definition goes earlier in file</strong></th>
+                        <th scope="col">put this at <em>some code goes here</em></th>
+                      </tr>
+                      <tr>
+                        <td> <pre>(None)<br />         
+              </pre></td>
+                        <td> <pre>a = temp;
+temp = b;
+b = a;    
+              </pre></td>
+                      </tr>
+                      </table><p>&nbsp;</p>
+      </li>
+      <!-- one of the options for this question -->
+            <li>(4 pts)   Circle CORRECT, or fill in the values: <code>After: a[i] = _____ a[j] = ______</code><br />
+                <br />
+                  <table class="smallPres">
+                      <tr>
+                        <th scope="col"><strong>function definition goes earlier in file</strong></th>
+                        <th scope="col">put this at <em>some code goes here</em></th>
+                      </tr>
+                      <tr>
+                        <td> <pre>None       
+              </pre></td>
+                        <td> <pre>temp = a;
+a = b;
+b = temp;    
+              </pre></td>
+                      </tr>
+                      </table><p>&nbsp;</p>
+      </li>
+      <!-- one of the options for this question -->
+            <li>(4 pts)   Circle CORRECT, or fill in the values: <code>After: a[i] = _____ a[j] = ______</code><br />
+                <br />
+                  <table class="smallPres">
+                      <tr>
+                        <th scope="col"><strong>function definition goes earlier in file</strong></th>
+                        <th scope="col">put this at <em>some code goes here</em></th>
+                      </tr>
+                      <tr>
+                        <td> <pre>void swap(int *a, int i, int j)<br />{<br />   int temp = 0;<br />   temp = a[i];<br />   a[i] = a[j];<br />   a[j] = temp;<br />}<br />
+              </pre></td>
+                        <td> <pre>swap(a,i,j);   
+              </pre></td>
+                      </tr>
+                      </table><p>&nbsp;</p>
+      </li>
+      <!-- one of the options for this question -->
+    </ol>
+ </li>
+</ol>
+<hr />
+<p ></p>
+<h2 class="instructions">End of Extra Practice Questions</h2>
+<p class="instructions"><span id="pointCount">Total points: ?</span></p>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 Midterm 1, 10W, Conrad, UCSB</title>
+<meta http-equiv="Content-Type" content="text /html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<link rel="stylesheet" type="text/css" href="../../../../../cs16.css" />
+<style type="text/css">
+body {width: 7.7in; margin-left:0.4in; margin-right: 0.4in;padding-left:1em;}
+h2, h3 {font-family:Arial, Helvetica, sans-serif;}
+div.framed { border-style: outset; border-width: 1em; border-color: #666666; padding: 2em; }
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+pre.forLoopPre {width:15em;}
+pre.trianglePre{width:7em;}
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+
+
+pre {width:20em;}
+
+.nobreak {white-space:nowrap;}
+.pageBreakBefore {padding-top: 2em;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<div id="container">
+<h1 class="instructions">Followup on Question 8 from<br />
+  CS16 Midterm Exam 1<br />
+  <span class="subhead">E01, 10W, Phill Conrad, UC Santa Barbara<br /> 
+ Tuesday, 02/02/2010, 11am-12:15pm</span> </h1>
+<p class="instructions">&nbsp;</p>
+<hr />
+<p><br />
+  Over half the class received a perfect score on this problem
+(39/72 responses, ~54%).</p>
+<p>The total breakdown was:</p>
+<table border="2" cellspacing="4" cellpadding="4">
+  <tr>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">&nbsp;</th>
+    <th scope="col"><div align="right"></div></th>
+    <th scope="col"><div align="right"></div></th>
+  </tr>
+  <tr>
+    <th scope="row">Correct Answers</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">39</div></td>
+    <td><div align="right">54%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>Group 1</td>
+    <td>24</td>
+    <td><div align="right"></div></td>
+    <td><div align="right"></div></td>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>Group 2</td>
+    <td>15</td>
+    <td><div align="right"></div></td>
+    <td><div align="right"></div></td>
+  </tr>
+  <tr>
+    <th scope="row">Minor Syntax Errors only</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">4</div></td>
+    <td><div align="right">6%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">Minor Logic Errors only</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">12</div></td>
+    <td><div align="right">17%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">At least one major logic error</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">16</div></td>
+    <td><div align="right">22%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">Blank Papers</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">1</div></td>
+    <td><div align="right">1%</div></td>
+  </tr>
+  <tr>
+    <th scope="row">TOTAL</th>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><div align="right">72</div></td>
+    <td><div align="right">100%</div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>There are many ways to answer this question correctly—here's an analysis of the correct answers I got:<br />
+</p>
+<h2>Correct Answer Group 1: (24/72 responses, ~33%)<br />
+Answers based on counting up</h2>
+<p> What all of the answers in this group have in common is that they all count up (the for loop ends in <code>i++</code>),<br />
+  and they all use 
+either <code>printKSpacesNStars(i, width-i); </code>or some slight variation on that.</p>
+<p>The most common answer was this one.</p>
+<h3>Correct Answer 1a (20/72 responses)</h3>
+<pre class="widePre">for (i=0; i&lt;height; i++)<br />{<br />  // print i spaces then width-i stars and a newline<br />  printKSpacesNStars(i, width-i); printf(&quot;\n&quot;);<br />}</pre>
+
+<p> Considering this as a change from the sample code given, to arrive at this answer, you had to reverse the parameters to <span class="widePre">printKSpacesNStars</span>, and change the for loop to count from 0 to height-1 instead of from 1 to height.<br />
+  <br />
+An slight variation on that answer was this one: the same but with <strong>width</strong> instead of <strong>height</strong> in the for loop:</p>
+<h3>Correct Answer 1b (2/72 responses):</h3>
+<pre class="widePre">for (i=0; i&lt;<strong>width</strong>; i++)<br />{<br />  // print i spaces then width-i stars and a newline<br />  printKSpacesNStars(i, width-i); printf(&quot;\n&quot;);<br />}</pre>
+<p>Another slight variation was to use a &lt;= operator, in which case it is necessary to adjust the right operand:</p>
+<h3>Correct Answer 1c (1/72 responses):</h3>
+<pre class="widePre">for (i=0; i<strong>&lt;=height-1</strong>; i++)<br />{<br />  // print i spaces then width-i stars and a newline<br />  printKSpacesNStars(i, width-i); printf(&quot;\n&quot;);<br />}</pre>
+<p>And finally in this group, it is also possible to count from 1 to height, but then you must adjust the parameters to the function by subtracting 1 from i:</p>
+<h3>Correct Answer 1d (1/72 responses):</h3>
+<pre class="widePre">for (i=<strong>1</strong>; i<strong>&lt;=height</strong>; i++)<br />{<br />  // print i spaces then width-i stars and a newline<br />  printKSpacesNStars(i<strong>-1</strong>, width-<strong>(</strong>i<strong>-1)</strong>); printf(&quot;\n&quot;);<br />}</pre>
+<h2>Correct Answer Group 2: (15/72 responses, ~21%)<br />
+  Answers based on counting down</h2>
+<p> What all of the answers in this group have in common is that they all count up (the for loop ends in <code>i-</code>),<br />
+  and they all use 
+  either <code>printKSpacesNStars(width-i, i); </code>or some slight variation on that.</p>
+<p>The most common answer in this group was:</p>
+<h3>Correct Answer 2a (7/72 responses)</h3>
+<pre class="widePre">for (i=height; i&gt;=1; i--)<br />{<br />  // print width-i spaces then i stars and a newline<br />  printKSpacesNStars(width-i,i); printf(&quot;\n&quot;);<br />}</pre>
+
+<p>Two slight variations on this answer changed either the termination condition to an equivalent one, and used either height or width as the initialization for i:</p>
+<h3>Correct Answer 2b (4/72 responses)</h3>
+<pre class="widePre">for (i=height; i<strong>&gt;0</strong>; i--)<br />{<br />  // print width-i spaces then i stars and a newline<br />  printKSpacesNStars(width-i,i); printf(&quot;\n&quot;);<br />}</pre>
+
+<h3>Correct Answer 2c (2/72 responses)</h3>
+<pre class="widePre">for (i=<strong>width</strong>; i<strong>&gt;0</strong>; i--)<br />{<br />  // print width-i spaces then i stars and a newline<br />  printKSpacesNStars(width-i,i); printf(&quot;\n&quot;);<br />}</pre>
+
+<p>There were two more counting down answers that were technically correct, though needlessly complicated:</p>
+<h3>Correct Answer 2d (1/72 responses)</h3>
+<pre class="widePre">for (i=<strong>width</strong>; <strong>0&lt;i</strong>; i--)<br />{<br />  <strong>if (i==width)<br />     printNChars(width, '*'); printf(&quot;\n&quot;);
+  else</strong><br />    printKSpacesNStars(width-i,i); printf(&quot;\n&quot;);<br />}</pre>
+
+The<strong><code> 0 &lt; i</code></strong> isn't a problem here—that's a style preference that some coders prefer because the natural order of left-to-right, smallest to largest. The problem is that the code inside the if is actually <em>equivalent to the code inside the else when the if condition is met. </em>Thus, there is really no need to pull this out as a special case.
+
+<h3>Correct Answer 2e (1/72 responses)</h3>
+<p>This next correct answer is one that at first looks like a logic error, since the for loop appears to be an infinite loop:</p>
+<pre class="widePre">for (i=<strong>height</strong>; <strong>i&lt;=height</strong>; <strong>i--</strong>)<br />{<br />  <strong>if (i==0)<br />  {<br />     return 0;
+  }</strong><br />  printKSpacesNStars(width-i,i); printf(&quot;\n&quot;);<br />}</pre>
+<p>
+Since <code>i</code> starts at <code>height</code> and goes down, the condition <code>i&lt;=height </code>is true the first time, and will remain true forever (or at least until <code>i</code> wraps around past the most negative integer.) <br />
+<br />
+But because there is an if inside the loop that checks for <code>i==0 </code>and does a <code>return</code> to end the function, the loop actually does terminate. </p>
+<p>It would be much simpler to just write this like answer 2b, to which it is, in effect, equivalent (provided there is no code after the for loop inside the function.)</p>
+<h2>Correct responses with minor syntax errors (4/72, ~6%)</h2>
+<p>There were four more papers with correct answers that had minor syntax errors.</p>
+<p>I deducted -1 for using , instead of ; in the for loop:</p>
+<p><strong>Wrong: </strong><span class="widePre"><code>for (i=0<strong>,</strong> i&lt;height<strong>,</strong> i++)</code></span> <br />
+  <strong> Correct:</strong> <span class="widePre"><code>for (i=0<strong>;</strong> i&lt;height<strong>;</strong> i++)</code></span></p>
+<p>I deducted -1 for the wrong slash in the newline character:</p>
+<p><strong>Wrong:</strong> <code>printf(&quot;<strong>/</strong>n&quot;);</code> <br />
+  <strong> Correct</strong>: <code>printf(&quot;<strong>\</strong>n&quot;);</code></p>
+<p>I deducted -2 for not putting braces on the body of the for loop. In Python, it is sufficient to indent code to show grouping under a for loop, but in C, if there is more than one statement, the braces are required. This is even true if the statements are on a single line separated by semicolons:</p>
+<p>Wrong</p>
+<pre class="widePre">for (i-0; i&lt;width; i++)<strong></strong><br />    printKSpacesNStars(i,width-i); 
+    printf(&quot;\n&quot;);<br /></pre>
+
+<p>Correct:</p>
+<pre class="widePre">for (i-0; i&lt;width; i++)<strong></strong><br /><strong>{</strong><br />    printKSpacesNStars(i,width-i); 
+    printf(&quot;\n&quot;);
+<strong>}</strong></pre>
+
+<p>The correct answers with minor syntax errors used the following forms of correct answers: </p>
+<p>Answer 1a: 3<br />
+Answer 1b: 1</p>
+<p>Counting these as correct answers (from a logic standpoint) brings the total to 28/72 correct, or ~39%.</p>
+<p>&nbsp;</p>
+<h2>Minor Logic Errors (12/72, ~17%)</h2>
+<p>There were two minor logic errors for which I assigned deductons of -2 in each case. </p>
+<p>12 of the 72 papers contained only one or both of these minor logic errors, but were otherwise ok.</p>
+<p>Because some of the papers contained the minor logic errors below in combination with each other, or with one or more of the more serious logic errors, the totals for the subcategories may sum to more than 72.</p>
+<h3>Minor logic error 1: &lt; vs &lt;= (12/72, ~17%)</h3>
+<p>This logic error had different forms based on which of the correct answers it occured in the context of.</p>
+<p>If we look at it in the context of correct answer 1a, it looks like this:</p>
+<pre class="widePre">for (i=0; i<strong>&lt;=</strong>height; i++)<br />{
+  // print i spaces then width-i stars and a newline<br />  printKSpacesNStars(i, width-i); printf(&quot;\n&quot;);<br />}</pre>
+<p> Because &lt;= was used instead of &lt;, we get one extra row.  It so happens that the extra row is a row of blanks, but it is still one too many rows in the output.</p>
+<p>The breakdown of students making this error was:</p>
+<ul>
+  <li>9/72: <span class="widePre">similar to correct answer 1a, but used </span><span class="widePre"><code>for (i=0; i<strong>&lt;=</strong>height; i++)</code></span></li>
+  <li>1/72: <span class="widePre">similar to correct answer 1b, but used </span><span class="widePre"><code>for (i=0; i<strong>&lt;=</strong>width; i++)</code></span></li>
+  <li>2/72: similar to correct answer 2c, but used <code>for (i=width; i<strong>&gt;=</strong>0; i--)</code></li>
+</ul>
+<p>&nbsp;</p>
+<h3>Minor logic error 2: no printf(&quot;\n&quot;); (3/72, ~4%)</h3>
+<pre class="widePre">for (i=0; i&lt;height; i++)<br />{<br />  // print i spaces then width-i stars and a newline<br />  printKSpacesNStars(i, width-i); <strong>/* MISSING printf here */</strong><br />}</pre>
+
+<p> In the case of height = 3, this would produce the following output:</p>
+<table border="2" cellpadding="2" cellspacing="2">
+  <tr>
+    <th scope="col">what we want</th>
+    <th scope="col">what we get instead</th>
+  </tr>
+  <tr>
+    <td align="left"><pre class="trianglePre">
+***
+ **
+  *   </pre>
+    </td>
+    <td align="left"><pre class="trianglePre" style="border:none;">*** **  *</pre></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h2>Serious Logic Errors (16/72, ~ 22%)</h2>
+<p>Sixteen of the responses contained at least one serious logic error. These are listed here in no particular order—i.e. they are not &quot;most serious to least serious&quot;, for example—this is just the order in which I pulled them from the stack.</p>
+<h3>Serious logic error 1: incorrect parameters to  printKSpaceNStars (-4)</h3>
+<p>If the for loop counts up using <code>for (i=0; i&lt;height; i++) </code>(or equivalently, using width) then the parameters to printKSpacesNStars must be <strong><code>(i, width -i).</code></strong></p>
+<p><strong>Version 1a: </strong>One person used the following (-4 pts):</p>
+<pre class="widePre">for (i=0; i&lt;height; i++)<br />{
+  printKSpacesNStars(<strong>i, width + i</strong>); printf(&quot;\n&quot;);
+}</pre>
+
+<p>What kind of pattern would that produce? (This is left as an exercise for you)</p>
+<p><strong>Version 1b:</strong> If the loop counts from 1 to height<br />
+then the parameters to printKSpacesNStars must be <strong><code>(i-1, width-i+1)</code></strong></p>
+<p>Here's what one person did instead (-4 pts):</p>
+<pre class="widePre">for (i=1; i&lt;=height; i++)<br />{
+  printKSpacesNStars(<strong>width -i, i</strong>); printf(&quot;\n&quot;);
+}</pre>
+<p>What kind of pattern would that produce? (This is left as an exercise for you)</p>
+<p>Versions 1c, 1d and 1e all are for loops that count down, e.g.. <span class="widePre"><code>for (i=width; i&gt;0; i--)</code></span> <br />
+For this case, the parameters to printKSpacesNStars must be <strong><code>(width-i, i)</code></strong></p>
+<p><strong>Version 1c:</strong> (-4 pts):</p>
+<pre class="widePre">for (i=width; i&gt;0; i--)<br />{
+  printKSpacesNStars(<strong>width -1, width</strong>); printf(&quot;\n&quot;);
+}</pre>
+<p>What kind of pattern would that produce? (This is left as an exercise for you)</p>
+<p>&nbsp;</p>
+<p><strong>Version 1d:</strong> If the loop counts down from height to 1, <br />
+then the parameters to printKSpacesNStars must be <strong><code>(width -i, i)</code></strong></p>
+<p>Here's what two people did instead (-4 pts):</p>
+<pre class="widePre">for (i=width; i&gt;0; i--) // or for (i=height; i&gt;=1; i--)<br />{
+  printKSpacesNStars(<strong>width +i, i</strong>); printf(&quot;\n&quot;);
+}</pre>
+<p>What kind of pattern would that produce? (This is left as an exercise for you)</p>
+<p><strong>Version 1e:</strong> If the loop counts down from height to 1, <br />
+then the parameters to printKSpacesNStars must be <strong><code>(width -i, i)</code></strong></p>
+<p>Here's what one person did instead (-4 pts):</p>
+<pre class="widePre">for (i=width; i&gt;=1; i--)<br />{
+  printKSpacesNStars(<strong>i, width -i</strong>); printf(&quot;\n&quot;);
+}</pre>
+<p>What kind of pattern would that produce? (This is left as an exercise for you)<br />
+</p>
+<p><strong>Version 1f:</strong> Returning to loops that count up—there is one more variation on getting it wrong:</p>
+<p><br />
+  Two people did this—compare this with correct answer 1d (-4 pts):</p>
+<pre class="widePre">for (i=1; i&lt;=height; i++)<br />{
+  printKSpacesNStars(<strong>i-1, width</strong>); printf(&quot;\n&quot;);
+}</pre>
+<p>What kind of pattern would that produce? (This is left as an exercise for you)</p>
+<h3>Serious logic error 2: too few rows (-3)</h3>
+<p>One paper had the following error that produces the correct pattern, but at the wrong size:</p>
+<p>Instead of correct answer 1a:</p>
+<pre class="widePre">for (<strong>i = 0</strong>; i&lt;height; i++)<br />{
+  printKSpacesNStars(i, width-i); printf(&quot;\n&quot;);
+}</pre>
+<p> there was the  following <strong>(serious logic error 2a)</strong>:</p>
+<pre class="widePre">for (<strong>i = 1;</strong> i&lt;height; i++)<br />{
+  printKSpacesNStars(i, width-i); printf(&quot;\n&quot;);
+}</pre>
+<p>What kind of pattern would that produce? (This is left as an exercise for you)</p>
+<p>Another variation on this was the following <strong>(serious logic error 2b)</strong>:</p>
+<p>there was the  following:</p>
+<pre class="widePre">for (<strong>i = 1;</strong> <strong>i&lt;=height</strong>; i++)<br />{
+  printKSpacesNStars(i, width-i); printf(&quot;\n&quot;);
+}</pre>
+<p>What kind of wrong answer would this produce?</p>
+<h3>Serious logic error 3: infinite loop (-4)</h3>
+<p>More than one  paper contained an infinite loop:</p>
+<p><strong>Infinite loop version 3a:</strong></p>
+<pre class="widePre">for <strong>(i = width; i=1; i--)</strong><br />{
+  printKSpacesNStars(width-i,i); printf(&quot;\n&quot;);
+}</pre>
+<p>As an exercise consider these questions:</p>
+<ul>
+  <li>What kind of pattern would this produce when, for example, width is 5, for the first 10 iterations through the loop?</li>
+  <li>And what is the smallest change you could make to the code give that would make it correct?</li>
+</ul>
+<p><strong>Infinite loop version 3b:</strong></p>
+<p>Two people wrote this infinite loop—why is this an infinite loop, and what do you think they intended instead? (I've put ... for the parameters to printKSpacesNStars, because both of the folks that used this infinite loop also had problems with their parameters:</p>
+<pre class="widePre">for <strong>(i = 1; i&lt;=height; i--)</strong><br />{
+  printKSpacesNStars(...); printf(&quot;\n&quot;);
+}</pre>
+<p>Here are the actual answers I got—note that even if you fix the infinite loop by changing i-- to i++, these parameters still don't work:</p>
+<p>First answer (a form of serious logic error 1c)</p>
+<pre class="widePre">for <strong>(i = 1; i&lt;=height; i--)</strong><br />{
+  printKSpacesNStars(width-i, i); printf(&quot;\n&quot;);
+}</pre>
+<p>Second answer ( a form of serious logic error 1d):</p>
+<pre class="widePre">for <strong>(i = 1; i&lt;=height; i--)</strong><br />{
+  printKSpacesNStars(width + i, i); printf(&quot;\n&quot;);
+}</pre>
+<h3>Serious logic error 4:premature return (-4)</h3>
+<p>At least one paper contained a premature return. The following answer is completely correct except that it has a return statement inside the loop. If this return statement were removed, or moved outside the loop, this would be an example of correct answer number 2b:</p>
+<pre class="widePre">for (i=height; i&gt;0; i--)<br />{<br />  // print width-i spaces then i stars and a newline<br />  printKSpacesNStars(width-i,i); printf(&quot;\n&quot;);
+<strong>  return;</strong><br />}</pre>
+<p>As an exercise: what would this produce for height and width of 4, 5 or 6? And why?</p>
+<h3>Serious logic error 5: confusing printKSpacesNChars with printNChars (-4)</h3>
+<p> The following answer is one that illustrates some of the strangeness that can result from the way that C conflates int with char. The following answer would likely compile and run but it could produce  strange (and incorrect) results.</p>
+<pre class="widePre">for (i=height; i&gt;0; i--)<br />{<br />  int j;<br />  j = height -i;<br />  <strong>printNChars(j,i);</strong><br />  printf(&quot;\n&quot;);
+<strong></strong>}</pre>
+<p>This answer would be a correct variation on correct answer 2b if the person had written, instead:</p>
+<pre class="widePre">for (i=height; i&gt;0; i--)<br />{<br />  int j;<br />  j = height -i;<br />  <strong>printKSpacesNChars(j,i);</strong><br />  printf(&quot;\n&quot;);
+<strong></strong>}</pre>
+<p>In that case, this would just been a variation where a separate variable j is used instead of writing height -i for the first parameter. However, instead, the person used printNChars(j, i); As a result, this would print the character referenced by i, and it would print that character j times. </p>
+<p>You might thing, therefore, that for input of 5, this would print the following—since:</p>
+<ul>
+  <li>the first time through the loop, j=0, i=5</li>
+  <li>the second time, j=1, i=4</li>
+  <li>the third time, j=2, i=3</li>
+  <li>etc.</li>
+</ul>
+<table border="2" cellpadding="2" cellspacing="2">
+  <tr>
+    <th scope="col">what we want</th>
+    <th scope="col">what you might <em>think</em> we would get</th>
+  </tr>
+  <tr>
+    <td align="left"><pre class="trianglePre">
+*****
+ ****
+  ***
+   **
+    *
+</pre>
+    </td>
+    <td align="left"><pre class="trianglePre" style="border:none;">
+
+4
+33
+2222
+11111
+ </pre></td>
+  </tr>
+</table>
+<p>However, that misses a key point: the second parameter is being passed in as an <strong><code>int</code></strong>, but is being treated in the function as a <strong><code>char</code></strong>. That means that instead of a triangle (of the wrong shape) of numbers, we'll get a triangle composed of the ASCII characters 4, 3, 2 and 1, all of which are &quot;control characters&quot; that won't show up on your screen as anything you can see. So, essentially you'll get what <em>appears</em> to be no output at all.</p>
+<h3>Serious logic error 6: improper for loop (-4) </h3>
+<p>Several papers contains this logic error:</p>
+<pre class="widePre">for <strong>(i = 1; i&gt;=height; i--)</strong><br />{
+  printKSpacesNStars(width -i, i); printf(&quot;\n&quot;);
+}</pre>
+<p>As an exercise: </p>
+<ul>
+  <li>What is wrong with this for loop? And what will it print for values of height/width of 0, 1, 2, 3 and 4?</li>
+  <li>If you were guiding this person toward a correct answer, how would you guide them?</li>
+</ul>
+<p>&nbsp;</p>
+<h3>Serious logic error 7: (difficult to describe) (-8) </h3>
+<p>One paper was a mixture of several problems.</p>
+<pre class="widePre">for (i=0, i&lt; height; i++)
+for <strong>(i=1, i&lt;=height, i++)</strong><br />{
+  printKSpacesNStars(i, width-1); <br />  printf(&quot;\n&quot;);
+}</pre>
+<p>There are a variety of problems here:</p>
+<ul>
+  <li>Nested for loops where a nested for loop is not needed—the printKSpacesNStars function already abstracts away the &quot;inner for loop&quot; that prints all the characters along a row. </li>
+  <li>Nested for loops that use the same variable, in this case i. If you have nested for loops, the two loops need different variables (e.g. i and j)</li>
+  <li>Syntax issues with , vs ; in the for loops.</li>
+</ul>
+<p>Given that the parameters to printKSpacesNStars are (i, width -i), the correct for loop is a single for loop—any of the ones from correct answers 1a, 1b, or 1c, e.g. <strong><code>for (i=0; i&lt;height; i++)</code></strong></p>
+<p>&nbsp;</p>
+<h3>&nbsp;</h3>
+<p>&nbsp;</p>
+<h2>Blank papers (1/72, ~1%)</h2>
+<p>There was one paper with no response to question 8, bringing the total to 72 papers total.</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<ul class="theQuestions">
+ 
+<li style="list-style:none;"></li>
+</ul>
+</div>
+</body>
+</html>

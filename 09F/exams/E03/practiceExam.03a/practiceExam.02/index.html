@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>PRACTICE EXAM for CS16 Midterm 2, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+ul.squareList li {list-style-type: square;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"> ***PRACTICE EXAM 02 for***<br />
+  CS16 Midterm Exam 2<br />
+  <span class="subhead">E02, 09F, Phill Conrad, UC Santa Barbara<br /> 
+  Actual exam scheduled for: 11/18/2009
+</span></h1>
+<p class="instructions"><strong>Name:</strong> ________________________________________________________</p>
+<p class="instructions"><br />
+<strong>Umail Address: </strong>__________________________________@ umail.ucsb.edu<br />
+<br />
+<br />
+<strong>Circle Lab section:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11AM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noon</p>
+<p class="instructions"><a href="exam.pdf">Link to Printer Friendly PDF Version</a></p>
+<hr />
+<p class="instructions">Please write your name <strong>only</strong> on this page. That allows me to grade your exams without knowing whose exam I am grading.</p>
+<p class="instructions">This exam is <strong>closed book, closed notes</strong>, <strong>closed mouth, cell phone off</strong>,<br />
+  except for:</p>
+<ul>
+  <li class="instructions">You are permitted <strong>one sheet of paper</strong> (max size 8.5x11&quot;) on which to write notes</li>
+  <li class="instructions">These sheets will be collected with the exam, and might not be returned</li>
+  <li class="instructions">Please write your name on your notes sheet</li>
+</ul>
+<p>There are 100 points worth of questions on the exam, and you have 50 minutes to complete the exam.</p>
+<p>A hint for allocating your time:</p>
+<ul>
+  <li>if a question is worth 10 points, spend no more than 5 minutes on it</li>
+  <li>if a question is worth 20 points, spend no more than 10 minutes on it</li>
+  <li>etc.</li>
+</ul>
+<hr />
+<ol class="theQuestions">
+ <li class="pageBreakBefore">(10 pts) Write the definition of a C function that takes two parameters&mdash;an array of integers, and a second integer indicating the size of the array.<br />
+     <br />
+    The function should be called countMax. The function should count how many elements of array have the maximum value in the array.<br />
+      <br />
+  For example, if the array contains {10,40,15,40,15,40,20} the value returned is 3, because the maximum value is 40, and 40 occurs three times in the array.<br />
+      <br />
+    If the array contains {40,34,20,70,40}, then the value returned is 1, because 70 occurs once in the array.<br />
+    <br />
+    If you use any helper functions&mdash;for example, if you use function calls to <code>countOccurences(a,n)</code>, or    <code>maxValue(a,n)</code>    &mdash;then include definitions of those functions also.<br />
+    <br />
+    Write ONLY the function definition&mdash;for this question, I do NOT want a complete C program, so do NOT include any extraneous stuff such as #include &lt;stdio.h&gt; or a main function. (See <a href="files/q1.c">solution</a>)<br />
+<br />  
+     <br />  
+    <br />
+    <br />
+    <br />
+    <br />
+ </li>
+
+ <li class="pageBreakBefore">(10 pts) Write the definition of a C function that takes two parameters&mdash;an array of integers, and a second integer indicating the size of the array.<br />
+     <br />
+    The function should be called sumPositive. The function should return the sum of all the integers in the array that are greater than 0.<br />
+      <br />
+  For example, if the array contains {-3,10,-5,20} the value returned is 30, because the positive elements are 10 and 20, and their sum is 30. <br />
+  <br />
+    If you use any helper functions&mdash;for example, if you call a function called  <code>isPositive(i)</code>&mdash;then include definitions of those functions also.<br />
+    <br />
+    Write ONLY the function definition&mdash;for this question, I do NOT want a complete C program, so do NOT include any extraneous stuff such as #include &lt;stdio.h&gt; or a main function. (See <a href="files/q2.c">solution</a> and an <a href="files/q2alt.c">alternate correct solution</a>)<br />
+<br />  
+     <br />  
+    <br />
+    <br />
+    <br />
+    <br />
+ </li>
+
+ <li class="pageBreakBefore"> <p>(10 pts) Write the definition of a C function that takes two parameters&mdash;an array of integers, and a second integer indicating the size of the array.<br />
+     <br />
+    The function should be called averageOfIntArray. The function should return the average of all the integers in the array. <br />
+    <br />
+    If you use any helper functions&mdash;for example, if you call a function <code>sumOfArray(a,n)</code>&mdash;then include definitions of those functions also.<br />
+    <br />
+Write ONLY the function definition&mdash;for this question, I do NOT want a complete C program, so do NOT include any extraneous stuff such as #include &lt;stdio.h&gt; or a main function. (See <a href="files/q3.c">solution</a> and compare it with this <a href="files/q3_incorrect.c">incorrect solution</a>)<br />
+<br />
+    <strong>Hints: </strong><br />
+    </p><ul><li>Note that the average is not necessarily a integer&mdash;for example the average of a two element array of integers containin 3 and 4 is 3.5&mdash;so choose the return type appropriately.</li>
+      <li>Remember to be careful about type&mdash;int vs. double&mdash;when dividing.</li>
+      <li>If a variable&mdash;say, x&mdash;is an integer, you can convert it to a double in several ways:
+        <ul>
+          <li>Using a typecast</li>
+          <li>Assigning its value to another variable of type double</li>
+          <li>Multiplying by 1.0<br />  
+            <br />
+            <br />
+            <br />
+            <br />
+            </li>
+        </ul>
+      </li>
+      </ul>
+  </li>
+
+
+ <li class="pageBreakBefore">(10 pts) Given the definition of a struct for Point:<br />
+     <br />
+      <code>struct Point {<br />
+       &nbsp;&nbsp;double x;<br />
+        &nbsp;&nbsp;double y;<br />
+  };<br />
+    </code><code><br />
+      </code>Write the definition of a function that matches this prototype:<br />
+     <br />
+     <code>int countPointsCloserThan(struct Point p, <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     struct Point *others, <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+double distance, int numPts);<br />  
+    </code><br />
+  This function counts the number of points in an array of points called <code>others</code> that are closer to the point <code>p</code> than the value of the parameter <code>distance</code> (i.e. the distance between p and the point from others is strictly less than <code>distance</code>. The parameter <code>numPts</code> indicates the size of the array <code>others</code>) <br />
+  <br />
+  Assume that the function matching the prototype below has already been defined, so that you can &mdash;and should&mdash;use a call to that function to determine the distance between points. <br />
+  <br />
+  <code>double distanceBetween(struct Point p1, struct Point p2);</code><br />
+  <br />
+  Notes:
+ <ul>
+   <li> You will lose points if you recreate the distance formula from scratch rather than using a call to the distanceBetween function.</li>
+   <li>You do NOT need to provide the definition of <code>distanceBewteen</code>&mdash;and <em>will not receive any credit for doing so (not even partial credit.)</em></li>
+ </ul>
+ <code><br />
+     </code><br />
+   See a <a href="files/q4.c">sample solution</a><br /> 
+    <br /> 
+    <br /> 
+    <br /> 
+    <br /> 
+    <br />  
+ </li>
+
+ <li class="pageBreakBefore">Here are several function definitions&mdash;doIt1, doIt2, etc.. <br />
+   <br />
+   In each case, <strong>indicate what would be printed when the function is called. </strong><br />
+     <br />
+<strong>If the value is unpredictable, because the array element is outside the bounds of the array</strong>, please write the word &quot;<strong>undefined</strong>&quot; (<a href="files/5.html">solution</a>)<br />
+     <br />
+    <ol>
+      <li>(3 pts) <br />
+          <br />
+<pre>
+void doIt1()<br />{<br />  int a[] = {10,20,30,40};<br />  printf(&quot;%d\n&quot;,a[3]);<br />}</pre>        <br />
+      </li>
+            <li>(3 pts) <br />
+          <br />
+<pre>void doIt2()<br />{<br />  int a[5] = {0};<br />  printf(&quot;%d\n&quot;,a[5]);<br />}
+</pre>        <br />
+      </li>
+            <li>(3 pts) <br />
+          <br />
+<pre>void doIt3()<br />{<br />  int a[5] = {1};<br />  printf(&quot;%d\n&quot;,a[4]);<br />}
+
+</pre>        <br />
+      </li>
+            <li>(3 pts) <br />
+          <br />
+<pre>void doIt4()<br />{<br />  int a[5];<br />  int i;<br />  for (i=0; i&lt;5; i++)<br />    a[i] = 5-i;<br />  printf(&quot;%d\n&quot;,a[2]);<br />}
+
+</pre>        
+
+      </li>
+    </ol><br />
+ </li>
+ <li class="pageBreakBefore">
+  <p>(25 pts) Together with this exam, there is a program (on a separate <a href="#handout">handout</a>).<br />
+  </p>
+ <p>Assuming each of the expressions below appeared in this program, indicate the type they would have, or write error if the expression is not valid, e.g. </p><ul>
+     <li>dereferencing something with * or -&gt; that isn't a pointer</li>
+     <li>a reference to a struct member that doesn't exist (e.g. d.foo where there is no foo)</li>
+   </ul>
+   <br />
+     <br />
+<p>  The first few are done for you as an example.</p>
+  <p>Hints--for full credit:</p>
+
+  <ul>
+    <li> don't write<em> pointer to character</em>; instead, write <strong>char *</strong></li>
+    <li>don't write<em> address of int</em>; instead, write <strong>int *</strong></li>
+    <li>don't write <em>address of int *</em> or <em>address of pointer to int</em>, instead write <strong>int **</strong><br />
+    </li>
+    </ul>
+ 
+<p>See <a href="files/6.html">solution</a></p>
+  <table border="1" cellpadding="1" cellspacing="1" id="typeExpressions">
+    <tr>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+      <td width="13" bgcolor="#000000">&nbsp;&nbsp; &nbsp; </td>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td><span class="style5 instructions">int</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>f-&gt;radius</td>
+      <td>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&amp;a</td>
+      <td><span class="style5 instructions">int *</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>f-&gt;center.x</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>*a</td>
+      <td><span class="style5 instructions">error</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>f-&gt;center-&gt;y</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>*b</td>
+      <td><span class="style5 instructions">int</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>&amp;g</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>e</td>
+      <td><span class="instructions">struct Circle</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>*h</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>&amp;(h-&gt;x)</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&amp; b</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>*(h.y)</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>c</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>i.m</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>*c</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>j.d</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="24">d</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>i-&gt;y</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&amp;d</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>j-&gt;m</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>*e</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>(*j).m</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>e.x</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argc</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>e.radius</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argv[0]</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td>f.y</td>
+      <td>&nbsp;</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argv[0][0]</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</li>
+  <li class="pageBreakBefore">There is a Unix command you can type that will give you information about the permissions that apply to accessing files in a format such as <code>rwxr-xr-x </code><br />
+      <br />
+    <br />
+    <br />
+    <ol>
+      <li>(2 pts) What is this command?<br />
+        Give the full command, exactly as you would type it at the Unix command prompt.<br />
+        <br />
+        <br />
+        (<a href="files/7a.html">Solution </a>to this quesiton, and all the rest of the parts of question 7)<br />
+        <br />
+        <br />  
+        </li>
+      <li>(1 pts) Suppose you use the command from question 7, and you see that the current permission mode for a file is <code>rw-r--r--</code>. <br />    
+        <br />Does the owner of this file have permission to make changes to the file?<br />
+        <br />
+        <br />
+        <br />  
+      </li>
+      <li>(1 pts) If the mode is <code>rw-r--r--</code>, can the owner of this file run this file as a program?<br />
+        <br />
+          <br />
+        <br />
+      </li>
+  <li>(1 pts) If the mode is<code> rwxr--r--</code>, can users other than the owner of the file make changes to it?<br />
+            <br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) If you want to change the permissions of a file, there is a unix command you can use to do this of the form <em>commandName octalNumber filename.<br />
+        <br />
+      </em>Give this command (the octal number form) for changing the permissions of the file <code>foobar</code> to have the permission string <code>rwxr-xr-x</code><br />
+        <br />
+        <br />
+      </li>
+      <li>(2 pts) If you use the same command as the previous problem but with the octal number 711, what would the resulting rwx format string look like?<br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) In that same scenario (changing the file foobar to have permission mode corresponding to 711), who would have permission to  execute the file? <br />
+        <br />
+        Select one: <br />
+        <br />
+        <ul class="squareList">
+        <li>all users,</li>
+        <li> no users</li>
+        <li>only the owner of the file?</li>
+      </ul>
+        <br />  
+        <br />
+      </li>
+      <li>(2 pts) There is a Unix command you can type that will give a brief summary of whether a file contains executable machine instructions, ASCII text, or something else. How would you run that command on the file with filename <code>foobar</code>?<br />  
+        <br />
+        <br />  
+        <br />
+          </li>
+    </ol>
+  </li>
+  <li class="pageBreakBefore">(10 pts) Briefly explain the following statement: <br />
+    <br />
+&quot;There are two senses in which a file can be executable&mdash;one having to do with the contents of the file, and another having to do with the chmod command.&quot;  <br />
+    <br />
+    (No solution given&mdash;but if you review what we did in <a href="../../../labs/lab07a/">lab07a</a>, you'll understand...)<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </li>
+</ol>
+<hr />
+<p ></p>
+<h2 class="instructions">End of Exam</h2>
+<p class="instructions"><span id="pointCount">Total points: ?</span></p>
+<div class="pageBreakBefore">
+<h1 class="instructions"  id="handout"> ***PRACTICE EXAM 02 for***<br />
+  CS16 Midterm Exam 2<br />
+  <br />
+Extra Handout</h1>
+<p class="instructions">&nbsp;</p>
+<p class="instructions">Program for question about types</p>
+<pre class="widePre">
+// types.c  Code for exam question, 11/15/2009
+// P. Conrad for CS16, 09F, UCSB
+
+
+#include &lt;stdio.h&gt;
+ 
+
+struct Point {
+  double x;
+  double y;
+};
+
+
+struct Date {
+  int d;
+  int m;
+  int y;
+};
+
+
+struct Circle {
+  struct Point center;
+  double radius;
+};
+
+
+int main(int argc, char *argv[])
+{
+  int a;
+  int *b;
+  double c;
+  double *d;
+  struct Circle e;
+  struct Circle *f;
+  struct Point g;
+  struct Point *h;
+  struct Date i;
+  struct Date *j;
+
+  
+  // Program does no useful work
+  // It is just the basis of a homework assignment about types<br />
+
+  
+  // Pretend there is useful code here, and then 
+  // answer questions about the types of various expressions
+  // as if they appeared right here.
+
+
+  return 0;
+
+
+}
+
+</pre>
+</div>
+</body>
+</html>

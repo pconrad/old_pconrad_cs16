@@ -1,0 +1,24 @@
+
+Mention, from homework h00 about question #6...
+
+Difference between "struct" which groups related data items
+
+and a library that might contain "qsort", which a group of related "functions".
+
+Data vs. Instructions---a crucial distinction in CS
+
+***
+
+Error that you get when you have a function call without
+a matching function definition
+
+-bash-4.1$ make dupFunctionErrorFixed
+cc     dupFunctionErrorFixed.c   -o dupFunctionErrorFixed
+/tmp/ccYnZLhR.o: In function `main':
+dupFunctionErrorFixed.c:(.text+0x19): undefined reference to `smaller'
+dupFunctionErrorFixed.c:(.text+0x35): undefined reference to `smaller'
+collect2: ld returned 1 exit status
+make: *** [dupFunctionErrorFixed] Error 1
+-bash-4.1$ ^C
+-bash-4.1$
+

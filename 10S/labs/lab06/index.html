@@ -1,0 +1,630 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>CS16, 10S, lab06,  structs, ptrs to structs, arrays of structs, reading from files (code)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../cs16.css" />
+<link rel="stylesheet" type="text/css" href="../../../cs16_labs.css" />
+<style type="text/css">
+.doubleSizeMath {font-size: 2.0em; font-family:"Times New Roman", Times, serif;}
+.singleSizeMath {font-family:"Times New Roman", Times, serif;}
+td.codes {font-size:0.8em; font-family:serif}
+td {text-align: center;}
+.smallerFont { font-size: 0.8em;}
+.bigLiteral {font-size: xx-large; font-family:"Courier New", Courier, monospace;}
+.subtle {
+	color: #666666;
+	font-style: italic;
+	font-size: 0.9em;
+}
+code {white-space:pre;}
+</style>
+</head>
+
+<body>
+<div style="background-color: yellow; padding: 1em; margin: 1em; border: red 2em inset; font-size: 150%;">
+<p>THIS IS NOT THE LAB FOR THE CURRENT QUARTER!!!!</p> 
+<p>If you are in one of Conrad's CS16 sections,  please visit <a href="https://foo.cs.ucsb.edu/16wiki">foo.cs.ucsb.edu/16wiki</a> for information on the current quarter of CS16.</p>
+</div>
+<div id="linksBox" style="width:8em;"><p class="closeOnTop closeOnBottom"><a href="code">code</a></p></div>
+<div id="container">
+ <h1>CS16, Spring 2010</h1>
+ <h1>lab06: <span class="smallerFont">(&quot;lab six&quot;)<br>
+   structs,  pointers to structs, <br>
+   reading from files,
+   arrays of structs<br>
+ </span><span class="smallerFont"></span></h1>
+ <hr>
+ <h2>Goals for this lab</h2>
+ <p>By the time you have completed this lab, you should be able to:</p>
+ <ul>
+   <li>Understand how to define a struct, and access the members of a struct
+     <ul>
+       <li>You should be able to access these members, directly, and through a pointer</li>
+      </ul>
+   </li>
+   <li>Understand how to pass a struct to a function
+     <ul>
+       <li>You should be able to pass either the struct itself (so that the function gets a copy of the original), or a pointer to the struct (so that the function can modify the original struct)&mdash;and understand the difference.</li>
+      </ul>
+   </li>
+  </ul>
+ <p>You'll also get some practice with reading from a file into an array of structs
+  </p>
+ <ul>
+   <ul>
+     
+      <li>We'll explore how to read lines from a file into an array of structs</li>
+      <li>We'll work with that array of structs to find various values</li>
+    </ul>
+ </ul>
+ <h2>Prior Skills/Knowledge Needed</h2>
+ <p>The list of skills needed for this lab is essentially the same as that for <a href="../../../10S/labs/lab04">lab04</a>, so we won't repeat that list in detail.</p>
+ <p>The only other pre-requisite for this lab is that you should already have introduced to the basic ideas of structs&mdash;in Spring 2010 we did this in homework assignments <a href="../../../10S/homework/H13">H13</a>, <a href="../../../10S/homework/H14">H14</a>, <a href="../../homework/H17">H17</a> and <a href="../../homework/H18">H18</a><br>
+  <br>
+ </p>
+ 
+ <h2>Continue with your same pair partner from <a href="../../../10S/labs/lab05">lab05</a>&mdash;<br>
+  unless there is some reason not to...</h2>
+ <ul>
+   <li><strong>If (and only if) you have a new partner for lab06&mdash;</strong>one you didn't work with previously&mdash;complete a new version of <a href="../../../10S/worksheets/W02/W02.pdf">W02</a>, and post to the lab04/05/06 pair partner forum on Gauchospace. Indicate that this is a new pairing for lab06.</li>
+  </ul>
+<p>Also keep in mind:<br>
+</p>
+<ul>
+   <li> Pair programming is <em>required</em> for this lab, not optional&mdash;see <a href="../../../10S/labs/lab02">lab02</a> for the reasons why.</li>
+   <li>Keep the evaluation criteria in mind&mdash;you can find those listed in the intro to <a href="../../../10S/labs/lab02">lab02</a></li>
+  </ul>
+ <p>&nbsp;</p>
+ <h2>Step by Step Instructions</h2>
+ <h3 id="step2">Step 0: Get together with your assigned lab partner and do the set up steps.</h3>
+ <p>Choose a pilot and a navigator, and remember to switch often.</p>
+ <p>Check your PC&mdash;if you are in Cooper, there might be two mice attached. The navigator might be able to use the second mouse to help point things out, and feel a bit more connected to what is going on.</p>
+ <p>The driver should:</p>
+ <ul>
+   <li> Bring up a terminal window and create a ~/cs16/lab06 directory</li>
+   <li>Copy files from my directory at  <code><a href="code">~pconrad/public_html/cs16/10S/labs/lab06/code/</a></code></li>
+ </ul>
+ <p>&nbsp;</p>
+ 
+ 
+ <h3>Step 1: Understanding what we are going to do:<br>
+  Finishing three programs&mdash;and writing a fourth from scratch</h3>
+ <p>The object of this lab is finish three incomplete programs that are in the test-driven development (TDD) style&mdash;and then to write a fourth one (completely from scratch.) Each of these works with the idea of structs. </p>
+ <p>Since this is our first time working with structs, the first program is very easy. The next two get  progressively more challenging.</p>
+ <p>The fourth one is about the same level of difficulty as the third, but it is more challenging because you need to write the entire program from scratch (although you can borrow lots of code from the third program.)</p>
+ <p>By now, you are very familiar with the outline of what we do with a TDD style program&mdash;i.e. see the tests fail, then replace the stub with working code so the tests pass. So, I'll skip right to an explanation of the three programs:</p>
+ <h3>Step 2: Working with <a href="code/areaBoxWithTests.c">areaBoxWithTests.c</a></h3>
+ <p>This one is super easy&mdash;you just need to fill in the stub for <code>areaOfBox</code>. (More on how to do that in just a moment.)</p>
+ <p>However, let's first review how you have to compile areaBoxWithTests.c</p>
+ <h4>Step 2a: How to compile areaBoxWithTests.c&mdash;and the other programs in this lab</h4>
+ <p>If you try the way we've compiled most programs so far, by just typing:</p>
+ <pre>make areaBoxWithTests</pre>
+ <p>we run into a problem. Try it! You'll get something like this:</p>
+
+   <pre>-bash-4.1$ <strong>make areaBoxWithTests</strong>
+cc     areaBoxWithTests.c   -o areaBoxWithTests
+/tmp/ccO5uGOC.o: In function `main':
+areaBoxWithTests.c:(.text+0x15e): undefined reference to `checkExpectDoubleWithFileAndLine'
+areaBoxWithTests.c:(.text+0x1ed): undefined reference to `checkExpectDoubleWithFileAndLine'
+areaBoxWithTests.c:(.text+0x26d): undefined reference to `checkExpectDoubleWithFileAndLine'
+areaBoxWithTests.c:(.text+0x2ed): undefined reference to `checkExpectDoubleWithFileAndLine'
+collect2: ld returned 1 exit status
+make: *** [areaBoxWithTests] Error 1
+-bash-4.1$ 
+  </pre>
+  <p>An error like this is called a <em>linking error</em>&mdash;it arises when we have a <em>function call without a matching function definition</em>.</p>
+  <ul>
+    <li> Specifically, in this case, there is a function call inside <code>areaBoxWithTests.c</code> to the function <code>checkExpectDoubleWithFileAndLine</code>, but there is no function definition for <code>checkExpectDoubleWithFileAndLine</code> inside that file&mdash;hence the error. </li>
+  </ul>
+  <p>So how do we fix this?   </p>
+  <ul>
+    <li>One way would be to put a definition for <code>checkExpectDoubleWithFileAndLine</code> inside areaBoxWithTests.c, but that's not what we are going to do in this case.</li>
+    <li>Instead, as you may recall from lab05, when we want to reuse a collection of function definitions in more than one program, we put those  function definitions in a separate file.  In this case, we've collected a number of functions related to test-driven development and put them into a file called <code>tdd.c</code>.   We've also put the function prototypes in a file called <code>tdd.h</code>.</li>
+    <li>The function definition for <code>checkExpectDoubleWithFileAndLine</code> is in the file <code>tdd.c</code>&mdash;so, what we need to do is compile <code>areaBoxWithTests.c</code> and <code>tdd.c</code> together.</li>
+  </ul>
+  <p>One way to combine these two is to compile with cc instead of with make, and list both files, like this:</p>
+
+    <pre>
+-bash-4.1$<strong> cc areaBoxWithTests.c tdd.c</strong>
+-bash-4.1$ 
+</pre>
+
+  <p>If we do this, the executable gets placed in a file called a.out, so to run the program we have to specify ./a.out:</p>
+  <pre class="smallerFont">-bash-4.1$ <strong>cc areaBoxWithTests.c tdd.c</strong>
+-bash-4.1$ <strong>./a.out</strong>
+TEST FAILED: areaBoxWithTests.c line 55 areaOfBox(r) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 56 areaOfBox(s) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 57 areaOfBox(t) got -42.000000 expected 10.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 58 areaOfBox(u) got -42.000000 expected 60.000000 (tolerance=0.000000): 
+4 tests failed
+-bash-4.1$ 
+</pre>
+<p>This works, but it has the disadvantage that we can only have one executable at a time. If we later want to compile another program in the same way, say initBoxWithTests.c, then the ./a.out file gets overwritten with that program:</p>
+<pre class="smallerFont">
+-bash-4.1$<strong> cc initBoxWithTests.c tdd.</strong>c
+-bash-4.1$ <strong>./a.out</strong>
+TEST FAILED: initBoxWithTests.c line 121 distanceBetween(p1,p2) got -42.300000 expected 8.062300 (tolerance=0.001000): 
+TEST FAILED: initBoxWithTests.c line 123 distanceBetween(p2,p1) got -42.300000 expected 8.062300 (tolerance=0.001000): 
+<span style="font-family:sans-serif; font-size:3em;">...</span>
+TEST FAILED: initBoxWithTests.c line 268 boxesApproxEqual(b2,b2Expected,tol) 
+ :-(  15 tests FAILED! 
+-bash-4.1$ 
+
+
+</pre>
+<p>This is inconvenient. One way around this is to specify the name of the output file on the command line with the -o flag&mdash;traditionally we use the name of the .c file that contains the main, but without the .c on it, like this:</p>
+<pre class="smallerFont">
+-bash-4.1$ <strong>cc areaBoxWithTests.c tdd.c -o areaBoxWithTests</strong>
+-bash-4.1$ <strong>./areaBoxWithTests </strong>
+TEST FAILED: areaBoxWithTests.c line 55 areaOfBox(r) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 56 areaOfBox(s) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 57 areaOfBox(t) got -42.000000 expected 10.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 58 areaOfBox(u) got -42.000000 expected 60.000000 (tolerance=0.000000): 
+4 tests failed
+-bash-4.1$ 
+
+</pre>
+<p>A danger of this method is that if we accidentally forget to leave off the .c on the name of the file that follows the -o, we can end up over-writing our .c code that we worked so hard to get right. This can be supremely frustrating!</p>
+<p>So, there is a trick that can make our life a lot easier&mdash;a trick that allows us to just use the make command the way we've been doing all quarter, but with the extra tdd.c file coming along for the ride.</p>
+<p>What we do is tell the make program that every time you run the C Compiler, add a bit of extra stuff. Here's how we do it:</p>
+<pre>
+-bash-4.1$<strong> export CFLAGS="tdd.c"</strong>
+-bash-4.1$ 
+</pre>
+<p>This looks like an assignment statement, and in a way it is. This is a <em>bash shell command</em> that assigning the value <code>&quot;tdd.c&quot;</code> to the <em>environment variable</em> called <code>CFLAGS</code>. </p>
+<p>Environment variables are variables that are known to the bash shell, and can be accessed inside certain programs to modify their behavior. The make program, in particular, will take anything in CFLAGS and insert it into the compile command.</p>
+<p>We can check the value of an environment variable by using the <em>environment variable dereference operator</em>&mdash;this isn't the star (*) like in C, but instead, the dollar sign ($). Here's how we check the value of <code>CFLAGS</code>:</p>
+<pre>
+-bash-4.1$ <strong>echo $CFLAGS</strong>
+tdd.c
+-bash-4.1$ 
+</pre>
+<p>Once CFLAGS has the value tdd.c, then we can just use the make command the way we always did, and tdd.c gets included every time&mdash;&mdash;like this. Note that once CFLAGS has the correct definition, we can use the make command on every single one of the C programs included in this lab:</p>
+<pre>-bash-4.1$ <strong>make areaBoxWithTests</strong>
+cc tdd.c    areaBoxWithTests.c   -o areaBoxWithTests
+-bash-4.1$ <strong>make initPointWithTests</strong>
+cc tdd.c    initPointWithTests.c   -o initPointWithTests
+-bash-4.1$ <strong>make initBoxWithTests</strong>
+cc tdd.c    initBoxWithTests.c   -o initBoxWithTests
+-bash-4.1$ <strong>make readAirports</strong>
+cc tdd.c    readAirports.c   -o readAirports
+-bash-4.1$ 
+</pre>
+<p>And each can be run in the normal way:</p>
+<pre class="smallerFont">
+-bash-4.1$<strong> ./areaBoxWithTests</strong> 
+TEST FAILED: areaBoxWithTests.c line 55 areaOfBox(r) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 56 areaOfBox(s) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 57 areaOfBox(t) got -42.000000 expected 10.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 58 areaOfBox(u) got -42.000000 expected 60.000000 (tolerance=0.000000): 
+4 tests failed
+-bash-4.1$ .<strong>/initPointWithTests </strong>
+TEST FAILED: initPointWithTests.c line 84 distanceBetween(p1,p2) got -42.300000 expected 8.062300 (tolerance=0.001000): 
+TEST FAILED: initPointWithTests.c line 86 distanceBetween(p2,p1) got -42.300000 expected 8.062300 (tolerance=0.001000): 
+etc..
+
+
+</pre>
+<p>So, that is what we'll do throughout this lab to compile our code&mdash;we'll define CFLAGS to be &quot;tdd.c&quot; with:</p>
+<pre>-bash-4.1$ <strong>export CFLAGS="tdd.c"</strong>
+-bash-4.1$ 
+</pre>
+<p>And then just use <code>make <em>programName</em></code> the same way we've been doing for most of the C programs we've compiled so far.</p>
+<div class="sideNoteDiv">
+<h4>Some extra hints related to the use of CFLAGS</h4>
+<ul>
+  <li><p>You have to run the <code>export CFLAGS=&quot;tdd.c&quot;</code> command once per login session&mdash;it doesn't carry over from session to session.</p>
+  </li>
+  <li>
+    <p>To cancel out the definition of an environment variable, use the unset command&mdash;e.g. <code>unset CFLAGS</code></p>
+    <br>
+  </li>
+  <li>If you want to get all the warnings the compiler can offer&mdash;which can be very helpful if you are debugging errors&mdash;you can use this command to add <code>-Wall</code> to the <code>CFLAGS</code> along with <code>tdd.c</code>
+    <pre>
+-bash-4.1$ <strong>export CFLAGS="-Wall tdd.c"</strong>
+-bash-4.1$ 
+
+</pre>
+  </li>
+  <li>Spacing is crucial in the <code>export</code> command&mdash;don't put spaces on either side of the = sign.<br>
+    <br>
+  For example,  this command does not work:
+  <pre>
+-bash-4.1$<strong> export CFLAGS = "-Wall tdd.c"</strong>
+-bash: export: `=': not a valid identifier
+-bash: export: `-Wall tdd.c': not a valid identifier
+-bash-4.1$ 
+</pre>
+  </li>
+  <li>If you are debugging a segmentation fault using the instructions from lab06a, you'll want to define your <code>CFLAGS</code> this way:
+    <pre>
+-bash-4.1$<strong> export CFLAGS="-g -Wall tdd.c"</strong>
+-bash-4.1$  
+  
+</pre>
+  </li>
+  <li>Finally, this isn't related to CFLAGS directly&mdash;but it is helpful for compiling with make&mdash;if you want to enable filename completion with the tab key after typing make, use this command:<pre>-bash-4.1$ <strong>complete -r make</strong>
+-bash-4.1$ 
+</pre>
+  <p>This only has to be typed once per login shell.</p></li>
+</ul>
+</div>
+<pre>&nbsp;</pre>
+<h4>Step 2b: Filling in the stub for the areaOfBox function</h4>
+  <p>Now you know how to compile areaBoxWithTests.c&mdash;as a reminder, the once per login commands are:</p>
+  <pre class="smallerFont">
+-bash-4.1$<strong> complete -r mak</strong>e
+-bash-4.1$ <strong>export CFLAGS="tdd.c"
+</strong></pre>
+<p>And what you type each time you want to compile and run is:</p>
+<pre class="smallerFont">
+-bash-4.1$<strong> make areaBoxWithTest</strong>s
+cc tdd.c    areaBoxWithTests.c   -o areaBoxWithTests
+-bash-4.1$ <strong>./areaBoxWithTests </strong>
+TEST FAILED: areaBoxWithTests.c line 55 areaOfBox(r) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 56 areaOfBox(s) got -42.000000 expected 12.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 57 areaOfBox(t) got -42.000000 expected 10.000000 (tolerance=0.000000): 
+TEST FAILED: areaBoxWithTests.c line 58 areaOfBox(u) got -42.000000 expected 60.000000 (tolerance=0.000000): 
+4 tests failed
+-bash-4.1$ 
+</pre>
+
+  <p>So now, you just need to fill in the stub for the areaOfBox function so that the tests pass.</p>
+  <p>This involves understanding how to access the members of a struct&mdash;in this case, the height and width of a <code>struct Box</code>&mdash;and how to multiply them together and return the result.</p>
+   <p>If you were able to complete the last few homework assignments related to structs, you should have no problem&mdash;but if you need to, review the following for more info on working with structs:</p>
+   <ul>
+     <li>The handouts that went with <a href="../../../10S/homework/H13">H13</a>, <a href="../../../10S/homework/H14">H14</a>, <a href="../../homework/H17">H17</a> and <a href="../../homework/H18">H18</a> </li>
+     <li>Sections 7.1 and 7.2 of your CS16 textbook (Engineering Problem Solving with C, 3rd Edition)</li>
+   </ul>
+  <p>Once you've fixed the areaOfBox function, and all the tests pass&mdash;take another minute to look through the entire program. Even though this part is easy, the next few steps get progressively longer and more complex, and understanding this easy program  <em><strong>first</strong></em> may really help&mdash;especially if you can understand <em><strong>in its entirety.</strong></em></p>
+  <h3>Step 3: Working with <a href="code/initPointWithTests.c">initPointWithTests.c</a></h3>
+ <p>This program is a bit more challenging. There's also something special here: when we replace the stub for distance with the formula for distance, we have to use a square root.</p>
+ <p>This may require us to add <code>-lm</code> into our <code>CFLAGS</code> as well, like this:</p>
+ <pre>-bash-4.1$ <strong>export CFLAGS=&quot;-lm tdd.c&quot;</strong><br>
+-bash-4.1$</pre>
+ <p>(This can also be combined with <code>-Wall</code> as in <strong><code>export CFLAGS=&quot;-Wall -lm tdd.c&quot;</code></strong>)</p>
+ <p>Your job on this program is to fill in three stubs:</p>
+<ul>
+     <li><strong><code>distanceBetween</code></strong>
+       &mdash; distance between two points
+         <ul>
+         <li>since we already covered this in lecture, the correct answer is provided in a comment </li>
+         <li>this answer is also provided as an example of how to access members of a struct</li>
+         <li>so don't just blindly uncomment the correct answer&mdash;try to understand how it works</li>
+       </ul>
+    </li>
+     <li><strong><code>pointsApproxEqual</code></strong>&mdash;whether two points are equal (within some tolerance)
+       <ul>
+         <li>the correct answer is provided in a comment here also is also provided for you as an example of how to reuse the distance formula </li>
+         <li>You'll get a chance to apply this idea yourself when you write <code>boxApproxEqual</code> and <code>circleApproxEqual</code> in a later step of this lab</li>
+       </ul>
+    </li>
+     <li><strong><code>initPoint</code></strong>&mdash;initialize a point
+       <ul>
+         <li>Here there are two possible correct answers, both provided. Try to understand how they work.</li>
+         <li>Again, you'll be required in later steps to provide answers like this on your own, so take some time with each of these&mdash;and come back to them later if you are stumped on the corresponding functions for <code>initBox</code> and <code>initCircle</code></li>
+       </ul>
+    </li>
+  </ul>
+   <p>You should also take a look at the way the <code>ASSERT_TRUE</code> function* is used and the places it is used in the program. You'll need to understand how <code>ASSERT_TRUE</code> works to write the later steps of this lab. Essentially, <code>ASSERT_TRUE</code> takes just one argument&mdash;an expression that should evaluate to true (i.e. a non-zero integer) for the test case to pass.</p>
+   <div class="sideNoteDiv">*Actually, strictly speaking, the <code>ASSERT_TRUE</code> function is a macro, not a function&mdash;but this is not a detail we need to concern ourselves with at this point. If you are interested, you can read more about macros in section 4.8 of the Etter textbook.</p>
+   </div>
+  <p>When your test cases pass, move on to the next step.</p>
+ <h3>Step 4: Working with <a href="code/initBoxWithTests.c">initBoxWithTests.c</a></h3>
+ <p>This program is similar to <code>initPointWithTests.c</code>, but here, you are filling in stubs and the answers are NOT provided. </p>
+ <p>For some of the stubs, you can copy/paste your answers from <code>initPointWithTests.c</code>.</p>
+ <p>But there are some new ones, where you and your pair partner need to come up with the code yourself.</p>
+ <p>Have fun!</p>
+ <p>Once you've gotten all the test cases to pass, you are ready to write a program from scratch.</p>
+ <p></p>
+ <h3>Step 5: Writing initCircleWithTests.c from scratch</h3>
+ <p>Now, write a program from scratch called initCircleWithTests.c</p>
+ <p>You are strongly encouraged to follow the TDD process: i.e. write tests and stubs first, get all the tests to fail, then fill in the stubs to make the tests pass.</p>
+ <ul>
+   <li>We aren't going to ask for a transcript to prove you did it this way&mdash;this is on the honor system.</li>
+   <li>But,  if you are asking the TA or the instructor for help, we'll give you frowny faces if you aren't following the TDD process, and big smiles if you are.</li>
+ </ul>
+ <p>To receive full credit, your program should have the following elements. </p>
+ <ol><li><strong>A definition for <code>st</code></strong><code></code><strong><code>ruct Circle</code></strong> that has a <code>struct Point</code> member called <code>center</code>, and a double member called <code>radius</code>.
+   <ul>
+       <li>You may reuse the <code>struct Point</code> definition from the example programs above&mdash;in fact, not only may you do this, you should do this.</li>
+       <li>In addition to reusing struct Point, you should also reuse the functions that go along with <code>struct Point,</code> such as <code>pointsApproxEqual(),</code><code> testPointsApproxEqual()</code>. </li>
+       <li>That also means reusing the functions that <code>pointsApproxEqual(),</code><code> testPointsApproxEqual()</code>  depend on, such as <code>distanceBetween()</code>.</li>
+       <li>For now, to simplify things, reusing the code may involve copying and pasting the code from the other files.
+         <ul>
+           <li>As we get more comfortable with how to share functions among different programs, we get away from this copying/pasting routine.</li>
+         </ul>
+       </li>
+       <li>If/when you reuse any functions, be sure that the tests come along with those functions and are called from your main.</li>
+     </ul>
+   </li>
+   <li><strong>A function called <code>circleApproxEquals()</code></strong> that takes three parameters: two <code>struct Circle</code> instances, and a double value for <code>tolerance</code>. It should return true if the circles are approximately equal, i.e. the center points are approximately equal, and the radii are approximately equal.</li>
+   <li><strong>A function <code>testCircleApproxEquals()</code></strong> that tests the <code>circleApproxEquals()</code>. Include at least three tests. This function should be called from your <code>main()</code>.</li>
+   <li><strong>A function called <code>initCircle()</code> </strong>that initializes a circle. For parameters, it should take a <code>struct Circle *</code>, and doubles for the values of <code>centerX</code>, <code>centerY</code> and <code>radius</code>.</li>
+   <li><strong>A function called <code>testInitCircle()</code> </strong>that tests <code>initCircle</code>. Include at least three tests. Call it from your main.</li>
+   <li><strong>A function called <code>areaCircle()</code></strong> that takes a <code>struct Circle</code> as its parameter, and returns the area of that circle.    
+     <ul>
+       <li>For the value &pi;, you can use <code>#include&lt;math.h&gt;</code>, and then use the predefined constant <code>M_PI</code>.        </li>
+      </ul>
+   </li>
+   <li><strong>A function called <code>testAreaCircle()</code></strong> that tests the <code>areaCircle</code> function. Include at least three tests.</li>
+ </ol>
+ <p>Good luck!</p>
+ <p></p>
+ <h3>Step 6: Turning to the readAirports.c program<br>
+ </h3>
+ <p>We now turn to another topic&mdash;reading from a data file into an array of structs. </p>
+ <p>To start, look at the files <a href="code/5airports.csv">5airports.csv</a> and <a href="code/airports.csv">airports.csv</a></p>
+ <p>Use the <code>more</code> command to look first at the file 5airports.cs (i.e. type more 5airports.csv at the Unix command prompt.)</p>
+ <p>Then use the more command to look at airports.csv</p>
+ <ul>
+   <li> For this one, you may need to know how to get out of <code>more</code>, since the file is pretty long!</li>
+   <li>You can exit <code>more</code> by typing <code>q</code> (for quit)</li>
+   <li><code>CTRL/C</code> should also work.</li>
+ </ul>
+ <p>These files contain latitude and longitude information for various airports. </p>
+ <ul>
+   <li>As the name suggests, <code>5airports.csv</code> contains information on only five airports</li>
+   <li>airports.csv contains information on a large number of airports.</li>
+ </ul>
+ <p>The first line in each file gives us some clues as to what the files contain: </p>
+ <pre>Code,Lat,Lon,City,State</pre>
+ <p>The file is in &quot;CSV&quot; format, i.e. &quot;comma separated values&quot;.</p>
+ <p>We can get an idea of how long the airports.csv file is using the command <code>wc -l airports.csv</code></p>
+ <p>This command allows us to see how many lines there are in the file ('wc stands for word count, but when we pass the -l flag it counts lines instead of words):</p>
+ <pre>-bash-3.2$ <strong>wc -l airports.csv</strong><br>1218 airports.csv<br>-bash-3.2$ 
+
+ </pre>
+We can see that if we want to make an array big enough to store all of these airports, it will need to have at least 1217 elements in it.
+</p>
+<h3>Step 7: Look at the file readAirports.c</h3>
+<p>Next,  look through the file <a href="code/readAirports.c">readAirports.c</a>&mdash;open it up in the text editor (i.e. emacs).</p>
+<p>This is a fairly long program, and some parts of it present new concepts that may be unfamiliar at first. </p>
+<p>Here are a few of the new things you'll encounter. Try to find each one, and look over it with your pair programming partner. See if you can figure out what the code is doing.</p>
+<ol>
+  <li>The struct definition is in a separate header file: <a href="code/airport.h">airport.h </a>
+      <ul>
+        <li>Take a look at that file</li>
+        <li>There are a few new things in there&mdash;the <code>#ifndef</code> stuff, for example&mdash;but don't worry about that for now.</li>
+        <li>Just look at the <code>struct Airport</code> definition</li>
+        <li>We put it in a separate file because we might <strong>reuse</strong> it in other programs.</li>
+      </ul>
+  </li>
+  <li>In the main, we declare a <code>FILE *</code> variable
+    <ul>
+        <li>This is a pointer to a file</li>
+      <li>It allows is to read data from a file</li>
+    </ul>
+  </li>
+  <li>In the main, we declare an array of structs
+    <ul>
+        <li>We are going to read every line from an input file into this array</li>
+    </ul>
+  </li>
+  <li>Inside the function <code>initAirportFromString</code>, we see calls to <code>strtok</code>
+    <ul>
+        <li> <code>strtok</code> stands for &quot;string tokenize&quot;&mdash;this means to pull it apart into its pieces</li>
+    <li>In this case, we are pulling apart a string such as<br>
+            <code>&quot;LAX,33.93,118.4,LosAngeles,CA</code>&quot;<br>
+        and turning it into separate strings, i.e. <code>&quot;LAX&quot;</code>, <code>&quot;33&quot;</code>, <code>&quot;93&quot;</code>, <code>&quot;118.4&quot;</code>, <code>&quot;LosAngeles&quot;</code>, and <code>&quot;CA&quot;</code>.<br>
+        </li>
+      <li>Notice that &quot;,&quot; is a parameter to each call&mdash;this is because our data is separated by commas</li>
+    </ul>
+  </li>
+  <li>Inside the function <code>initAirportFromString</code>, we see calls to strncpy
+    <ul>
+        <li>The <code>strncpy</code> function is used to copy a string</li>
+      <li><code>strncpy</code> allows us to copy the <strong>contents </strong>of the string, not just the <strong>pointer</strong> value</li>
+      <li>The <code>n</code> in <code>strncpy</code> refers to the third argument, which is the maximum number of characters to be copied.</li>
+    </ul>
+  </li>
+  <li>In the <code>main</code> program, we find a call to <code>strcmp</code>&mdash;the string compare function
+    <ul>
+        <li>This function allows us to see whether two strings are equal</li>
+      <li>If the strings are equal, strcmp returns a value of 0 (think: there is 0 difference between them.)</li>
+      <li>We use strcmp to check whether the name of the file passed in is the special value: &quot;test&quot;</li>
+      <li>If <code>argv[1] </code>is<code> &quot;test&quot;</code>, instead of opening a file, we run some tests, and quit.</li>
+    </ul>
+  </li>
+  <li>The test function <code>runTests() </code>also uses<code> strcmp </code>
+    <ul>
+        <li>Notice that we use our test-driven development approach to check whether the function <code>initAirportFromString </code>did its job properly.</li>
+    </ul>
+  </li>
+  <li>The main program has code to open a file with <code>fopen</code>, and read data from it
+    <ul>
+        <li> The <code>fgets() </code>function (file get string) is used to read lines from the file</li>
+      <li>We combine this with a while loop that tests <code>feof</code> (end of file) and <code>ferror</code> (file error) each time through the loop to see whether to continue into the loop&mdash;in case the fgets call didn't return any data.</li>
+      <li>Note that <code>feof</code> is only true AFTER you try to read and find nothing there.</li>
+      <li>We only continue into the loop if both <code>feof</code> and <code>ferror</code> are NOT true&mdash;i.e. our attempt to read was successful and we have some data to process!</li>
+    </ul>
+  </li>
+  <li>After reading the data into the array, we use the array to look for the easternmost airport.
+    <ul>
+        <li>You get to add code for finding the westernmost, northernmost, and southernmost airports.</li>
+    </ul>
+  </li>
+</ol>
+<p>Once you've looked over all of that, you are ready to start coding yourself!</p>
+<h3>Step 8: What you need to do&mdash;adding some tests, and some new code</h3>
+<p>You job is to add a few tests, and then add some extra code at the end of the main function. (That extra code will also require you to add three functions.)</p>
+<ol>
+  <li>Compile the <a href="code/readAirports.c">readAirports.c</a> program.<br>
+  </li>
+  <li>Run it with the command: <code>./readAirports test</code>
+      <ul>
+        <li>You should see that five tests fail</li>
+        <li>Find the &quot;stub&quot; line in the function <code>initAirportFromString()</code> and comment it out
+          <ul>
+              <li>For now, don't remove it entirely&mdash;we'll do that at a later step</li>
+          </ul>
+        </li>
+        <li>Recompile and run again with <code>./readAirports test</code></li>
+        <li>All five tests should pass</li>
+      </ul>
+  </li>
+  <li>Next, find the function runTests()
+    <ul>
+        <li>Inside this function, find the comment where it indicates you should add five tests</li>
+      <li>Add those tests</li>
+      <li>Then, bring the stub back in <code>initAirportFromString()</code>
+            <ul>
+              <li><code>i.e. </code> the line that just says <code>return; </code>as the first line of the function</li>
+              <li>this prevents the function from doing any useful work</li>
+            </ul>
+      </li>
+      <li>You should see 10 tests fail</li>
+      <li>Then take the stub back out&mdash;permanently&mdash;and all the tests should pass.</li>
+    </ul>
+  </li>
+  <li>Finally, look at the end of the main function
+    <ul>
+        <li>There is a place there where the program prints out the easternmost airport</li>
+      <li>Your job is to add code to also print out the westernmost, southernmost and northernmost airport</li>
+      <li>In the process of doing that, you'll need to create three new functions:
+        <ul>
+              <li>indexOfAirportWithLargestLongitude</li>
+          <li>indexOfAirportWithSmallestLatitude</li>
+          <li>indexOfAirportWithLargestLatitude</li>
+        </ul>
+      </li>
+      <li>Once you've written the new functions, and the new code in the main, you can test this code by running the program first with <code>./readAirports 5airports.csv </code>
+            <ul>
+              <li>You should see that San Diego is the easternmost airport&mdash;look at a map if you don't believe it!</li>
+              <li>Similarly, by simple inspection of the data, you should be able to determine which of the airports (SBA, SAN, SFO, LAX, SMF) is the southernmost, northernmost, and westernmost.</li>
+            </ul>
+      </li>
+      <li>Then run your program with <code>./readAirports airports.csv</code> to see if the answers make sense (i.e. you'd expect the northernmost airport to be in Alaska, the easternmost to be in Maine, etc.)</li>
+    </ul>
+  </li>
+</ol>
+<p>When you've done all that, you are ready to submit!</p>
+<p>
+  <div class="importantDiv">
+    <p class="smallerFont"><strong>A note of caution:</strong> When I've assigned this airport program in the past, some folks clearly either didn't look at their results carefully, or they were very unfamiliar with US Geography.
+    <p class="smallerFont">As an example: if your program suggests that the Northernmost airport  in the United States is in Houston, Texas, then this is a big clue that something is wrong with your code.    
+    <p class="smallerFont">Please check your results against common-sense notions about where things are&mdash;and what North, South, East and West actually mean in terms of latitude and longitude. If you aren't sure about these things, look them up (e.g. Google Maps, Wikipedia articles on latitude and longitude, etc.)
+  </div>
+</p>
+<h3>&nbsp;</h3>
+ <h3>Step 9: Script and submit</h3>
+ <p>Script your assignment just as in previous weeks. This week, instead of walking you through it step-by-step, I'm providing only the basic outline. </p>
+ <ul>
+   <li>By the time the course is over, you should be able to script properly without detailed instructions (that will be the expectation in future CS courses.)</li>
+ </ul>
+ <p>So here's a basic outline. (You can always refer back to <a href="../lab05">lab05</a> if you want to see the detailed step-by-step version).</p>
+ <ul>
+   <li>You always start by doing a <strong>pwd</strong> and and <strong>ls</strong> to show what directory you are in, and what files you have.</li>
+   <li>The idea then is to take each of your programs one at a time, i.e. <a href="code/areaBoxWithTests.c"><code>areaBoxWithTests.c</code></a>, <a href="code/initPointWithTests.c"><code>initPointWithTests.c</code></a>, <a href="code/initBoxWithTests.c"><code>initBoxWithTests.c</code></a>,  <code>initCircleWithTests.c</code> and <a href="code/readAirports.c"><code>readAirports.c</code></a> for each one:
+     <ul>
+       <li>Show that it compiles cleanly (you may need to remove the executable first if you are using make)</li>
+       <li>Show that it works properly by running it at least once</li>
+       <li>If needed, run it a few more times if needed, on different inputs, to show that it works properly.
+         <ul>
+           <li>This only applies if the program reads input from a file, the user, or the command line.</li>
+          </ul>
+       </li>
+      </ul>
+   </li>
+   <li>When finished, type <code>exit</code> to end the script, and check the contents of the script file with <code>cat</code> or <code>more</code>.</li>
+ </ul>
+ <p>&nbsp;</p>
+ <p>Your script file should be located in your <strong>~/cs16/lab06</strong> directory and should be called <strong>lab06.txt</strong></p>
+ <p>To submit use the turnin command: <strong>turnin lab06@cs16 lab06</strong></p>
+ <ul>
+   <li>As a reminder: to submit your assignment, <strong>you need to be in the ~/cs16 directory</strong>&mdash;one level higher than the previous step (use <code>cd&nbsp;..</code>)</li>
+  </ul>
+ <p>&nbsp;</p>
+ <hr>
+<h2>Evaluation and Grading (300 pts total) </h2>
+<ul>
+   <li><strong>Mechanics (80 pts)
+     </strong>
+     <ul>
+         <li>30 points: submission is on time and follows submission instructions (i.e. is done via turnin by the Due Date.)</li>
+         <li>50 points:
+           <ul>
+             <li>successfully submitting a lab06 directory with five required C programs and a lab06.txt transcript file.</li>
+             <li>each C file contains a header comment on first line with name &quot;cs16 lab06&quot; and date and name(s) of students submitting the work.</li>
+             <li>all @@@ comments are removed in all  files</li>
+             <li>extraneous irrelevant comments are removed&mdash;i.e. you shouldn't have comments about a &quot;box&quot; in a routine that process a &quot;circle&quot;, leftover from copying/pasting </li>
+           </ul>
+         </li>
+         </ul>
+   </li>
+   <li><strong>Programming Tasks&mdash;<code>areaBoxWithTests.c,</code> <code>initPointWithTests.c</code>, <code>initBoxWithTests.c</code> (50 pts)
+     </strong>
+     <ul>
+       <li>10 points&mdash;<code>areaBoxWithTests.c</code>
+         <ul>
+           <li>Replace stub for <code>areaBox</code> with correct code</li>
+          </ul>
+       </li>
+        <li>10 points&mdash;<code>initPointWithTests.c </code>
+          <ul>
+              <li>Replace three stubs with correct code </li>
+          </ul>
+        </li>
+        <li>30 points&mdash;<code>initBoxWithTests.c</code></li>
+        <ul>
+          <li>10 points: replace three stubs that are same as those in <code>initPointWithTests.c</code></li>
+          <li>10 points: replace stub of <code>boxesApproxEqual</code> with correct code</li>
+          <li>10 points: replace stub of <code>initBox</code>  with correct code</li>
+        </ul>
+        </ul>
+   </li>
+ 
+   <li><strong>Programming Tasks&mdash;<code>initCircleWithTests.c </code>(70 points)</strong></li>
+   <ul>
+     <ul>
+       <li>10 points for each of the items 1-7 listed in Step 5</li>
+      </ul>
+   </ul>
+   <li><strong>Programming Tasks in <code>readAirports.c</code>
+     (100 points)
+     </strong>
+     <ul>
+         <li>25 points&mdash;adding tests in 
+           <code>runTests</code> as indicated by the comment
+           <ul>
+               <li>Add tests and remove the @@@ comments</li>
+             <li>The results of the tests should be added into the <code>failure</code> variable (use the <code>+=</code> operator)</li>
+             <li>The tests should fail when there is a stub in <code>initAirportFromString()</code>, and should pass when the stub is replaced with working code.</li>
+           </ul>
+         </li>
+       <li>25  points&mdash;code for printing western most point
+         <ul>
+               <li>This code should call a new function <code>indexOfAirportWithLargestLongitude()</code> to do its calculation</li>
+         </ul>
+       </li>
+       <li>25 points&mdash;similar code for printing northernmost point
+         <ul>
+               <li>This too should call a new function with an appropriate name</li>
+         </ul>
+       </li>
+       <li>25 points&mdash;similar code for printing southernmost point
+         <ul>
+               <li>You guessed it&mdash;this should call yet another function with an appropriate name</li>
+         </ul>
+       </li>
+     </ul>
+   </li>
+ </ul>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+ <h2>Due Date</h2>
+ <p>Due Date: You should try to complete this assignment by the end of the discussion section in which it was assigned.</p>
+ <p>If you are unable to complete it by the end of your discussion section you may continue to work on it through the week&mdash;ideally before the start of next week's discussion section.</p>
+ <p>It will be accepted without late penalty until 5pm on Friday 05/14.</p>
+ <p>Late assignments will only be accepted (with 20 point penalty) through 5PM on Thursday 05/20&mdash;however you are strongly encouraged to complete it before the Midterm Exam E02 on Wednesday 05/19, as part of your studying and preparation for the exam.</p>
+ <p>After 5PM Thursday 05/20, a zero will be recorded, and the only option is to make up the points via extra credit.<br>
+   <br>
+ </p>
+ <hr>
+ <p>Copyright 2010, Phillip T. Conrad, CS Dept, UC Santa Barbara. Permission to copy for non-commercial, non-profit, educational purposes granted, provided appropriate credit is given;  all other rights reserved. </p>
+</div>
+<!-- id = "container" -->
+</body>
+</html>

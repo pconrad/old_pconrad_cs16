@@ -1,0 +1,13 @@
+Hazel	1954	4
+Audrey	1957	4
+Donna	1960	4
+Carla		1961	4
+Camille	1969	5
+Celia		1970	3
+Frederic	1979	3
+Allen	1980	3
+Gloria	1985	3
+Hugo	1989	4
+Andrew	1992	5
+Opal		1995	3
+

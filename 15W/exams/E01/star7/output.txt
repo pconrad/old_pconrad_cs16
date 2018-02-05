@@ -1,0 +1,21 @@
+-bash-4.2$ ./proposedAnswer01 4 7
+****
+    *
+    *
+    *
+    *
+    *
+    *
+
+-bash-4.2$ ./proposedAnswer01 3 5
+***
+   *
+   *
+   *
+   *
+
+-bash-4.2$ ./proposedAnswer01 4 2
+****
+    *
+
+-bash-4.2$ 

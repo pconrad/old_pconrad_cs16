@@ -1,0 +1,53 @@
+def drawPlus(t, w, h):
+    """
+    draw a plus sign with width and height w, h
+    """
+
+    # get Turtle's starting point for x and y
+
+    sx = t.xcor()
+    sy = t.ycor()
+
+    # Compute where the turtle should end up
+
+    ex = sx + w
+    ey = sy
+
+    # compute four points of plus sign
+
+    topX = sx + w/2
+    topY = sy + h/2 + 0.3*w
+
+    bottomX = sx + w/2
+    bottomY = sy + h/2 - 0.3*w
+
+    leftX = sx + 0.2*w
+    leftY = sy + h/2
+
+    rightX = sx + 0.8*w
+    rightY = sy + h/2
+
+    # draw the plus
+
+    t.up()
+
+    t.goto(topX,topY)
+
+    t.down()
+
+    t.goto(bottomX, bottomY)
+    
+    t.goto(rightX, rightY) 
+
+    t.goto(leftX, leftY)
+
+
+
+    # Move turtle to ending position
+
+    t.up()
+
+    t.goto(ex, ey)
+
+    t.down()
+

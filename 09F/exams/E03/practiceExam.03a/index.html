@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>PRACTICE EXAM for CS16 Midterm 2, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+ul.squareList li {list-style-type: square;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"> ***PRACTICE EXAM 03 for***<br />
+  CS16 Final Exam<br />
+  <span class="subhead">E03, 09F, Phill Conrad, UC Santa Barbara<br /> 
+Actual exam scheduled for: 12/10/2009</span></h1>
+<p class="instructions"><strong>Name:</strong> ________________________________________________________</p>
+<p class="instructions"><br />
+<strong>Umail Address: </strong>__________________________________@ umail.ucsb.edu<br />
+<br />
+<br />
+<strong>Circle Lab section:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10AM &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11AM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noon</p>
+<p class="instructions"><a href="exam.pdf">Link to Printer Friendly PDF Version</a></p>
+<hr />
+<p class="instructions">Please write your name <strong>only</strong> on this page. That allows me to grade your exams without knowing whose exam I am grading.</p>
+<p class="instructions">This exam is <strong>closed book, closed notes</strong>, <strong>closed mouth, cell phone off</strong>,<br />
+  except for:</p>
+<ul>
+  <li class="instructions">You are permitted <strong>one sheet of paper</strong> (max size 8.5x11&quot;) on which to write notes</li>
+  <li class="instructions">These sheets will be collected with the exam, and might not be returned</li>
+  <li class="instructions">Please write your name on your notes sheet</li>
+</ul>
+<p>There are 100 points worth of questions on the exam, and you have 50 minutes to complete the exam.</p>
+<p>A hint for allocating your time:</p>
+<ul>
+  <li>if a question is worth 10 points, spend no more than 5 minutes on it</li>
+  <li>if a question is worth 20 points, spend no more than 10 minutes on it</li>
+  <li>etc.</li>
+</ul>
+<hr />
+<ol class="theQuestions">
+ <li class="pageBreakBefore">(10 pts) Given the definition of a struct for Point:<br />
+     <br />
+      <code>struct Assignment {<br />
+      &nbsp;&nbsp;int pointValue; // how many pts the assignment was worth<br />
+       &nbsp;&nbsp;int pointsEarned; // how many pts the student earned on this assignment<br />
+  };<br />
+      </code><code><br />
+      </code>Write the definition of a function that matches this prototype:<br />
+     <br />
+      <code>double pctScoreForAssignment(struct Assignment *scores, <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int assignmentNumber)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />  
+      </code><br />
+  This function takes an array of struct Assignment entries called scores, and assignmentNumber which is an index into that array.<br />
+  <br />
+  The function should return the score on the assignment that is at index assignmentNumber, as a percent. That is, you should divide the points earned by the point value, and multiply by 100. Keep in mind that the result might not be an integer.<code><br />
+    </code><br />
+    <br /> 
+    <br /> 
+    <br /> 
+    <br /> 
+    <br />
+ </li>
+ <li class="pageBreakBefore">Here is a recursive function with the name <code>mysteryFunction</code>. As parameters, it takes an array of integers <code>a</code>, and the length of that array <code>n</code> as parameters, and returns an integer. What it actually computes is a mystery for you to solve.<br />
+     <br />
+   <pre>
+int mysteryFunction(int *a, int n)
+{
+  if (n&lt;=0)
+    return 0;
+  else
+    return a[0] + mysteryFunction(a+1,n-1);
+}
+</pre>
+    <ol>
+      <li>(5 pts) Solve the mystery by figuring out what the mystery function computes, then come up with a more reasonable name for the function. <br />
+        <br />
+       Hint: Among these possible function names, one (and only one) of them would be a reasonable answer to this question: <code>average, countEven, countMax, countMin, countNeg, countOdd, countPos, countSevens, indexFirstEven, indexFirstOdd, indexOfMax, indexOfMin, isSorted, maxValue, minValue, noDups, sum</code>.<br />
+       <br />
+      </li>
+      <li>(10 pts) Rewrite the function so that it computes the same result for every input, but using iteration (a <code>for</code> loop or <code>while</code> loop) instead of recursion.</li>
+     </ol>
+ </li>
+</ol>
+</body>
+</html>

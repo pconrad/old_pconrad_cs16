@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Solution to question 3 for PRACTICE EXAM for CS16 Midterm 1, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  pre {width:auto;}
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+.nobreak {white-space:nowrap;}
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions"><br />
+  CS16 Final Exam<br />
+  <span class="subhead">E03, 09F, Phill Conrad, UC Santa Barbara<br />
+</span></h1>
+<p class="instructions"><br />
+   <br />
+</p>
+                                                                     
+                                                                     
+ <ol><li>                                            
+                                                                     
+   <pre>
+struct Complex{
+   double a;
+   double b;
+};
+</pre></li>
+<li><ol><li>
+<pre>
+void initComplex(struct Complex *cPtr, double aVal, double bVal);
+</pre></li>
+<li><pre>
+void initComplex(struct Complex *cPtr, double aVal, double bVal){
+   (*cPtr).a=aVal;
+   (*cPtr).b=bVal;
+}
+</pre></li></ol></li>
+<li>
+<pre>
+struct Complex squareComplex(struct Complex c){
+   struct Complex ans;
+   initComplex(&ans, (c.a*c.a - c.b*c.b), ( 2*c.a*c.b));
+   return ans;
+}
+</pre>
+</li>
+<li>
+<p>
+You can tell if a function is recursive by looking in the function definition, that is, where the function body is actually written, and look for a call to itself in body of the function's definition. Inside the body block of the function definition, there should be  a call to the function itself, as well as other code needed to adapt the inputs in order to eventually reach a terminating case.</p></li>
+<li>
+<pre>
+int iStar(int w, int h){
+   int i;
+
+   if(h&lt;3 || w&lt;3 || w%2==0) 
+     return 1;<br />
+
+   // top of I
+   printNChars(w,'*');
+   printf("\n");<br />
+
+   // middle of I
+   for(i = 0; i&lt;h-2; i++)
+   {
+         printNChars(w/2,' ');
+         printf(&quot;*\n&quot;);
+   }<br />
+
+   // bottom of I
+   printNChars(w,'*');
+   printf(&quot;\n&quot;);
+   
+   return 0; 
+}
+</pre>
+</li>
+<li>
+<pre>
+a) ls -l  (LS -L but lowercase)
+b) 644
+c) chmod 755 blah
+d) rwxr-xr-x
+</pre>
+</li>
+<li>
+<pre>
+void drawI(struct Drawing *d, struct Point ul, double w, double h, int color){
+
+   drawLine(d,makePoint ul.x,       ul.y),   makePoint(ul.x + (w-1),ul.y),      color);  
+   drawLine(d,makePoint(ul.x + w/2,ul.y),   makePoint(ul.x + w/2), ul.y + h),   color);  
+   drawLine(d,makePoint(ul.x,      ul.y+h), makePoint(ul.x + (w-1),ul.y + h),   color);
+}</pre>
+</li>
+<li>
+<pre>
+a         double *
+*b         error
+*e         struct Circle
+&amp;f         struct Circle*
+*g         struct Point
+f         struct Circle
+e->center.x      double
+&amp;argc         int*
+</pre>
+</li>
+<li><ol><li>
+<p>
+the mysteryFunction counts the number of odd entries the array has. a more reasonable name is countOdd.</p>
+</li>
+<li>
+<pre>
+
+int countOdd(int *a, int n)
+{
+   int i;
+   int result = 0;
+   for(i = 0; i&lt;n; i++)
+   {
+      if(a[i]%2!=0) 
+        result++;
+   }
+   return result;
+}
+
+
+
+</pre>
+</li>
+</ol>
+</li>
+</ol>
+
+</body>
+</html>

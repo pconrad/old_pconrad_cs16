@@ -1,0 +1,153 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10S, H02 (due Fri Lect 04.02) Oualline, Chapter 5, Arrays</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.smallerFont {font-size: 0.9em;}
+.style1 {font-size: smaller}
+#bookstoreMemo {font-style: italic; font-size: 0.8em;}
+div#bookstoreMemo {outline: #0066FF solid medium;}
+.style2 {	font-size: 24px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.style3 {	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p><strong>CS16, 10S, H02 (due Fri Lecture 04.02)  Oualline, Chapters 3, 4--Style, C basics—<span id="pointCount">Total points: ?</span></strong> <br />
+Online version: <a href="H02">http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H02</a> (<a href="H02.pdf">printable PDF</a>)</p>
+<p>Accepted: <strong>on paper, in lecture (9am, 10am, 11am or noon) on Friday, 04/02</strong> in Chem 1171<br />
+    <br />
+  <span class="smallerFont"><strong>Late Policy:</strong> No email submission allowed—and don't &quot;slip it under my door&quot;. If you need to make it up, you must do so during office hours, or make an appointment to see me, and you must request this appointment within 48 hours of when the assignment was originally due. <br />
+    <br />
+    <strong>Personal Day/Sick Day policy</strong>: Everyone is permitted one &quot;personal day/sick day&quot; when you get to make up a missed homework assignment for free during office hours or via appointment. After that, you may not make up the homework assignment—you can only earn back the points through extra credit opportunities.</span></p>
+<p><span class="smallerFont">(For more details, see  the <a href="../../syllabus/index.html">syllabus</a> and the <a href="..">homework policy</a>)</span><br />
+</p>
+<hr />
+<p>Name: (3 pts)___________________________  <span>UMail address (3 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (4 pts) Circle one:         9am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noon        crashing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unknown&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+    <br />
+  <span class="style1">(Note: For now, circle the lab section you are registered for on GOLD. If you need to request attendance at a different lab section because of an ACTUAL SCHEDULE CONFLICT, please email pconrad@cs.ucsb.edu with details)</span></p>
+<hr />
+<p align="center" class="style2">This assignment is due <strong>IN LECTURE ON FRIDAY 04/02<br />
+</strong>It may <strong>ONLY</strong> be turned in IN LECTURE ON FRIDAY 04/02</p>
+<p align="left" class="style3">The <strong>only</strong> other time/place this lab will be accepted is i<strong>n person, at your instructor's office hours</strong> within one week of 04/02 , or the day you add the class on GOLD, whichever is later, in accordance with the homework policies outlined on the course syllabus. Make this appointment within 48 hours of 04/02, or when you add the course.</p>
+<p>Please obtain the official textbook for this course by Delores Etter. <strong>I will assign homework from that book on Friday, and it will be due on Monday 04/05. </strong>Here is an excerpt from a memo from the bookstore regarding availability of textbooks:</p>
+<div id="bookstoreMemo">
+  <p>...<br />
+  I wanted to send out a reminder regarding what to say to students who complain that they can't get the book....if you would forward this email to your faculty it would be much appreciated and hopefully eliminate some anxiety for students and faculty.</p>
+  <p><strong>TELL THE STUDENTS TO COME TALK TO US IN THE TEXTBOOK DEPARTMENT</strong>.  We will make sure they get a book. <strong>If we are out, we can get more copies in approximately three to five business days.</strong></p>
+  <p>If students don't talk to us we have no way of knowing somebody wants a book.  We base our reordering on need.  Students shop in so many different places these days we cannot predict how many will want to shop here.  Freight is hugely expensive, as is the labor involved in bringing books in that we might not be able to sell.  Therefore, we need to hear from our students if they want something...<br />
+    <br />
+    Best wishes,<br />
+  Cynthia Ellestad, Course Materials Department Manager, UCSB Bookstore</p>
+</div>
+<p>For now, the reading assignments are chapters from an online textbook—Practical C Programming by Steve Oualline. Links to material in this book appear below. <br />
+  <br />
+  Once you've read Chapter 5, write answers to the questions on the reverse side of this sheet (use the <a href="../../../10S/homework/H02/H02.pdf">PDF link</a> to print a copy of this if you weren't in class).<br />
+  <br />
+  Even though this book is a bit &quot;dated&quot;—for example, the advice in section about 5.8 about float vs. double is the opposite of what I told you in class*—there is still lots of good information in this book.  And is has the advantage of being free, and available to you while we wait for everyone to get their textbooks.<br />
+</p>
+<p> (*Regarding float and double—my advice is always use double unless you have a specific reason to prefer float. The reason the conventional wisdom has changed: memory is cheaper and processor speeds are faster than they once were.)</p>
+<p>To link directly to this book, use these links: (<a href="http://search.safaribooksonline.com/1565923065/pcp3-CHP-5">on campus</a>) (<a href="http://search.safaribooksonline.com.proxy.library.ucsb.edu:2048/1565923065/pcp3-CHP-5">off campus</a>)</p>
+<p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for questions to answer</span><br />
+            </p>
+          <p style="page-break-before:always"><br />
+            <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+<ol>
+  <li>In Chapter 5, the author describes how to declare arrays.<br />
+      <br />
+      <ol>
+        <li>(5 pts) How would you write a line of C code that declares an array to hold 10 integers, each representing a students exam score?<br />
+            <br />
+            <br />
+            <br />
+        </li>
+        <li>(5 pts) What would be the highest index (subscript) used to access an item in this array—i.e. the highest number you could put in [ ] to pull out a single element of this array?<br />
+        <br />
+            <br />
+          
+              
+            </p>
+        </li>
+      </ol>
+  </li>
+  <li>(10 pts) Let's suppose you've just read through Chapter 5 of the online reading assignment. (If you haven't yet, please go ahead and do so for real, before answering this question.)<br />
+      <br />
+      <em>Your friend has also read through the section, but your friend isn't quite getting it. Your friend says: I'm still not sure what an array is. I know what a variable is, but I'm not clear on this idea of an array.<br />
+      <br />
+        Can you explain it to me in plain english?<br />
+      </em><br />
+    How do you answer your friend?<br />
+    <br />
+    (By the way, this quesiton would be a very typical &quot;Phill Conrad-style exam question&quot;, so when you are studying for exams in this course, be sure to try to ask yourself questions like this. You might like to get together with a friend and ask each other questions like this to practice.)<br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </li>
+  </li>
+  <li>According to the author, strings in C are &quot;just character arrays with a few restrictions.&quot; <br />
+      <br />
+      <ol>
+        <li>(5 pts) What is the restriction that the author mentions about the ends of strings in C?<br />
+            <br />
+            <br />
+            <br />
+        </li>
+        <li>(5 pts) The author mentions that to copy one string to another, we can't use an assignment statement—we have to use a special &quot;string copying function&quot; instead. What is the name of that function?<br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </li>
+      </ol>
+  </li>
+  <li>Read what the author has to say about variable length strings in C—including the string that holds the name &quot;Sam&quot; that is mentioned in the reading. (There is something specific about strings in C that is different from string in Java, Python, and many other languages.) <br />
+      <br />
+    Then answer these questions. <br />
+    <br />
+    <ol>
+      <li>(5 pts) Which of the following would be the correct way to declare a string variable for &quot;state&quot; that could hold two letter state abbreviations as a C-string? (Choose one)<br />
+          <br />
+          <br />
+        char [] state;<br />
+        <br />
+        char state [];<br />
+        <br />
+        char state[2];<br />
+        <br />
+        char state[3];<br />
+        <br />
+        char state[4];<br />
+        <br />
+        <br />
+      </li>
+      <li>(5 pts) Briefly explain your choice.<br />
+          <br />
+          <br />
+          <br />
+      </li>
+    </ol>
+  </li>
+</ol>
+<ol><!--- -->
+</ol>
+<hr />
+End of H02
+</body>
+</html>

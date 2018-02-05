@@ -1,0 +1,28 @@
+-bash-3.2$ ch
+                                   Ch 
+                Professional edition, version 6.1.0.13751 
+              (C) Copyright 2001-2009 SoftIntegration, Inc.
+                     http://www.softintegration.com
+/cs/faculty/pconrad> struct Point { double x; double y; };
+/cs/faculty/pconrad> struct Circle { struct Point center; double radius; };
+/cs/faculty/pconrad> struct Point p;
+/cs/faculty/pconrad> struct Point origin;
+/cs/faculty/pconrad> p.x = 3.5
+3.5000 
+/cs/faculty/pconrad> p.y = 7.0
+7.0000 
+/cs/faculty/pconrad> p 
+.x = 3.5000
+.y = 7.0000 
+/cs/faculty/pconrad> struct Circle c1;
+/cs/faculty/pconrad> c1.center.x = 3.0;
+3.0000 
+/cs/faculty/pconrad> c1.center.y = 5.0;
+5.0000 
+/cs/faculty/pconrad> c1.radius = 4.0;
+4.0000 
+/cs/faculty/pconrad> c1
+.center.x = 3.0000
+.center.y = 5.0000
+.radius = 4.0000 
+/cs/faculty/pconrad> 

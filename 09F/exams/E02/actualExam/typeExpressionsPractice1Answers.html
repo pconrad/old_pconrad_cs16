@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CS16 2nd Midterm, E02, 09F, Conrad, UCSB</title>
+<link rel="stylesheet" type="text/css" href="exam.css" />
+<style type="text/css">
+  table.selectEm tr td {font-size: 3.0em; padding-left:0.75em; padding-right:0.75em;}
+  table.selectEm {border-style: none;}
+  table.withLines tr td {border:thin #000000 solid;}
+    table.withLines tr th {border:thin #000000 solid;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.cellVerticallyCentered {vertical-align:center;}
+table.blankTable { border: solid white 0px; }
+
+ol.theQuestions li ul li {page-break-before:avoid;}
+ol.theQuestions li ol li {page-break-before:avoid;}
+
+pre.widePre {font-size: 10px;}
+
+pre.widePreNoBox {border: none; font-size: 12px; width: auto;}
+
+.nobreak {white-space:nowrap;}
+table#typeExpressions tr td {height: 2.0em; padding: 3px;}
+ul.squareList li {list-style-type: square;}
+.style1 {color: #999999}
+.style2 {font-family: Verdana, Arial, Helvetica, sans-serif; color: #999999; }
+</style>
+<script type="text/javascript" src="exam.js" ></script>
+</head>
+
+<body onload="updatePointCount();">
+<h1 class="instructions">Answers to Type Expressions Practice 1<br />
+  (Also 09F, E02, CS16, question 4)<br />
+CS16,P. Conrad, UCSB</h1>
+<p class="instructions">The problems that this is an answer key for can be found at the links below:</p>
+<ul>
+  <li>As question 4 of <a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/exams/E02/actualExam/">Midterm Exam E02 from 09F</a></li>
+  <li>As this <a href="typeExpressionsPractice1.html">separate set of practice problems</a></li>
+</ul>
+
+ 
+
+ 
+
+   <table border="1" cellpadding="1" cellspacing="1" id="typeExpressions">
+    <tr>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+      <td width="13" bgcolor="#000000">&nbsp;&nbsp; &nbsp; </td>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td><span class="style5 instructions style1">double *</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>i.x</td>
+      <td class="instructions">error</td>
+    </tr>
+    <tr>
+      <td>*b</td>
+      <td><span class="style2">error</span></td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>i-&gt;y</td>
+      <td class="instructions">int</td>
+    </tr>
+    <tr>
+      <td>e</td>
+      <td class="instructions">struct Circle *</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>&amp;(j.y)</td>
+      <td class="instructions">int *</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td class="instructions">double</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>(*g).x</td>
+      <td class="instructions">double</td>
+    </tr>
+    <tr>
+      <td>&amp;b</td>
+      <td class="instructions">double *</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>(*g)-&gt;y</td>
+      <td class="instructions">error</td>
+    </tr>
+    <tr>
+      <td>*a</td>
+      <td class="instructions">double</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>h.x</td>
+      <td class="instructions">double</td>
+    </tr>
+    <tr>
+      <td>*d</td>
+      <td class="instructions">error</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>*(h.x)</td>
+      <td class="instructions">error</td>
+    </tr>
+    <tr>
+      <td>e.center</td>
+      <td class="instructions">error</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>&amp;g</td>
+      <td class="instructions">struct Point **</td>
+    </tr>
+    <tr>
+      <td>e-&gt;x</td>
+      <td class="instructions">error</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argc</td>
+      <td class="instructions">int </td>
+    </tr>
+    <tr>
+      <td>f-&gt;y</td>
+      <td class="instructions">error</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argv[0]</td>
+      <td class="instructions">char * </td>
+    </tr>
+    <tr>
+      <td>e-&gt;center-&gt;x</td>
+      <td class="instructions">error</td>
+      <td bgcolor="#000000">&nbsp;</td>
+      <td>argv[0][0]</td>
+      <td class="instructions">char </td>
+    </tr>
+  </table>
+
+
+</body>
+</html>

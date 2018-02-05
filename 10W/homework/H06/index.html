@@ -1,0 +1,169 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, H06 (Functions that print characters using for and if, based on lecture from 01.19, Etter 3.2, 3.3)</title>
+<script type="text/javascript" src="../exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.smallerFont {font-size: 0.9em;}
+.style1 {font-size: smaller}
+.style2 {font-size: larger}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p>CS16, 10W, H06 (Functions that print characters using for and if) <span id="pointCount">Total points: ?</span></p>
+<p>Available online at: <a href="http://www.cs.ucsb.edu/~pconrad/cs16/09F/homework/H06">http://www.cs.ucsb.edu/~pconrad/cs16/10W/homework/H06</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<a href="H06.pdf">printable PDF</a>)</p>
+<p>Accepted: <strong>on paper, in LAB (Thursday afternoon Jan 21th</strong>)<br />
+  <br />
+  <span class="smallerFont"><strong>Late Policy:</strong> No email submission allowed—and don't &quot;slip it under my door&quot;. If you need to make it up, you must do so during office hours, or make an appointment to see me, and you must request this appointment within 48 hours of when the assignment was originally due. <br />
+  <br />
+  <strong>Personal Day/Sick Day policy</strong>: Everyone is permitted one &quot;personal day/sick day&quot; when you get to make up a missed homework assignment for free during office hours or via appointment. After that, you may not make up the homework assignment—you can only earn back the points through extra credit opportunities.</span></p>
+<p><span class="smallerFont">(For more details, see  the <a href="../../syllabus/index.html">syllabus</a> and the <a href="../index.php">homework policy</a>)</span><br />
+</p>
+<hr />
+<p>Name: (2 pts)___________________________  <span>UMail address (3 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (5 pts) Circle one:         3pm       4pm         5pm           unknown<br />
+    <br />
+    <span class="style1">(Note: For now, circle the lab section you are registered for on GOLD. If you need to request attendance at a different lab section because of an ACTUAL SCHEDULE CONFLICT, please email pconrad@cs.ucsb.edu with details)</span><br />
+</p>
+<hr />
+<p align="center" class="style2">This assignment is due <strong>IN LAB on Thursday. </strong><br />
+    <strong>It may ONLY be turned in during LAB on Thursday.</strong><br />
+  Do NOT turn it in early in lecture on Thursday.</p>
+<p></p>
+<p><br />
+</p>
+<hr />
+<p>This assignment is based on material covered in lecture on Tuesday 01/19<br />
+  <br />
+If you missed these lectures, as is traditional in college/university level coures, it is <em>your</em> responsibility to make up what you missed by getting notes from fellow classmates. It is not the instructors responsibility to review the lecture with you at a later time.</p>
+<p>You may also find it helpful to read about for loops, functions, and printf in your textbook—see the table of contents and index to find appropriate chapters.</p>
+<ol>
+  <li>(20 pts) Write a C function definition for a function called printKSpacesNXs that <strong>takes two integer parameters, k and n. </strong>The function should print k spaces, and then n lowercase 'x' characters on standard output. <br />
+    It should NOT print a new line after it is finished.<br />
+      <br />
+        <strong>[Note: the version handed out in class said, incorrectly, &quot;... takes two integer parameters, k and x&quot;. <br />
+  A correction was sent out by email at noon on Wednesday 1/20, <br />
+  and will be mentioned in lecture on Thursday 1/21, before this is due in lab.]</strong><br />
+    <br />
+Example output:<br />
+<br />
+<table border="2">
+  <tr>
+    <th scope="col">This code</th>
+    <th scope="col">produces this output</th>
+  </tr>
+  <tr>
+    <td style="text-align:left; vertical-align:top;"><pre>printf(&quot;1234567890\n&quot;);
+printf(&quot;|&quot;);
+printKSpacesNXs(3,5);
+printf(&quot;|\n&quot;);
+        </pre>
+        </p>    </td>
+    <td style="text-align:left; vertical-align:top;"><pre>1234567890
+|   xxxxx|</pre></td>
+  </tr>
+  <tr>
+    <td style="text-align:left; vertical-align:top;"><pre>printf(&quot;1234567890\n&quot;);
+printf(&quot;|&quot;);
+printKSpacesNXs(2,4);
+printf(&quot;|\n&quot;);
+        </pre>
+        </p>    </td>
+    <td style="text-align:left; vertical-align:top;"><pre>1234567890
+|  xxxx|</pre></td>
+  </tr>
+</table>
+<br />
+<br />
+    <p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for questions to answer</span><br />
+    </p>
+    <p style="page-break-before:always"><br />
+      <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+    </p>
+  </li>
+  <li> (20 pts) Write a C function definition for a function called alternatePrintNTimes that takes one integer parameters n, and two character parameters c1 and c2. The function should alternate between printing c1 and c2, until n characters have been printed.<br />
+    <br />
+    Hints: There are many ways to approach this problem. <br />
+    <br />
+    One way is to use an if test that checks whether the index variable of a for loop is odd or even.<br />
+    If the variable i is odd, then i%2 will be 1.  If it is even then i%2 will be 0.<br />
+    <br />
+    Another way is to initialize a character variable c to the value of c1 before the loop starts. Then, each time through the loop, you can check whether the value is c1 or c2, and depending on which value it is, you can change it to the other value.<br />
+    <br />
+  <br />
+    Example output:<br />
+    <br />
+    <table border="2">
+      <tr>
+        <th scope="col">This code</th>
+        <th scope="col">produces this output</th>
+      </tr>
+      <tr>
+        <td style="text-align:left; vertical-align:top;"><pre>printf(&quot;1234567890\n&quot;);
+printf(&quot;|&quot;);
+alternatePrintNTimes(4,'x','o');
+printf(&quot;|\n&quot;);
+</pre>          </td>
+        <td style="text-align:left; vertical-align:top;"><pre>1234567890
+|xoxo|</pre></td>
+      </tr>
+      <tr>
+        <td style="text-align:left; vertical-align:top;"><pre>printf(&quot;1234567890\n&quot;);
+printf(&quot;|&quot;);
+alternatePrintNTimes(5,'x','o');
+printf(&quot;|\n&quot;);
+</pre>          </td>
+        <td style="text-align:left; vertical-align:top;"><pre>1234567890
+|xoxox|</pre></td>
+      </tr>
+      <tr>
+        <td style="text-align:left; vertical-align:top;"><pre>printf(&quot;1234567890\n&quot;);
+printf(&quot;|&quot;);
+alternatePrintNTimes(6,'+','-');
+printf(&quot;|\n&quot;);
+</pre>        </td>
+        <td style="text-align:left; vertical-align:top;"><pre>1234567890
+|+-+-+-|</pre></td>
+      </tr>
+      <tr>
+        <td style="text-align:left; vertical-align:top;"><pre>printf(&quot;1234567890\n&quot;);
+printf(&quot;|&quot;);
+alternatePrintNTimes(7,'+','-');
+printf(&quot;|\n&quot;);
+      </pre>        </td>
+        <td style="text-align:left; vertical-align:top;"><pre>1234567890
+|+-+-+-+|</pre></td>
+      </tr>
+      <tr>
+        <td style="text-align:left; vertical-align:top;"><pre>printf(&quot;1234567890\n&quot;);
+printf(&quot;|&quot;);
+alternatePrintNTimes(7,'-','+');
+printf(&quot;|\n&quot;);
+      </pre>
+        </td>
+        <td style="text-align:left; vertical-align:top;"><pre>1234567890
+|-+-+-+-|</pre></td>
+      </tr>
+    </table>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </li>
+  <!--- -->
+</ol>
+<hr />
+End of H06
+</body>
+</html>

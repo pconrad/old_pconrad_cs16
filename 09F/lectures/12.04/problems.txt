@@ -1,0 +1,365 @@
+(1) Write a C program that takes one command line argument,
+an integer.   We'll call that integer "width".
+
+Write that many stars on one line as output
+then return 0 indicating success.
+
+If there isn't one item on the command line, 
+print the message: "Usage: p1 width" and return 1 indicating an error
+
+Example runs:
+
+-bash-3.2$ ./p1
+Usage: p1 width
+-bash-3.2$ ./p1 1
+*
+-bash-3.2$ ./p1 5
+*****
+-bash-3.2$ ./p1 0
+
+-bash-3.2$ 
+
+(2) Write a C program that takes two command line arguments,
+both integers. We'll call them width and height.
+
+Make the letter L at that width and height, using stars.
+
+If you don't have two command line args,
+print the message: "Usage: p2 width height" and return 1 indicating an error
+
+Example runs:
+
+-bash-3.2$ ./p2
+Usage: p2 width height
+-bash-3.2$ ./p2 2
+Usage: p2 width height
+-bash-3.2$ ./p2 2 3
+*
+*
+**
+-bash-3.2$ ./p2 3 2
+*
+***
+-bash-3.2$ ./p2 1 5
+*
+*
+*
+*
+*
+-bash-3.2$ ./p2 5 1
+*****
+-bash-3.2$ ./p2 0 100
+
+-bash-3.2$ ./p2 100 0
+
+-bash-3.2$ ./p2 2 5
+*
+*
+*
+*
+**
+-bash-3.2$ ./p2 5 2
+*
+*****
+-bash-3.2$ ./p2 1 1
+*
+-bash-3.2$ ./p2 2 2
+*
+**
+-bash-3.2$ 
+
+(3) Write a C program that takes two command line arguments,
+both integers. We'll call them width and height.
+
+If you don't have two command line args, 
+print the message: "Usage: p2 width height" and return 1 indicating an error
+
+If height is not >=2, print
+"Height must be >=2" and return 2, indicating an error
+
+If width is not an odd integers >=3, print
+"Width must be odd, >=3" and return 3, indicating an error
+
+Otherwise, print the letter T at that width and height, using stars.
+The vertical bar of the T should be centered.
+
+Hint: It is easier if you make a helper function first, 
+with this prototype:
+
+// print character c n times, no spaces, not return
+void printNChars(int n, char c);
+
+Example output:
+
+
+-bash-3.2$ ./p3
+Usage: p3 width height
+-bash-3.2$ ./p3 4 5
+Width must be odd, >=3
+-bash-3.2$ ./p3 5 4
+*****
+  *
+  *
+  *
+-bash-3.2$ ./p3 5 3
+*****
+  *
+  *
+-bash-3.2$ ./p3 5 2
+*****
+  *
+-bash-3.2$ ./p3 5 1
+Height must be >=2
+-bash-3.2$ ./p3 3 5
+***
+ *
+ *
+ *
+ *
+-bash-3.2$ ./p3 1 5
+Width must be odd, >=3
+-bash-3.2$ ./p3 3 2
+***
+ *
+-bash-3.2$ 
+
+
+(4) Write a C program that takes two command line arguments,
+both integers. We'll call them width and height.
+
+If you don't have two command line args, 
+print the message: "Usage: p2 width height" and return 1 indicating an error
+
+Make a filled in box of stars with the given height and width.
+If either height or width is zero, print nothing at all,
+not even a blank line.   No error message in that case either.
+
+
+Hint: It is easier if you make a helper function first, 
+with this prototype:
+
+// print character c n times, no spaces, not return
+void printNChars(int n, char c);
+
+Sample output:
+
+-bash-3.2$ ./p4 
+Usage: p4 width height
+-bash-3.2$ ./p4 1
+Usage: p4 width height
+-bash-3.2$ ./p4 1 2
+*
+*
+-bash-3.2$ ./p4 2 1
+**
+-bash-3.2$ ./p4 0 5
+-bash-3.2$ ./p4 5 0
+-bash-3.2$ ./p4 3 2
+***
+***
+-bash-3.2$ ./p4 2 3
+**
+**
+**
+-bash-3.2$ 
+
+
+(5) Write a C program that takes two command line arguments,			   
+    both integers. We'll call them width and height.				   
+    										   
+    If you don't have two command line args, 					   
+    print the message: "Usage: p2 width height" and return 1 indicating an error	   
+    										   
+    Print the error message "Width and height must both be >=3" if that		   
+    rule is violated by the value that are provided, and return 1		   
+    Otherwise:									   
+    Print a hollow box of stars with the given height and width.                   
+
+
+Sample output:
+
+-bash-3.2$ ./p5 2 2
+Width and height must both be >=3
+-bash-3.2$ ./p5 2 3
+Width and height must both be >=3
+-bash-3.2$ ./p5 3 3
+***
+* *
+***
+-bash-3.2$ ./p5 3 5
+***
+* *
+* *
+* *
+***
+-bash-3.2$ ./p5 5 3
+*****
+*   *
+*****
+-bash-3.2$ 
+
+
+(6) Write a program that takes one integer argument.  Call this height.	   
+									   
+If there isn't exactly one command line argument, give the error message:  
+"Usage: p6 height" and return 1.					   
+									   
+If height is zero, there is no output---no error message, and not even	   
+a blank line.								   
+									   
+Otherwise, you will have a figure with 1 star on the first line,	   
+2 stars on the second line, 3 on the third line, and so forth,		   
+with height lines in all.   (See examples.)   Return 0 to indicate success.
+
+
+Example output:
+
+-bash-3.2$ ./p6 
+Usage: p6 height
+-bash-3.2$ ./p6 3
+*
+**
+***
+-bash-3.2$ ./p6 6
+*
+**
+***
+****
+*****
+******
+-bash-3.2$ ./p6 0
+-bash-3.2$ ./p6 2
+*
+**
+-bash-3.2$ 
+
+(7) Write a program that is exactly the same as p6, but the output	    
+comes out in the reverse order, and the error message says p7		    
+instead of p6.								    
+									    
+That is:								    
+									    
+If there isn't exactly one command line argument, give the error message:   
+"Usage: p7 height" and return 1.					    
+									    
+If height is zero, there is no output---no error message, and not even	    
+a blank line.								    
+									    
+Otherwise, you will have a figure with height stars on the first line,	    
+height-1 stars on the second line, height-2 on the third line, and so forth,		   
+unti the last line has only 1 star.					    
+(See examples.)   Return 0 to indicate success.                             
+
+
+-bash-3.2$ ./p7
+Usage: p7 height
+-bash-3.2$ ./p7 3
+***
+**
+*
+-bash-3.2$ ./p7 0
+-bash-3.2$ ./p7 1
+*
+-bash-3.2$ ./p7 2
+**
+*
+-bash-3.2$ ./p7 6
+******
+*****
+****
+***
+**
+*
+-bash-3.2$ 
+
+====================
+
+You can imagine similar problems:
+
+(8) Make the block letter C.   Require width >=2, and height >=3
+
+> ./makeC 2 3
+**
+*
+**
+> ./makeC 3 2
+Height must be >=3
+> ./makeC 3 4
+***
+*
+*
+***
+>
+
+(8) Make the block letter E.   Require width >=2, and height odd >=5
+
+(Variation: make F)
+(Another variation, if you require width >=3:  make P, make S, H)
+
+
+> ./makeC 4 5
+****
+*
+****
+*
+****
+> ./makeC 2 5
+**
+*
+**
+*
+**
+> ./makeC 3 6
+Height must be odd >=5
+> ./makeC 1 7
+Width must be >=2
+> ./makeC 3 7
+***
+*
+*
+***
+*
+*
+***
+>
+
+(9) Make the block letter Z.  Ask only for height >=4.
+Make width=height.
+
+(Variation: make the letter N)
+
+> ./makeZ 4
+****
+  *
+ *
+****
+> ./makeZ 5
+*****
+   *
+  *
+ *
+*****
+>
+
+(10) Make the block letter X.  Ask only for odd height >=5.
+Make width=height.
+
+> ./makeX 5
+*   *
+ * *
+  *
+ * *
+*   *
+> ./makeX 7
+*     *
+ *   *
+  * *
+   *
+  * *
+ *   *
+*     *
+>
+
+(11) Consider other letters too... what are the limiations that would apply?
+How would you draw them?
+

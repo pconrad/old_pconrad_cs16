@@ -1,0 +1,32 @@
+Today's lecture continues the discussion from 04.26 about the function to
+count spaces in a string.
+
+We'll look to two other functions...
+
+* find the index of the first space
+* sum an array of integers.
+
+If there is time left, we may look at a few others ways
+to count spaces or sum an array... 
+
+* Using pointers/dereferencing instead of array subscripting
+* Alternatives to loops
+
+
+========
+
+A strange feature of C: the comma operator
+
+The comma operator wouldn't really be an 
+important thing to learn about,
+except for one thing: it trips people up so often!
+
+It isn't really all that useful, but they stuck
+it in the language anyway.
+
+Here's where it is used----(see comma.c)
+
+
+
+
+ 

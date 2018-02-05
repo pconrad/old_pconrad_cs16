@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<p>Python Version of CS16 &quot;Are you Prepared quiz&quot;</p>
+<ol>
+  <li>Here is some Python code that contains several function definitions.<br />
+    <pre>
+def fum():
+   print("Banana")
+
+def bar():
+   print("Pear")
+
+def foo():
+   bar()
+   print("Apple")
+   fum()
+
+    
+    </pre>
+    <p>Which of the following would be the output of the function call <code>foo();</code><br />
+      <ol><li><pre>
+Banana
+Pear
+Apple      
+      </pre></li>
+      <li><pre>
+Pear
+Apple
+Banana      
+      </pre></li>
+      <li><pre>
+bar
+Apple
+fum      
+      </pre></li>
+      </ol>
+  </li>
+  <li>In Python, there is a difference between = (assignment) and == (check for equality).    For each of the following, fill in whether = or == is more appropriate.
+  
+  <pre>
+ tempC ____ (5.0/9.0) * (tempF - 32) # convert fahrenheit to celsius<br />
+
+ if (denom ____ 0):         
+    print("Can't divide by zero")
+ else:
+    answer ___ num / denom     # answer should be num divided by denom  
+  </pre>
+</li>
+  <li>In Python we can define a function with <code>def functionName(parameter):</code> followed by the function body.<br />
+    <br />
+  For example, here's a function that returns the value of its formal parameter multiplied by 2:<br />
+    <br />
+    <pre>
+def doubleIt(x):
+  return x * 2
+</pre>
+<p>Given this reminder, please write the definition of a Python function called squareIt that returns the value of its formal parameter squared  (i.e. multiplied by itself.)   You can either multiply the value times itself, or use the exponentiation operator, which is <code>**</code>.  <br />
+  <br />
+  <br />
+  <br />
+</li>
+  <li>In Python there is something called a list. Here are some reminders about Python lists.<br />
+    <br />
+    <ul><li>If we define: <code>nums = [23,5,7,12]</code> then the values in list are 23, 5, 7 12, and the indexes (or indices) of the list are 0,1,2,3. </li>
+      <li>We can return the length of the list with <code>len(nums)</code> (in this case it is 4).</li>
+      <li>We can pull out a value from the list using square brackets with the index—for example, nums[2] is 7.</li>
+    </ul>
+    <p>For working with lists, it is common to use a for loop. As an example, here is a for loop that prints each value in the list nums, one at at time.<br />
+        <br />
+    <pre>for i in range(len(nums)):<br />  print(nums[i])</pre>
+      With all that in mind, please answer these questions. The important thing here is to be sure you understand the difference between the values and indexes (indicies):<br />
+      <br />
+      <br />
+      <ol><li>What is the output of the following code?<pre>
+def mystery():
+    nums = [23,5,7,12]
+
+    for i in range(len(nums)):
+        print(i + nums[i])
+      
+      
+      </pre></li></ol>
+      <br />
+      <br />
+  </li>
+</ol>
+</body>
+</html>

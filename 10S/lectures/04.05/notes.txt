@@ -1,0 +1,16 @@
+
+printf vs. return in functions...
+
+  as Joe Biden would say, this is a BFD
+
+
+If you want to be sure to get as much help as possible
+from the compiler---i.e. have it tell you about warnings:
+
+do this before you make your program:
+
+ export CFLAGS="-Wall"
+
+That means "warnings?  give me all of them!"
+
+watch for 5 / 9   or 9 /5 e.g. in fToC calculations....

@@ -1,0 +1,1 @@
+average,countEven,countMax,countMin,countNeg,countOdd,countPos,countSevens,indexFirstEven,indexFirstOdd,indexOfMax,indexOfMin,isSorted,maxValue,minValue,noDups,sum

@@ -1,0 +1,10 @@
+
+# CXX=g++
+CXX=clang++
+
+BINARIES=ptrDemo
+
+all:	$(BINARIES)
+
+clean:
+	/bin/rm -f $(BINARIES) *.o

@@ -1,0 +1,160 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10S, H01 (due Fri Lab 04.02)  Oualline, Chapters 3, 4--Style, C basics</title>
+<script type="text/javascript" src="../../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+
+td {text-align:center; height:1.5em;}
+.smallerFont {font-size: 0.9em;}
+.style1 {font-size: smaller}
+.style2 {
+	font-size: 24px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.style3 {
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+-->
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<p><strong>CS16, 10S, H01 (due Fri Lab 04.02)  Oualline, Chapters 3, 4--Style, C basics—<span id="pointCount">Total points: ?</span></strong> <br />
+Online version: <a href="H01">http://www.cs.ucsb.edu/~pconrad/cs16/10S/homework/H01</a> (<a href="H01.pdf">printable PDF</a>)</p>
+<p>Accepted: <strong>on paper, in lab/discussion section (9am, 10am, 11am or noon) on Friday, 04/02</strong> in ESB 1003 (Cooper Lab)<br />
+    <br />
+  <span class="smallerFont"><strong>Late Policy:</strong> No email submission allowed—and don't &quot;slip it under my door&quot;. If you need to make it up, you must do so during office hours, or make an appointment to see me, and you must request this appointment within 48 hours of when the assignment was originally due. <br />
+    <br />
+    <strong>Personal Day/Sick Day policy</strong>: Everyone is permitted one &quot;personal day/sick day&quot; when you get to make up a missed homework assignment for free during office hours or via appointment. After that, you may not make up the homework assignment—you can only earn back the points through extra credit opportunities.</span></p>
+<p><span class="smallerFont">(For more details, see  the <a href="../../syllabus/index.html">syllabus</a> and the <a href="..">homework policy</a>)</span><br />
+</p>
+<hr />
+<p>Name: (3 pts)___________________________  <span>UMail address (3 pts)</span>  ______________@umail.ucsb.edu </p>
+<p>Lab Section (4 pts) Circle one:         9am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11am&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;noon        crashing&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unknown&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+    <br />
+    <span class="style1">(Note: For now, circle the lab section you are registered for on GOLD. If you need to request attendance at a different lab section because of an ACTUAL SCHEDULE CONFLICT, please email pconrad@cs.ucsb.edu with details)</span></p>
+<hr />
+<p align="center" class="style2">This assignment is due <strong>IN LAB ON FRIDAY 04/02<br />
+</strong>It may <strong>ONLY</strong> be turned in IN LAB ON FRIDAY 04/02</p>
+<p align="left" class="style3">The <strong>only</strong> other time/place this lab will be accepted is i<strong>n person, at your instructor's office hours</strong> within one week of 04/02 , or the day you add the class on GOLD, whichever is later, in accordance with the homework policies outlined on the course syllabus. Make this appointment within 48 hours of 04/02, or when you add the course.</p>
+<hr />
+<p>Please obtain the official textbook for this course by Delores Etter. <strong>You will start having homework assignments in that book next week.</strong></p>
+<p>For this week, the reading assignments are chapter 3 and 4 in an online textbook—Practical C Programming by Steve Oualline. Once you've read these chapters, write answers to the questions below and on the reverse side of this sheet (use the <a href="../../../10S/homework/H01/H01.pdf">PDF link</a> to print a copy of this if you weren't in class).<br />
+  <br />
+Even though this book is a bit &quot;dated&quot;—as an example, find the sentence in Chapter 4 about how most PCs are 16 bit machines (!)—it is still a great resource for learning C, because many of the basics haven't changed.</p>
+<p>To link directly to this book, use these links:</p>
+<ul>
+  <li>Chapter 3: Style (<a href="http://search.safaribooksonline.com/1565923065/pcp3-CHP-3#pcp3-CHP-3">on campus</a>) (<a href="http://search.safaribooksonline.com.proxy.library.ucsb.edu:2048/1565923065/pcp3-CHP-3#pcp3-CHP-3">off campus</a>)</li>
+  <li>Chapter 4: Basic Declarations and Expressions (<a href="http://search.safaribooksonline.com/1565923065/pcp3-CHP-4">on campus</a>) (<a href="http://search.safaribooksonline.com.proxy.library.ucsb.edu:2048/1565923065/pcp3-CHP-4">off campus</a>)</li>
+</ul>
+<p>In Chapter 3, the author discusses programming style.</p>
+<ol><li><ol>
+      <li>(8 pts) According to the author, what are at least two &quot;real-world&quot; reasons that programming style is important?<br />
+      (By &quot;real-world&quot; I mean reasons that will still be true after you graduate and are working in the so-called &quot;real world&quot;. For example, &quot;I need good style to get a good grade from my TA&quot; doesn't count as a real-world reason for purposes of this question.)<br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      </li>
+      <li>(5 pts) Section 3.4 presents two segments of code. The author indicates that the bottom one is better style, but doesn't explain why. So, I'm asking you: why is the bottom segment of code better style that the top one? <br />
+        <br />
+        For full credit, give me a thoughtful answer, not a simplistic one. A simplistic answer might be:  &quot;the bottom one has more space and comments&quot;. While that is technically correct, it doesn't really address the question in a thoughtful way—it doesn't explain <em><strong>why</strong></em> a segment of code with more space and comments is better style.<br />
+        <br />
+        <br />
+        <br />
+      </li>
+    </ol>
+ <blockquote>
+    <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for questions to answer</span></blockquote>
+  <blockquote style="page-break-before:always"><br />
+    <span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br />
+  </blockquote>
+  </li>
+  <li>(3 pts) In Chapter 4, the author indicates the name of the function that is always called first in a C program. What is the name of that function?<br />
+    <br />
+    <br />
+    <br />
+    <br />
+  </li>
+  <li>(3 pts) In many C programs, there is a line of code at the end of main like this: <code>return 0;</code> <br />
+      <br />
+    According to the author, what is the purpose of that line of code?<br />
+    <br />
+    <br />
+      <br />
+      <br />
+  </li>
+  <li>Chapter 4 discusses variable declarations. Write variable declarations for each of the following. Include a comment after each declaration to indicate the purpose of the variable, just as you would do in a well written program:
+    <br />
+    <br />
+    <ol>
+      <li>(3 pts) A integer variable called &quot;count&quot;. The comment should indicate that this counts the number of lines in the input file<br />
+          <br />
+        <br />
+          <br />
+          <br />
+      </li>
+      <li>(3 pts) A variable that can store a hospital patient's  temperature in Fahrenheit. You should be able to store numbers such as 98.6<br />
+          <br />
+        <br />
+            <br />
+          <br />
+      </li>
+      <li>(3 pts) A variable that can store the correct response on a multiple choice test, i.e. either a single letter, such as a, b, c, d or e. <br />
+          <br />
+        <br />
+          <br />
+        <br />
+      </li>
+    </ol>
+  </li>
+  <li>Chapter 4 discusses the difference between floating point division and integer division. What would each of the following expressions evaluate to?<br />
+      <br />
+    <br />
+    <ol>
+      <li>(2 pts) 6 / 3 <br />
+          <br />
+          <br />
+          <br />
+      </li>
+  <li>(2 pts) 3 / 6<br />
+            <br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 6.0 / 2.0<br />
+            <br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 2.0 / 4.0<br />
+            <br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 1/4.0<br />
+            <br />
+            <br />
+          <br />
+      </li>
+      <li>(2 pts) 4.0/2<br />  
+        <br />
+        <br />
+        <br />
+            </li>
+    </ol>
+  </li>
+  <!--- -->
+</ol>
+<hr />
+End of H01
+</body>
+</html>

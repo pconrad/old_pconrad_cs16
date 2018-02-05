@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" href="../../../../../cs16.css" />
+<style type="text/css">
+.pageBreakBefore {page-break-before:always;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+.style1 {font-size: smaller}
+div.framed {border-style: outset; border-width: 1em; border-color: #666666; padding: 2em; }
+</style>
+<title>Feedback on q4 from Midterm 1 (E01)---CS16, UCSB, Winter 2010 (Conrad)</title>
+</head>
+
+<body>
+<div id="container">
+  <h1><span class="instructions">Followup on Question 4 from<br />
+CS16 Midterm Exam 1<br />
+<span class="subhead style1">E01, 10W, Phill Conrad, UC Santa Barbara<br />
+Tuesday, 02/02/2010, 11am-12:15pm</span></span></h1>
+  <p>Question 4 was an essay question which asked you to explain the statement:</p>
+  <div class="framed" style="width: 15em; text-align:center; font-family: Arial, Helvetica, sans-serif; font-size: 1.2em; font-weight:bold;"> First, see the test fail<br />
+    Then, see the test pass<br />
+  </div>
+  <p>The main idea here was the one explained in <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/labs/lab02/#brokenTestHarness">step 7 of lab02</a>, which discussed a broken test harness.</p>
+  <p>Since this was an essay question, the grading was admittedly more subjective than with other questions on the exam.</p>
+  <p>Here are three examples of answers that were given full credit (10/10). I've added my own emphasis (bold type) to these answers to indicate the main point I was looking for. It was necessary for your answer to state this point clearly in order to get full credit.</p>
+  <ul>
+    <li>Using stub vaues, which give expectd false values, <strong>we want to see if the test works</strong>. If the test is functional, all of the stub values will make the test fail. The programmer can then move on and remove the stubs, and hopefully the test cases will work.</li>
+    <li>The first programmer failed to understand the test-driven deveopment methodology. While having the code pass on the first try could indicate that the code is correct, it could also indicate that the test itself is flawed. <strong>Hence by verifying that the tests fail, one confirms that code that passes the tests is correct and not a byproduct of a faulty test.</strong></li>
+    <li>When you write the code, you first write it incorrectly on purpose. <strong>This is a way to test the test and ensure that it won't pass if the code is wrong.</strong> Then you can fix the code so the test passes.</li>
+  </ul>
+  <p>Other answers were awarded 9/10, 8/10, 7/10, 6/10, or 5/10 based on how close they were to a clear and cogent explanation of this point. Answers that received 8/10 or 9/10 may have hinted at the key idea without stating it clearly. Answers receiving 5,6 or 7/10 tended to be statements of things about coding and testing that were true, but that missed the main point. More points were awarded to answers that were more relevant and clear, while fewer points were awarded to vague and unclear answers.</p>
+  <p>Here are the point counts for question 4:</p>
+  <table border="2" cellpadding="4" cellspacing="4">
+    <tr>
+      <th scope="col">subtraction</th>
+      <th scope="col">points/10</th>
+      <th scope="col">count</th>
+    </tr>
+    <tr>
+      <td>-0</td>
+      <td>10</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td>9</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>-2</td>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>-3</td>
+      <td>7</td>
+      <td>18</td>
+    </tr>
+    <tr>
+      <td>-4</td>
+      <td>6</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>-5</td>
+      <td>5</td>
+      <td>7</td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+</div> 
+<!--id="container"-->
+</body>
+</html>

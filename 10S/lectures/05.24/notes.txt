@@ -1,0 +1,20 @@
+
+
+
+We briefly reviewed various meanings of & in various contexts:
+
+ && logical and
+  & bitwise and
+
+We did some problems such as 7 & 5,  3 & 7, 2 & 5
+
+and the same for &&
+
+We talked about & being "address of" when.... 
+.. it is a unary operator.
+
+e.g. &x
+
+     &(p->center.y)
+
+ 

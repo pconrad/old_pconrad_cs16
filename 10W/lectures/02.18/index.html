@@ -1,0 +1,275 @@
+<!DOCTYPE html6 PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CS16, 10W, 02.18 Handout--the type expression game</title>
+<script type="text/javascript" src="../../../scripts/exam.js" ></script>
+<style type="text/css">
+<!--
+ol li ol li {list-style-type: lower-alpha;}
+ol li ul li {list-style-type:disc;}
+div.floatRight {float:right}
+div.floatLeft {float:left;}
+div.tableDiv {width: 20em;}
+td {text-align:center; height:1.5em;}
+.strikethrough {text-decoration: line-through;}
+.highlight {background-color:yellow;}
+.smallerFont {font-size: 0.9em;}
+.instructions {font-family: Verdana, Arial, Helvetica, sans-serif}
+
+table.tableWithSpaceToLeftAndRight {margin-left: 3em; margin-right: 3em;}
+
+p { margin-top: 0.4em; margin-bottom: 0.1em; padding-top: 0.1em; padding-bottom: 0.1em;}
+-->
+h1 {font-size: 1em; font-family: Arial, Helvetica, sans-serif; text-align:left; margin: 0em; padding: 0em;}
+h2 {font-size: 1.3em; font-family: Arial, Helvetica, sans-serif; text-align:center; margin: 0em; padding: 0em; margin-top: 0.2em; margin-bottom: 0.2em;}
+
+.style1 {font-size: small}
+</style>
+</head>
+
+<body onload="updatePointCount();">
+<h1>CS16, 10W, UCSB—Handout for 02/18—The type expression game (<a href="handout.pdf">PDF</a>)</h1>
+<p style="margin:0em; padding:0em;">  <a href="http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/02.18">http://www.cs.ucsb.edu/~pconrad/cs16/10W/lectures/02.18</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PLEASE CONTINUE TO READ: In Etter: 6.4, 7.1, 7.2<br />
+</p>
+<hr />
+<h2 align="center">Why type is important</h2>
+<p align="left">The concept of type is very important in C. This is also true in C++, which you'll study if you go on to CS24, CS32, and CS48. And, the way types work in C++ is very similar—almost identical, in fact— to how they work in C. 
+<p align="left">
+
+<p align="left">When you get error messages from either the Ch interpreter or the cc compiler, the message may say things like: <code>found (int *) value where (int) value was expected</code>. So understanding the difference between int and int * is very important to getting your programs to compile correctly, and understanding the messages you get when they don't.
+<h2 align="center">The basic exercise</h2>
+<p align="left">A basic exercise I've used in C/C++ courses for many years is the one illustrated below. We start with a segment of code, such as this:</p>
+<pre class="widePre"><span class="pageBreakBefore">int main(int argc, char *argv[])
+{
+  int a;
+  int *b;
+  // rest of the program would go here
+  return 0;
+}
+
+</span></pre>
+<p align="left">This is obviously not a &quot;useful&quot; C program—to be useful, there would have to be some more code at the comment line that says &quot;rest of code goes here&quot;. However, it does give us a context to answer some questions about type.</p>
+<p align="left">&nbsp;</p>
+<p align="left">The question is in the form a table where the left column contains an expression, and the right column asks what the type of that expression would be. For example:</p>
+
+<div class="tableDiv" style="float:right;">
+<p align="center">What the correct answers are:</p>
+<table border="1" cellpadding="1" cellspacing="1" class="tableWithSpaceToLeftAndRight">
+  <tr>
+    <td width="90">Expression</td>
+    <td width="199">Type</td>
+  </tr>
+  <tr>
+    <td>a</td>
+    <td class="instructions">int</td>
+  </tr>
+  <tr>
+    <td>b</td>
+    <td class="instructions">int *</td>
+  </tr>
+  <tr>
+    <td>*a</td>
+    <td class="instructions">error</td>
+  </tr>
+  <tr>
+    <td>*b</td>
+    <td><span class="instructions">int</span></td>
+  </tr>
+  <tr>
+    <td>&amp;a</td>
+    <td><span class="instructions">int *</span></td>
+  </tr>
+  <tr>
+    <td>&amp;b</td>
+    <td><span class="instructions">int **</span></td>
+  </tr>
+</table>
+</div>
+
+<div class="tableDiv" >
+<p align="center">What you'll be given as the problem</p>
+<table border="1" cellpadding="1" cellspacing="1" class="tableWithSpaceToLeftAndRight">
+  <tr>
+    <td width="90">Expression</td>
+    <td width="199">Type</td>
+  </tr>
+  <tr>
+    <td>a</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>b</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>*a</td>
+    <td class="instructions">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>*b</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;a</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&amp;b</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</div>
+
+<p align="left" style="clear:both;">&nbsp;</p>
+<p align="left" style="clear:both;">Here's how each of those is solved:</p>
+<p><code>a</code> is of type <code>int</code>, so the correct answer is <code>int</code> (cover up the <code>a</code> in the declaration <code>int a; </code>and what is left is <code>int</code>).</p>
+  <p><code>b</code> is of type <code>int *</code>,  so the correct answer is <code>int</code> * (cover up the <code>b</code> in the declaration <code>int *b; </code>and what is left is <code>int</code> *).</p>
+  <p><code>*a</code> is an error—since <code>a</code> is not a pointer, it cannot be dereferenced. So the correct answer is <strong>error</strong>.</p>
+<p>*b however, is not an error: since b is of type <code>int *</code>, it points to something of type <code>int</code>. So the answer is <code>int</code></p>
+  <ul>
+    <li>The unary * operator means &quot;dereference&quot;, i.e. follow the pointer.</li>
+    <li>So if we follow an <code>int *</code> pointer, to what it points to, what we are left with is an <code>int</code>. So the correct answer is <code>int  </code></li>
+    <li>Here's another way to think about it:
+      <ul>
+        <li>The unary * in an expression takes away a star from the declaration.</li>
+        <li>So if a * appears in front of something of type <code>int *</code>, the stars cancel each other out, and we are left with <code>int</code>.</li>
+        <li>Using this rule, if there isn't a star to remove, then you have an error.</li>
+      </ul>
+    </li>
+  </ul>
+<p align="left">For &amp;a, we start by noting that a is of type int, and taking the address of an int gives us an int *. So the answer is int *</p>
+<ul>
+  <li>You can also think of it this way: an &amp; operator <em>adds a star to the type </em>(provided the expression it is applied to is a valid expression)</li>
+</ul>
+<p>Similarly for &amp;b, since b is of type int *, taking the address of b gives us an int **</p>
+<ul>
+  <li>The adding a star rule still applies. An int ** is a pointer to an int *, i.e. an pointer to a pointer to an int.</li>
+  <li>Or, we could say that an int ** is the address of a variable, which itself contains the address of some other int variable.</li>
+</ul>
+<p>A note about the ** variables:</p>
+<ul>
+  <li>	** type variables do occur in practice when handling certain pointer situations that arise in CS24 and CS32.</li>
+  <li>*** and **** and even higher levels of star are legal, but are much more rare in practice.</li>
+  <li>If your code is getting to the point of needing four or more stars, it may be getting too complex, <br />
+  and you may want to look for a simpler way to solve your problem.</li>
+</ul>
+
+<p>Finally, a note that if we put in  <code>double</code> (or <code>char</code>, etc.) instead of <code>int</code>, the rules are the same:—e.g. for <code>double *c;</code> we have:<br />
+  </p>
+<ul>
+  <li><code>c</code> of type <code>double *</code>, <code>*c</code> of type <code>double</code>, and <code>&amp;c </code>of type <code>double **</code>.</li>
+</ul>
+<p><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Please turn over for more.</span></p>
+<p style="page-break-before:always"><span style="font-family: Arial, Helvetica, sans-serif; font-size:larger;">Continued from other side</span><br /></p>
+
+
+<h2 align="left">Adding arrays into the type expression game</h2>
+<p align="left">&nbsp;</p>
+<p align="left">As we recall the name of an array is a pointer to its first element.</p>
+<p align="left">So in the type expression game, if we are given the name of an array of int for example, we should treat it as an int *.</p>
+<p></p>
+<p align="left">Also, each element of the array is of the type of the array, and array subscripting, is just another form of pointer dereference, i.e.</p>
+<ul><li>a[0] is equivalent to *(a)</li>
+  <li>a[1] is equivalent to *(a + 1)</li>
+</ul>
+<p>See if you can use those facts to understand the answers in the example below.</p>
+<p align="left">&nbsp;</p>
+<div class="tableDiv" style="float:right;">
+  <p align="center">What the correct answers are:</p>
+  <table border="1" cellpadding="1" cellspacing="1" class="tableWithSpaceToLeftAndRight">
+    <tr>
+      <td width="90">Expression</td>
+      <td width="199">Type</td>
+    </tr>
+    <tr>
+      <td><code>a</code></td>
+      <td class="instructions">int *</td>
+    </tr>
+    <tr>
+      <td><code>*a</code></td>
+      <td class="instructions">int</td>
+    </tr>
+    <tr>
+      <td><code>a[1]</code></td>
+      <td class="instructions">int</td>
+    </tr>
+    <tr>
+      <td><code>a[3]</code></td>
+      <td><span class="instructions">int<br />
+        <span class="style1">(*see explanation)</span></span></td>
+    </tr>
+    <tr>
+      <td><code>&amp;a</code></td>
+      <td><span class="instructions">int **</span></td>
+    </tr>
+    <tr>
+      <td><code>b</code></td>
+      <td><span class="instructions">double *</span></td>
+    </tr>
+    <tr>
+      <td><code>b[2]</code></td>
+      <td><span class="instructions">double</span></td>
+    </tr>
+    <tr>
+      <td><code>*b[2]</code></td>
+      <td><span class="instructions">error</span></td>
+    </tr>
+    <tr>
+      <td><code>&amp;b[2]</code></td>
+      <td><span class="instructions">double *</span></td>
+    </tr>
+  </table>
+</div>
+<div class="tableDiv" >
+  <p align="center">Code:</p>
+  <pre>int main()<br />
+{
+  int a[] = {12, 23, 45};
+  double b[] = {0.4, 0.5, 0.6};
+  // ...
+  return 0;
+}</pre>
+</div>
+<p align="left" style="clear:both;">&nbsp;</p>
+<p align="left" style="clear:both;">*Note that although it is likely a logic error to subscript a[3] when a contains only elements a[0], a[1] and a[2], it is <em>not</em> a <em>type </em>error. So the correct answer here is still <code>int</code>, not error.</p>
+<p>&nbsp;</p>
+<h2>Adding structs into the type expression game</h2>
+<p align="left">As we recall from the handout from 02.16, and sections 7.1 and 7.2 in the textbook, a struct is a way to<em> create a new type</em>—in addition to int, double, char, char *, int *, etc. A struct has members inside it: for example:</p>
+<pre>struct Point {<br />  double x;<br />  double y;<br />};<br /><br />
+
+
+int main()<br />{
+   struct Point p;
+   struct Point *q;
+   int a;
+   // ... 
+   return 0;
+}<br /></pre>
+    <p>In the type expression game, if we reference a variable that is an entire struct, the answer is the type of that struct.</p>
+    <ul>
+      <li>so p is of type struct Point, and so is *q</li>
+      <li>q is of type struct Point *, and so is &amp;p</li>
+      <li>*p is an error, since p is not a pointer to anything.</li>
+      <li>&amp;q is of type struct Point **</li>
+    </ul>
+    <p>If we reference an individual member of a struct, the answer is the type of the member of the struct.</p>
+    <ul>
+      <li>p.x is of type double</li>
+      <li>&amp;(p.y) is of type double *</li>
+      <li>(*q).x is of type double</li>
+      <li>(*p).x is an error, since we cannot dereference p (it isn't a pointer)</li>
+    </ul>
+    <p>If we reference a member of a struct that doesn't exist, or use the . operator on something that isn't a struct, that's an error.</p>
+    <ul>
+      <li>p.z is an error, since p is of type struct Point, and there is not member named z in a struct point</li>
+      <li>q.x is an error, because q isn't a struct Point, it is a <code>struct Point *</code> so we can't use the . on it.</li>
+      <li>a.x is an error, because a isn't a struct at all—it is an int.</li>
+    </ul>
+    <p>Finally, we need to keep in mind that p-&gt;x is an abbreviation for (*p).x</p>
+    <p>So whenever we see p-&gt;x, we can just convert to (*p).x and then apply the rules above. <br />
+    Eventually, you'll get used to the p-&gt;x syntax, and you won't need to convert to understand what to do with the p-&gt;x notation.</p>
+<hr />
+End of  Handout for 02.18
+</body>
+</html>

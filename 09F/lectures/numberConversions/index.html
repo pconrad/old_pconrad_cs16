@@ -1,0 +1,313 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<!-- quiz.html, P. Conrad   11/17/05
+     An online multiple choice quiz
+     for CISC103 Fall 2005  -->
+
+
+  <head>
+    <title>Decimal, Binary, Octal, Hexadecimal</title>
+    <link rel="stylesheet" type="text/css" href="quiz.css" />
+    <script type="text/javascript" src="spaceIt.js"></script>
+    
+  <script type="text/javascript">
+      <!--
+
+      var debug = false;
+      unicodeHeavyCheckMark = String.fromCharCode(0x2714);
+      unicodeHeavyBallotX = String.fromCharCode(0x2718);
+
+function randomIndex(n) // returns random index between 0 and n-1
+{
+   return Math.floor(Math.random()*n);
+}
+
+function radixDesc(radix)
+{
+   var whichWay = randomIndex(2); // returns either 0 or 1
+
+   if (whichWay == 0)
+      return "base " + radix;
+	  
+   switch(radix)
+   {
+      case 8: return "octal";
+	  case 16: return "hexadecimal";
+	  case 2: return "binary";
+	  case 10: return "decimal";
+	  default: return "base " + radix;
+   }
+
+
+}
+
+
+function randomIntBetween(minVal,maxVal) // returns random index between 0 and n-1
+{	
+   if (minVal > maxVal)
+      {
+		alert("problem in randomIntBetween function");
+	  }
+   var numIntsInRange = maxVal - minVal + 1;
+   return Math.floor(Math.random()*numIntsInRange) + minVal;
+}
+
+// return a name to use for a form for question i
+function formForQuestion(i)
+ {
+   return("formForQuestion" + i);
+ }
+ 
+ function buildQuiz(numQuestions)
+ {      
+ 
+ 
+	
+   var theQuizQuestionsDivElement = 
+              document.getElementById("theQuizQuestions");
+			  
+   // the exclamation point means "not".. if I didn't find it, print an error and stop
+
+   if (!theQuizQuestionsDivElement)
+   {
+     window.alert("Could not find an element with id: " + "theQuizQuestions");
+     return;
+   }
+
+   var theQuizQuestions = "";
+
+   var i;
+   
+   var conversions = [ {fromRad: 10, toRad: 2, minVal: 0, maxVal: 255},
+                       {fromRad: 2, toRad: 10, minVal: 0, maxVal: 255},
+					   {fromRad: 2, toRad: 8, minVal: 0, maxVal: 511 },
+					   {fromRad: 8, toRad: 2, minVal: 0, maxVal: 63 },
+					   {fromRad: 2, toRad: 16, minVal: 0, maxVal: 65535},
+					   {fromRad: 16, toRad: 2, minVal: 0, maxVal: 65535} ]
+	
+   
+   theQuizQuestions += "<table>\n"
+   for (i = 1; i<=numQuestions; i++) // index counts up 0,1,2, etc through the array
+   {
+	  var whichConversion =  randomIndex(conversions.length);
+	  
+	  var numToConvert = randomIntBetween(conversions[whichConversion].minVal,
+	                                      conversions[whichConversion].maxVal);
+	    	  
+      theQuizQuestions += "<tr>\n"
+
+      // the question number (add one to index)
+      theQuizQuestions += "<td style='vertical-align:top'>\n"
+      var questionNumber = i;
+      theQuizQuestions += questionNumber + ".&nbsp;";
+      theQuizQuestions += "</td>\n"
+	
+      // the question text and code
+
+      theQuizQuestions += "<td style='vertical-align: top'>\n"
+      theQuizQuestions += "Convert "
+	  
+	  var fromRad = conversions[whichConversion].fromRad;
+	  var toRad = conversions[whichConversion].toRad;
+	
+	  
+	  theQuizQuestions += formatFor(numToConvert.toString(fromRad), fromRad, toRad);
+	   
+	  theQuizQuestions += " from " + radixDesc(fromRad) +
+	  	                  " to " + radixDesc(toRad);
+						  
+       theQuizQuestions += "</td>\n"
+	   
+	   var answer = formatFor(numToConvert.toString(toRad),toRad,fromRad);
+	 
+       theQuizQuestions += "<td>" + turnAnswerIntoFormElement(formForQuestion(i),answer) + "</td>";
+
+      theQuizQuestions += "</tr>\n"
+ 
+	
+
+   }
+
+   theQuizQuestions += "</table>\n"
+
+   // when you add the text to the innerHTML, it must
+   // ALREADY BE well-formed HTML with properly nested
+   // tags; otherwise, the browser may not process it properly.
+   
+   if (debug) { window.alert(theQuizQuestions); }
+
+   theQuizQuestionsDivElement.innerHTML = theQuizQuestions;
+
+}
+
+function turnAnswerIntoFormElement(formName,correct)
+{
+ // form all the HTML in a variable called
+ // formElement then add it all at once.
+
+ var formElement = "";
+
+ formElement += "<form name='" + formName + "' action=''>\n";
+
+ // cellpadding leaves room for the border 
+ // that we put around correct answer to not interfere with the
+ // answer text itself
+
+ var idOfQuestionControl = questionControlID(formName);
+
+ formElement += "<div id='" + idOfQuestionControl + "'>";
+ formElement += makeResponseInputTextElement(formName);
+ formElement += makeCheckAnswerButton(formName,correct);
+
+ formElement += "</div>\n"; // end of question control div element
+
+ formElement += "</form>\n";
+ return formElement;
+}
+
+function questionControlID(formName)
+{
+  return formName + "questionControl";
+}
+
+
+function responseFieldName (formName)
+{
+   return formName + "Response";
+}
+
+function makeResponseInputTextElement(formName)
+{
+  return ( "<input type='text' name='" + responseFieldName(formName) + "' id='" + responseFieldName(formName)+ "' value='' size = '16' />"); 
+}
+
+function makeCheckAnswerButton(formName,correct)
+{
+  return ( "<input type='button' name='" + formName + "button' " +
+                 " value='press to check' " +
+		 "onclick='checkAnswer(\"" + correct + 
+					"\", \"" + formName + "\");' />"); 
+}
+
+
+function checkAnswer(answer, formName)
+{
+   var answerElem = 
+      window.document.getElementById(responseFieldName(formName));
+
+   var questionControlDivElement =
+       window.document.getElementById(questionControlID(formName));
+
+   var usersAnswer = answerElem.value;
+
+   var userGotItRight = (usersAnswer == answer);
+
+   if (debug)  window.alert("The correct answer is " + answer +
+                "\nThe user's answer is " + usersAnswer);
+		
+   questionControlDivElement.innerHTML   = 
+             "Your answer: " + usersAnswer +
+             "&nbsp;&nbsp; Correct answer: " + answer;
+   
+}
+
+function showAnswer(answerElemId,answer)
+ {
+    var answerElem = document.getElementById(answerElemId);
+	answerElem.innerHTML = answer;
+ }
+
+      -->
+    </script>
+</head>
+<body onload="buildQuiz(10);">
+<h1>Exam review for number conversions:</h1>
+    
+    <p>First a check to make sure you know the terminology:</p>
+<p><strong>Matching: </strong><br />
+  <br />
+The table below is in the <strong>wrong order.</strong><br />
+Draw a line from the term on the left, to the correct base on the right.</p>
+<table width="257">
+  <tr>
+    <td width="94"><div align="right">binary</div></td>
+    <td width="37">&nbsp;&nbsp;&nbsp;</td>
+    <td width="88">base 2 </td>
+  </tr>
+
+  <tr>
+    <td><div align="right">decimal</div></td>
+    <td>&nbsp;</td>
+    <td>base 8 </td>
+  </tr>
+  <tr>
+    <td><div align="right">hexadecimal</div></td>
+
+    <td>&nbsp;</td>
+    <td>base 10 </td>
+  </tr>
+  <tr>
+    <td><div align="right">octal</div></td>
+    <td>&nbsp;</td>
+    <td>base 16 </td>
+
+  </tr>
+</table>
+<script type="text/javascript">
+ var q1_answer = '<p><img src=\"q1_answer.png\" width=\"261\" height=\"101\" /></p>';
+</script>
+ <div id="q1_answer"><form name="form1" id="form1" method="post" action="">
+  <input type="button" value="Click to show answer" onClick="showAnswer('q1_answer',q1_answer);" />
+</form></div>
+    
+    
+  <h2>&nbsp;</h2>
+  <h2>Now practice with conversions</h2>
+<p>Each time you click the &quot;make new quiz&quot; button, you'll get a different randomly generated quiz.<br>
+    The actual questions on the final exam will be  generated from this form.<br />
+    <br />
+Note that &quot;leading zeros&quot; and &quot;spacing&quot; do not affect the correctness of your answers&mdash;for example:</p>
+<ul>
+  <li>In	binary, 0101 and 101 are the same number.</li>
+  <li>In binary 0010 0011, 0100011, and  100 011 are all the same number.<br>
+  </li>
+</ul>
+<form id="theForm" action="">
+      <table>
+
+		<tr>
+		   <td style="text-align:center">
+		    <input type="button" value="Make new quiz!" onClick="buildQuiz(10);" />		   </td>
+		</tr>
+	   </table>
+	</form>
+
+    <div id="theQuizQuestions">[If you are seeing this message, then either JavaScript is  not enabled in your browser, or there is a problem with the coding of this web page.<br />
+    Try a different browser, or try enabling JavaScript, and if the page still doesn't work, contact your instructor for assistance.]</div>
+
+
+   
+    <h2>What you are responsible for knowing how to do:</h2>
+    <ul>
+      <li>Convert any decimal number between 0 and 255 into binary.</li>
+      <li>Convert any binary number between 0 and 255 into decimal</li>
+      <li>Convert any binary number from 0 to 111111111 into octal</li>
+      <li>Convert any octal number from 0 to 777 into binary</li>
+      <li>Convert any binary number from 0 to 1111 1111 1111 1111 into hex</li>
+      <li>Convert any hex number from 0 to 1111 1111 1111 1111 into binary</li>
+    </ul>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
